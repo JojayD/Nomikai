@@ -69,6 +69,29 @@ describe('PgErrorFilter', () => {
     expect(res.body).toMatchObject({ statusCode: 409, code: '23505' });
   });
 
+  // Regression: the DrizzleQueryError wrapper's message embeds the full SQL and
+  // bound params; the response must carry the driver error's short message only.
+  it('never echoes the wrapped query text or params', () => {
+    const { host, res } = hostWithResponse();
+    filter.catch(
+      Object.assign(
+        new Error('Failed query: insert into "profiles" ...\nparams: alice'),
+        {
+          cause: Object.assign(new Error('duplicate key value'), {
+            code: '23505',
+          }),
+        },
+      ),
+      host,
+    );
+    expect(res.body).toMatchObject({
+      code: '23505',
+      message: 'duplicate key value',
+    });
+    expect(JSON.stringify(res.body)).not.toContain('Failed query');
+    expect(JSON.stringify(res.body)).not.toContain('params');
+  });
+
   it('maps a check violation to 400', () => {
     const { host, res } = hostWithResponse();
     filter.catch({ code: '23514', message: 'bad row' }, host);

@@ -29,11 +29,19 @@ export type EntryRow = {
     : K extends 'recommended'
       ? boolean | null
       : string | null;
-};
+} & { reaction_count: number; reacted_by_me: boolean };
 
-export function entryQuery(db: Db) {
+/** F6: the toggle count and the viewer's own state ride on every entry row. */
+export function reactionColumns(viewerId: string) {
+  return {
+    reaction_count: sql<number>`(select count(*)::int from reactions r where r.entry_id = ${entries.id})`,
+    reacted_by_me: sql<boolean>`exists (select 1 from reactions r where r.entry_id = ${entries.id} and r.user_id = ${viewerId})`,
+  };
+}
+
+export function entryQuery(db: Db, viewerId: string) {
   return db
-    .select(entryColumns)
+    .select({ ...entryColumns, ...reactionColumns(viewerId) })
     .from(entries)
     .innerJoin(profiles, eq(profiles.id, entries.userId))
     .leftJoin(drinks, eq(drinks.id, entries.drinkId))

@@ -28,6 +28,9 @@ export default async function Home(props: PageProps<"/">) {
             <Link href="/log" className="!text-[inherit] no-underline">
               Log
             </Link>
+            <Link href="/board" className="!text-[inherit] no-underline">
+              Board
+            </Link>
             <Link href="/friends" className="!text-[inherit] no-underline">
               Friends
             </Link>

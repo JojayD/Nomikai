@@ -20,11 +20,13 @@ export default function AccountPanel(props: {
   timezone: string;
   email: string;
   avatarUrl: string | null;
+  leaderboardOptIn: boolean;
 }) {
   const router = useRouter();
   const queryClient = useQueryClient();
   const [username, setUsername] = useState(props.username);
   const [timezone, setTimezone] = useState(props.timezone);
+  const [optIn, setOptIn] = useState(props.leaderboardOptIn);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const timezones = useMemo<string[]>(
     () =>
@@ -36,9 +38,15 @@ export default function AccountPanel(props: {
 
   const save = useMutation({
     mutationFn: () =>
-      api("/me", { method: "PATCH", ...json({ username, timezone }) }),
+      api("/me", {
+        method: "PATCH",
+        ...json({ username, timezone, leaderboard_opt_in: optIn }),
+      }),
     // The profile is rendered by the server component above us.
-    onSuccess: () => router.refresh(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["leaderboard"] });
+      router.refresh();
+    },
   });
 
   const uploadAvatar = useMutation({
@@ -60,6 +68,9 @@ export default function AccountPanel(props: {
       if (error) throw error;
     },
     onSuccess: () => {
+      // No query key is user-scoped, so drop the whole cache: otherwise the
+      // next account signed in on this device reads the previous user's data.
+      queryClient.clear();
       router.push("/login");
       router.refresh();
     },
@@ -74,6 +85,7 @@ export default function AccountPanel(props: {
       await createClient().auth.signOut({ scope: "local" });
     },
     onSuccess: () => {
+      queryClient.clear();
       router.push("/login");
       router.refresh();
     },
@@ -126,6 +138,18 @@ export default function AccountPanel(props: {
             ))}
           </select>
         </div>
+        <label className="mb-3 flex cursor-pointer items-start gap-3">
+          <input
+            type="checkbox"
+            checked={optIn}
+            onChange={(e) => setOptIn(e.target.checked)}
+            className="mt-0.5 size-5 accent-[var(--color-accent)]"
+          />
+          <span className="text-[13px] leading-[1.45]">
+            Appear on leaderboards. Off removes you from every friend&apos;s
+            board — yours shows only you.
+          </span>
+        </label>
         <button className="btn btn-secondary btn-block !min-h-[42px]" disabled={busy}>
           Save changes
         </button>

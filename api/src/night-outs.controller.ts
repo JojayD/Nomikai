@@ -60,7 +60,7 @@ export class NightOutsController {
   @Get(':id/entries')
   async entries(@UserId() viewerId: string, @Param('id') id: string) {
     const { user_id } = await this.one(viewerId, id);
-    const rows = await entryQuery(this.db)
+    const rows = await entryQuery(this.db, viewerId)
       .where(and(eq(entries.nightOutId, id), eq(entries.userId, user_id)))
       .orderBy(asc(entries.loggedAt));
     return withSignedUrls(this.storage, rows);

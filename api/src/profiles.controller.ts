@@ -13,6 +13,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { Throttle } from '@nestjs/throttler';
 import { eq, sql } from 'drizzle-orm';
 import { AuthGuard, UserEmail, UserId } from './auth.guard';
 import { DB, type Db } from './db';
@@ -49,7 +50,10 @@ export class ProfilesController {
   @Get('me')
   async me(@UserId() userId: string, @UserEmail() email: string | null) {
     const [row] = await this.db
-      .select(publicColumns)
+      .select({
+        ...publicColumns,
+        leaderboard_opt_in: profiles.leaderboardOptIn,
+      })
       .from(profiles)
       .where(eq(profiles.id, userId));
     return row ? { ...(await this.withAvatar(row)), email } : null;
@@ -76,13 +80,21 @@ export class ProfilesController {
   @Patch('me')
   async update(
     @UserId() userId: string,
-    @Body() body: { username?: string; timezone?: string },
+    @Body()
+    body: {
+      username?: string;
+      timezone?: string;
+      leaderboard_opt_in?: boolean;
+    },
   ) {
     const [row] = await this.db
       .update(profiles)
       .set({
         ...(body.username !== undefined && { username: body.username }),
         ...(body.timezone !== undefined && { timezone: body.timezone }),
+        ...(body.leaderboard_opt_in !== undefined && {
+          leaderboardOptIn: body.leaderboard_opt_in,
+        }),
       })
       .where(eq(profiles.id, userId))
       .returning(publicColumns);
@@ -91,6 +103,7 @@ export class ProfilesController {
   }
 
   @Post('me/avatar')
+  @Throttle({ default: { limit: 20, ttl: 60_000 } })
   @UseInterceptors(FileInterceptor('file'))
   async avatar(
     @UserId() userId: string,

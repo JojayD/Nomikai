@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Delete,
+  ForbiddenException,
   Get,
   Inject,
   NotFoundException,
@@ -10,8 +11,10 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
+import { Throttle } from '@nestjs/throttler';
 import { aliasedTable, and, desc, eq, or } from 'drizzle-orm';
 import { AuthGuard, UserId } from './auth.guard';
+import { isBlockedPair } from './blocks.controller';
 import { DB, type Db } from './db';
 import { friendships, profiles } from './db/schema';
 
@@ -72,6 +75,7 @@ export class FriendshipsController {
 
   /** Send a request, by username or by profile id (the invite-link path). */
   @Post()
+  @Throttle({ default: { limit: 15, ttl: 60_000 } })
   async send(
     @UserId() userId: string,
     @Body() body: { username?: string; addressee_id?: string },
@@ -85,6 +89,10 @@ export class FriendshipsController {
         .where(eq(profiles.username, name));
       if (!target) throw new NotFoundException(`No user named @${name}.`);
       addresseeId = target.id;
+    }
+    // Same message either way round: don't reveal who blocked whom.
+    if (await isBlockedPair(this.db, userId, addresseeId)) {
+      throw new ForbiddenException('You cannot add this user.');
     }
     const [row] = await this.db
       .insert(friendships)

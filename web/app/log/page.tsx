@@ -4,7 +4,7 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { api, json } from "@/lib/api";
+import { ApiError, api, json } from "@/lib/api";
 import { normalizeDrinkName } from "@/lib/normalize";
 import { compressPhoto, photoForm } from "@/lib/photo";
 import Header from "../header";
@@ -254,6 +254,12 @@ function LogForm({
   const [camError, setCamError] = useState<string | null>(null);
   const [saved, setSaved] = useState<{ id: string; name: string } | null>(null);
 
+  // Stable across retries so a re-tap after the entry landed but the photo
+  // failed reuses the same rows instead of inserting duplicates. Reset per
+  // fresh entry in resetForm.
+  const entryId = useRef(crypto.randomUUID());
+  const nightId = useRef(crypto.randomUUID());
+
   function entryFields() {
     return {
       drink_id: sel!.drinkId,
@@ -271,7 +277,7 @@ function LogForm({
   type Payload = {
     fields: ReturnType<typeof entryFields>;
     photoFile: File | null;
-    newNight: { name: string; location: string | null } | null;
+    newNight: { id: string; name: string; location: string | null } | null;
   };
 
   // "+ New night out" is created alongside the entry, in one transaction, so
@@ -303,10 +309,18 @@ function LogForm({
     // The id is generated here so the confirmation screen can link to the
     // entry before the write lands.
     mutationFn: async ({ id, fields, photoFile, newNight }: Payload & { id: string }) => {
-      await api("/entries", {
-        method: "POST",
-        ...json({ id, ...fields, new_night_out: newNight }),
-      });
+      try {
+        await api("/entries", {
+          method: "POST",
+          ...json({ id, ...fields, new_night_out: newNight }),
+        });
+      } catch (e) {
+        // Retry after the entry landed but the photo step failed: the row (and
+        // its night out) already exist, so skip to the photo rather than
+        // inserting a duplicate. id is client-generated, so a 23505 here can
+        // only be this same entry.
+        if (!(e instanceof ApiError) || e.code !== "23505") throw e;
+      }
       if (photoFile) {
         await api(`/entries/${id}/photo`, {
           method: "POST",
@@ -401,6 +415,8 @@ function LogForm({
     closeCamera();
     setCamError(null);
     setSaved(null);
+    entryId.current = crypto.randomUUID();
+    nightId.current = crypto.randomUUID();
     saveEdit.reset();
     createEntry.reset();
   }
@@ -415,13 +431,17 @@ function LogForm({
       photoFile: photo,
       newNight:
         nightSel === "__new__" && newNightName.trim()
-          ? { name: newNightName.trim(), location: newNightLoc.trim() || null }
+          ? {
+              id: nightId.current,
+              name: newNightName.trim(),
+              location: newNightLoc.trim() || null,
+            }
           : null,
     };
     if (editId) return saveEdit.mutate(payload);
 
     // New entry: optimistic — confirmation renders now, insert runs behind it.
-    const id = crypto.randomUUID();
+    const id = entryId.current;
     setSaved({ id, name: sel.name });
     createEntry.mutate({ id, ...payload });
   }
@@ -435,7 +455,11 @@ function LogForm({
           <h2 className="text-[32px] leading-[1.05] tracking-[-0.03em]">
             {saved.name}
           </h2>
-          <button className="btn btn-primary btn-block mt-6" onClick={resetForm}>
+          <button
+            className="btn btn-primary btn-block mt-6"
+            disabled={pending}
+            onClick={resetForm}
+          >
             Log another
           </button>
           {!editId && (
@@ -450,7 +474,12 @@ function LogForm({
               Edit details
             </button>
           )}
-          <Link href="/" className="btn btn-secondary btn-block">
+          <Link
+            href="/"
+            aria-disabled={pending}
+            onClick={(e) => pending && e.preventDefault()}
+            className={`btn btn-secondary btn-block ${pending ? "pointer-events-none opacity-50" : ""}`}
+          >
             Done
           </Link>
         </div>

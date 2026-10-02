@@ -1,10 +1,11 @@
-import { NextResponse, type NextRequest } from "next/server";
+import { redirect } from "next/navigation";
+import type { NextRequest } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import type { EmailOtpType } from "@supabase/supabase-js";
 
 // Lands here from emailed links: either a PKCE ?code= or a ?token_hash=.
 export async function GET(request: NextRequest) {
-  const { searchParams, origin } = new URL(request.url);
+  const { searchParams } = new URL(request.url);
   const code = searchParams.get("code");
   const tokenHash = searchParams.get("token_hash");
   const type = searchParams.get("type") as EmailOtpType | null;
@@ -16,8 +17,7 @@ export async function GET(request: NextRequest) {
       ? await supabase.auth.verifyOtp({ token_hash: tokenHash, type })
       : { error: new Error("Missing code or token") };
 
-  if (error) {
-    return NextResponse.redirect(`${origin}/login`);
-  }
-  return NextResponse.redirect(`${origin}/`);
+  // Relative redirects: behind a proxy, request.url carries the internal
+  // host (localhost:10000 on Render), not the public one.
+  redirect(error ? "/login" : "/");
 }

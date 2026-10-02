@@ -61,7 +61,9 @@ export class FeedController {
       select v.id, v.user_id, p.username, p.avatar_url,
              coalesce(d.name, v.custom_drink_name) as drink_name,
              v.night_out_id, n.name as night_out_name,
-             v.location, v.photo_path, v.note, v.recommended, v.logged_at
+             v.location, v.photo_path, v.note, v.recommended, v.logged_at,
+             (select count(*)::int from reactions r where r.entry_id = v.id) as reaction_count,
+             exists (select 1 from reactions r where r.entry_id = v.id and r.user_id = ${viewerId}) as reacted_by_me
       from visible v
       join profiles p on p.id = v.user_id
       left join drinks d on d.id = v.drink_id

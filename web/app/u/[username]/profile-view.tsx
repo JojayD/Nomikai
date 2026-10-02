@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { api, json } from "@/lib/api";
 import EntryCard, { type EntryRowData } from "../../entry-card";
@@ -20,10 +21,12 @@ export default function ProfileView({
   profile,
   viewerId,
   email,
+  leaderboardOptIn,
 }: {
   profile: Profile;
   viewerId: string;
   email: string | null; // non-null only on the own profile
+  leaderboardOptIn: boolean;
 }) {
   const own = profile.id === viewerId;
   const queryClient = useQueryClient();
@@ -35,6 +38,25 @@ export default function ProfileView({
       api<{ id: string; requester_id: string; status: string } | null>(
         `/friendships/with/${profile.id}`
       ),
+  });
+
+  // F10: block state; blocking dissolved any friendship server-side.
+  const blocks = useQuery({
+    queryKey: ["blocks"],
+    enabled: !own,
+    queryFn: () => api<{ blocked_id: string }[]>("/blocks"),
+  });
+  const blocked = !!blocks.data?.some((b) => b.blocked_id === profile.id);
+  const [confirmBlock, setConfirmBlock] = useState(false);
+  const toggleBlock = useMutation({
+    mutationFn: () =>
+      blocked
+        ? api(`/blocks/${profile.id}`, { method: "DELETE" })
+        : api("/blocks", { method: "POST", ...json({ blocked_id: profile.id }) }),
+    onSuccess: () => {
+      setConfirmBlock(false);
+      queryClient.invalidateQueries();
+    },
   });
   const state = own
     ? "self"
@@ -110,7 +132,7 @@ export default function ProfileView({
           </div>
         </div>
 
-        {!own && state !== "friends" && (
+        {!own && state !== "friends" && !blocked && (
           <div className="mt-4">
             {state === "none" && (
               <button
@@ -151,6 +173,32 @@ export default function ProfileView({
             <p className="mt-3 text-[13.5px] opacity-70">
               Drinks and stats are visible to friends only.
             </p>
+          </div>
+        )}
+
+        {!own && !blocks.isPending && (
+          <div className="mt-4">
+            {blocked && (
+              <p className="mb-2 text-[13.5px] opacity-70">
+                Blocked — you can&apos;t see each other&apos;s drinks, and
+                neither of you can send a friend request.
+              </p>
+            )}
+            <button
+              className="btn btn-ghost !mt-0 text-sm"
+              style={{ color: "var(--color-accent)" }}
+              disabled={toggleBlock.isPending}
+              onClick={() => {
+                if (blocked || confirmBlock) return toggleBlock.mutate();
+                setConfirmBlock(true);
+              }}
+            >
+              {blocked
+                ? "Unblock"
+                : confirmBlock
+                  ? "Tap again to block & unfriend"
+                  : `Block @${profile.username}`}
+            </button>
           </div>
         )}
 
@@ -214,6 +262,7 @@ export default function ProfileView({
           timezone={profile.timezone}
           email={email}
           avatarUrl={profile.avatar_url}
+          leaderboardOptIn={leaderboardOptIn}
         />
       )}
     </>

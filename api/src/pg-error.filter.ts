@@ -19,14 +19,29 @@ const STATUS: Record<string, number> = {
   '22P02': 400, // invalid_text_representation (bad uuid)
 };
 
-/** Drizzle wraps driver errors in DrizzleQueryError, so the code is on .cause. */
-export function pgCode(error: unknown): string | undefined {
+/**
+ * Drizzle wraps driver errors in DrizzleQueryError, so the code is on .cause.
+ * The wrapper's message is `Failed query: <SQL>\nparams: <values>` — never
+ * surface that; the driver error at the code-carrying level has the safe short
+ * message ("duplicate key value violates ...") with no SQL or bound params.
+ */
+export function pgError(
+  error: unknown,
+): { code: string; message: string } | undefined {
   for (let e = error; e; e = (e as { cause?: unknown }).cause) {
     const code = (e as { code?: unknown }).code;
-    if (typeof code === 'string' && code in STATUS) return code;
+    if (typeof code === 'string' && code in STATUS) {
+      const message = (e as { message?: unknown }).message;
+      return {
+        code,
+        message: typeof message === 'string' ? message : 'Request failed',
+      };
+    }
   }
   return undefined;
 }
+
+export const pgCode = (error: unknown) => pgError(error)?.code;
 
 @Catch()
 export class PgErrorFilter implements ExceptionFilter {
@@ -43,12 +58,12 @@ export class PgErrorFilter implements ExceptionFilter {
       return;
     }
 
-    const code = pgCode(exception);
-    if (code) {
-      res.status(STATUS[code]).json({
-        statusCode: STATUS[code],
-        code,
-        message: (exception as { message?: string }).message,
+    const pg = pgError(exception);
+    if (pg) {
+      res.status(STATUS[pg.code]).json({
+        statusCode: STATUS[pg.code],
+        code: pg.code,
+        message: pg.message,
       });
       return;
     }

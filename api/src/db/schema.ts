@@ -8,6 +8,7 @@ import {
   type AnyPgColumn,
   pgPolicy,
   pgTable,
+  primaryKey,
   text,
   timestamp,
   unique,
@@ -229,6 +230,88 @@ export const entries = pgTable(
     pgPolicy('own entries delete', {
       for: 'delete',
       using: sql`${uid} = user_id`,
+    }),
+  ],
+).enableRLS();
+
+// F6: one reaction type, one row per (entry, user); the PK is the toggle.
+export const reactions = pgTable(
+  'reactions',
+  {
+    entryId: uuid('entry_id').notNull(),
+    userId: uuid('user_id').notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'string' })
+      .defaultNow()
+      .notNull(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.entryId, t.userId], name: 'reactions_pkey' }),
+    foreignKey({
+      columns: [t.entryId],
+      foreignColumns: [entries.id],
+      name: 'reactions_entry_id_fkey',
+    }).onDelete('cascade'),
+    foreignKey({
+      columns: [t.userId],
+      foreignColumns: [profiles.id],
+      name: 'reactions_user_id_fkey',
+    }).onDelete('cascade'),
+    // visible wherever the entry is visible
+    pgPolicy('reactions on visible entries select', {
+      for: 'select',
+      using: sql`exists (select 1 from public.entries e where e.id = entry_id
+        and (${uid} = e.user_id or public.is_friends_with(e.user_id)))`,
+    }),
+    pgPolicy('own reactions insert', {
+      for: 'insert',
+      withCheck: sql`${uid} = user_id and exists (
+        select 1 from public.entries e where e.id = entry_id
+        and (${uid} = e.user_id or public.is_friends_with(e.user_id)))`,
+    }),
+    pgPolicy('own reactions delete', {
+      for: 'delete',
+      using: sql`${uid} = user_id`,
+    }),
+  ],
+).enableRLS();
+
+// F10: blocking hides content both ways. The API deletes the friendship row in
+// the same transaction, so feed/leaderboard/profile visibility (all friendship
+// -gated) drops out without extra filters; this table's job is to stop the
+// pair from re-friending.
+export const blocks = pgTable(
+  'blocks',
+  {
+    blockerId: uuid('blocker_id').notNull(),
+    blockedId: uuid('blocked_id').notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'string' })
+      .defaultNow()
+      .notNull(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.blockerId, t.blockedId], name: 'blocks_pkey' }),
+    foreignKey({
+      columns: [t.blockerId],
+      foreignColumns: [profiles.id],
+      name: 'blocks_blocker_id_fkey',
+    }).onDelete('cascade'),
+    foreignKey({
+      columns: [t.blockedId],
+      foreignColumns: [profiles.id],
+      name: 'blocks_blocked_id_fkey',
+    }).onDelete('cascade'),
+    check('blocks_check', sql`blocker_id <> blocked_id`),
+    pgPolicy('own blocks select', {
+      for: 'select',
+      using: sql`${uid} = blocker_id`,
+    }),
+    pgPolicy('own blocks insert', {
+      for: 'insert',
+      withCheck: sql`${uid} = blocker_id`,
+    }),
+    pgPolicy('own blocks delete', {
+      for: 'delete',
+      using: sql`${uid} = blocker_id`,
     }),
   ],
 ).enableRLS();

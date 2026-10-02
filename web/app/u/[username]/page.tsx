@@ -18,6 +18,10 @@ export default async function ProfilePage(props: PageProps<"/u/[username]">) {
   if (!profile) notFound();
 
   const own = profile.id === user.id;
+  // The public profile omits the leaderboard flag; own settings read /me.
+  const me = own
+    ? await apiServer<{ leaderboard_opt_in: boolean }>("/me")
+    : null;
   return (
     <main className="flex flex-1 flex-col">
       <Header kicker={own ? "Your profile" : "Profile"} />
@@ -25,6 +29,7 @@ export default async function ProfilePage(props: PageProps<"/u/[username]">) {
         profile={profile}
         viewerId={user.id}
         email={own ? (user.email ?? "") : null}
+        leaderboardOptIn={me?.leaderboard_opt_in ?? true}
       />
     </main>
   );

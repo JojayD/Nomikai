@@ -185,6 +185,8 @@ try {
   check('GET /night-outs/:id for a stranger → 403', r.status === 403, r);
   r = await api(b, 'GET', '/feed');
   check("stranger's feed excludes A", !r.body?.some((e) => e.user_id === a.id), r.body?.length);
+  r = await api(b, 'PUT', `/entries/${entryId}/reaction`);
+  check("stranger cannot react → 403", r.status === 403, r);
 
   console.log('\n— friendships —');
   r = await api(a, 'GET', `/friendships/with/${b.id}`);
@@ -251,6 +253,58 @@ try {
   r = await api(a, 'GET', `/night-outs/${crypto.randomUUID()}`);
   check('GET /night-outs/:id unknown → 404', r.status === 404, r);
 
+  console.log('\n— reactions —');
+  r = await api(b, 'PUT', `/entries/${entryId}/reaction`);
+  check('PUT /entries/:id/reaction', r.status === 200 && r.body.reacted === true, r);
+
+  r = await api(b, 'PUT', `/entries/${entryId}/reaction`);
+  check('PUT reaction is idempotent', r.status === 200 && r.body.reacted === true, r);
+
+  r = await api(b, 'GET', '/feed');
+  let reacted = r.body?.find((e) => e.id === entryId);
+  check('feed carries reaction_count and reacted_by_me',
+    reacted?.reaction_count === 1 && reacted.reacted_by_me === true, reacted);
+
+  r = await api(a, 'GET', `/entries?user_id=${a.id}`);
+  check("owner sees the count but not b's state",
+    r.body?.[0]?.reaction_count === 1 && r.body[0].reacted_by_me === false, r.body?.[0]);
+
+  console.log('\n— leaderboard —');
+  r = await api(a, 'GET', '/leaderboard');
+  check('GET /leaderboard has both members, A first',
+    r.body?.length === 2 && r.body[0].username === nameA
+      && r.body[0].unique_drinks === 1 && r.body[0].nights_out === 1
+      && r.body[1].unique_drinks === 0, r.body);
+
+  r = await api(a, 'GET', '/leaderboard?window=month');
+  check('GET /leaderboard?window=month works', r.body?.length === 2, r.body);
+
+  r = await api(b, 'PATCH', '/me', { leaderboard_opt_in: false });
+  check('PATCH /me leaderboard_opt_in', r.status === 200, r);
+
+  r = await api(a, 'GET', '/leaderboard');
+  check("opted-out B leaves A's board", r.body?.length === 1 && r.body[0].username === nameA, r.body);
+
+  r = await api(b, 'GET', '/leaderboard');
+  check('opted-out B sees only themself', r.body?.length === 1 && r.body[0].username === nameB, r.body);
+
+  r = await api(b, 'PATCH', '/me', { leaderboard_opt_in: true });
+  check('opting back in restores B', r.status === 200 && (await api(a, 'GET', '/leaderboard')).body.length === 2, r);
+
+  console.log('\n— recap —');
+  r = await api(a, 'GET', '/recap');
+  check('GET /recap counts the week', r.body?.total_entries === 1 && r.body.unique_drinks === 1 && r.body.nights_out === 1, r.body);
+  check('GET /recap names the most reacted drink',
+    r.body?.most_reacted?.drink_name === 'Lager' && r.body.most_reacted.reactions === 1, r.body?.most_reacted);
+  check('GET /recap carries username and week_start', r.body?.username === nameA && !!r.body.week_start, r.body);
+
+  r = await api(b, 'DELETE', `/entries/${entryId}/reaction`);
+  check('DELETE /entries/:id/reaction', r.status === 200 && r.body.reacted === false, r);
+
+  r = await api(b, 'GET', '/feed');
+  reacted = r.body?.find((e) => e.id === entryId);
+  check('unreact drops the count', reacted?.reaction_count === 0 && reacted.reacted_by_me === false, reacted);
+
   console.log('\n— updates and deletes —');
   r = await api(a, 'PATCH', `/entries/${entryId}`, {
     drink_id: null,
@@ -314,6 +368,46 @@ try {
 
   r = await api(b, 'DELETE', `/friendships/${friendshipId}`);
   check('DELETE /friendships/:id twice → 404', r.status === 404, r);
+
+  console.log('\n— blocks —');
+  r = await api(a, 'POST', '/friendships', { username: nameB });
+  const refriendId = r.body?.id;
+  check('re-friending after unfriend works', r.status === 201 && !!refriendId, r);
+  r = await api(b, 'PATCH', `/friendships/${refriendId}`);
+  check('B accepts again', r.status === 200, r);
+
+  r = await api(a, 'POST', '/blocks', { blocked_id: b.id });
+  check('POST /blocks', r.status === 201 && r.body.blocked === true, r);
+
+  r = await api(b, 'GET', `/friendships/with/${a.id}`);
+  check('blocking dissolved the friendship', r.status === 200 && r.body === null, r);
+
+  r = await api(b, 'GET', `/entries?user_id=${a.id}`);
+  check("blocked B cannot see A's entries → 403", r.status === 403, r);
+
+  r = await api(b, 'POST', '/friendships', { username: nameA });
+  check('blocked B cannot re-friend → 403', r.status === 403, r);
+
+  r = await api(a, 'POST', '/friendships', { username: nameB });
+  check('blocker cannot re-friend either → 403', r.status === 403, r);
+
+  r = await api(a, 'GET', '/blocks');
+  check('GET /blocks lists B with username', r.body?.length === 1 && r.body[0].username === nameB, r);
+
+  r = await api(b, 'GET', '/blocks');
+  check("B's own block list is empty", r.body?.length === 0, r);
+
+  r = await api(a, 'POST', '/blocks', { blocked_id: a.id });
+  check('blocking yourself → 400 / 23514', r.status === 400 && r.body.code === '23514', r);
+
+  r = await api(a, 'DELETE', `/blocks/${b.id}`);
+  check('DELETE /blocks/:id (unblock)', r.body?.blocked === false, r);
+
+  r = await api(a, 'DELETE', `/blocks/${b.id}`);
+  check('unblocking twice → 404', r.status === 404, r);
+
+  r = await api(b, 'POST', '/friendships', { username: nameA });
+  check('after unblock, requests flow again', r.status === 201, r);
 
   console.log('\n— account deletion —');
   r = await api(a, 'DELETE', '/me');

@@ -1,6 +1,9 @@
 "use client";
 
+import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
 import Link from "next/link";
+import { api } from "@/lib/api";
 
 // Shape of one feed/profile row as the API returns it; photo_url and
 // avatar_src are signed URLs the API attaches to each row.
@@ -17,9 +20,45 @@ export type EntryRowData = {
   note: string | null;
   recommended: boolean | null;
   logged_at: string;
+  reaction_count: number;
+  reacted_by_me: boolean;
   photo_url?: string | null;
   avatar_src?: string | null;
 };
+
+/**
+ * F6: the toggle updates optimistically — local state flips first, the
+ * request follows, and an error flips it back. No query invalidation: the
+ * server lands on the same state, so the next refetch agrees.
+ */
+function ReactionButton({ row }: { row: EntryRowData }) {
+  const [state, setState] = useState({
+    count: row.reaction_count,
+    reacted: row.reacted_by_me,
+  });
+  const toggle = useMutation({
+    mutationFn: (next: boolean) =>
+      api(`/entries/${row.id}/reaction`, { method: next ? "PUT" : "DELETE" }),
+    onError: (_e, next) =>
+      setState((s) => ({ reacted: !next, count: s.count + (next ? -1 : 1) })),
+  });
+  return (
+    <button
+      className="mt-1.5 cursor-pointer text-[13px] font-semibold tabular-nums"
+      style={state.reacted ? { color: "var(--color-accent)" } : undefined}
+      aria-pressed={state.reacted}
+      aria-label="React"
+      onClick={() => {
+        const next = !state.reacted;
+        setState((s) => ({ reacted: next, count: s.count + (next ? 1 : -1) }));
+        toggle.mutate(next);
+      }}
+    >
+      {state.reacted ? "♥" : "♡"}
+      {state.count > 0 && ` ${state.count}`}
+    </button>
+  );
+}
 
 export function relativeTime(iso: string) {
   const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
@@ -100,6 +139,11 @@ export default function EntryCard({
           className="mt-2 max-h-80 w-full object-cover"
         />
       )}
+      {/* key: a refetched server value reseeds the optimistic state */}
+      <ReactionButton
+        key={`${row.reaction_count}-${row.reacted_by_me}`}
+        row={row}
+      />
     </div>
   );
 }

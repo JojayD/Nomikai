@@ -1,13 +1,14 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { api, json } from "@/lib/api";
 import { createClient } from "@/lib/supabase/client";
 
 export default function OnboardingPage() {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const detected = useMemo(
     () => Intl.DateTimeFormat().resolvedOptions().timeZone,
     []
@@ -35,6 +36,9 @@ export default function OnboardingPage() {
       return true;
     },
     onSuccess: (created) => {
+      // ["me"] may be cached as null (staleTime: Infinity) from a /log visit
+      // before the profile existed; drop it so the app sees the new profile.
+      if (created) queryClient.invalidateQueries({ queryKey: ["me"] });
       router.push(created ? "/" : "/login");
       router.refresh();
     },
