@@ -76,11 +76,18 @@ describe('PgErrorFilter', () => {
     filter.catch(
       Object.assign(
         new Error('Failed query: insert into "profiles" ...\nparams: alice'),
-        { cause: Object.assign(new Error('duplicate key value'), { code: '23505' }) },
+        {
+          cause: Object.assign(new Error('duplicate key value'), {
+            code: '23505',
+          }),
+        },
       ),
       host,
     );
-    expect(res.body).toMatchObject({ code: '23505', message: 'duplicate key value' });
+    expect(res.body).toMatchObject({
+      code: '23505',
+      message: 'duplicate key value',
+    });
     expect(JSON.stringify(res.body)).not.toContain('Failed query');
     expect(JSON.stringify(res.body)).not.toContain('params');
   });
