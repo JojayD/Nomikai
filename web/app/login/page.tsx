@@ -108,8 +108,8 @@ export default function LoginPage() {
             }}
           >
             <p className="text-sm opacity-80">
-              We emailed <strong>{email}</strong>. Enter the 6-digit code, or
-              click the link in the email — either works.
+              We emailed <strong>{email}</strong> a link. Click it to
+              continue.
             </p>
             <div className="field mt-3">
               <label htmlFor="code">Code</label>
@@ -179,7 +179,7 @@ export default function LoginPage() {
             {mode === "email" ? (
               <>
                 <button className="btn btn-primary btn-block" disabled={busy}>
-                  Email me a code
+                  Email me a link
                 </button>
                 <button
                   type="button"
@@ -213,7 +213,7 @@ export default function LoginPage() {
                     setMode("email");
                   }}
                 >
-                  Email me a code instead
+                  Email me a link instead
                 </button>
               </>
             )}
