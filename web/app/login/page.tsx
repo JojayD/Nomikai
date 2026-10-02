@@ -5,16 +5,13 @@ import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
-type Mode = "email" | "password" | "code";
+type Mode = "email" | "password" | "sent";
 
 export default function LoginPage() {
   const router = useRouter();
   const [mode, setMode] = useState<Mode>("email");
-  // "email" = OTP verify, "signup" = confirm a new password account
-  const [codeType, setCodeType] = useState<"email" | "signup">("email");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [code, setCode] = useState("");
 
   const goHome = () => {
     router.push("/");
@@ -32,10 +29,7 @@ export default function LoginPage() {
       });
       if (error) throw error;
     },
-    onSuccess: () => {
-      setCodeType("email");
-      setMode("code");
-    },
+    onSuccess: () => setMode("sent"),
   });
 
   const signInWithPassword = useMutation({
@@ -62,26 +56,13 @@ export default function LoginPage() {
     onSuccess: (data) => {
       // A session comes back immediately when email confirmation is off.
       if (data.session) return goHome();
-      setCodeType("signup");
-      setMode("code");
+      setMode("sent");
     },
   });
 
-  const verifyCode = useMutation({
-    mutationFn: async () => {
-      const { error } = await createClient().auth.verifyOtp({
-        email,
-        token: code,
-        type: codeType,
-      });
-      if (error) throw error;
-    },
-    onSuccess: goHome,
-  });
-
-  // One error line serves all four paths. Retrying clears that mutation's own
-  // error; switching paths has to clear the other three.
-  const all = [sendCode, signInWithPassword, createAccount, verifyCode];
+  // One error line serves all three paths. Retrying clears that mutation's own
+  // error; switching paths has to clear the other two.
+  const all = [sendCode, signInWithPassword, createAccount];
   const busy = all.some((m) => m.isPending);
   const error = all.find((m) => m.error)?.error;
   const resetErrors = () => all.forEach((m) => m.reset());
@@ -100,46 +81,23 @@ export default function LoginPage() {
       </div>
 
       <div className="p-5">
-        {mode === "code" ? (
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              verifyCode.mutate();
-            }}
-          >
+        {mode === "sent" ? (
+          <>
             <p className="text-sm opacity-80">
-              We emailed <strong>{email}</strong>. Enter the 6-digit code, or
-              click the link in the email — either works.
+              We emailed <strong>{email}</strong> a link. Click it to
+              continue.
             </p>
-            <div className="field mt-3">
-              <label htmlFor="code">Code</label>
-              <input
-                id="code"
-                className="input text-center font-extrabold tracking-[0.4em]"
-                inputMode="numeric"
-                autoComplete="one-time-code"
-                maxLength={6}
-                value={code}
-                onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
-                autoFocus
-                required
-              />
-            </div>
-            <button className="btn btn-primary btn-block" disabled={busy || code.length < 6}>
-              Verify code
-            </button>
             <button
               type="button"
               className="btn btn-ghost mt-3 text-sm"
               onClick={() => {
-                setCode("");
                 resetErrors();
                 setMode("email");
               }}
             >
               Use a different email
             </button>
-          </form>
+          </>
         ) : (
           <form
             onSubmit={(e) => {
@@ -179,7 +137,7 @@ export default function LoginPage() {
             {mode === "email" ? (
               <>
                 <button className="btn btn-primary btn-block" disabled={busy}>
-                  Email me a code
+                  Email me a link
                 </button>
                 <button
                   type="button"
@@ -213,7 +171,7 @@ export default function LoginPage() {
                     setMode("email");
                   }}
                 >
-                  Email me a code instead
+                  Email me a link instead
                 </button>
               </>
             )}
