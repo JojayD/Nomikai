@@ -231,6 +231,18 @@ export default function ProfileView({
 
       {canSee && (
         <div>
+          {entries.isPending && <p role="status" className="px-4 py-7 text-sm">Loading drink history…</p>}
+          {entries.isError && (
+            <div role="alert" className="px-4 py-4 text-sm">
+              <p>Could not load drink history.</p>
+              <button type="button" className="btn btn-secondary" disabled={entries.isFetching} onClick={() => entries.refetch()}>
+                {entries.isFetching ? "Retrying…" : "Retry"}
+              </button>
+            </div>
+          )}
+          {entries.isSuccess && !entries.data.pages.some(page => page.length > 0) && (
+            <p className="px-4 py-7 text-sm">No drinks logged yet.</p>
+          )}
           {entries.data?.pages.flat().map((r) => (
             <EntryCard
               key={r.id}

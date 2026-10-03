@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { createClient } from '@supabase/supabase-js';
 
 const BUCKET = 'photos';
@@ -8,6 +8,7 @@ const SIGNED_URL_TTL = 3600;
 // decided the viewer may see the path. Paths are always `{userId}/...`.
 @Injectable()
 export class StorageService {
+  private readonly logger = new Logger(StorageService.name);
   private readonly supabase = createClient(
     process.env.SUPABASE_URL!,
     process.env.SUPABASE_SECRET_KEY!,
@@ -21,9 +22,10 @@ export class StorageService {
     const unique = [...new Set(paths.filter((p): p is string => !!p))];
     const map = new Map<string, string>();
     if (!unique.length) return map;
-    const { data } = await this.supabase.storage
+    const { data, error } = await this.supabase.storage
       .from(BUCKET)
       .createSignedUrls(unique, SIGNED_URL_TTL);
+    if (error) this.logger.warn('Could not sign photo URLs');
     for (const d of data ?? []) {
       if (d.path && d.signedUrl) map.set(d.path, d.signedUrl);
     }
