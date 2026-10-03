@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -152,6 +152,17 @@ function LogForm({
   const [note, setNote] = useState(entry?.note ?? "");
   const [rec, setRec] = useState<boolean | null>(entry?.recommended ?? null);
   const [photo, setPhoto] = useState<File | null>(null);
+  // Preview of the chosen/captured photo; the object URL is released when it changes.
+  const photoPreview = useMemo(
+    () => (photo ? URL.createObjectURL(photo) : null),
+    [photo]
+  );
+  useEffect(
+    () => () => {
+      if (photoPreview) URL.revokeObjectURL(photoPreview);
+    },
+    [photoPreview]
+  );
   // edit mode: path of the photo already on the entry; removePhoto marks it for deletion
   const existingPhotoPath = entry?.photo_path ?? null;
   const [removePhoto, setRemovePhoto] = useState(false);
@@ -608,10 +619,15 @@ function LogForm({
               >
                 Take photo
               </button>
-              {photo && (
+              {photo && photoPreview && (
                 <div className="mt-2 text-sm">
-                  <span>Selected: {photo.name}</span>
-                  <button type="button" className="btn btn-ghost ml-2 text-sm" onClick={() => {
+                  {/* eslint-disable-next-line @next/next/no-img-element -- local object URL */}
+                  <img
+                    src={photoPreview}
+                    alt="Selected photo"
+                    className="max-h-80 w-full object-cover"
+                  />
+                  <button type="button" className="btn btn-ghost mt-1 text-sm" onClick={() => {
                     setPhoto(null);
                     if (photoInputRef.current) photoInputRef.current.value = "";
                   }}>Remove selected photo</button>

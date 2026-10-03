@@ -250,6 +250,22 @@ test("retry after a photo failure persists changes to the drink fields", async (
   expect(stored?.note).toBe("Updated after failure");
 });
 
+test("a chosen photo shows as an image, not just its name", async () => {
+  navigation.edit = "";
+  mount(<LogPage />);
+  fireEvent.change(screen.getByPlaceholderText("Start typing…"), {
+    target: { value: "Beer" },
+  });
+  fireEvent.click(screen.getByText("Log “Beer” as written"));
+  fireEvent.click(screen.getByText(/Add details/));
+  fireEvent.change(screen.getByLabelText(/Photo · optional/), {
+    target: { files: [new File(["jpeg"], "drink.jpg")] },
+  });
+  expect(
+    (screen.getByAltText("Selected photo") as HTMLImageElement).src,
+  ).toBe("blob:preview");
+});
+
 const row = {
   id: "entry",
   user_id: "owner",
