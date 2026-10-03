@@ -1,0 +1,2 @@
+# Allow GitHub PR merges for this project.
+prefix_rule(pattern=["gh", "pr", "merge"], decision="allow")
