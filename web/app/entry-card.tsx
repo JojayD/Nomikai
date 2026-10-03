@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import Link from "next/link";
 import { api } from "@/lib/api";
+import Photo from "./photo";
 
 // Shape of one feed/profile row as the API returns it; photo_url and
 // avatar_src are signed URLs the API attaches to each row.
@@ -131,9 +132,9 @@ export default function EntryCard({
         </div>
       )}
       {row.note && <p className="mt-1 text-[14px]">{row.note}</p>}
-      {row.photo_url && (
-        // eslint-disable-next-line @next/next/no-img-element -- signed URL, remote patterns don't apply
-        <img
+      {row.photo_path && (
+        <Photo
+          key={`${row.photo_path}:${row.photo_url}`}
           src={row.photo_url}
           alt={`Photo of ${row.drink_name}`}
           className="mt-2 max-h-80 w-full object-cover"
