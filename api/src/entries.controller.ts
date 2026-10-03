@@ -3,10 +3,13 @@ import {
   Controller,
   Delete,
   ForbiddenException,
+  FileTypeValidator,
   Get,
   Inject,
+  Logger,
   NotFoundException,
   Param,
+  ParseFilePipe,
   Patch,
   Post,
   Query,
@@ -14,6 +17,7 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
+import { randomUUID } from 'node:crypto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Throttle } from '@nestjs/throttler';
 import { and, desc, eq } from 'drizzle-orm';
@@ -39,6 +43,7 @@ type EntryBody = {
 @Controller('entries')
 @UseGuards(AuthGuard)
 export class EntriesController {
+  private readonly logger = new Logger(EntriesController.name);
   constructor(
     @Inject(DB) private readonly db: Db,
     private readonly storage: StorageService,
@@ -166,39 +171,70 @@ export class EntriesController {
       .where(and(eq(entries.id, id), eq(entries.userId, userId)))
       .returning({ photoPath: entries.photoPath });
     if (!row) throw new NotFoundException('No such entry');
-    if (row.photoPath) await this.storage.remove([row.photoPath]);
+    await this.removeUnusedPhoto(row.photoPath);
     return { deleted: true };
   }
 
   @Post(':id/photo')
   @Throttle({ default: { limit: 20, ttl: 60_000 } })
-  @UseInterceptors(FileInterceptor('file'))
+  @UseInterceptors(
+    FileInterceptor('file', { limits: { fileSize: 5 * 1024 * 1024 } }),
+  )
   async setPhoto(
     @UserId() userId: string,
     @Param('id') id: string,
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [new FileTypeValidator({ fileType: 'image/jpeg' })],
+      }),
+    )
+    file: Express.Multer.File,
   ) {
     await this.assertOwn(userId, id);
-    // Path is derived, never supplied: an upload can only land in own folder.
-    const path = `${userId}/${id}.jpg`;
-    await this.storage.upload(path, file.buffer, 'image/jpeg');
-    await this.db
-      .update(entries)
-      .set({ photoPath: path })
-      .where(eq(entries.id, id));
+    // Never reuse an object name: a delayed deletion must not remove a newer photo.
+    const path = `${userId}/${id}-${randomUUID()}.jpg`;
+    let previous: string | null;
+    try {
+      await this.storage.upload(path, file.buffer, 'image/jpeg');
+      previous = await this.replacePhoto(userId, id, path);
+    } catch (error) {
+      await this.removeUnusedPhoto(path);
+      throw error;
+    }
+    await this.removeUnusedPhoto(previous);
     return { photo_path: path };
   }
 
   @Delete(':id/photo')
   async clearPhoto(@UserId() userId: string, @Param('id') id: string) {
-    const [row] = await this.db
-      .update(entries)
-      .set({ photoPath: null })
-      .where(and(eq(entries.id, id), eq(entries.userId, userId)))
-      .returning({ photoPath: entries.photoPath });
-    if (!row) throw new NotFoundException('No such entry');
-    await this.storage.remove([`${userId}/${id}.jpg`]);
+    const previous = await this.replacePhoto(userId, id, null);
+    await this.removeUnusedPhoto(previous);
     return { photo_path: null };
+  }
+
+  private replacePhoto(userId: string, id: string, path: string | null) {
+    return this.db.transaction(async (tx) => {
+      const owner = and(eq(entries.id, id), eq(entries.userId, userId));
+      const [row] = await tx
+        .select({ photoPath: entries.photoPath })
+        .from(entries)
+        .where(owner)
+        .for('update');
+      if (!row) throw new NotFoundException('No such entry');
+      await tx.update(entries).set({ photoPath: path }).where(owner);
+      return row.photoPath;
+    });
+  }
+
+  private async removeUnusedPhoto(path: string | null) {
+    if (!path) return;
+    try {
+      await this.storage.remove([path]);
+    } catch {
+      // The entry change has already committed. Do not report a failed save
+      // or delete that a retry cannot undo; keep cleanup failures observable.
+      this.logger.warn(`Could not remove unused photo: ${path}`);
+    }
   }
 
   private async assertOwn(userId: string, id: string) {

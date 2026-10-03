@@ -8,6 +8,7 @@ import { ApiError, api, json } from "@/lib/api";
 import { normalizeDrinkName } from "@/lib/normalize";
 import { compressPhoto, photoForm } from "@/lib/photo";
 import Header from "../header";
+import CameraDialog from "./camera-dialog";
 
 type Drink = {
   id: number;
@@ -176,95 +177,9 @@ function LogForm({
       ? [{ id: entry.night_out_id, name: entry.night_out_name ?? "…" }, ...(nights.data ?? [])]
       : (nights.data ?? []);
 
-  // In-app camera (video only, no audio). Stream lives here; the effect below
-  // owns stopping tracks on close/unmount. camClosed covers the gap where
-  // getUserMedia is still pending — a stream resolving after close/unmount
-  // must be stopped, not set.
-  const [camStream, setCamStream] = useState<MediaStream | null>(null);
-  const camDialogRef = useRef<HTMLDialogElement | null>(null);
-  const camVideoRef = useRef<HTMLVideoElement | null>(null);
+  const [cameraOpen, setCameraOpen] = useState(false);
   const photoInputRef = useRef<HTMLInputElement | null>(null);
-  const camClosed = useRef(false);
-  useEffect(() => {
-    return () => camStream?.getTracks().forEach((t) => t.stop());
-  }, [camStream]);
-  useEffect(() => {
-    const dialog = camDialogRef.current;
-    if (!camStream || !dialog) return;
-    dialog.showModal();
-    const overflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      dialog.close();
-      document.body.style.overflow = overflow;
-    };
-  }, [camStream]);
-  useEffect(() => {
-    return () => {
-      camClosed.current = true;
-    };
-  }, []);
 
-  async function openCamera() {
-    setCamError(null);
-    camClosed.current = false;
-    try {
-      // Triggers the browser's standard camera permission prompt.
-      const s = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: "environment" },
-        audio: false,
-      });
-      if (camClosed.current) {
-        s.getTracks().forEach((t) => t.stop());
-        return;
-      }
-      setCamStream(s);
-    } catch {
-      setCamError("Camera unavailable — allow camera access or pick a file instead.");
-    }
-  }
-
-  function closeCamera() {
-    camClosed.current = true;
-    setCamStream(null);
-    setCamError(null);
-  }
-
-  function capturePhoto() {
-    const v = camVideoRef.current;
-    // readyState < HAVE_CURRENT_DATA would drawImage nothing → black JPEG
-    if (!v || v.readyState < 2) {
-      setCamError("Camera is still starting — try again.");
-      return;
-    }
-    setCamError(null);
-    const canvas = document.createElement("canvas");
-    canvas.width = v.videoWidth;
-    canvas.height = v.videoHeight;
-    canvas.getContext("2d")!.drawImage(v, 0, 0);
-    canvas.toBlob(
-      (b) => {
-        if (!b) {
-          setCamError("Could not capture photo — try again.");
-          return;
-        }
-        const f = new File([b], "camera.jpg", { type: "image/jpeg" });
-        setPhoto(f);
-        setRemovePhoto(false);
-        if (photoInputRef.current) {
-          // show the capture in the file input natively
-          const dt = new DataTransfer();
-          dt.items.add(f);
-          photoInputRef.current.files = dt.files;
-        }
-        closeCamera();
-      },
-      "image/jpeg",
-      0.9
-    );
-  }
-
-  const [camError, setCamError] = useState<string | null>(null);
   const [saved, setSaved] = useState<{ id: string; name: string } | null>(null);
 
   // Stable across retries so a re-tap after the entry landed but the photo
@@ -301,19 +216,23 @@ function LogForm({
         method: "PATCH",
         ...json({ ...fields, new_night_out: newNight }),
       });
-      if (photoFile) {
-        await api(`/entries/${editId}/photo`, {
-          method: "POST",
-          body: photoForm(await compressPhoto(photoFile)),
-        });
-      } else if (removePhoto && existingPhotoPath) {
-        await api(`/entries/${editId}/photo`, { method: "DELETE" });
+      try {
+        if (photoFile) {
+          await api(`/entries/${editId}/photo`, {
+            method: "POST",
+            body: photoForm(await compressPhoto(photoFile)),
+          });
+        } else if (removePhoto && existingPhotoPath) {
+          await api(`/entries/${editId}/photo`, { method: "DELETE" });
+        }
+      } catch (error) {
+        throw new Error(`Entry saved, but photo change failed. Please retry. ${error instanceof Error ? error.message : ""}`);
       }
     },
+    onSettled: () => queryClient.invalidateQueries(),
     onSuccess: () => {
       // feed, profile history, stats, and the night-out list all reflect a
       // saved entry — refetch everything rather than tracking keys
-      queryClient.invalidateQueries();
       setSaved({ id: editId!, name: sel!.name });
     },
   });
@@ -328,20 +247,26 @@ function LogForm({
           ...json({ id, ...fields, new_night_out: newNight }),
         });
       } catch (e) {
-        // Retry after the entry landed but the photo step failed: the row (and
-        // its night out) already exist, so skip to the photo rather than
-        // inserting a duplicate. id is client-generated, so a 23505 here can
-        // only be this same entry.
         if (!(e instanceof ApiError) || e.code !== "23505") throw e;
-      }
-      if (photoFile) {
-        await api(`/entries/${id}/photo`, {
-          method: "POST",
-          body: photoForm(await compressPhoto(photoFile)),
+        // A previous attempt saved the row. Persist any edits made since the
+        // photo failed, using the owner-scoped update endpoint.
+        await api(`/entries/${id}`, {
+          method: "PATCH",
+          ...json({ ...fields, new_night_out: newNight }),
         });
       }
+      try {
+        if (photoFile) {
+          await api(`/entries/${id}/photo`, {
+            method: "POST",
+            body: photoForm(await compressPhoto(photoFile)),
+          });
+        }
+      } catch (error) {
+        throw new Error(`Entry saved, but photo failed. Retry or remove the selected photo. ${error instanceof Error ? error.message : ""}`);
+      }
     },
-    onSuccess: () => queryClient.invalidateQueries(),
+    onSettled: () => queryClient.invalidateQueries(),
     // restore the form with everything intact so retry is one tap
     onError: () => setSaved(null),
   });
@@ -361,7 +286,6 @@ function LogForm({
   const pending = createEntry.isPending;
   const failure = saveEdit.error ?? createEntry.error ?? removeEntry.error;
   const error =
-    camError ??
     (failure
       ? failure instanceof Error
         ? failure.message
@@ -425,8 +349,7 @@ function LogForm({
     setNewNightName("");
     setNewNightLoc("");
     setPhoto(null);
-    closeCamera();
-    setCamError(null);
+    setCameraOpen(false);
     setSaved(null);
     entryId.current = crypto.randomUUID();
     nightId.current = crypto.randomUUID();
@@ -436,8 +359,8 @@ function LogForm({
 
   function submit() {
     if (!sel || !userId) return;
-    setCamError(null);
-    closeCamera();
+    if (busy || pending) return;
+    setCameraOpen(false);
 
     const payload = {
       fields: entryFields(),
@@ -464,7 +387,7 @@ function LogForm({
       <main className="flex flex-1 flex-col">
         <Header kicker="Log a drink" />
         <div className="px-4 py-7">
-          <div className="kicker mb-2">Logged</div>
+          <div className="kicker mb-2" role="status">{pending ? "Saving…" : "Logged"}</div>
           <h2 className="text-[32px] leading-[1.05] tracking-[-0.03em]">
             {saved.name}
           </h2>
@@ -510,6 +433,7 @@ function LogForm({
           submit();
         }}
       >
+        <fieldset disabled={busy || pending}>
         {sel ? (
           <div
             className="flex items-baseline gap-3 border px-3.5 py-3"
@@ -686,10 +610,20 @@ function LogForm({
               <button
                 type="button"
                 className="btn btn-secondary !mt-2 btn-block !min-h-[42px]"
-                onClick={openCamera}
+                disabled={busy || pending}
+                  onClick={() => setCameraOpen(true)}
               >
                 Take photo
               </button>
+              {photo && (
+                <div className="mt-2 text-sm">
+                  <span>Selected: {photo.name}</span>
+                  <button type="button" className="btn btn-ghost ml-2 text-sm" onClick={() => {
+                    setPhoto(null);
+                    if (photoInputRef.current) photoInputRef.current.value = "";
+                  }}>Remove selected photo</button>
+                </div>
+              )}
               {existingPhotoPath && !removePhoto && !photo && (
                 <button
                   type="button"
@@ -732,7 +666,7 @@ function LogForm({
             Delete entry
           </button>
         )}
-        {error && !camStream && (
+        {error && (
           <p
             className="mt-4 text-sm font-semibold"
             style={{ color: "var(--color-accent)" }}
@@ -740,52 +674,18 @@ function LogForm({
             {error}
           </p>
         )}
+        </fieldset>
       </form>
-      <dialog
-        ref={camDialogRef}
-        aria-labelledby="camera-title"
-        className="fixed inset-0 m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-[430px] overflow-y-auto border border-[var(--color-divider)] bg-[var(--color-bg)] p-4 text-[var(--color-text)] backdrop:bg-black/70"
-        onCancel={(e) => {
-          e.preventDefault();
-          closeCamera();
-        }}
-      >
-        <h2 id="camera-title" className="text-xl">Take photo</h2>
-        {camStream && (
-          <video
-            className="mt-3 max-h-[60dvh] w-full bg-black object-contain"
-            ref={(el) => {
-              camVideoRef.current = el;
-              if (el && el.srcObject !== camStream)
-                el.srcObject = camStream;
-            }}
-            autoPlay
-            playsInline
-            muted
-          />
-        )}
-        {camError && (
-          <p role="alert" className="mt-3 text-sm font-semibold text-[var(--color-accent)]">
-            {camError}
-          </p>
-        )}
-        <div className="mt-3 flex gap-2">
-          <button
-            type="button"
-            className="btn btn-primary flex-1"
-            onClick={capturePhoto}
-          >
-            Capture
-          </button>
-          <button
-            type="button"
-            className="btn btn-secondary flex-1"
-            onClick={closeCamera}
-          >
-            Cancel
-          </button>
-        </div>
-      </dialog>
+      {cameraOpen && !busy && !pending && (
+        <CameraDialog
+          onClose={() => setCameraOpen(false)}
+          onPhoto={(file) => {
+            setPhoto(file);
+            setRemovePhoto(false);
+            if (photoInputRef.current) photoInputRef.current.value = "";
+          }}
+        />
+      )}
     </main>
   );
 }
