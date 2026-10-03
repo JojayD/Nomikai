@@ -1,0 +1,7940 @@
+[
+  {
+    "name": "?",
+    "city": null,
+    "address": "312 Harriet Street"
+  },
+  {
+    "name": "1015 Folsom",
+    "city": "San Francisco",
+    "address": "1015 Folsom Street"
+  },
+  {
+    "name": "111 Minna Gallery",
+    "city": null,
+    "address": "111 Minna Street"
+  },
+  {
+    "name": "13 Orphans",
+    "city": null,
+    "address": "410 15th Street"
+  },
+  {
+    "name": "1300 on Fillmore",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "1400 Bar & Grill",
+    "city": "Alameda",
+    "address": "705 Central Avenue"
+  },
+  {
+    "name": "15 Romolo",
+    "city": null,
+    "address": "15 Romolo Place"
+  },
+  {
+    "name": "1601 Bar And Kitchen",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "19th Street Station",
+    "city": null,
+    "address": "339 19th Street"
+  },
+  {
+    "name": "20 Spot",
+    "city": "San Francisco",
+    "address": "3565 20th Street"
+  },
+  {
+    "name": "21st Amendment Brewery",
+    "city": null,
+    "address": "563 2nd Street"
+  },
+  {
+    "name": "21st Amendment Brewery Taproom",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "355",
+    "city": "Oakland",
+    "address": "355 19th Street"
+  },
+  {
+    "name": "3SIXTY Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "40 Thieves San Jose",
+    "city": "San Jose",
+    "address": "18 North 1st Street"
+  },
+  {
+    "name": "47 Hills Brewing Company",
+    "city": "South San Francisco",
+    "address": "137 South Linden Avenue"
+  },
+  {
+    "name": "500 Club",
+    "city": "San Francisco",
+    "address": "500 Guerrero Street"
+  },
+  {
+    "name": "51 & Tel",
+    "city": null,
+    "address": "5018 Telegraph Avenue"
+  },
+  {
+    "name": "540 Club",
+    "city": "San Francisco",
+    "address": "540 Clement Street"
+  },
+  {
+    "name": "55 South",
+    "city": "San Jose",
+    "address": "55 South 1st Street"
+  },
+  {
+    "name": "58 Social",
+    "city": null,
+    "address": "24 Willie Mays Plaza"
+  },
+  {
+    "name": "620 Jones",
+    "city": null,
+    "address": "620 Jones Street"
+  },
+  {
+    "name": "7 Bamboo",
+    "city": "San Jose",
+    "address": "162 Jackson Street"
+  },
+  {
+    "name": "7 Mile House Sports Bar & Grill",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "7 Stars Bar & Grill",
+    "city": "Campbell",
+    "address": "400 East Campbell Avenue"
+  },
+  {
+    "name": "750 Restaurant & Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "924 Gilman",
+    "city": "Berkeley",
+    "address": "924 Gilman Street"
+  },
+  {
+    "name": "A Grape In the Fog",
+    "city": "Pacifica",
+    "address": "400 Old County Road"
+  },
+  {
+    "name": "Absinthe Brasserie & Bar",
+    "city": "San Francisco",
+    "address": "398 Hayes Street"
+  },
+  {
+    "name": "ABV",
+    "city": "San Francisco",
+    "address": "3174 16th Street"
+  },
+  {
+    "name": "AC Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "AC Lounge",
+    "city": "Oakland",
+    "address": "1431 Jefferson Street"
+  },
+  {
+    "name": "Aces",
+    "city": "San Francisco",
+    "address": "998 Sutter Street"
+  },
+  {
+    "name": "Acme Bar",
+    "city": "Berkeley",
+    "address": "2115 San Pablo Avenue"
+  },
+  {
+    "name": "Adega Azul",
+    "city": "Berkeley",
+    "address": "1287 Gilman Street"
+  },
+  {
+    "name": "Adelita's Taqueria & Restaurant Bar",
+    "city": "San Jose",
+    "address": "1896 Curtner Avenue"
+  },
+  {
+    "name": "Admirals Club",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Adobe Creek Brewing",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "After Hours SF",
+    "city": "San Francisco",
+    "address": "3044 Taraval Street"
+  },
+  {
+    "name": "Afterwork Bar",
+    "city": null,
+    "address": "409 Gough Street"
+  },
+  {
+    "name": "Aisle5",
+    "city": null,
+    "address": "3320 Grand Avenue"
+  },
+  {
+    "name": "AJ's Bar",
+    "city": null,
+    "address": "1250 Market Street"
+  },
+  {
+    "name": "AJI Bar & Robata",
+    "city": "San Jose",
+    "address": "170 South Market Street"
+  },
+  {
+    "name": "Akiko's Sushi Bar",
+    "city": "San Francisco",
+    "address": "542 Mason Street"
+  },
+  {
+    "name": "alaMar Dominican Kitchen and Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Alameda Brewing Co.",
+    "city": "Alameda",
+    "address": "1716 Park Street"
+  },
+  {
+    "name": "Alaska Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Alberto's Cantina",
+    "city": null,
+    "address": "435 Main Street"
+  },
+  {
+    "name": "Alberto’s Night Club",
+    "city": "Mountain View",
+    "address": "736 West Dana Street"
+  },
+  {
+    "name": "Alchemist",
+    "city": "San Francisco",
+    "address": "679 3rd Street"
+  },
+  {
+    "name": "Ale Arsenal",
+    "city": "San Carlos",
+    "address": "971 Laurel Street"
+  },
+  {
+    "name": "Alley Oop",
+    "city": "Santa Cruz",
+    "address": "320 Cedar Street"
+  },
+  {
+    "name": "Alma Tequileria",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Almaden Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Almanac",
+    "city": "Alameda",
+    "address": "651B West Tower Avenue"
+  },
+  {
+    "name": "Almanac West Oakland Clubhouse",
+    "city": "Oakland",
+    "address": "1640 18th Street"
+  },
+  {
+    "name": "Almost Famous Wine Company",
+    "city": "Livermore",
+    "address": "2271 South Vasco Road"
+  },
+  {
+    "name": "Aloha Club",
+    "city": "Oakland",
+    "address": "952 Fruitvale Avenue"
+  },
+  {
+    "name": "Alta Vina",
+    "city": null,
+    "address": "420 3rd Street"
+  },
+  {
+    "name": "Altamont Beer Works",
+    "city": "Livermore",
+    "address": "2402 Research Drive"
+  },
+  {
+    "name": "Amandine",
+    "city": "Los Altos",
+    "address": "235 1st Street"
+  },
+  {
+    "name": "Amélie",
+    "city": "San Francisco",
+    "address": "1754 Polk Street"
+  },
+  {
+    "name": "American Express Centurion Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Anchor Oyster Bar",
+    "city": null,
+    "address": "579 Castro Street"
+  },
+  {
+    "name": "Andy & Yu’s Restaurant and Bar",
+    "city": null,
+    "address": "348"
+  },
+  {
+    "name": "Anina",
+    "city": "San Francisco",
+    "address": "482 Hayes Street"
+  },
+  {
+    "name": "Apple Jacks",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Apt. C",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Arcana",
+    "city": null,
+    "address": "2512 Mission Street"
+  },
+  {
+    "name": "Armistice Brewing Company",
+    "city": "Richmond",
+    "address": "845 Ste #1 Marina Bay Parkway"
+  },
+  {
+    "name": "Arthur Mac's Tap & Snack",
+    "city": "Oakland",
+    "address": "4006 Martin Luther King Junior Way"
+  },
+  {
+    "name": "Asiento",
+    "city": "San Francisco",
+    "address": "2730 21st Street"
+  },
+  {
+    "name": "Asti",
+    "city": null,
+    "address": "709 Pacific Avenue"
+  },
+  {
+    "name": "Atlas Tap Room",
+    "city": null,
+    "address": "606 Mission Street"
+  },
+  {
+    "name": "Atwater Tavern",
+    "city": "San Francisco",
+    "address": "295 Terry A. Francois Boulevard"
+  },
+  {
+    "name": "Au",
+    "city": null,
+    "address": "2436 Broadway"
+  },
+  {
+    "name": "Aub Zam Zam",
+    "city": null,
+    "address": "1633 Haight Street"
+  },
+  {
+    "name": "Auburn Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Augustine",
+    "city": "San Jose",
+    "address": "377 Santana Row"
+  },
+  {
+    "name": "Aunt Charlies Lounge",
+    "city": "San Francisco",
+    "address": "133 Turk Street"
+  },
+  {
+    "name": "Aura",
+    "city": "San Jose",
+    "address": "389 South 1st Street"
+  },
+  {
+    "name": "Avery Lounge",
+    "city": "San Jose",
+    "address": "399 South 1st Street"
+  },
+  {
+    "name": "Azotea Cocina & Cocktail Club",
+    "city": "Livermore",
+    "address": "2470 First Street"
+  },
+  {
+    "name": "Azucar Lounge",
+    "city": "San Francisco",
+    "address": "299 9th Street"
+  },
+  {
+    "name": "B Restaurant and Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "B Street Station",
+    "city": null,
+    "address": "236 South B Street"
+  },
+  {
+    "name": "B-Side",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Bach Dancing & Dynamite Society",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Baci Bistro and Bar",
+    "city": "Pleasanton",
+    "address": "500 Main Street"
+  },
+  {
+    "name": "Back Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Back Nine Grill & Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Backstage Wine Bar",
+    "city": "Larkspur",
+    "address": "295 Magnolia Avenue"
+  },
+  {
+    "name": "Bad Egg Breakfast Bar",
+    "city": "San Jose",
+    "address": "1701 Airport Boulevard"
+  },
+  {
+    "name": "Baggy's By the Lake",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Bahche – Mezze House & Wine Bar",
+    "city": null,
+    "address": "3081C South Delaware Street"
+  },
+  {
+    "name": "Balancoire",
+    "city": "San Francisco",
+    "address": "2565 Mission Street"
+  },
+  {
+    "name": "Ballast Point Tasting Room & Kitchen",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Bambino's Italian Restaurant and Bar",
+    "city": "Concord",
+    "address": "1895 Farm Bureau Road"
+  },
+  {
+    "name": "Bamboo Hut",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Bank Club",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Bank Club Cafe",
+    "city": "Emeryville",
+    "address": "3900 San Pablo Avenue"
+  },
+  {
+    "name": "Bar & Grill",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Bar 49",
+    "city": "San Francisco",
+    "address": "2295 Market Street"
+  },
+  {
+    "name": "Bar 821",
+    "city": null,
+    "address": "821 Divisadero Street"
+  },
+  {
+    "name": "Bar Agricole",
+    "city": null,
+    "address": "355 11th Street"
+  },
+  {
+    "name": "Bar Bay Grill",
+    "city": "Union City",
+    "address": "1784 Decoto Road"
+  },
+  {
+    "name": "Bar Bocce",
+    "city": "Sausalito",
+    "address": "1250 Bridgeway"
+  },
+  {
+    "name": "Bar Camino",
+    "city": "Walnut Creek",
+    "address": "1470 North Broadway"
+  },
+  {
+    "name": "Bar Cava",
+    "city": "Martinez",
+    "address": "718 Main Street"
+  },
+  {
+    "name": "Bar César",
+    "city": "Oakland",
+    "address": "4039 Piedmont Avenue"
+  },
+  {
+    "name": "Bar Crudo",
+    "city": null,
+    "address": "655 Divisadero Street"
+  },
+  {
+    "name": "Bar El Camino",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Bar Fluxus",
+    "city": "San Francisco",
+    "address": "18 Harlan Place"
+  },
+  {
+    "name": "Bar Jabroni",
+    "city": "San Francisco",
+    "address": "698 Haight Street"
+  },
+  {
+    "name": "Bar Jamón",
+    "city": "San Francisco",
+    "address": "100 Van Ness Avenue"
+  },
+  {
+    "name": "Bar La Palma",
+    "city": "San Jose",
+    "address": "262 Keyes Street"
+  },
+  {
+    "name": "Bar Mercury",
+    "city": "San Jose",
+    "address": "177 West Santa Clara Street"
+  },
+  {
+    "name": "Bar None",
+    "city": "San Francisco",
+    "address": "1980 Union Street"
+  },
+  {
+    "name": "Bar Panisse",
+    "city": "Berkeley",
+    "address": "1515 Shattuck Avenue"
+  },
+  {
+    "name": "Bar Part Time",
+    "city": "San Francisco",
+    "address": "496 14th Street"
+  },
+  {
+    "name": "Bar Shiru",
+    "city": "Oakland",
+    "address": "1600 Telegraph Avenue"
+  },
+  {
+    "name": "Bar Skula",
+    "city": null,
+    "address": "542 Grand Avenue"
+  },
+  {
+    "name": "Bar Sprezzatura",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Bar TZA",
+    "city": null,
+    "address": "2481 Mission Street"
+  },
+  {
+    "name": "Bar Underdog",
+    "city": null,
+    "address": "299, #110 South California Avenue"
+  },
+  {
+    "name": "Bar VIA",
+    "city": null,
+    "address": "136 King Street"
+  },
+  {
+    "name": "Barbara Pinseria & Cocktail Bar",
+    "city": "San Francisco",
+    "address": "431 Columbus Avenue"
+  },
+  {
+    "name": "Bardo Lounge & Supper Club",
+    "city": null,
+    "address": "3343"
+  },
+  {
+    "name": "Barebottle Brew Co.",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Barebottle Brewing Company",
+    "city": null,
+    "address": "550 Oak Grove Avenue"
+  },
+  {
+    "name": "Barebottle Brewing Company",
+    "city": "Santa Clara",
+    "address": "2520 Augustine Drive"
+  },
+  {
+    "name": "Barebottle Taproom",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Bargetto Winery",
+    "city": "Soquel",
+    "address": "3535 Main Street"
+  },
+  {
+    "name": "Barrel Aged Cocktail Bar & Lounge",
+    "city": "Martinez",
+    "address": "700 Ferry Street"
+  },
+  {
+    "name": "Bartenders Union",
+    "city": "Gilroy",
+    "address": "7421 Monterey Street"
+  },
+  {
+    "name": "Bartlett Hall",
+    "city": "San Francisco",
+    "address": "242 O'Farrell Street"
+  },
+  {
+    "name": "Basil Thai Resaurant & Bar",
+    "city": "San Francisco",
+    "address": "1175 Folsom Street"
+  },
+  {
+    "name": "Basin",
+    "city": "Napa",
+    "address": "200 Stanly Crossroad"
+  },
+  {
+    "name": "Bay Grape",
+    "city": "Oakland",
+    "address": "376 Grand Avenue"
+  },
+  {
+    "name": "Beach Chalet Brewery & Restaurant",
+    "city": "San Francisco",
+    "address": "1000 Great Highway"
+  },
+  {
+    "name": "Beach St. Pizza And Bar",
+    "city": null,
+    "address": "303"
+  },
+  {
+    "name": "Beauty Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Beeb's Sports Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Beer Thirty",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Beercraft",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Behan's Irish Pub",
+    "city": "Burlingame",
+    "address": "1327 Broadway"
+  },
+  {
+    "name": "Bell Tower",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Bella's Bar & Grill",
+    "city": "Sunnyvale",
+    "address": "111 Elko Drive"
+  },
+  {
+    "name": "Ben 'N Nick's Bar & Grill",
+    "city": "Oakland",
+    "address": "5612 College Avenue"
+  },
+  {
+    "name": "Bender's Bar and Grill",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "BEREVINO Cucina & Wine Bar",
+    "city": "Dublin",
+    "address": "4590 Dublin Boulevard"
+  },
+  {
+    "name": "Bergerac",
+    "city": null,
+    "address": "316 11th St"
+  },
+  {
+    "name": "Berkeley Yacht Club Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Beso Bistro and Wine Bar",
+    "city": "Novato",
+    "address": "502 South Palm Drive"
+  },
+  {
+    "name": "Beta Lounge",
+    "city": "Berkeley",
+    "address": "2129 Durant Avenue"
+  },
+  {
+    "name": "Biergarten",
+    "city": "San Francisco",
+    "address": "424 Octavia Street"
+  },
+  {
+    "name": "Big Basin Burger Bar",
+    "city": "Saratoga",
+    "address": "14413 Big Basin Way"
+  },
+  {
+    "name": "Big Basin Tasting Room",
+    "city": null,
+    "address": "14598 Big Basin Way"
+  },
+  {
+    "name": "Big Basin Vineyards Tasting Room & Wine Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Big T's Seafood Market Bar",
+    "city": "San Jose",
+    "address": "1694 Tully Road"
+  },
+  {
+    "name": "Bijan",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Billar Los Portales",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Bimbo's 365 Club",
+    "city": "San Francisco",
+    "address": "1025 Columbus Avenue"
+  },
+  {
+    "name": "Binu Bonu",
+    "city": "San Francisco",
+    "address": "230 West Portal Avenue"
+  },
+  {
+    "name": "Birba",
+    "city": "San Francisco",
+    "address": "458 Grove Street"
+  },
+  {
+    "name": "Birdhaus Beer Garden",
+    "city": null,
+    "address": "3821 Smith Street"
+  },
+  {
+    "name": "Birrieria Potrillo Restaurant and Bar",
+    "city": "Oakland",
+    "address": "400 29th Avenue"
+  },
+  {
+    "name": "Bistro Gambrinus",
+    "city": null,
+    "address": "1813 Fulton Street"
+  },
+  {
+    "name": "Black cat",
+    "city": null,
+    "address": "400 Eddy Street"
+  },
+  {
+    "name": "Black Magic Voodoo Lounge",
+    "city": null,
+    "address": "1400 Lombard Street"
+  },
+  {
+    "name": "Black Ridge Vineyards",
+    "city": "Los Gatos",
+    "address": "18550 Black Road"
+  },
+  {
+    "name": "Black Watch",
+    "city": null,
+    "address": "141 North Santa Cruz Avenue"
+  },
+  {
+    "name": "Blackbird",
+    "city": null,
+    "address": "2124;2126 Market Street"
+  },
+  {
+    "name": "Blacksmith Square",
+    "city": "Livermore",
+    "address": "21 South Livermore Avenue"
+  },
+  {
+    "name": "Blind Pig",
+    "city": null,
+    "address": "718 California Street"
+  },
+  {
+    "name": "Blockers",
+    "city": "San Jose",
+    "address": "1250 East Santa Clara Street"
+  },
+  {
+    "name": "Blondies Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Bloodhound",
+    "city": "San Francisco",
+    "address": "1145 Folsom Street"
+  },
+  {
+    "name": "Blooms Saloon",
+    "city": "San Francisco",
+    "address": "1318 18th Street"
+  },
+  {
+    "name": "Blossom Chai Cafe",
+    "city": "Sunnyvale",
+    "address": "199 South Murphy Avenue"
+  },
+  {
+    "name": "Blue Lagoon",
+    "city": null,
+    "address": "923 Pacific Avenue"
+  },
+  {
+    "name": "Blue Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Blue Max Cocktails",
+    "city": "Sunnyvale",
+    "address": "828 West El Camino Real"
+  },
+  {
+    "name": "Blue Moon",
+    "city": "Sonoma",
+    "address": null
+  },
+  {
+    "name": "Blue Note Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Blush! Wine Bar",
+    "city": null,
+    "address": "476 Castro Street"
+  },
+  {
+    "name": "Boardroom",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Bobby D's Cocktail Lounge & Sports Bar",
+    "city": "Redwood City",
+    "address": "700 Winslow Street"
+  },
+  {
+    "name": "Boca Pizzeria & Wine Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Bodega Wine Bar",
+    "city": "San Francisco",
+    "address": "700 Columbus Avenue"
+  },
+  {
+    "name": "Bogart's Sport Bar",
+    "city": "Sunnyvale",
+    "address": "1209 Wildwood Avenue"
+  },
+  {
+    "name": "Bombera Bar & Grill",
+    "city": "Oakland",
+    "address": "3459 Champion Street"
+  },
+  {
+    "name": "Bonny Doon Vineyard Tasting Room",
+    "city": "Davenport",
+    "address": "450 Cabrillo Highway"
+  },
+  {
+    "name": "Boo Loo Lounge",
+    "city": "Orinda",
+    "address": "2 Theatre Square"
+  },
+  {
+    "name": "Boomerang",
+    "city": null,
+    "address": "1430 Noriega Street"
+  },
+  {
+    "name": "Bosco's Bones and Brew",
+    "city": null,
+    "address": "11922 Main Street"
+  },
+  {
+    "name": "Bota Tapas & Paella Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Bottle Club Pub",
+    "city": "San Francisco",
+    "address": "555 Geary Street"
+  },
+  {
+    "name": "Bottom of the Hill",
+    "city": "San Francisco",
+    "address": "1233 17th Street"
+  },
+  {
+    "name": "Boulder Creek Brewery",
+    "city": null,
+    "address": "13101 Central Avenue"
+  },
+  {
+    "name": "Boulder Creek Pizza & Pub",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Bourbon and Branch",
+    "city": "San Francisco",
+    "address": "501 Jones Street"
+  },
+  {
+    "name": "Bourbon Highway",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Bourbon Pub",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Bourbon Steak & Pub",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Bow Bow Cocktails",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "BoxSeat Sports Grill",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Brady's Yacht Club",
+    "city": "Santa Cruz",
+    "address": "413 Seabright Avenue"
+  },
+  {
+    "name": "Branch Line Bar",
+    "city": "Emeryville",
+    "address": "5885 Hollis Street"
+  },
+  {
+    "name": "Brass Tacks",
+    "city": null,
+    "address": "488 Hayes Street"
+  },
+  {
+    "name": "Brick & Beam",
+    "city": null,
+    "address": "555 North Point Street"
+  },
+  {
+    "name": "Bridges Restaurant and Bar",
+    "city": null,
+    "address": "44 Church Street"
+  },
+  {
+    "name": "Brisbane Inn",
+    "city": "Brisbane",
+    "address": "50 Visitacion Avenue"
+  },
+  {
+    "name": "Britannia Arms",
+    "city": "Capitola",
+    "address": "110 Monterey Avenue"
+  },
+  {
+    "name": "Britannia Arms Downtown San Jose",
+    "city": "San Jose",
+    "address": "173 West Santa Clara Street"
+  },
+  {
+    "name": "British Airways lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Brittania Arms",
+    "city": "San Jose",
+    "address": "5027 Almaden Expressway"
+  },
+  {
+    "name": "Brix Factory Brewing",
+    "city": null,
+    "address": "2431 Peralta Street"
+  },
+  {
+    "name": "Brotzeit Lokal",
+    "city": "Oakland",
+    "address": "1000 Embarcadero"
+  },
+  {
+    "name": "Bubbles Wine Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Buckhorn",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Buckshot",
+    "city": null,
+    "address": "3848 Geary Boulevard"
+  },
+  {
+    "name": "Bucky’s Cocktail Lounge",
+    "city": "San Mateo",
+    "address": "101 South Boulevard"
+  },
+  {
+    "name": "Buddha",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Buddy",
+    "city": "San Francisco",
+    "address": "3115 22nd Street"
+  },
+  {
+    "name": "Buena Vida Cantina",
+    "city": null,
+    "address": "860 Folsom Street"
+  },
+  {
+    "name": "Buena Vista",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Buffalo Bill's Brewery",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Bugzo's Bar and Lounge",
+    "city": "Oakland",
+    "address": "1814 Franklin Street"
+  },
+  {
+    "name": "Bullitt",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Burger Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Bus Stop",
+    "city": "San Francisco",
+    "address": "1901 Union Street"
+  },
+  {
+    "name": "Butter",
+    "city": null,
+    "address": "354 11th Street"
+  },
+  {
+    "name": "ButtercuP Diner & Bar",
+    "city": "Concord",
+    "address": "4301 Clayton Road"
+  },
+  {
+    "name": "Buttercup Grill & Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Buzzworks",
+    "city": null,
+    "address": "365 11th Street"
+  },
+  {
+    "name": "C & J's Sports Bar",
+    "city": "Santa Clara",
+    "address": "1550 Lafayette Street"
+  },
+  {
+    "name": "C Casa & Taco Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "C.D.P",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Cafe du Nord",
+    "city": null,
+    "address": "2170 Market Street"
+  },
+  {
+    "name": "Cafe Muse",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Café Prague",
+    "city": null,
+    "address": "424 Merchant Street"
+  },
+  {
+    "name": "Cafe Tosca",
+    "city": null,
+    "address": "242 Columbus Avenue"
+  },
+  {
+    "name": "Cafe Van Kleef",
+    "city": "Oakland",
+    "address": "1621 Telegraph Avenue"
+  },
+  {
+    "name": "Cali's Sports Bar & Kitchen",
+    "city": "Berkeley",
+    "address": "2367 Telegraph Avenue"
+  },
+  {
+    "name": "CaliCraft",
+    "city": "Walnut Creek",
+    "address": "1501 Mount Diablo Boulevard"
+  },
+  {
+    "name": "Calicraft Brewing Company",
+    "city": "Walnut Creek",
+    "address": "2700, Bldg. 2 Mitchell Drive"
+  },
+  {
+    "name": "Califonia craft beer",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Califormia Gold",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "California Billiards",
+    "city": "Fremont",
+    "address": "40510 Albrae Street"
+  },
+  {
+    "name": "California Wine Merchant",
+    "city": "San Francisco",
+    "address": "2113 Chestnut Street"
+  },
+  {
+    "name": "Callahan's Pub",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Calle-11",
+    "city": "San Francisco",
+    "address": "1501 Folsom Street"
+  },
+  {
+    "name": "Cameron’s Inn, Pub & Restaurant",
+    "city": "Half Moon Bay",
+    "address": "1410 Cabrillo Highway South"
+  },
+  {
+    "name": "Campovida",
+    "city": null,
+    "address": "Linden Street"
+  },
+  {
+    "name": "Campton Bar & Bistro",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Campus - San Francisco",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Canchola's Bar",
+    "city": null,
+    "address": "3779 Mission Street"
+  },
+  {
+    "name": "Candlestick Park Sports Bar",
+    "city": null,
+    "address": "747 3rd Street"
+  },
+  {
+    "name": "Cantina Los Mayos",
+    "city": "San Francisco",
+    "address": "431 Balboa Street"
+  },
+  {
+    "name": "Canyon Club Brewery",
+    "city": null,
+    "address": "1558 Canyon Road"
+  },
+  {
+    "name": "Canyon Inn",
+    "city": "Redwood City",
+    "address": "587 Canyon Road"
+  },
+  {
+    "name": "Canyon Lakes Brewery",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Caps and Taps",
+    "city": "Dublin",
+    "address": "6601 Dublin Boulevard"
+  },
+  {
+    "name": "Cardiff Lounge",
+    "city": "Campbell",
+    "address": "260 East Campbell Avenue"
+  },
+  {
+    "name": "Carlitos Club",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Carlos Club",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Carry Nations",
+    "city": null,
+    "address": "8 North Santa Cruz Avenue"
+  },
+  {
+    "name": "Casa Barajas / Chug Pub",
+    "city": null,
+    "address": "1849 Lincoln Way"
+  },
+  {
+    "name": "Casanova Lounge",
+    "city": "San Francisco",
+    "address": "527 Valencia Street"
+  },
+  {
+    "name": "Cascade Restaurant & Bar",
+    "city": "Pescadero",
+    "address": "2001 Rossi Road"
+  },
+  {
+    "name": "Casements",
+    "city": null,
+    "address": "2351 Mission Street"
+  },
+  {
+    "name": "Cash Only",
+    "city": "San Jose",
+    "address": "78 East Santa Clara Street"
+  },
+  {
+    "name": "Cat Club",
+    "city": "San Francisco",
+    "address": "1190 Folsom Street"
+  },
+  {
+    "name": "Cave Lounge",
+    "city": null,
+    "address": "266 14th Street"
+  },
+  {
+    "name": "Cedar Room",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Cellar Door",
+    "city": "Pleasanton",
+    "address": "4469 Railroad Avenue"
+  },
+  {
+    "name": "Cellar Door",
+    "city": "San Francisco",
+    "address": "3131 Fillmore Street"
+  },
+  {
+    "name": "Cellarmaker",
+    "city": null,
+    "address": "3191 Mission Street"
+  },
+  {
+    "name": "Cellarmaker Brewing Co.",
+    "city": null,
+    "address": "300 Webster Street"
+  },
+  {
+    "name": "Ceremony",
+    "city": "Oakland",
+    "address": "1220 Broadway"
+  },
+  {
+    "name": "Cervecería de MateVeza",
+    "city": "San Francisco",
+    "address": "3801 18th Street"
+  },
+  {
+    "name": "Chaplin's Sports Bistro",
+    "city": "Union City",
+    "address": "29200 Kohoutek Way"
+  },
+  {
+    "name": "Charmaine's rooftop bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Chelsea Place",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Chief Sullivan's",
+    "city": null,
+    "address": "622 Green Street"
+  },
+  {
+    "name": "Chief's Mess",
+    "city": "Alameda",
+    "address": "Coast Guard Island"
+  },
+  {
+    "name": "Choza Tacos y Cantina",
+    "city": null,
+    "address": "3421 Blackhawk Plaza Circle"
+  },
+  {
+    "name": "Chris' Club",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Churchill",
+    "city": "San Francisco",
+    "address": "198 Church Street"
+  },
+  {
+    "name": "Cider Junction",
+    "city": "San Jose",
+    "address": "820 Willow Street"
+  },
+  {
+    "name": "Cigar Bar",
+    "city": "San Francisco",
+    "address": "850 Montgomery Street"
+  },
+  {
+    "name": "Cin Cin",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Cinco Taco Bar",
+    "city": null,
+    "address": "15100 Hesperian Boulevard"
+  },
+  {
+    "name": "Cinnabar",
+    "city": "San Francisco",
+    "address": "397 Ellis Street"
+  },
+  {
+    "name": "Cityscape Lounge",
+    "city": null,
+    "address": "333 O'Farrell Street"
+  },
+  {
+    "name": "Claremont Lobby Lounge & Bar",
+    "city": "Berkeley",
+    "address": "41 Tunnel Road"
+  },
+  {
+    "name": "Clark's Oyster Bar",
+    "city": "Menlo Park",
+    "address": "780 Santa Cruz Avenue"
+  },
+  {
+    "name": "Classic Cars West Beer Garden",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Clayton Club Saloon",
+    "city": "Clayton",
+    "address": "6096 Main Street"
+  },
+  {
+    "name": "Clio’s Bookshop",
+    "city": "Oakland",
+    "address": "353 Grand Avenue"
+  },
+  {
+    "name": "Clock Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Clooney's Pub",
+    "city": null,
+    "address": "1401 Valencia Street"
+  },
+  {
+    "name": "Club 1220",
+    "city": "Walnut Creek",
+    "address": "1220 Pine Street"
+  },
+  {
+    "name": "Club 2101",
+    "city": null,
+    "address": "2101 MacArthur Boulevard"
+  },
+  {
+    "name": "Club Fox",
+    "city": "Redwood City",
+    "address": "2209 Broadway"
+  },
+  {
+    "name": "Club Kristi",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Club Malibu",
+    "city": "San Francisco",
+    "address": "3395 Mission Street"
+  },
+  {
+    "name": "Club Mallard",
+    "city": null,
+    "address": "752"
+  },
+  {
+    "name": "Club Maraka's",
+    "city": "South San Francisco",
+    "address": "254 Grand Avenue"
+  },
+  {
+    "name": "Club Mari's / Mogura",
+    "city": null,
+    "address": "1825 Webster Street"
+  },
+  {
+    "name": "Club Rodeo",
+    "city": "San Jose",
+    "address": "610 Coleman Avenue"
+  },
+  {
+    "name": "Club Sense",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Club Tac",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Clyde's Liquors",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Coach's",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Coach's Sports Bar & Grill",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Coasters",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Cold Drinks Bar",
+    "city": "San Francisco",
+    "address": "644 Broadway"
+  },
+  {
+    "name": "Cole Valley Tavern",
+    "city": "San Francisco",
+    "address": "900 Cole Street"
+  },
+  {
+    "name": "Columbus Cafe",
+    "city": "San Francisco",
+    "address": "562 Green Street"
+  },
+  {
+    "name": "Complex Oakland",
+    "city": "Oakland",
+    "address": "420 14th Street"
+  },
+  {
+    "name": "Comstock Saloon",
+    "city": "San Francisco",
+    "address": "155 Columbus Avenue"
+  },
+  {
+    "name": "Convivium Enoteca",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Copper",
+    "city": null,
+    "address": "4092 18th Street"
+  },
+  {
+    "name": "Corner Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Cornerstone Craft Beer & Live Music",
+    "city": "Berkeley",
+    "address": "2367 Shattuck Avenue"
+  },
+  {
+    "name": "Courts Lounge",
+    "city": "Campbell",
+    "address": "2425 South Bascom Avenue"
+  },
+  {
+    "name": "Covale Rooftop Beer & Wine Bar",
+    "city": "Gilroy",
+    "address": "7534 Gourmet Alley"
+  },
+  {
+    "name": "Cowboy Bar & Grill",
+    "city": "Felton",
+    "address": "5447 Highway 9"
+  },
+  {
+    "name": "Coyote Stop",
+    "city": "San Jose",
+    "address": "102 Monterey Road"
+  },
+  {
+    "name": "Craft Roots Bar & Veggie Grill",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Crafthouse",
+    "city": null,
+    "address": "295 East Washington Avenue"
+  },
+  {
+    "name": "Creekside Pizza & Taproom",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Crepe Place",
+    "city": "Santa Cruz",
+    "address": "1134 Soquel Avenue"
+  },
+  {
+    "name": "Cresta's",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Crogan's",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Crooked Goat Brewing",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Crown bar",
+    "city": "El Cerrito",
+    "address": "San Pablo Avenue"
+  },
+  {
+    "name": "Crown Billiards",
+    "city": "San Ramon",
+    "address": "2416 San Ramon Valley Boulevard"
+  },
+  {
+    "name": "CRU Wine Shop & Bar",
+    "city": null,
+    "address": "900 Middlefield Road"
+  },
+  {
+    "name": "Crumbs Breakfast, Lunch & Bar",
+    "city": null,
+    "address": "428 Railroad Avenue"
+  },
+  {
+    "name": "Crush'd Wine Bar Kitchen",
+    "city": "Danville",
+    "address": "312 Railroad Avenue"
+  },
+  {
+    "name": "Crybaby",
+    "city": null,
+    "address": "1928 Telegraph Avenue"
+  },
+  {
+    "name": "Cunha's Cocktails",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Cupertino Country Inn Restaurant & Bar",
+    "city": "Cupertino",
+    "address": "10080 North Wolfe Road"
+  },
+  {
+    "name": "Custom Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Cypress Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Da Silva's Bronco's Pub",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "DaDa Bar",
+    "city": "San Francisco",
+    "address": "86 2nd Street"
+  },
+  {
+    "name": "Dahlia",
+    "city": "San Francisco",
+    "address": "1799 Mission Street"
+  },
+  {
+    "name": "Dalva",
+    "city": null,
+    "address": "3121 16th Street"
+  },
+  {
+    "name": "Dan Izakaya Restaurant",
+    "city": "San Jose",
+    "address": "1306 Saratoga Avenue"
+  },
+  {
+    "name": "Dan's Irish Sports Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Danawa",
+    "city": "Santa Clara",
+    "address": "2776 El Camino Real"
+  },
+  {
+    "name": "Danny Coyle's",
+    "city": "San Francisco",
+    "address": "668 Haight Street"
+  },
+  {
+    "name": "Danny Murry's Irish Pub",
+    "city": "San Leandro",
+    "address": "1692 Washington Avenue"
+  },
+  {
+    "name": "Danville Brewing Company",
+    "city": "Danville",
+    "address": "200 Railroad Avenue"
+  },
+  {
+    "name": "Dawn Club",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "DC Tap House",
+    "city": "Cupertino",
+    "address": "10700 Club House Lane"
+  },
+  {
+    "name": "Decant SF",
+    "city": null,
+    "address": "1168 Folsom Street"
+  },
+  {
+    "name": "DecoDance Bar",
+    "city": "San Francisco",
+    "address": "1160 Polk Street"
+  },
+  {
+    "name": "Degrees Plato Bottle Shop",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Del Cielo Brewing Company",
+    "city": "Martinez",
+    "address": "701 Escobar Street"
+  },
+  {
+    "name": "delarosa",
+    "city": null,
+    "address": "2175 Chestnut Street"
+  },
+  {
+    "name": "Delirium",
+    "city": null,
+    "address": "3141 16th Street"
+  },
+  {
+    "name": "Delta Sky Club",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Dempsey's Restaurant and Brewery",
+    "city": "Petaluma",
+    "address": "50 East Washington Street"
+  },
+  {
+    "name": "Desero Taquila Town",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Dezi's Lounge",
+    "city": "Oakland",
+    "address": "1802 Telegraph Avenue"
+  },
+  {
+    "name": "Dimples",
+    "city": null,
+    "address": "1700 Post Street"
+  },
+  {
+    "name": "Ding's Cocktail Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Discoteca El Indito",
+    "city": "San Jose",
+    "address": "2261 Story Road"
+  },
+  {
+    "name": "District",
+    "city": "San Jose",
+    "address": "65 North San Pedro Street"
+  },
+  {
+    "name": "DNA Lounge",
+    "city": "San Francisco",
+    "address": "375 11th Street"
+  },
+  {
+    "name": "Doc's Clock",
+    "city": "San Francisco",
+    "address": "2417 Mission Street"
+  },
+  {
+    "name": "Doctor Funk",
+    "city": "San Jose",
+    "address": "29 North San Pedro Street"
+  },
+  {
+    "name": "Doghouse Sports Lounge",
+    "city": "San Jose",
+    "address": "1336 North 1st Street"
+  },
+  {
+    "name": "Dogpatch Saloon",
+    "city": null,
+    "address": "2496"
+  },
+  {
+    "name": "Double D's Sports Grille",
+    "city": "Los Gatos",
+    "address": "354 North Santa Cruz Avenue"
+  },
+  {
+    "name": "Dovre Club",
+    "city": null,
+    "address": "1498 Valencia Street"
+  },
+  {
+    "name": "Downtown Joe's",
+    "city": "Napa",
+    "address": "902 Main Street"
+  },
+  {
+    "name": "Dragon Gate Bar & Grille",
+    "city": "Oakland",
+    "address": "1 Franklin Street"
+  },
+  {
+    "name": "Dragon Lounge",
+    "city": "San Francisco",
+    "address": "1355 Taraval Street"
+  },
+  {
+    "name": "Drake's Brewing Co.",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Drake's Dealership",
+    "city": "Oakland",
+    "address": "2325 Broadway"
+  },
+  {
+    "name": "Drexl",
+    "city": "Oakland",
+    "address": "382 19th Street"
+  },
+  {
+    "name": "Driftwood",
+    "city": null,
+    "address": "1225 Folsom Street"
+  },
+  {
+    "name": "Duarte's Tavern",
+    "city": "Pescadero",
+    "address": "202 Stage Road"
+  },
+  {
+    "name": "Duke of Edinburgh",
+    "city": "Cupertino",
+    "address": "10801 North Wolfe Road"
+  },
+  {
+    "name": "Dumpling Kitchen & Bar",
+    "city": "Burlingame",
+    "address": "1125 Burlingame Avenue"
+  },
+  {
+    "name": "Durty Nelly's",
+    "city": "San Francisco",
+    "address": "2328 Irving Street"
+  },
+  {
+    "name": "Dust Bowl Brewery",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Duster's",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "E.J. Phair Brewing Co.",
+    "city": "Pittsburg",
+    "address": "300 Cumberland St"
+  },
+  {
+    "name": "E.J. Phair Brewing Company",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "E&O Kitchen and Bar",
+    "city": "San Francisco",
+    "address": "314 Sutter Street"
+  },
+  {
+    "name": "East Brother Beer Company",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "East Cliff Brewing Company",
+    "city": "Santa Cruz",
+    "address": "2-1517 East Cliff Drive"
+  },
+  {
+    "name": "Eclipse Kitchen & Bar",
+    "city": "San Francisco",
+    "address": null
+  },
+  {
+    "name": "Ed's",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Effie's Restaurant and Bar",
+    "city": "Campbell",
+    "address": "331 West Hacienda Avenue"
+  },
+  {
+    "name": "Eight Bridges Brewing",
+    "city": "Livermore",
+    "address": "332 Earhart Way"
+  },
+  {
+    "name": "El Agavero Restaurant and Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "El Barrio",
+    "city": null,
+    "address": "736 Washington Street"
+  },
+  {
+    "name": "El Bolero",
+    "city": "San Jose",
+    "address": "990 North 17th Street"
+  },
+  {
+    "name": "El Catrin",
+    "city": "San Jose",
+    "address": "2255 Alum Rock Avenue"
+  },
+  {
+    "name": "El Chato",
+    "city": null,
+    "address": "2301 Bryant Street"
+  },
+  {
+    "name": "El Farolito Bar",
+    "city": null,
+    "address": "2777 Mission Street"
+  },
+  {
+    "name": "El Gato Negro Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "El Girasol Cafe & Bar",
+    "city": "San Jose",
+    "address": "1125 South King Road"
+  },
+  {
+    "name": "El Jardin",
+    "city": "San Jose",
+    "address": "368 Santana Row"
+  },
+  {
+    "name": "El Lopo",
+    "city": "San Francisco",
+    "address": "1327 Polk Street"
+  },
+  {
+    "name": "El Palomar Cantina",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "El Rio",
+    "city": null,
+    "address": "3158 Mission Street"
+  },
+  {
+    "name": "El Savoy Club",
+    "city": "San Jose",
+    "address": "1030 North 10th Street"
+  },
+  {
+    "name": "El Tapatio Restaurant & Cantina",
+    "city": "Pleasant Hill",
+    "address": "40 Golf Club Road"
+  },
+  {
+    "name": "El Tenampa Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "El Toro Nightclub",
+    "city": "San Francisco",
+    "address": "2470 San Bruno Avenue"
+  },
+  {
+    "name": "El Trebol",
+    "city": "San Francisco",
+    "address": "3149 22nd Street"
+  },
+  {
+    "name": "El Trebol #2",
+    "city": null,
+    "address": "3088 24th Street"
+  },
+  {
+    "name": "Elaguachile Ceviches Cocktails",
+    "city": "San Jose",
+    "address": "35 South Jackson Avenue"
+  },
+  {
+    "name": "Elbo Room Jack London",
+    "city": "Oakland",
+    "address": "311 Broadway"
+  },
+  {
+    "name": "Elements Bar and Lounge",
+    "city": "San Francisco",
+    "address": "165 O'Farrell Street"
+  },
+  {
+    "name": "Elephant Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Elevation 66",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Eli's Sports Bar & Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Elixir",
+    "city": "San Francisco",
+    "address": "3200 16th Street"
+  },
+  {
+    "name": "Elks Lodge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Elliot's",
+    "city": null,
+    "address": "369 Hartz Avenue"
+  },
+  {
+    "name": "EMC Seafood & Raw Bar",
+    "city": "San Jose",
+    "address": "378 Santana Row"
+  },
+  {
+    "name": "Emirates Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Emperor Norton's Boozeland",
+    "city": "San Francisco",
+    "address": "510 Larkin Street"
+  },
+  {
+    "name": "Encore Karaoke",
+    "city": "San Francisco",
+    "address": "1550 Fl 2 California Street"
+  },
+  {
+    "name": "ENO Wine Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Enoteca La Storia",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "ENSŌ",
+    "city": "San Jose",
+    "address": "97 East Santa Clara Street"
+  },
+  {
+    "name": "Enterprise Brewing Company",
+    "city": "San Francisco",
+    "address": "1150 Howard Street"
+  },
+  {
+    "name": "Era Lounge",
+    "city": "San Jose",
+    "address": "386 South 1st Street"
+  },
+  {
+    "name": "Ernie's Tin Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Esin Restaurant & Bar",
+    "city": "Danville",
+    "address": "750 Camino Ramon"
+  },
+  {
+    "name": "Etcetera Wine Bar",
+    "city": null,
+    "address": "795 Valencia Street"
+  },
+  {
+    "name": "Evergreen Inn and Pub",
+    "city": "San Jose",
+    "address": "3273 South White Road"
+  },
+  {
+    "name": "Evie's",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Evil Eye",
+    "city": "San Francisco",
+    "address": "2937 Mission Street"
+  },
+  {
+    "name": "Evolution",
+    "city": null,
+    "address": "1131 Lawrence Expressway"
+  },
+  {
+    "name": "Executive Order",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Express Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "EZ's Lounge",
+    "city": null,
+    "address": "412 14th Street"
+  },
+  {
+    "name": "EZ5 Cocktails",
+    "city": null,
+    "address": "682 Commercial Street"
+  },
+  {
+    "name": "F8",
+    "city": null,
+    "address": "1192 Folsom Street"
+  },
+  {
+    "name": "Faction Brewing Tasting Room",
+    "city": null,
+    "address": "2501 Monarch Street"
+  },
+  {
+    "name": "Fairfax Brewing",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Faith & Spirits",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Family",
+    "city": null,
+    "address": "2807 Geary Boulevard"
+  },
+  {
+    "name": "Fat Beli Deli",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Fat Cat x The Mantis",
+    "city": "San Francisco",
+    "address": "3215 Mission Street"
+  },
+  {
+    "name": "Fat Pidgeon",
+    "city": "Livermore",
+    "address": "2223 First Street"
+  },
+  {
+    "name": "Faz Restaurant And Bar",
+    "city": "San Jose",
+    "address": "181 East Tasman Drive"
+  },
+  {
+    "name": "Fermentation Lab",
+    "city": null,
+    "address": "1230 Market Street"
+  },
+  {
+    "name": "Fermentation Lab",
+    "city": "San Francisco",
+    "address": "1700A Post Street"
+  },
+  {
+    "name": "Festa Wine & Cocktail Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Fibbar MaGees",
+    "city": "Sunnyvale",
+    "address": "156 South Murphy Avenue"
+  },
+  {
+    "name": "Fieldwork",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Fieldwork Brewing Co.",
+    "city": null,
+    "address": "1160 Sixth Street"
+  },
+  {
+    "name": "Fieldwork Brewing Company",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Fieldwork Brewing Company",
+    "city": null,
+    "address": "107 Corte Madera Town Center"
+  },
+  {
+    "name": "Fieldwork Brewing Company",
+    "city": "Napa",
+    "address": "1046 McKinstry Street"
+  },
+  {
+    "name": "Fieldwork Brewing Company",
+    "city": "San Mateo",
+    "address": null
+  },
+  {
+    "name": "Fillmore Billiards",
+    "city": "San Francisco",
+    "address": "1526 Fillmore Street"
+  },
+  {
+    "name": "Final final",
+    "city": null,
+    "address": "Lombard Street"
+  },
+  {
+    "name": "Final Score Sports Bar",
+    "city": "San Jose",
+    "address": "1126 Saratoga Avenue"
+  },
+  {
+    "name": "Finnegan's Marin Restaurant & Bar",
+    "city": "Novato",
+    "address": "877 Grant Avenue"
+  },
+  {
+    "name": "Finnegans Wake",
+    "city": "San Francisco",
+    "address": "937 Cole Street"
+  },
+  {
+    "name": "Fino Bar & Restaurant",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Fireside Bar",
+    "city": "San Francisco",
+    "address": "603 Irving Street"
+  },
+  {
+    "name": "First Street Alehouse",
+    "city": "Livermore",
+    "address": "2106 First Street"
+  },
+  {
+    "name": "First Street Wine Company",
+    "city": "Livermore",
+    "address": "2211 First Street"
+  },
+  {
+    "name": "Five Points",
+    "city": "San Jose",
+    "address": "169 West Santa Clara Street"
+  },
+  {
+    "name": "Fizzees",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Flanahan's Pub",
+    "city": "San Francisco",
+    "address": "3805 Noriega Street"
+  },
+  {
+    "name": "Floodcraft Brewing Company",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Floodcraft Brewing Company",
+    "city": "Santa Clara",
+    "address": "2732 Augustine Drive"
+  },
+  {
+    "name": "Florio Bar & Café",
+    "city": null,
+    "address": "1915 Fillmore Street"
+  },
+  {
+    "name": "Flower Lounge Restaurant",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Fluid510",
+    "city": "Oakland",
+    "address": "1544 Broadway"
+  },
+  {
+    "name": "Fly Bar & Restaurant",
+    "city": "San Francisco",
+    "address": "762 Divisadero Street"
+  },
+  {
+    "name": "Fog Bank",
+    "city": null,
+    "address": "211 Esplanade"
+  },
+  {
+    "name": "Fogbird",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Foghorn Taproom",
+    "city": null,
+    "address": "450 Balboa Street"
+  },
+  {
+    "name": "Foghorn Taproom",
+    "city": "San Francisco",
+    "address": "534 Irving Street"
+  },
+  {
+    "name": "Foghorn Taproom",
+    "city": "San Francisco",
+    "address": "846 Divisadero Street"
+  },
+  {
+    "name": "Food & Beverages",
+    "city": "San Jose",
+    "address": "110 Paseo De San Antonio"
+  },
+  {
+    "name": "Food Lounge",
+    "city": "Santa Cruz",
+    "address": "1001 Center Street"
+  },
+  {
+    "name": "Fool's Errand",
+    "city": null,
+    "address": "639A Divisadero Street"
+  },
+  {
+    "name": "Foothills Lounge",
+    "city": "San Jose",
+    "address": "3311 San Felipe Road"
+  },
+  {
+    "name": "Forbidden Island",
+    "city": null,
+    "address": "1304 Lincoln Avenue"
+  },
+  {
+    "name": "Fort Point",
+    "city": "Oakland",
+    "address": "6309 College Avenue"
+  },
+  {
+    "name": "Fort Point Beer Co.",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Fort Point Beer Company",
+    "city": "San Francisco",
+    "address": "742 Valencia Street"
+  },
+  {
+    "name": "Four Legs Brewing",
+    "city": "Brentwood",
+    "address": "2010 Elkins Way"
+  },
+  {
+    "name": "Frank's Sports Bar & Grill",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Fred's Place",
+    "city": "Mountain View",
+    "address": "2534 Old Middlefield Way"
+  },
+  {
+    "name": "Free House",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Freewheel Brewing Company",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Friend's Bar",
+    "city": "San Francisco",
+    "address": "558 Monterey Boulevard"
+  },
+  {
+    "name": "Front & Cooper",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Front And Cooper 2",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Fuego Sports Bar and Club",
+    "city": "Sunnyvale",
+    "address": "140 South Murphy Avenue"
+  },
+  {
+    "name": "Fuze Lounge",
+    "city": "San Jose",
+    "address": "58 South 1st Street"
+  },
+  {
+    "name": "Gallagher's Pub",
+    "city": null,
+    "address": "7821 Amador Valley Boulevard"
+  },
+  {
+    "name": "Gamba Karaoke",
+    "city": "Cupertino",
+    "address": "19990 East Homestead Road"
+  },
+  {
+    "name": "Gambit Lounge",
+    "city": "San Francisco",
+    "address": "581 Hayes Street"
+  },
+  {
+    "name": "Gaucho NightClub",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Geary Club",
+    "city": "San Francisco",
+    "address": "768 Geary Street"
+  },
+  {
+    "name": "Geneva Pub",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "George & Walt's",
+    "city": null,
+    "address": "5445 College Avenue"
+  },
+  {
+    "name": "George Kaye's",
+    "city": "Oakland",
+    "address": "4044 Broadway"
+  },
+  {
+    "name": "Gerry's Grill and Bar",
+    "city": "Union City",
+    "address": "31005 Courthouse Drive"
+  },
+  {
+    "name": "Ghost Town Brewing",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Ghost Town Brewing - Laurel",
+    "city": "Oakland",
+    "address": "3506 MacArthur Boulevard"
+  },
+  {
+    "name": "Ghostwood Beer Co.",
+    "city": "Redwood City",
+    "address": "965 Brewster Avenue"
+  },
+  {
+    "name": "Gilman Brewing",
+    "city": "Daly City",
+    "address": "2001 Junipero Serra Boulevard"
+  },
+  {
+    "name": "Gilman Brewing Company",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Gilman Brewing Company",
+    "city": "Berkeley",
+    "address": "912 Gilman Street"
+  },
+  {
+    "name": "Gino and Carlo",
+    "city": null,
+    "address": "548 Green Street"
+  },
+  {
+    "name": "Glen Park Station",
+    "city": "San Francisco",
+    "address": "2816 Diamond Street"
+  },
+  {
+    "name": "Go Fish Poke Bar",
+    "city": null,
+    "address": "823 Hamilton Street"
+  },
+  {
+    "name": "Godfather's Burger Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Goemon Izakaya",
+    "city": "San Francisco",
+    "address": "3129 Clement Street"
+  },
+  {
+    "name": "Gold Bar Distillery",
+    "city": null,
+    "address": "1 Avenue of the Palms"
+  },
+  {
+    "name": "Golden Gate Tap Room",
+    "city": "San Francisco",
+    "address": "449 Powell Street"
+  },
+  {
+    "name": "Golden Gate Yacht Club",
+    "city": "San Francisco",
+    "address": "1 Yacht Road"
+  },
+  {
+    "name": "Golden Hours",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Golden Ratio",
+    "city": null,
+    "address": "1517 Franklin Street"
+  },
+  {
+    "name": "Golden Sol Wellness Bar (coming soon....)",
+    "city": "Pacifica",
+    "address": "1905 Palmetto Avenue"
+  },
+  {
+    "name": "Good Time Tavern",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Goodtime Bar",
+    "city": "San Jose",
+    "address": "30 East Santa Clara Street"
+  },
+  {
+    "name": "Goosetown",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Gordon Biersch",
+    "city": "San Jose",
+    "address": "1701 Airport Boulevard"
+  },
+  {
+    "name": "Gourmet Haus Staudt - Bier Stube",
+    "city": "Redwood City",
+    "address": "2615 Broadway"
+  },
+  {
+    "name": "Grand Hot Pot Lounge",
+    "city": "San Francisco",
+    "address": "3565 Geary Boulevard"
+  },
+  {
+    "name": "Grant and Green",
+    "city": null,
+    "address": "1371 Grant Avenue"
+  },
+  {
+    "name": "Grasslands Bar & Lounge",
+    "city": "San Francisco",
+    "address": "905 Kearny Street"
+  },
+  {
+    "name": "Gravity Tavern",
+    "city": "Mill Valley",
+    "address": "38 Miller Avenue"
+  },
+  {
+    "name": "Great Notion Brewing",
+    "city": "Berkeley",
+    "address": "2031 Fourth Street"
+  },
+  {
+    "name": "Green Room",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Green Sports Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Grill 'Em Pizza & Sports Bar",
+    "city": "San Jose",
+    "address": "497 Reynolds Circle"
+  },
+  {
+    "name": "Grumpy's Restaurant Pub",
+    "city": null,
+    "address": "125 Vallejo Street"
+  },
+  {
+    "name": "Grupo De Carnaval Cultural Português",
+    "city": "San Jose",
+    "address": "1610 Alum Rock Avenue"
+  },
+  {
+    "name": "Guadalajara Restaurant & Tequila Bar",
+    "city": null,
+    "address": "3134 East 10th Street"
+  },
+  {
+    "name": "Guildhouse",
+    "city": "San Jose",
+    "address": "420 South 1st Street"
+  },
+  {
+    "name": "Ha-Ra",
+    "city": "San Francisco",
+    "address": "875 Geary Street"
+  },
+  {
+    "name": "Hakashi Japanese Sushi Bar & Grill",
+    "city": null,
+    "address": "474 3rd Street"
+  },
+  {
+    "name": "Halcyon",
+    "city": "San Francisco",
+    "address": "314 11th Street"
+  },
+  {
+    "name": "Half Moon Bay Brewing Company",
+    "city": "Half Moon Bay",
+    "address": "390 Capistrano Road"
+  },
+  {
+    "name": "Halftime",
+    "city": null,
+    "address": "300 Broadway"
+  },
+  {
+    "name": "Hanaro",
+    "city": null,
+    "address": "939 Geary Boulevard"
+  },
+  {
+    "name": "Hapa's Brewing Company",
+    "city": "Los Gatos",
+    "address": "114 South Santa Cruz Avenue"
+  },
+  {
+    "name": "Hapa’s Brewing Company",
+    "city": "San Jose",
+    "address": "460 Lincoln Avenue"
+  },
+  {
+    "name": "Hapa’s Brewing Company",
+    "city": "San Jose",
+    "address": "59 Barack Obama Boulevard"
+  },
+  {
+    "name": "Happy Billiard",
+    "city": "San Francisco",
+    "address": "931 Kearny Street"
+  },
+  {
+    "name": "Happy Lounge",
+    "city": "San Francisco",
+    "address": "3745 Geary Boulevard"
+  },
+  {
+    "name": "Hardwood Bar & Smokery",
+    "city": "San Francisco",
+    "address": "680 8th Street"
+  },
+  {
+    "name": "Harmonic Brewing",
+    "city": "San Francisco",
+    "address": "7 Warriors Way"
+  },
+  {
+    "name": "Harper & Rye",
+    "city": "San Francisco",
+    "address": "1695 Polk Street"
+  },
+  {
+    "name": "Harrington's Bar & Grill",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Harry's Bar",
+    "city": "San Francisco",
+    "address": "2020 Fillmore Street"
+  },
+  {
+    "name": "Hawthorn",
+    "city": null,
+    "address": "46 Grant Avenue"
+  },
+  {
+    "name": "Headland's Brewing",
+    "city": null,
+    "address": "2465 Bancroft Way"
+  },
+  {
+    "name": "Headlands Brewing Company",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Headlands Brewing Westbrae Beer Garden",
+    "city": "Berkeley",
+    "address": "1280 Gilman Street"
+  },
+  {
+    "name": "Heart and Dagger Saloon",
+    "city": "Oakland",
+    "address": "504 Lake Park Avenue"
+  },
+  {
+    "name": "Heartwood",
+    "city": null,
+    "address": "531A Commercial Street"
+  },
+  {
+    "name": "Hedley Club",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Heinold's First and Last Chance Saloon",
+    "city": "Oakland",
+    "address": "48 Jack London Square"
+  },
+  {
+    "name": "Hella Bees",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Hello Stranger",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Henfling’s Bar & Grill",
+    "city": "Ben Lomond",
+    "address": "9450 Highway 9"
+  },
+  {
+    "name": "HenHouse Brewing Company Record Room",
+    "city": "Novato",
+    "address": "1301 Grant Avenue"
+  },
+  {
+    "name": "Henry's",
+    "city": null,
+    "address": "2600 Durant Avenue"
+  },
+  {
+    "name": "Heritage Restaurant & Bar",
+    "city": null,
+    "address": "708 Clement Street"
+  },
+  {
+    "name": "Hi Dive",
+    "city": "San Francisco",
+    "address": "Pier 28 Embarcadero"
+  },
+  {
+    "name": "Hi Tops",
+    "city": "San Francisco",
+    "address": "2247 Market Street"
+  },
+  {
+    "name": "Hi-Lo Club",
+    "city": "San Francisco",
+    "address": "1423 Polk Street"
+  },
+  {
+    "name": "Hidden Tap and Barrel",
+    "city": null,
+    "address": "900 Middlefield Road"
+  },
+  {
+    "name": "Hideaway Lounge",
+    "city": "San Jose",
+    "address": "6104 Monterey Road"
+  },
+  {
+    "name": "High 5ive",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "High Treason",
+    "city": null,
+    "address": "443 Clement Street"
+  },
+  {
+    "name": "Highway 1 Brewing Company",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Hinata Japanese Steakhouse, Sushi, and Bar",
+    "city": "Fairfield",
+    "address": "5113 Business Center Drive"
+  },
+  {
+    "name": "Hindquarter Bar & Grill",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Hinodeya Ramen & Bar",
+    "city": "San Francisco",
+    "address": "219 O'Farrell Street"
+  },
+  {
+    "name": "HK Lounge Bistro",
+    "city": "San Francisco",
+    "address": "1136 Folsom Street"
+  },
+  {
+    "name": "Hobnob",
+    "city": "Alameda",
+    "address": "1313 Park Street"
+  },
+  {
+    "name": "Hockey Haven",
+    "city": null,
+    "address": "3625 Balboa Street"
+  },
+  {
+    "name": "Hoi Polloi",
+    "city": "Berkeley",
+    "address": "1763 Alcatraz Avenue"
+  },
+  {
+    "name": "Hole In The Wall",
+    "city": null,
+    "address": "1369 Folsom Street"
+  },
+  {
+    "name": "Holy Water",
+    "city": "San Francisco",
+    "address": "309 Cortland Avenue"
+  },
+  {
+    "name": "HolyCraft Brewery",
+    "city": "San Francisco",
+    "address": "787 Broadway"
+  },
+  {
+    "name": "Homegrown Hops",
+    "city": "Livermore",
+    "address": "3000 Mines Road"
+  },
+  {
+    "name": "Homestead",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Homestead Cocktail Lounge",
+    "city": "Santa Clara",
+    "address": "3557 Homestead Road"
+  },
+  {
+    "name": "Hometown Heroes",
+    "city": "South San Francisco",
+    "address": "303 Grand Avenue"
+  },
+  {
+    "name": "Honeycomb Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Hong Kong Lounge",
+    "city": "San Francisco",
+    "address": "5322 Geary Boulevard"
+  },
+  {
+    "name": "Honor Kitchen & Cocktails",
+    "city": null,
+    "address": "1411 Powell Street"
+  },
+  {
+    "name": "Hook & Line Seafood Bar",
+    "city": "Sanata Cruz",
+    "address": "105 Walnut Avenue"
+  },
+  {
+    "name": "Hook Fish Co. at Proof Lab Beer Garden",
+    "city": "Mill Valley",
+    "address": "254 Shoreline Hwy"
+  },
+  {
+    "name": "Hop Oast",
+    "city": null,
+    "address": "2887 Bryant Street"
+  },
+  {
+    "name": "Hopmonk Tavern",
+    "city": "Sonoma",
+    "address": "691 Broadway"
+  },
+  {
+    "name": "HopMonk Tavern Novato",
+    "city": "Novato",
+    "address": "224 Vintage Way"
+  },
+  {
+    "name": "Hops & Scotch",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Hops and Sessions",
+    "city": "Livermore",
+    "address": "2339 First Street"
+  },
+  {
+    "name": "Hops Bar and Grill",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Hôtel Biron",
+    "city": "San Francisco",
+    "address": "45 Rose Street"
+  },
+  {
+    "name": "Hotel Utah Saloon",
+    "city": null,
+    "address": "500 4th Street"
+  },
+  {
+    "name": "Hotsy Totsy Club",
+    "city": "Albany",
+    "address": "601 San Pablo Avenue"
+  },
+  {
+    "name": "House of Michael and Aislinn",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "House of Shields",
+    "city": "San Francisco",
+    "address": "39 New Montgomery Street"
+  },
+  {
+    "name": "Humble Sea Brewing Co",
+    "city": "Pacifica",
+    "address": "5560 CA-1"
+  },
+  {
+    "name": "Humble Sea Brewing Company",
+    "city": "Santa Cruz",
+    "address": "820 Swift Street"
+  },
+  {
+    "name": "Humble Sea Brewing Company Alameda Taproom",
+    "city": null,
+    "address": "2350 Saratoga Street"
+  },
+  {
+    "name": "Humble Sea Tavern",
+    "city": "Felton",
+    "address": "6256 CA-9"
+  },
+  {
+    "name": "IBU Taproom and Bottle Shop",
+    "city": "Milpitas",
+    "address": "1422 Dempsey Road"
+  },
+  {
+    "name": "Ideal Bar & Grill",
+    "city": "Santa Cruz",
+    "address": "106 Beach Street"
+  },
+  {
+    "name": "Ijo Izakaya",
+    "city": "Berkeley",
+    "address": "1463 Shattuck Avenue"
+  },
+  {
+    "name": "In The Wood",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "INC 82 Brewing",
+    "city": null,
+    "address": "7370 San Ramon Road"
+  },
+  {
+    "name": "Indie Darling",
+    "city": null,
+    "address": "537 Stevenson Street"
+  },
+  {
+    "name": "INDO Restaurant & Lounge",
+    "city": "Palo Alto",
+    "address": "3295 El Camino Real"
+  },
+  {
+    "name": "International Sports Club",
+    "city": "San Francisco",
+    "address": "1000 Columbus Avenue"
+  },
+  {
+    "name": "Ireland's 32",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Irish Bank",
+    "city": "San Francisco",
+    "address": "10 Mark Lane"
+  },
+  {
+    "name": "Irish Times",
+    "city": null,
+    "address": "500 Sacramento Street"
+  },
+  {
+    "name": "Iron & Oak Restaurant and Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Island Brews",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "ISO Beers",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "It's Wine Tyme",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Ivy Room",
+    "city": "Albany",
+    "address": "860 San Pablo Avenue"
+  },
+  {
+    "name": "Izakaya An",
+    "city": "Concord",
+    "address": "3501 Clayton Road"
+  },
+  {
+    "name": "Izakaya Ginji",
+    "city": null,
+    "address": "301 East 4th Avenue"
+  },
+  {
+    "name": "Izakaya Mai",
+    "city": null,
+    "address": "212 2nd Avenue"
+  },
+  {
+    "name": "Izakaya Mayumi",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Izakaya Sozai",
+    "city": "San Francisco",
+    "address": "1500 Irving Street"
+  },
+  {
+    "name": "Izakaya Yoki",
+    "city": null,
+    "address": "900 Bush Street"
+  },
+  {
+    "name": "J K's Brickhouse Sports Bar and Grill",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Jack Mackerel's Sand Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Jack O'Neill Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Jack’s",
+    "city": "San Jose",
+    "address": "167 East Taylor Street"
+  },
+  {
+    "name": "Jack's Restaurant & Bar",
+    "city": "San Jose",
+    "address": "1502 Saratoga Avenue"
+  },
+  {
+    "name": "Jack's Resturant & Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Jackalope",
+    "city": "San Francisco",
+    "address": "1092 Post Street"
+  },
+  {
+    "name": "Jasper's",
+    "city": null,
+    "address": "401 Taylor Street"
+  },
+  {
+    "name": "Jim Stump's Taproom + Kitchen",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Jim's Cocktails",
+    "city": "Union City",
+    "address": "34696 Alvarado-Niles Road"
+  },
+  {
+    "name": "Jimmy’s Billiards",
+    "city": "Milpitas",
+    "address": "235 South Milpitas Boulevard"
+  },
+  {
+    "name": "Jinya Ramen Bar",
+    "city": "San Jose",
+    "address": "925 Blossom Hill Road"
+  },
+  {
+    "name": "JJ's Blues",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "JJ's Saloon",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Joe's Bar",
+    "city": null,
+    "address": "13118 Central Avenue"
+  },
+  {
+    "name": "Joe's Taco Lounge",
+    "city": "Mill Valley",
+    "address": "382 Miller Avenue"
+  },
+  {
+    "name": "John Foley's Dueling Piano Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Johnny Foley's Irish House",
+    "city": "San Francisco",
+    "address": "243 O'Farrell Street"
+  },
+  {
+    "name": "Johnny's",
+    "city": null,
+    "address": "1746 Washington Avenue"
+  },
+  {
+    "name": "Johnny's Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Johnny's Pub",
+    "city": "Newark",
+    "address": "5800 Jarvis Avenue"
+  },
+  {
+    "name": "Jolenes Bar",
+    "city": null,
+    "address": "2700 16th Street"
+  },
+  {
+    "name": "Jonell's",
+    "city": "San Francisco",
+    "address": "401 Ellis Street"
+  },
+  {
+    "name": "JP's Family Restaurant & Sports Lounge",
+    "city": null,
+    "address": "3600 Castro Valley Boulevard"
+  },
+  {
+    "name": "Ju-ni Sushi Bar",
+    "city": null,
+    "address": "1335 Fulton Street"
+  },
+  {
+    "name": "Judnich's",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Julie's Hummus Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Jupiter",
+    "city": "Berkeley",
+    "address": "2181 Shattuck Avenue"
+  },
+  {
+    "name": "Jury Room",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Kaiyō Rooftop",
+    "city": "San Francisco",
+    "address": "701 3rd Street"
+  },
+  {
+    "name": "Kakushi Izakaya",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Kali Noodles & Tea Bar",
+    "city": "San Jose",
+    "address": "374 East Santa Clara Street"
+  },
+  {
+    "name": "Kansai Sushi Bar",
+    "city": "Concord",
+    "address": "1669 Willow Pass Road"
+  },
+  {
+    "name": "Katie Bloom's Irish Pub",
+    "city": "Campbell",
+    "address": "369 East Campbell Avenue"
+  },
+  {
+    "name": "Kell’s",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Kemuri Japanese Barú",
+    "city": "Redwood City",
+    "address": "2616 Broadway"
+  },
+  {
+    "name": "Kennedy's Irish Pub & Curry House",
+    "city": null,
+    "address": "1040 Columbus Avenue"
+  },
+  {
+    "name": "Kensington Circus Pub",
+    "city": null,
+    "address": "389 Colusa Avenue"
+  },
+  {
+    "name": "Key Klub",
+    "city": "San Francisco",
+    "address": "850 Bush Street"
+  },
+  {
+    "name": "Keyes Club",
+    "city": "San Jose",
+    "address": "396 Keyes Street"
+  },
+  {
+    "name": "Khartoum",
+    "city": "Campbell",
+    "address": "300 Orchard City Drive"
+  },
+  {
+    "name": "Kianti's Pizza and Pasta Bar",
+    "city": null,
+    "address": "1100 Pacific Avenue"
+  },
+  {
+    "name": "Kilowatt",
+    "city": "San Francisco",
+    "address": "3160 16th Street"
+  },
+  {
+    "name": "Kinda Izakaya",
+    "city": "Berkeley",
+    "address": "1941 University Avenue"
+  },
+  {
+    "name": "King of Clubs",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Kingfish",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Kip's Bar and Grill",
+    "city": "Berkeley",
+    "address": "2439 Durant Avenue"
+  },
+  {
+    "name": "Kiss Lounge Bar & Restaurant",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Kissakeko",
+    "city": null,
+    "address": "1327 Mason Street"
+  },
+  {
+    "name": "Koko Izakaya",
+    "city": null,
+    "address": "759 East El Camino Real"
+  },
+  {
+    "name": "Kona Club",
+    "city": "Oakland",
+    "address": "4401 Piedmont Avenue"
+  },
+  {
+    "name": "Kona’s Street Market",
+    "city": "San Francisco",
+    "address": "32 3rd Street"
+  },
+  {
+    "name": "Korner Kitchen and Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Kozy Kar",
+    "city": "San Francisco",
+    "address": "1548 Polk Street"
+  },
+  {
+    "name": "Krayon's Gallery",
+    "city": null,
+    "address": "3477 Castro Valley Boulevard"
+  },
+  {
+    "name": "Kuidaore Handroll Bar",
+    "city": "Oakland",
+    "address": "431 Water Street"
+  },
+  {
+    "name": "Kura Revolving Sushi Bar",
+    "city": "Berkeley",
+    "address": "2100 University Avenue"
+  },
+  {
+    "name": "La Corona Bar",
+    "city": "San Jose",
+    "address": "858 North 13th Street"
+  },
+  {
+    "name": "La Ginestra",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "La Hacienda Lounge",
+    "city": "San Jose",
+    "address": "95 South Market Street"
+  },
+  {
+    "name": "La Hacienda Napa Bar & Grill",
+    "city": "Napa",
+    "address": "1851 Old Sonoma Road"
+  },
+  {
+    "name": "La Loulou",
+    "city": null,
+    "address": "4250 Piedmont Avenue"
+  },
+  {
+    "name": "La Oficina Bar",
+    "city": "San Jose",
+    "address": "2610 Union Avenue"
+  },
+  {
+    "name": "La Playita Seafood Bar Grill",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "La Rocca's Corner",
+    "city": "San Francisco",
+    "address": "957 Columbus Avenue"
+  },
+  {
+    "name": "La Tapatia Mexican Restaurant and Cantina",
+    "city": "Concord",
+    "address": "1802 Willow Pass Road"
+  },
+  {
+    "name": "La Taza Restaurant and Bar",
+    "city": null,
+    "address": "2475 Mission Street"
+  },
+  {
+    "name": "Labyrinth Bar & Kitchen",
+    "city": "San Jose",
+    "address": "45 Post Street"
+  },
+  {
+    "name": "Lagom Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Lai Hong Lounge",
+    "city": "San Francisco",
+    "address": "1416 Powell Street"
+  },
+  {
+    "name": "Lakeside Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Las Margaritas",
+    "city": "San Francisco",
+    "address": "3336 24th Street"
+  },
+  {
+    "name": "Las Palmas Taco Bar",
+    "city": "Santa Cruz",
+    "address": "55 Front Street"
+  },
+  {
+    "name": "Last Drop Tavern",
+    "city": "San Francisco",
+    "address": "550 Powell Street"
+  },
+  {
+    "name": "Last Rites",
+    "city": "San Francisco",
+    "address": "718 14th Street"
+  },
+  {
+    "name": "Laszlo",
+    "city": null,
+    "address": "2526 Mission Street"
+  },
+  {
+    "name": "Latin American Club",
+    "city": null,
+    "address": "3286 22nd Street"
+  },
+  {
+    "name": "Laughing Monk Brewing",
+    "city": "Scotts Valley",
+    "address": "262 Mount Hermon Road"
+  },
+  {
+    "name": "Laughing Monk Brewing",
+    "city": "Sunnyvale",
+    "address": "1235 Oakmead Parkway"
+  },
+  {
+    "name": "Laurel Lounge",
+    "city": "Oakland",
+    "address": "3970 MacArthur Boulevard"
+  },
+  {
+    "name": "Lava Restaurant & Lounge",
+    "city": null,
+    "address": "527 Bryant Street"
+  },
+  {
+    "name": "Lavanta Mezze Bar & Restaurant",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Lazy Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Left Door",
+    "city": "San Francisco",
+    "address": "1905 Union Street"
+  },
+  {
+    "name": "Lemon Drop",
+    "city": "Alameda",
+    "address": "2542 Santa Clara Avenue"
+  },
+  {
+    "name": "Leo's Oyster Bar",
+    "city": "San Francisco",
+    "address": "568 Sacramento Street"
+  },
+  {
+    "name": "Level III",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Li Po Cocktail Lounge",
+    "city": "San Francisco",
+    "address": "916 Grant Avenue"
+  },
+  {
+    "name": "Limewood Bar & Restaurant",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Lincoln Park Bar & Grill",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Linden Room",
+    "city": "San Francisco",
+    "address": "330 Gough Street"
+  },
+  {
+    "name": "Linwood's",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Lion's Den Bar & Lounge",
+    "city": "San Francisco",
+    "address": "57 Wentworth Place"
+  },
+  {
+    "name": "Liquid",
+    "city": null,
+    "address": "32 South 3rd Street"
+  },
+  {
+    "name": "Liquid Gold",
+    "city": "San Francisco",
+    "address": "1040 Hyde Street"
+  },
+  {
+    "name": "Little Bird",
+    "city": "Oakland",
+    "address": "435 13th Street"
+  },
+  {
+    "name": "Little Hill Lounge",
+    "city": "El Cerrito",
+    "address": "10753 San Pablo Avenue"
+  },
+  {
+    "name": "Little Sushi Bar",
+    "city": null,
+    "address": "200 23rd Avenue"
+  },
+  {
+    "name": "Live Sushi Bar",
+    "city": null,
+    "address": "2001 17th Street"
+  },
+  {
+    "name": "Liverpool Lil's",
+    "city": null,
+    "address": "2940;2942 Lyon Street"
+  },
+  {
+    "name": "Local Edition",
+    "city": "San Francisco",
+    "address": "691 Market Street"
+  },
+  {
+    "name": "Local Tap",
+    "city": null,
+    "address": "600 3rd Street"
+  },
+  {
+    "name": "Locanda Wine Bar",
+    "city": null,
+    "address": "2293 First Street"
+  },
+  {
+    "name": "Lokanta Mediterranean Grill & Bar",
+    "city": "Pleasanton",
+    "address": "443 Main Street"
+  },
+  {
+    "name": "Loma Brewing Company",
+    "city": null,
+    "address": "130 North Santa Cruz Avenue"
+  },
+  {
+    "name": "London Bar and Grill",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Lone Palm",
+    "city": "San Francisco",
+    "address": "3394 22nd Street"
+  },
+  {
+    "name": "Lone Star Saloon",
+    "city": "San Francisco",
+    "address": "1354 Harrison Street"
+  },
+  {
+    "name": "Long Weekend Havana",
+    "city": null,
+    "address": "270 Columbus Avenue"
+  },
+  {
+    "name": "Longboard Margarita Bar",
+    "city": "Pacifica",
+    "address": "180 Eureka Drive"
+  },
+  {
+    "name": "Lookout",
+    "city": "San Francisco",
+    "address": "3600 16th Street"
+  },
+  {
+    "name": "Loretta",
+    "city": "Menlo Park",
+    "address": "639 Santa Cruz Avenue"
+  },
+  {
+    "name": "Los Altos Mexican Bar and Grill",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Los Compadres Bar & Grill",
+    "city": "San Jose",
+    "address": "4126 Monterey Road"
+  },
+  {
+    "name": "Los Garcia's Taqueria & Cantina",
+    "city": "San Jose",
+    "address": "1390 Oakland Road"
+  },
+  {
+    "name": "Los Gatos Soda Works",
+    "city": "Los Gatos",
+    "address": "21 College Avenue"
+  },
+  {
+    "name": "Los Moles Beer Garden",
+    "city": "El Cerrito",
+    "address": "6120 Potrero Avenue"
+  },
+  {
+    "name": "Lost & Found",
+    "city": "San Francisco",
+    "address": "1439 Taraval Street"
+  },
+  {
+    "name": "Lost Cat",
+    "city": "San Francisco",
+    "address": "587 Post Street"
+  },
+  {
+    "name": "Lost Marbles",
+    "city": "San Francisco",
+    "address": "823 Clement Street"
+  },
+  {
+    "name": "Loteria Taco Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Louie's Bar",
+    "city": null,
+    "address": "55 Stevenson Street"
+  },
+  {
+    "name": "Lounge Chinatown",
+    "city": null,
+    "address": "366 8th Street"
+  },
+  {
+    "name": "Love + Propaganda",
+    "city": "San Francisco",
+    "address": "85 Campton Place"
+  },
+  {
+    "name": "Low Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Luau Lounge Tiki Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Lucca Bar and Grill",
+    "city": "Benicia",
+    "address": "439 1st Street"
+  },
+  {
+    "name": "Lucita's Nite Club",
+    "city": null,
+    "address": "3247 Mission Street"
+  },
+  {
+    "name": "Lucky 13",
+    "city": "Alameda",
+    "address": "1301 Park Street"
+  },
+  {
+    "name": "Lucky Horseshoe",
+    "city": "San Francisco",
+    "address": "453 Cortland Avenue"
+  },
+  {
+    "name": "Lucky Shot Billiards",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Lucky’s Place",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Lucuma Kitchen & Bar",
+    "city": null,
+    "address": "1700 Franklin Street"
+  },
+  {
+    "name": "Lucy Blue",
+    "city": "Oakland",
+    "address": "468 19th Street"
+  },
+  {
+    "name": "Luisa's Ristorante and Wine Bar",
+    "city": "San Francisco",
+    "address": "1001 Guerrero Street"
+  },
+  {
+    "name": "Luna's Bar & Nightclub",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Lúpulo",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Lush Lounge",
+    "city": null,
+    "address": "1221 Polk Street"
+  },
+  {
+    "name": "Lux Pub and Club",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "M Korea Tapas",
+    "city": "Santa Clara",
+    "address": "3546 Flora Vista Avenue"
+  },
+  {
+    "name": "M.S. Gaslight Bar",
+    "city": "San Jose",
+    "address": "233 South White Road"
+  },
+  {
+    "name": "M&H Tavern",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "M4 Wine",
+    "city": null,
+    "address": "Big Basin Way"
+  },
+  {
+    "name": "MacKenzie Bar & Grill",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Mad Oak",
+    "city": "Oakland",
+    "address": "135 12th Street"
+  },
+  {
+    "name": "Madarae",
+    "city": "San Francisco",
+    "address": "46 Minna Street"
+  },
+  {
+    "name": "Madrone Art Bar",
+    "city": "San Francisco",
+    "address": "500 Divisadero Street"
+  },
+  {
+    "name": "Maggie & Mac's",
+    "city": "San Francisco",
+    "address": "1326 9th Avenue"
+  },
+  {
+    "name": "Maggie McGarrys",
+    "city": null,
+    "address": "1353 Grant Avenue"
+  },
+  {
+    "name": "Magnolia SF",
+    "city": "San Francisco",
+    "address": "1398 Haight Street"
+  },
+  {
+    "name": "Main Street Bar and Grill",
+    "city": null,
+    "address": "627 Main Street"
+  },
+  {
+    "name": "Main Street Brewery",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Make Out Room",
+    "city": null,
+    "address": "3225 22nd Street"
+  },
+  {
+    "name": "Maple Leaf Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Mare Island Brewing Co. - First Street",
+    "city": null,
+    "address": "440 1st Street"
+  },
+  {
+    "name": "Margarita's Bar and Grill",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Margaritaville",
+    "city": null,
+    "address": "Esplanade"
+  },
+  {
+    "name": "Maria’s Night Club",
+    "city": "San Jose",
+    "address": "728 North 13th Street"
+  },
+  {
+    "name": "Marina Lounge",
+    "city": null,
+    "address": "2138;2142;2144;2146 Chestnut Street"
+  },
+  {
+    "name": "Market Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Market Street Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Market Tavern",
+    "city": "Dublin",
+    "address": "4775 Hacienda Drive"
+  },
+  {
+    "name": "Mars Bar & Restaurant",
+    "city": "San Francisco",
+    "address": "798 Brannan Street"
+  },
+  {
+    "name": "Martuni's",
+    "city": "San Francisco",
+    "address": "4 Valencia Street"
+  },
+  {
+    "name": "Marvin Gardens",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Mary's",
+    "city": null,
+    "address": "1437 Haight Street"
+  },
+  {
+    "name": "Mas Fuego Cantina Tequilaria Cocina",
+    "city": "Fremont",
+    "address": "43968 Pacific Commons Boulevard"
+  },
+  {
+    "name": "Match Point Brewing",
+    "city": "Albany",
+    "address": "745 San Pablo Avenue"
+  },
+  {
+    "name": "Matteucci's",
+    "city": "San Anselmo",
+    "address": "114 Greenfield Avenue"
+  },
+  {
+    "name": "Mauna Loa Cocktails",
+    "city": "San Francisco",
+    "address": "Fillmore Street"
+  },
+  {
+    "name": "Max's Restaurant & Bar of Burlingame",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Maya",
+    "city": "Redwood City",
+    "address": "1776 Broadway"
+  },
+  {
+    "name": "Maya Mexican Cuisine & Cantina",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Mc Bears",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "McCarthy‘s Irish Bar",
+    "city": "San Francisco",
+    "address": "46 West Portal Avenue"
+  },
+  {
+    "name": "McGee's Bar and Grill",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "McGovern's Bar",
+    "city": null,
+    "address": "215 East 4th Avenue"
+  },
+  {
+    "name": "McKay's Taphouse & Beer Garden",
+    "city": "Pleasanton",
+    "address": "252 Main Street"
+  },
+  {
+    "name": "McNally's Irish Pub",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "McTeague's Saloon",
+    "city": "San Francisco",
+    "address": "1237 Polk Street"
+  },
+  {
+    "name": "Mel-O-Dee",
+    "city": "El Cerrito",
+    "address": "240 El Cerrito Plaza"
+  },
+  {
+    "name": "Melo Melo Kava Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Melo Melo Kava Bar",
+    "city": null,
+    "address": "1101 Pacific Avenue"
+  },
+  {
+    "name": "Members Only",
+    "city": "San Francisco",
+    "address": "1000 Larkin Street"
+  },
+  {
+    "name": "Menlo Grill Bistro and Bar",
+    "city": null,
+    "address": "100 El Camino Real"
+  },
+  {
+    "name": "Merchant's",
+    "city": "Oakland",
+    "address": "401 2nd Street"
+  },
+  {
+    "name": "Merle's",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Merritt House",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Mervyn's Lounge",
+    "city": "Mountain View",
+    "address": "236 Castro Street"
+  },
+  {
+    "name": "Metro City Restaurant & Bar",
+    "city": "Sunnyvale",
+    "address": "151 South Murphy Avenue"
+  },
+  {
+    "name": "Metro City Restaurant and Bar",
+    "city": "Sunnyvale",
+    "address": "919 East Duane Avenue"
+  },
+  {
+    "name": "Mezes Kitchen & Wine Bar",
+    "city": "San Francisco",
+    "address": "2373 Chestnut Street"
+  },
+  {
+    "name": "Mezzanine",
+    "city": "San Francisco",
+    "address": "444 Jessie Street"
+  },
+  {
+    "name": "Mi Casa Cantina",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Miami Beach Club",
+    "city": "San Jose",
+    "address": "417 South 1st Street"
+  },
+  {
+    "name": "Michaud and Martella",
+    "city": null,
+    "address": "14598 Big Basin Way"
+  },
+  {
+    "name": "Middle Eight",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Midnight Sun",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Mike's Place",
+    "city": "San Jose",
+    "address": "5837 Camden Avenue"
+  },
+  {
+    "name": "Millay",
+    "city": null,
+    "address": "691 14th Street"
+  },
+  {
+    "name": "mini bar",
+    "city": null,
+    "address": "837 Divisadero Street"
+  },
+  {
+    "name": "Miniboss",
+    "city": "San Jose",
+    "address": "52 East Santa Clara Street"
+  },
+  {
+    "name": "Miraloma Club",
+    "city": "San Francisco",
+    "address": "749 Portola Drive"
+  },
+  {
+    "name": "Mission Bar",
+    "city": "San Francisco",
+    "address": "2695 Mission Street"
+  },
+  {
+    "name": "Mission Bar & Grill",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Mission Bay Wine Bar at Thrive City",
+    "city": null,
+    "address": "640 Terry A. Francois Boulevard"
+  },
+  {
+    "name": "Mission Hill Saloon",
+    "city": "San Francisco",
+    "address": "491 Potrero Avenue"
+  },
+  {
+    "name": "Mission Street Oyster Bar",
+    "city": "San Francisco",
+    "address": "2282 Mission Street"
+  },
+  {
+    "name": "Missouri Lounge",
+    "city": null,
+    "address": "2600 San Pablo Avenue"
+  },
+  {
+    "name": "Mistral Restaurant and Bar",
+    "city": "Redwood City",
+    "address": "370 Bridge Parkway"
+  },
+  {
+    "name": "Mix Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Mizu Sushi Bar & Grill",
+    "city": "Mountain View",
+    "address": "2590 West El Camino Real"
+  },
+  {
+    "name": "Mizu Sushi Bar & Grill",
+    "city": "San Jose",
+    "address": "1035 South Winchester Boulevard"
+  },
+  {
+    "name": "MO's Wine Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Moby Dick",
+    "city": "San Francisco",
+    "address": "4049 18th Street"
+  },
+  {
+    "name": "Modernist",
+    "city": null,
+    "address": "139 Steuart Street"
+  },
+  {
+    "name": "Moe's Alley",
+    "city": "Santa Cruz",
+    "address": "1535 Commercial Way"
+  },
+  {
+    "name": "Molloy's Tavern",
+    "city": null,
+    "address": "1655 Mission Road"
+  },
+  {
+    "name": "Molly Magees",
+    "city": null,
+    "address": "241 Castro Street"
+  },
+  {
+    "name": "Molotov's",
+    "city": null,
+    "address": "582 Haight Street"
+  },
+  {
+    "name": "Monarch",
+    "city": "San Francisco",
+    "address": "101 6th Street"
+  },
+  {
+    "name": "Monkey King at the Brewery",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Monkey King Pub & Grub",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Monroe San Francisco",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Monte Carlo",
+    "city": null,
+    "address": "228 Castro Street"
+  },
+  {
+    "name": "Monte's Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Monty's Log Cabin",
+    "city": "Felton",
+    "address": "5755 Highway 9"
+  },
+  {
+    "name": "Moods Wine Bar & Bistro",
+    "city": "Sunnyvale",
+    "address": "111 West Evelyn Avenue"
+  },
+  {
+    "name": "Moongate Lounge",
+    "city": null,
+    "address": "28 Waverly Place"
+  },
+  {
+    "name": "Moonglow at Gold Palm",
+    "city": "Oakland",
+    "address": "1902 Telegraph Avenue"
+  },
+  {
+    "name": "Morgan Territory",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Mother",
+    "city": "San Francisco",
+    "address": "3079 16th Street"
+  },
+  {
+    "name": "Mothership",
+    "city": "San Francisco",
+    "address": "3152 Mission Street"
+  },
+  {
+    "name": "Mountain Charley's",
+    "city": "Los Gatos",
+    "address": "15 North Santa Cruz Avenue"
+  },
+  {
+    "name": "Mountain House Bar",
+    "city": "Tracy",
+    "address": "16784 West Grantline Road"
+  },
+  {
+    "name": "Moylan's Brewery & Resturant",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Mr Lucky's",
+    "city": "Walnut Creek",
+    "address": "1527 Locust Street"
+  },
+  {
+    "name": "Mr. Bing's",
+    "city": "San Francisco",
+    "address": "201 Columbus Avenue"
+  },
+  {
+    "name": "Mr. Mojito JF Bar & Grill",
+    "city": "San Jose",
+    "address": "5925 Almaden Expressway"
+  },
+  {
+    "name": "Mr. Tipple's Recording Studio",
+    "city": "San Francisco",
+    "address": "39 Fell Street"
+  },
+  {
+    "name": "Mua Lounge",
+    "city": null,
+    "address": "2442 Webster Street"
+  },
+  {
+    "name": "Mucky Duck",
+    "city": "San Francisco",
+    "address": "1315 9th Avenue"
+  },
+  {
+    "name": "Murales Wine Bar & Tapas",
+    "city": null,
+    "address": "2199 Mission Street"
+  },
+  {
+    "name": "Murdoch's Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Murio's Trophy Room",
+    "city": null,
+    "address": "1811 Haight Street"
+  },
+  {
+    "name": "Murphy's",
+    "city": null,
+    "address": "Kearny Street"
+  },
+  {
+    "name": "Murphy's Irish Pub",
+    "city": "Sonoma",
+    "address": "464 1st Street East"
+  },
+  {
+    "name": "MYKA Cellars",
+    "city": null,
+    "address": "18, Suite C Hangar Way"
+  },
+  {
+    "name": "Napa Palisades Saloon",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Napa Point Brewing",
+    "city": "Napa",
+    "address": "388 Devlin Road"
+  },
+  {
+    "name": "Napa Valley Distillery",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Napa Yard",
+    "city": null,
+    "address": "585 1st Street"
+  },
+  {
+    "name": "Nari",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Narrative Fermentations",
+    "city": "San Jose",
+    "address": "101 East Alma Avenue"
+  },
+  {
+    "name": "Natoma Cabana",
+    "city": "San Francisco",
+    "address": "90 Natoma Street"
+  },
+  {
+    "name": "Neck of the Woods",
+    "city": null,
+    "address": "406 Clement Street"
+  },
+  {
+    "name": "Nectar Social Club",
+    "city": null,
+    "address": "408 15th Street"
+  },
+  {
+    "name": "Nectar Wine Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Neighborhood Sports Bar And Kitchen",
+    "city": "Pleasanton",
+    "address": "234 Main Street"
+  },
+  {
+    "name": "NetApp Celly Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "New Eritrean Restaurant & Bar",
+    "city": "San Francisco",
+    "address": "907 Irving Street"
+  },
+  {
+    "name": "Newell's Cocktail Time",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Next door",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Nickie's Bar and Restaurant",
+    "city": null,
+    "address": "466 Haight Street"
+  },
+  {
+    "name": "Night Heron",
+    "city": "Oakland",
+    "address": "1780 Telegraph Avenue"
+  },
+  {
+    "name": "Nighthawk",
+    "city": "Redwood City",
+    "address": "2033 Broadway Street"
+  },
+  {
+    "name": "Nightingale",
+    "city": "San Francisco",
+    "address": "239 Kearny Street"
+  },
+  {
+    "name": "Niwa Sushi Bar",
+    "city": "Orinda",
+    "address": "Camino Sobrante"
+  },
+  {
+    "name": "No Name Bar",
+    "city": "Sausalito",
+    "address": "757 Bridgeway"
+  },
+  {
+    "name": "Noah's Bar & Bistro",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Noc Noc",
+    "city": null,
+    "address": "557 Haight Street"
+  },
+  {
+    "name": "Nojo Ramen Tavern",
+    "city": "San Francisco",
+    "address": "231 Franklin Street"
+  },
+  {
+    "name": "Nomikai",
+    "city": "San Jose",
+    "address": "48 South 1st Street"
+  },
+  {
+    "name": "Noodle Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Noren Izakaya",
+    "city": "San Francisco",
+    "address": "1701 Powell Street"
+  },
+  {
+    "name": "Norman Rose Tavern",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Normandy House Lounge",
+    "city": "Santa Clara",
+    "address": "30 Washington Street"
+  },
+  {
+    "name": "NORTH - Seasonal Vietnamese Cuisine and Bar",
+    "city": null,
+    "address": "133 North Santa Cruz Avenue"
+  },
+  {
+    "name": "North Bar and Grill",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Northstar Cafe",
+    "city": "San Francisco",
+    "address": "1560 Powell Street"
+  },
+  {
+    "name": "Novela",
+    "city": "San Francisco",
+    "address": "662 Mission Street"
+  },
+  {
+    "name": "Nu-Rays",
+    "city": "Martinez",
+    "address": "709 Ferry Street"
+  },
+  {
+    "name": "Nueve Mexican Bar and Grill",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "O’Flaherty’s",
+    "city": "San Jose",
+    "address": "25 North San Pedro Street"
+  },
+  {
+    "name": "O'Keeffe's",
+    "city": "San Francisco",
+    "address": "598 5th Avenue"
+  },
+  {
+    "name": "O'Malley's Sports Pub",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "O'Neill's Irish Pub",
+    "city": null,
+    "address": "South B Street"
+  },
+  {
+    "name": "O'Reillys Pub",
+    "city": null,
+    "address": "1840 Haight Street"
+  },
+  {
+    "name": "O'Sullivans",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Oak and Ale",
+    "city": "Santa Cruz",
+    "address": "3102 Portola Drive"
+  },
+  {
+    "name": "OAK Clubhouse",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Oak Door",
+    "city": "Livermore",
+    "address": "3062 Pacific Avenue"
+  },
+  {
+    "name": "Oakland Athletic Club",
+    "city": "Oakland",
+    "address": "59 Grand Avenue"
+  },
+  {
+    "name": "Oakland Metro Opera House",
+    "city": "Oakland",
+    "address": "522 2nd Street"
+  },
+  {
+    "name": "Oakland United Beerworks",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Oaks Corner Sports Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Oasis",
+    "city": "San Francisco",
+    "address": "298 11th Street"
+  },
+  {
+    "name": "Obscenity Bar & Lounge",
+    "city": "San Francisco",
+    "address": "562 Sutter Street"
+  },
+  {
+    "name": "Ocean Ale House",
+    "city": "San Francisco",
+    "address": "1314 Ocean Avenue"
+  },
+  {
+    "name": "Ocean Bar",
+    "city": "Union City",
+    "address": "30980 Union Landing Boulevard"
+  },
+  {
+    "name": "Ocean Oyster Bar & Grill",
+    "city": null,
+    "address": "2107 Broadway"
+  },
+  {
+    "name": "Odonata Wines",
+    "city": null,
+    "address": "2343 Mission Street"
+  },
+  {
+    "name": "Oeste",
+    "city": "Oakland",
+    "address": "722 Clay Street"
+  },
+  {
+    "name": "ØL Beercafe & Bottleshop",
+    "city": "Walnut Creek",
+    "address": "1560 Giammona Drive"
+  },
+  {
+    "name": "Old Princeton Landing: Public House and Grill",
+    "city": "Half Moon Bay",
+    "address": "460 Capistrano Road"
+  },
+  {
+    "name": "Old Ship Saloon",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Olde Sonoma Public House",
+    "city": "Sonoma",
+    "address": "18615 Sonoma Highway"
+  },
+  {
+    "name": "Omee J Fusion Sushi Bar & Grill",
+    "city": "Santa Clara",
+    "address": "4477 Stevens Creek Boulevard"
+  },
+  {
+    "name": "Omg Club",
+    "city": "San Francisco",
+    "address": "43 6th Street"
+  },
+  {
+    "name": "One Double Oh Seven",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "One Fish Raw Bar",
+    "city": "Campbell",
+    "address": "193 East Campbell Avenue"
+  },
+  {
+    "name": "oneup bar",
+    "city": null,
+    "address": "1232 Noriega Street"
+  },
+  {
+    "name": "OneUP Lounge",
+    "city": "San Francisco",
+    "address": "345 Stockton Street"
+  },
+  {
+    "name": "Opal",
+    "city": null,
+    "address": "251 Castro Street"
+  },
+  {
+    "name": "Ora Wine Bar",
+    "city": null,
+    "address": "1519 Polk Street"
+  },
+  {
+    "name": "Orale Restaurant & Bar",
+    "city": "San Jose",
+    "address": "792 East Julian Street"
+  },
+  {
+    "name": "Orchid Room",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Ordinaire Wine Shop & Wine Bar",
+    "city": "Oakland",
+    "address": "3354 Grand Avenue"
+  },
+  {
+    "name": "Original Gravity Public House",
+    "city": "San Jose",
+    "address": "66 South 1st Street"
+  },
+  {
+    "name": "Original Pattern Brewing Company",
+    "city": "Oakland",
+    "address": "292 4th Street"
+  },
+  {
+    "name": "Osmanthus Dim Sum Lounge",
+    "city": "San Francisco",
+    "address": "504 Broadway"
+  },
+  {
+    "name": "Otherwise Brewing",
+    "city": "San Francisco",
+    "address": "1402 Grant Avenue"
+  },
+  {
+    "name": "Out of the Barrel",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Over The Hill Gang Saloon",
+    "city": null,
+    "address": "3530 Portola Drive"
+  },
+  {
+    "name": "Overtime",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Owl Tree",
+    "city": "San Francisco",
+    "address": "601 Post Street"
+  },
+  {
+    "name": "Oyster Point Yacht Club",
+    "city": null,
+    "address": "911 Oyster Point Boulevard"
+  },
+  {
+    "name": "Pacific Cocktail Haven",
+    "city": "San Francisco",
+    "address": "550 Sutter Street"
+  },
+  {
+    "name": "Paddy Flynn's",
+    "city": "Burlingame",
+    "address": "256 Lorton Avenue"
+  },
+  {
+    "name": "Pagan Idol",
+    "city": "San Francisco",
+    "address": "375 Bush Street"
+  },
+  {
+    "name": "Pagoda",
+    "city": "San Francisco",
+    "address": "1704 Post Street"
+  },
+  {
+    "name": "Pairings Wine Bar & Restaurant",
+    "city": "Pleasanton",
+    "address": "310 Main Street"
+  },
+  {
+    "name": "Palmer's",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Paname",
+    "city": "San Francisco",
+    "address": "523 Broadway"
+  },
+  {
+    "name": "Pandora Karaoke Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Paper Plane",
+    "city": "San Jose",
+    "address": "72 South 1st Street"
+  },
+  {
+    "name": "Paradise Beach Grille",
+    "city": null,
+    "address": "215 Esplanade"
+  },
+  {
+    "name": "Paradise Hookah Lounge",
+    "city": "San Bruno",
+    "address": "591 San Mateo Avenue"
+  },
+  {
+    "name": "Paris 75",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Parish Publick House",
+    "city": "Santa Cruz",
+    "address": "841 Almar Avenue"
+  },
+  {
+    "name": "Parish Publick House Aptos",
+    "city": "Aptos",
+    "address": "8017 Soquel Drive"
+  },
+  {
+    "name": "Park Lane Lounge",
+    "city": "San Jose",
+    "address": "5152 Moorpark Avenue"
+  },
+  {
+    "name": "Park Station",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Parkside Tavern",
+    "city": "San Francisco",
+    "address": "1940 Taraval Street"
+  },
+  {
+    "name": "Parkway Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Parliament",
+    "city": null,
+    "address": "811 Washington Street"
+  },
+  {
+    "name": "Pasha",
+    "city": "San Francisco",
+    "address": "673 Geary Street"
+  },
+  {
+    "name": "Pasta Primavera Restaurant & Bar",
+    "city": null,
+    "address": "34 East 4th Avenue"
+  },
+  {
+    "name": "Patriot House",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Paul and Eddies",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Paulista Brazilian Kitchen & Taproom",
+    "city": null,
+    "address": "4239 Park Boulevard"
+  },
+  {
+    "name": "Peacekeeper",
+    "city": "San Francisco",
+    "address": "925 Bush Street"
+  },
+  {
+    "name": "Peacock Lounge",
+    "city": "San Francisco",
+    "address": "552 Haight Street"
+  },
+  {
+    "name": "Penelope Bar & Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Persona",
+    "city": null,
+    "address": "685 Sutter Street"
+  },
+  {
+    "name": "Philosophers Club",
+    "city": "San Francisco",
+    "address": "824 Ulloa Street"
+  },
+  {
+    "name": "Pied Piper",
+    "city": "San Francisco",
+    "address": "2 New Montgomery Street"
+  },
+  {
+    "name": "Pig in a Pickle",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Pilsner Inn",
+    "city": null,
+    "address": "225 Church Street"
+  },
+  {
+    "name": "Pine Street Sports Bar and Grill",
+    "city": "Livermore",
+    "address": "875 Rincon Avenue"
+  },
+  {
+    "name": "Pink Elephant",
+    "city": "San Francisco",
+    "address": "142 Minna Street"
+  },
+  {
+    "name": "Pinky's Pizza & Pub",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Pint Size Lounge",
+    "city": "San Rafael",
+    "address": "1615 Fourth Street"
+  },
+  {
+    "name": "Pioneer Saloon",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Pisco Bar",
+    "city": null,
+    "address": "14486 Big Basin Way"
+  },
+  {
+    "name": "Pissed Off Pete's",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Pittsburgh's Pub",
+    "city": null,
+    "address": "4207 Judah Street"
+  },
+  {
+    "name": "Poké Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Poke Poke Fish Bar",
+    "city": "Santa Clara",
+    "address": "2362 El Camino Real"
+  },
+  {
+    "name": "Polomoni's",
+    "city": "Livermore",
+    "address": "1843 First Street"
+  },
+  {
+    "name": "Pond Farm Brewing Company",
+    "city": "San Rafael",
+    "address": "1848 Fourth Street"
+  },
+  {
+    "name": "Pops",
+    "city": null,
+    "address": "2800 24th Street"
+  },
+  {
+    "name": "Port O' Call",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Powerhouse",
+    "city": "San Francisco",
+    "address": "1347 Folsom Street"
+  },
+  {
+    "name": "Presidio Yacht Club",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Press Club",
+    "city": null,
+    "address": "20 Yerba Buena Lane"
+  },
+  {
+    "name": "Primo's Pizzeria & Pub",
+    "city": "Danville",
+    "address": "298 Hartz Avenue"
+  },
+  {
+    "name": "Prizefighter",
+    "city": "Emeryville",
+    "address": "6702 Hollis Street"
+  },
+  {
+    "name": "Professional Karaoke",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Promised Land Brewing Company",
+    "city": "Gilroy",
+    "address": "7419 Monterey Street"
+  },
+  {
+    "name": "Propagation",
+    "city": null,
+    "address": "895 Post Street"
+  },
+  {
+    "name": "Providence",
+    "city": "San Francisco",
+    "address": "1351 Polk Street"
+  },
+  {
+    "name": "Public Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Public Works",
+    "city": "San Francisco",
+    "address": "161 Erie Street"
+  },
+  {
+    "name": "Puerto 27 Peruvian Kitchen & Pisco Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Punsch Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Pure Nightclub",
+    "city": "Sunnyvale",
+    "address": "146 South Murphy Avenue"
+  },
+  {
+    "name": "Q's Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "QBar",
+    "city": "San Francisco",
+    "address": "456 Castro Street"
+  },
+  {
+    "name": "Qi Dumpling Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Quarter Note",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Que Rico",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "R & G Lounge",
+    "city": "San Francisco",
+    "address": "631 Kearny Street"
+  },
+  {
+    "name": "R Bar",
+    "city": "San Francisco",
+    "address": "1176 Sutter Street"
+  },
+  {
+    "name": "Rabbit's Foot Meadery",
+    "city": "Sunnyvale",
+    "address": "1246 Birchwood Drive"
+  },
+  {
+    "name": "Radio Habana",
+    "city": null,
+    "address": "1109 Valencia Street"
+  },
+  {
+    "name": "Radius",
+    "city": "San Jose",
+    "address": "43 West San Salvador Street"
+  },
+  {
+    "name": "Raices Mexican Cuisine & Bar",
+    "city": "American Canyon",
+    "address": "100 West American Canyon Road"
+  },
+  {
+    "name": "Railroad Saloon",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Raleigh's Pub",
+    "city": null,
+    "address": "2438 Telegraph Avenue"
+  },
+  {
+    "name": "Ramen Izakaya Goku",
+    "city": "San Francisco",
+    "address": "3232 16th Street"
+  },
+  {
+    "name": "Ramen Izakaya Yu-Gen",
+    "city": "Mountain View",
+    "address": "152 Castro Street"
+  },
+  {
+    "name": "Rancho Sports Bar and Liquor Store",
+    "city": "El Sobrante",
+    "address": "3912 San Pablo Dam Road"
+  },
+  {
+    "name": "Rasoi Restaurant & Lounge",
+    "city": "Burlingame",
+    "address": "1425 Burlingame Avenue"
+  },
+  {
+    "name": "Raven Bar",
+    "city": "San Francisco",
+    "address": "1151 Folsom Street"
+  },
+  {
+    "name": "Rec Room",
+    "city": "San Jose",
+    "address": "1 East San Fernando Street"
+  },
+  {
+    "name": "Red Jack Saloon",
+    "city": "San Francisco",
+    "address": "Bay Street"
+  },
+  {
+    "name": "Red Restaurant and Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Red Room Hookah Lounge",
+    "city": "San Jose",
+    "address": "2902 Almaden Expressway"
+  },
+  {
+    "name": "Red Stag",
+    "city": "San Jose",
+    "address": "1711 West San Carlos Street"
+  },
+  {
+    "name": "Red Tavern",
+    "city": null,
+    "address": "2229 Clement Street"
+  },
+  {
+    "name": "Red's Place",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Redfield",
+    "city": "Oakland",
+    "address": "5817 College Avenue"
+  },
+  {
+    "name": "Redi Room",
+    "city": "San Jose",
+    "address": "4340 Moorpark Avenue"
+  },
+  {
+    "name": "Reef Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Renegades",
+    "city": "San Jose",
+    "address": "501 West Taylor Street"
+  },
+  {
+    "name": "Residual Sugar Wine Bar",
+    "city": null,
+    "address": "2045 Diamond Boulevard"
+  },
+  {
+    "name": "Resolute",
+    "city": "San Francisco",
+    "address": "678 Geary Street"
+  },
+  {
+    "name": "Restaurante-Pupusería Ilobasco",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Retro Junkie",
+    "city": "Walnut Creek",
+    "address": "2112 North Main Street"
+  },
+  {
+    "name": "Revel Kitchen & Bar",
+    "city": null,
+    "address": "331 Hartz Avenue"
+  },
+  {
+    "name": "Richmond Republic Draught House",
+    "city": "San Francisco",
+    "address": "642 Clement Street"
+  },
+  {
+    "name": "Rickhouse",
+    "city": "San Francisco",
+    "address": "246 Kearny Street"
+  },
+  {
+    "name": "Rickshaw Stop",
+    "city": "San Francisco",
+    "address": "155 Fell Street"
+  },
+  {
+    "name": "Ridge Winery",
+    "city": "Cupertino",
+    "address": "17100 Montebello Road"
+  },
+  {
+    "name": "Riggers loft",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Rikki's",
+    "city": "San Francisco",
+    "address": "2223 Market Street"
+  },
+  {
+    "name": "Rio nilo Nite Club",
+    "city": "Gilroy",
+    "address": "7466 Monterey Road"
+  },
+  {
+    "name": "Rite Spot Cafe",
+    "city": null,
+    "address": "2099 Folsom Street"
+  },
+  {
+    "name": "Rob Ben’s Restaurant & Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Roberto's Cantina",
+    "city": "Sunnyvale",
+    "address": "168 South Murphy Avenue"
+  },
+  {
+    "name": "Roccapulco",
+    "city": "San Francisco",
+    "address": "3140 Mission Street"
+  },
+  {
+    "name": "Rocco's Ballpark",
+    "city": "Santa Clara",
+    "address": "2531 Newhall Street"
+  },
+  {
+    "name": "Rock Bar",
+    "city": "San Francisco",
+    "address": "80 29th Street"
+  },
+  {
+    "name": "Rocks Den",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "ROH Bar & Restaurant",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Rooftop Restaurant & Bar",
+    "city": "Walnut Creek",
+    "address": "1500 Mount Diablo Boulevard"
+  },
+  {
+    "name": "Rookies Sports Lodge",
+    "city": "San Jose",
+    "address": "1535 Meridian Avenue"
+  },
+  {
+    "name": "Rookies Sports Lounge",
+    "city": "San Jose",
+    "address": "99 South 1st Street"
+  },
+  {
+    "name": "Room 389",
+    "city": "Oakland",
+    "address": "389 Grand Avenue"
+  },
+  {
+    "name": "Rootstock Wine Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Rootwater Kava Bar",
+    "city": "Oakland",
+    "address": "464 3rd Street"
+  },
+  {
+    "name": "Rose and Crown",
+    "city": null,
+    "address": "547"
+  },
+  {
+    "name": "Roses on Adeline",
+    "city": "Berkeley",
+    "address": "3218 Alcatraz Avenue"
+  },
+  {
+    "name": "Rosie McCann's Irish Pub & Restaurant",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Rotator Tap Room",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Rouge Night Club",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Roundup Saloon",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Route 101",
+    "city": "San Francisco",
+    "address": "1332 Van Ness Avenue"
+  },
+  {
+    "name": "Royal Cuckoo",
+    "city": "San Francisco",
+    "address": "3202 Mission Street"
+  },
+  {
+    "name": "Royal Cuckoo Market",
+    "city": null,
+    "address": "3368;3370 19th Street"
+  },
+  {
+    "name": "Royal Exchange",
+    "city": "San Francisco",
+    "address": "301 Sacramento Street"
+  },
+  {
+    "name": "Ruby Room",
+    "city": "Oakland",
+    "address": "132 14th Street"
+  },
+  {
+    "name": "Ruby Wine",
+    "city": null,
+    "address": "1419 18th Street"
+  },
+  {
+    "name": "Rural Ramen Bar",
+    "city": null,
+    "address": "1059 Powell Street"
+  },
+  {
+    "name": "Rush Inn",
+    "city": null,
+    "address": "113 Knight Street"
+  },
+  {
+    "name": "Rustic House Oyster Bar & Grill",
+    "city": "Los Altos",
+    "address": "295 Main Street"
+  },
+  {
+    "name": "Rustic House Oyster Bar And Grill - San Carlos",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Rustic Tavern",
+    "city": "Lafayette",
+    "address": "3576 Mount Diablo Boulevard"
+  },
+  {
+    "name": "Rustwater Kitchen And Taproom",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Rusty Porthole Bar & Grill",
+    "city": "Bethel Island",
+    "address": "3893 North Willow Road"
+  },
+  {
+    "name": "Ruth’s at Treat Street",
+    "city": null,
+    "address": "3050 24th Street"
+  },
+  {
+    "name": "Rye",
+    "city": "San Francisco",
+    "address": "688 Geary Street"
+  },
+  {
+    "name": "Sable Lounge",
+    "city": "Oakland",
+    "address": "3332 Grand Avenue"
+  },
+  {
+    "name": "Sacrilege Brewery",
+    "city": null,
+    "address": "730 Main Street"
+  },
+  {
+    "name": "Saddle Room Bar",
+    "city": null,
+    "address": "1607 Woodside Road"
+  },
+  {
+    "name": "Saffron Indian Restaurant & Bar",
+    "city": null,
+    "address": "Ste 153 Orinda Theatre Square"
+  },
+  {
+    "name": "Saison Cellar & Wine Bar",
+    "city": "San Francisco",
+    "address": "234 Townsend Street"
+  },
+  {
+    "name": "Saison Cellar & Wine Bar: Member's Cellar",
+    "city": "San Francisco",
+    "address": "228 Townsend Street"
+  },
+  {
+    "name": "Salar Restaurant and Bar",
+    "city": "Sunnyvale",
+    "address": "141 South Murphy Avenue"
+  },
+  {
+    "name": "Salmon Bar",
+    "city": "San Francisco",
+    "address": "3214 16th Street"
+  },
+  {
+    "name": "Salsa's Taco Bar",
+    "city": null,
+    "address": "1710 Brommer Street"
+  },
+  {
+    "name": "Salsa's Taco Bar",
+    "city": "Scotts Valley",
+    "address": "95 Mount Hermon Road"
+  },
+  {
+    "name": "Salty Otter Sports Grill",
+    "city": null,
+    "address": "110 Walnut Avenue"
+  },
+  {
+    "name": "Salvaje",
+    "city": "Palo Alto",
+    "address": "369 Lytton Avenue"
+  },
+  {
+    "name": "Sam's Bar-B-Que",
+    "city": "San Jose",
+    "address": "1110 South Bascom Avenue"
+  },
+  {
+    "name": "Sam's Cable Car Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Sam’s South Beach Bar",
+    "city": null,
+    "address": "4210 North Cabrillo Highway"
+  },
+  {
+    "name": "Sam's Tavern",
+    "city": "San Francisco",
+    "address": "374 Bush Street"
+  },
+  {
+    "name": "San Benito House Restaurant and Saloon",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "San Carlos Billiards",
+    "city": "San Jose",
+    "address": "861 West San Carlos Street"
+  },
+  {
+    "name": "San Francisco Brewing Co.",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "San Francsco Brewing Co",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "San Jose Bar and Grill",
+    "city": "San Jose",
+    "address": "85 South 2nd Street",
+    "aliases": [
+      "SJBG"
+    ]
+  },
+  {
+    "name": "San Jose Beer Union",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "San Pedro Social",
+    "city": "San Jose",
+    "address": "163 West Santa Clara Street"
+  },
+  {
+    "name": "Sandbar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Santa Cruz Aleworks & Deli",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Sante Adairius Rustic Ales",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Sante Adairius Rustic Ales: Oakland Arbor",
+    "city": "Oakland",
+    "address": "460 8th Street"
+  },
+  {
+    "name": "Santorini Wine and Beer Garden",
+    "city": "Saratoga",
+    "address": "20490 A Saratoga Los Gatos Rd"
+  },
+  {
+    "name": "Saratoga SGD Tofu House / Bar•B•Q",
+    "city": "San Jose",
+    "address": "491 Saratoga Avenue"
+  },
+  {
+    "name": "Saru Handroll Bar",
+    "city": "San Francisco",
+    "address": "2206 Polk Street"
+  },
+  {
+    "name": "Savannah-Chanelle Vineyards",
+    "city": "Saratoga",
+    "address": "23600 Big Basin Way"
+  },
+  {
+    "name": "Savoy Tivoli",
+    "city": "San Francisco",
+    "address": "1434 Grant Avenue"
+  },
+  {
+    "name": "Savvy Cellar",
+    "city": "Mountain View",
+    "address": "750 West Evelyn Avenue"
+  },
+  {
+    "name": "Saylor's Restaurant & Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Scarlet Fox Wine Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Scarlet Lounge",
+    "city": null,
+    "address": "408 Clement Street"
+  },
+  {
+    "name": "Scène",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Schmidt's Tobacco & Trading Co.",
+    "city": null,
+    "address": "1492 Solano Avenue"
+  },
+  {
+    "name": "Score",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Scotty's",
+    "city": null,
+    "address": "548 Emerson Street"
+  },
+  {
+    "name": "Seabright Social",
+    "city": "Santa Cruz",
+    "address": "519 Seabright Avenue"
+  },
+  {
+    "name": "Seahorse Brewing Company",
+    "city": "Pacifica",
+    "address": "2017 Palmetto Avenue"
+  },
+  {
+    "name": "Second to None Dive Bar",
+    "city": "El Sobrante",
+    "address": "4156 Appian Way"
+  },
+  {
+    "name": "Secret Bar & Lounge",
+    "city": null,
+    "address": "708 Polk Street"
+  },
+  {
+    "name": "Selva",
+    "city": "San Jose",
+    "address": "44 South Almaden Avenue"
+  },
+  {
+    "name": "Senro Japanese Bar And Grill",
+    "city": "Pleasanton",
+    "address": "30 West Neal Street"
+  },
+  {
+    "name": "Sequoia Sake tasting room",
+    "city": "San Francisco",
+    "address": "50 Apparel Way"
+  },
+  {
+    "name": "Sessions on 15th",
+    "city": null,
+    "address": "406 15th Street"
+  },
+  {
+    "name": "Seven Square Taproom",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Sevens Bar And Grill",
+    "city": "Milpitas",
+    "address": "777 Bellew Drive"
+  },
+  {
+    "name": "Seventh West",
+    "city": "Oakland",
+    "address": "1255 7th Street"
+  },
+  {
+    "name": "SF Citadel",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "SF Eagle",
+    "city": "San Francisco",
+    "address": "398 12th Street"
+  },
+  {
+    "name": "SF Uncork'd",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Shadow Ultra Lounge",
+    "city": "Oakland",
+    "address": "341 13th Street"
+  },
+  {
+    "name": "Shanghai Kelly's",
+    "city": "San Francisco",
+    "address": null
+  },
+  {
+    "name": "Shannon Arms",
+    "city": "San Francisco",
+    "address": "915 Taraval Street"
+  },
+  {
+    "name": "Shanty Shack",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Shapeshifters Brewery",
+    "city": "Oakland",
+    "address": "567 5th Street"
+  },
+  {
+    "name": "Sheba Piano Lounge",
+    "city": "San Francisco",
+    "address": "1419 Fillmore Street"
+  },
+  {
+    "name": "Shoji",
+    "city": "San Francisco",
+    "address": "140 New Montgomery Street"
+  },
+  {
+    "name": "Shotwell's",
+    "city": "San Francisco",
+    "address": "3349 20th Street"
+  },
+  {
+    "name": "Shovels Bar",
+    "city": "San Francisco",
+    "address": "460 Larkin Street"
+  },
+  {
+    "name": "Side Gate Brewery & Beer Garden",
+    "city": "Concord",
+    "address": "1822 Grant Street"
+  },
+  {
+    "name": "Sideline Sports Bar & Grill",
+    "city": "San Jose",
+    "address": "7028 Santa Teresa Boulevard"
+  },
+  {
+    "name": "Sidetrack Bar and Grill",
+    "city": null,
+    "address": "30 West Angela Street"
+  },
+  {
+    "name": "Sigh",
+    "city": "Sonoma",
+    "address": "29 East Napa Street"
+  },
+  {
+    "name": "Silk Road Bar",
+    "city": null,
+    "address": "134 Ellis Street"
+  },
+  {
+    "name": "Silver Spur",
+    "city": "San Francisco",
+    "address": "1914 Irving Street"
+  },
+  {
+    "name": "Sir Froggy's Pub",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Six Eleven Bar & Grill",
+    "city": "Martinez",
+    "address": "611 Escobar Street"
+  },
+  {
+    "name": "Skewers & Brew",
+    "city": "San Jose",
+    "address": "65 South 1st Street"
+  },
+  {
+    "name": "Sky & Vine Rooftop Bar",
+    "city": "Napa",
+    "address": "1230 First Street"
+  },
+  {
+    "name": "Sky Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Skylark",
+    "city": null,
+    "address": "3089 16th Street"
+  },
+  {
+    "name": "Sláinte Pub & Grub",
+    "city": null,
+    "address": "131 Broadway"
+  },
+  {
+    "name": "Slanted Tree Kitchen & Taproom",
+    "city": null,
+    "address": "251 Pittman Road"
+  },
+  {
+    "name": "Slate",
+    "city": null,
+    "address": "2925 16th Street"
+  },
+  {
+    "name": "Slice Poke Bar",
+    "city": "San Jose",
+    "address": "1150 Murphy Avenue"
+  },
+  {
+    "name": "Sliderbar",
+    "city": "Palo Alto",
+    "address": "324 University Avenue"
+  },
+  {
+    "name": "Smitty's",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Smitty’s",
+    "city": null,
+    "address": "214 Caledonia Street"
+  },
+  {
+    "name": "Smuggler's Cove",
+    "city": null,
+    "address": "650 Gough Street"
+  },
+  {
+    "name": "Snail Bar",
+    "city": "Oakland",
+    "address": "4935 Shattuck Avenue"
+  },
+  {
+    "name": "Sobre Mesa",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Sodini's",
+    "city": "Redwood City",
+    "address": "727 El Camino Real"
+  },
+  {
+    "name": "Solaire",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "SOMA Restaurant & Bar",
+    "city": null,
+    "address": "85 5th Street"
+  },
+  {
+    "name": "SomaR Bar",
+    "city": null,
+    "address": "1727 Telegraph Avenue"
+  },
+  {
+    "name": "Sonoma Springs Brewing Co",
+    "city": null,
+    "address": "19449 Riverside Drive"
+  },
+  {
+    "name": "Sool Bar and Lounge",
+    "city": "San Francisco",
+    "address": "323 Grant Avenue"
+  },
+  {
+    "name": "Soon's Cocktail Lounge",
+    "city": "Oakland",
+    "address": "3449 Fruitvale Avenue"
+  },
+  {
+    "name": "Southern Pacific Brewing",
+    "city": "San Francisco",
+    "address": "620 Treat Avenue"
+  },
+  {
+    "name": "Southside Spirit House",
+    "city": "San Francisco",
+    "address": "575 Howard Street"
+  },
+  {
+    "name": "Spats",
+    "city": "Berkeley",
+    "address": "1974 Shattuck Avenue"
+  },
+  {
+    "name": "Speakeasy Ales & Lagers",
+    "city": null,
+    "address": "401 Keith Street"
+  },
+  {
+    "name": "Spearmint Rhinos Gentlemens Club",
+    "city": "San Jose",
+    "address": "81 West Santa Clara Street"
+  },
+  {
+    "name": "Specs Bar",
+    "city": null,
+    "address": "12 Saroyan Place"
+  },
+  {
+    "name": "Spice N Ice Bar & Grill",
+    "city": "Gilroy",
+    "address": "55 5th Street"
+  },
+  {
+    "name": "SPiN SF",
+    "city": "San Francisco",
+    "address": "690 Folsom Street"
+  },
+  {
+    "name": "Splash",
+    "city": "San Jose",
+    "address": "65 Post Street"
+  },
+  {
+    "name": "Sports Page Bar & Grill",
+    "city": "Mountain View",
+    "address": "1431 Plymouth Street"
+  },
+  {
+    "name": "Sportsmen's Lounge",
+    "city": "Santa Clara",
+    "address": "2368 Pruneridge Avenue"
+  },
+  {
+    "name": "Sporty’s Bikini Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "St. Francis Yacht Club",
+    "city": "San Francisco",
+    "address": "700 Marina Boulevard"
+  },
+  {
+    "name": "St. James Gate",
+    "city": "Belmont",
+    "address": "1410 Old County Road"
+  },
+  {
+    "name": "St. John's Bar & Grill",
+    "city": "Sunnyvale",
+    "address": "510 Lawrence Expressway"
+  },
+  {
+    "name": "St. Mary's Pub",
+    "city": null,
+    "address": "3845 Mission Street"
+  },
+  {
+    "name": "St. Regis Hotel Lobby Bar",
+    "city": "San Francisco",
+    "address": "125 3rd Street"
+  },
+  {
+    "name": "St. Stephens Green",
+    "city": null,
+    "address": "223 Castro Street"
+  },
+  {
+    "name": "Stadium",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Stadium Pub",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Stamp Bar & Grill",
+    "city": null,
+    "address": "773 Laurel Street"
+  },
+  {
+    "name": "Standard Deviant",
+    "city": "San Francisco",
+    "address": "280 14th Street"
+  },
+  {
+    "name": "Stanley’s Sports Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Starline",
+    "city": "Oakland",
+    "address": "2236 Martin Luther King Junior Way"
+  },
+  {
+    "name": "Starlite Room",
+    "city": "San Francisco",
+    "address": "450 Powell Street"
+  },
+  {
+    "name": "Steamies",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Steel Bonnet Brewing Company",
+    "city": "Scotts Valley",
+    "address": "20 Victor Square"
+  },
+  {
+    "name": "Stein Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Steiners Tavern",
+    "city": "Sonoma",
+    "address": "465 1st Street West"
+  },
+  {
+    "name": "Steins Beer Garden",
+    "city": "Mountain View",
+    "address": "895 Villa Street"
+  },
+  {
+    "name": "Stevie’s Bar & Grill",
+    "city": "San Jose",
+    "address": "2705 Union Avenue"
+  },
+  {
+    "name": "Stilettos Piano Bar & Restaurant",
+    "city": null,
+    "address": "148 East Prospect Avenue"
+  },
+  {
+    "name": "Stoa Bar",
+    "city": "San Francisco",
+    "address": "701 Haight Street"
+  },
+  {
+    "name": "Stock in Trade",
+    "city": "San Francisco",
+    "address": "2036 Lombard Street"
+  },
+  {
+    "name": "Stone's",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Stonehedge Winery",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Stookey's Club Moderne",
+    "city": "San Francisco",
+    "address": "895 Bush Street"
+  },
+  {
+    "name": "Stratus Restaurant & Bar",
+    "city": "Milpitas",
+    "address": "1100 Cadillac Court"
+  },
+  {
+    "name": "Strike Brewing Co. Campbell Taproom",
+    "city": "Campbell",
+    "address": "469 East Campbell Avenue"
+  },
+  {
+    "name": "StriXe Lounge",
+    "city": "Morgan Hill",
+    "address": "650 Tennant Station Way"
+  },
+  {
+    "name": "Study Hall Rooftop Lounge",
+    "city": "Berkeley",
+    "address": "2121 Center Street"
+  },
+  {
+    "name": "Sugar Lounge",
+    "city": "San Francisco",
+    "address": "377 Hayes Street"
+  },
+  {
+    "name": "Sugo Italian Pasta Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Sullivan's Irish Pub",
+    "city": "Saratoga",
+    "address": "14421 Big Basin Way"
+  },
+  {
+    "name": "Summer Bar & Lounge",
+    "city": null,
+    "address": "526 8th Street"
+  },
+  {
+    "name": "Sunset Cantina",
+    "city": null,
+    "address": "3416 Judah Street"
+  },
+  {
+    "name": "Sunshine Coast: Hookah Fusion Bar",
+    "city": "San Francisco",
+    "address": "1312 Haight Street"
+  },
+  {
+    "name": "Sunshine Saloon",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Surf City Billiards",
+    "city": "Santa Cruz",
+    "address": "931 Pacific Avenue"
+  },
+  {
+    "name": "Surf Lounge",
+    "city": "Pacifica",
+    "address": "77 Bill Drake Way"
+  },
+  {
+    "name": "Suro Sushi Bar & Grill",
+    "city": "San Jose",
+    "address": "1102 Saratoga Avenue"
+  },
+  {
+    "name": "Sushi Bar Hana",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Sutter Pub & Restaurant",
+    "city": "San Francisco",
+    "address": "700 Sutter Street"
+  },
+  {
+    "name": "Sutter Station Tavern",
+    "city": null,
+    "address": "554 Market Street"
+  },
+  {
+    "name": "Sweet Maple",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Swell Bar",
+    "city": "Alameda",
+    "address": "1539 Lincoln Avenue"
+  },
+  {
+    "name": "Swig",
+    "city": null,
+    "address": "561 Geary Street"
+  },
+  {
+    "name": "Swiss Bar & Restaurant",
+    "city": "Sonoma",
+    "address": "18 West Spain Street"
+  },
+  {
+    "name": "Swiss Park",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "T's Fire House Indian Cuisine & Sports Bar",
+    "city": null,
+    "address": "3709"
+  },
+  {
+    "name": "TACONHAMBRE",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Tailgaters",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Tallboy",
+    "city": "Oakland",
+    "address": "4210 Telegraph Avenue"
+  },
+  {
+    "name": "Tam Tavern",
+    "city": "Mill Valley",
+    "address": "152 Shoreline Highway"
+  },
+  {
+    "name": "Tamarack",
+    "city": null,
+    "address": "1501 Harrison Street"
+  },
+  {
+    "name": "Tane Vegan Izakaya",
+    "city": "Berkeley",
+    "address": "1956 Shattuck Avenue"
+  },
+  {
+    "name": "Tane Vegan Izakaya",
+    "city": "Palo Alto",
+    "address": "461 Emerson Street"
+  },
+  {
+    "name": "Tang Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Taniku Izakaya",
+    "city": "San Francisco",
+    "address": "1035 Geary Street"
+  },
+  {
+    "name": "Tanq",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Tap & Pour",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Tap 25",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Tap Haus",
+    "city": null,
+    "address": "2516 Durant Avenue"
+  },
+  {
+    "name": "Tap In Lounge",
+    "city": null,
+    "address": "2012 Shattuck Avenue"
+  },
+  {
+    "name": "Tapas & Taps",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Tapas Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Taplands",
+    "city": "Santa Clara",
+    "address": "1171 Homestead Road"
+  },
+  {
+    "name": "Taproom",
+    "city": "Napa",
+    "address": "2295 Streblow Drive"
+  },
+  {
+    "name": "Tapsilog Cantina",
+    "city": "Santa Clara",
+    "address": "1998 Homestead Road"
+  },
+  {
+    "name": "Teeth",
+    "city": null,
+    "address": "2323 Mission Street"
+  },
+  {
+    "name": "Temescal Brewing",
+    "city": null,
+    "address": "4117 Telegraph Avenue"
+  },
+  {
+    "name": "Tempest",
+    "city": "San Francisco",
+    "address": "431 Natoma Street"
+  },
+  {
+    "name": "Temple Night Club",
+    "city": "San Francisco",
+    "address": "540 Howard Street"
+  },
+  {
+    "name": "Tenma Beer Project",
+    "city": null,
+    "address": "6510 San Pablo Avenue"
+  },
+  {
+    "name": "Teo Restaurant & Bar",
+    "city": "San Francisco",
+    "address": "1111 Mission Street"
+  },
+  {
+    "name": "Tequila Shots Bar & Grill",
+    "city": "Milpitas",
+    "address": "38 North Main Street"
+  },
+  {
+    "name": "Terminus",
+    "city": null,
+    "address": "16 California Street"
+  },
+  {
+    "name": "Tessora's Barra di Vino",
+    "city": "Campbell",
+    "address": "234 East Campbell Avenue"
+  },
+  {
+    "name": "Thai Satay Restaurant and Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "The 2AM Club",
+    "city": "Mill Valley",
+    "address": "380 Miller Avenue"
+  },
+  {
+    "name": "The Alembic",
+    "city": "San Francisco",
+    "address": "1725 Haight Street"
+  },
+  {
+    "name": "The Alley",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "The Annex",
+    "city": "Sonoma",
+    "address": null
+  },
+  {
+    "name": "The Avenue",
+    "city": null,
+    "address": "715 Pacific Avenue"
+  },
+  {
+    "name": "The Avenue",
+    "city": "Oakland",
+    "address": "4822 Telegraph Avenue"
+  },
+  {
+    "name": "The Bar on Dolores",
+    "city": "San Francisco",
+    "address": "1600 Dolores Street"
+  },
+  {
+    "name": "The Barrel Room",
+    "city": null,
+    "address": "415 Sansome Street"
+  },
+  {
+    "name": "The Bears Cocktail",
+    "city": "San Jose",
+    "address": "1872 West San Carlos Street"
+  },
+  {
+    "name": "The Beehive",
+    "city": null,
+    "address": "842 Valencia Street"
+  },
+  {
+    "name": "The Beer Aisle",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "The Benton",
+    "city": "Alameda",
+    "address": "1403 Encinal Avenue"
+  },
+  {
+    "name": "The Bitter End",
+    "city": null,
+    "address": "Clement Street"
+  },
+  {
+    "name": "The Black Cat",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "The Blacksmith",
+    "city": "Redwood City",
+    "address": "2048 Broadway"
+  },
+  {
+    "name": "The Blarney Stone",
+    "city": "San Francisco",
+    "address": "5625 Geary Boulevard"
+  },
+  {
+    "name": "The Blue Room",
+    "city": null,
+    "address": "891 Bush Street"
+  },
+  {
+    "name": "The Boardroom",
+    "city": null,
+    "address": "1609 Powell Street"
+  },
+  {
+    "name": "The Branham Lounge",
+    "city": "San Jose",
+    "address": "1116 Branham Lane"
+  },
+  {
+    "name": "The BreakRoom",
+    "city": "Berkeley",
+    "address": "2021 Shattuck Avenue"
+  },
+  {
+    "name": "The Brick Yard",
+    "city": "San Francisco",
+    "address": "1787 Union Street"
+  },
+  {
+    "name": "The Brixton",
+    "city": "San Francisco",
+    "address": "2140 Union Street"
+  },
+  {
+    "name": "The Broken Rack",
+    "city": "Emeryville",
+    "address": "5768 Peladeau Street"
+  },
+  {
+    "name": "The Buccaneer",
+    "city": "San Francisco",
+    "address": "2155 Polk Street"
+  },
+  {
+    "name": "The Buckhorn Tavern",
+    "city": "San Jose",
+    "address": "3273 Sierra Road"
+  },
+  {
+    "name": "The Budda Nightclub",
+    "city": "San Francisco",
+    "address": "333 11th Street"
+  },
+  {
+    "name": "The Café",
+    "city": "San Francisco",
+    "address": "2369 Market Street"
+  },
+  {
+    "name": "The Caravan Lounge",
+    "city": "San Jose",
+    "address": "98 South Almaden Avenue"
+  },
+  {
+    "name": "The Castaways",
+    "city": null,
+    "address": "3623 Portola Drive"
+  },
+  {
+    "name": "The Cat House",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "The Catalyst",
+    "city": "Santa Cruz",
+    "address": "1011 Pacific Avenue"
+  },
+  {
+    "name": "The Chapel",
+    "city": "San Francisco",
+    "address": "777 Valencia Street"
+  },
+  {
+    "name": "The Chieftain Irish Pub & Restaurant",
+    "city": "San Francisco",
+    "address": "198 5th Street"
+  },
+  {
+    "name": "The Cinch Saloon",
+    "city": null,
+    "address": "1723 Polk Street"
+  },
+  {
+    "name": "The City Club",
+    "city": null,
+    "address": "2919 16th Street"
+  },
+  {
+    "name": "The Club at SFO",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "The Comet Club",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "The Connection",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "The Continental",
+    "city": "San Jose",
+    "address": "349 South 1st Street"
+  },
+  {
+    "name": "The Crafty Fox",
+    "city": "San Francisco",
+    "address": "1700 Mission Street"
+  },
+  {
+    "name": "The Den at the Fox",
+    "city": null,
+    "address": "1807 Telegraph Avenue"
+  },
+  {
+    "name": "The Derby",
+    "city": "San Jose",
+    "address": "399 North 13th Street"
+  },
+  {
+    "name": "The Devil's Acre",
+    "city": "San Francisco",
+    "address": "256 Columbus Avenue"
+  },
+  {
+    "name": "The Dirty Bird Lounge",
+    "city": "Hayward",
+    "address": "926 B Street"
+  },
+  {
+    "name": "The Double Standard",
+    "city": "Oakland",
+    "address": "2424 Telegraph Avenue"
+  },
+  {
+    "name": "The Dubliner",
+    "city": "San Francisco",
+    "address": "328 West Portal Avenue"
+  },
+  {
+    "name": "The Dubliner",
+    "city": "San Francisco",
+    "address": "3838 24th Street"
+  },
+  {
+    "name": "The Edge",
+    "city": null,
+    "address": "4149 18th Street"
+  },
+  {
+    "name": "The Endup",
+    "city": null,
+    "address": "401 6th Street"
+  },
+  {
+    "name": "The European",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "The Factory Bar",
+    "city": "Richmond",
+    "address": "12517 San Pablo Avenue"
+  },
+  {
+    "name": "The Fireside Lounge",
+    "city": "Alameda",
+    "address": "1453 Webster Street"
+  },
+  {
+    "name": "The Florence",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "The Function",
+    "city": "San Francisco",
+    "address": "1414 Market Street"
+  },
+  {
+    "name": "The G",
+    "city": "Milpitas",
+    "address": "134 South Main Street"
+  },
+  {
+    "name": "The Gold Cane",
+    "city": null,
+    "address": "1569 Haight Street"
+  },
+  {
+    "name": "The Grand",
+    "city": null,
+    "address": "520 4th Street"
+  },
+  {
+    "name": "The Grand Tavern",
+    "city": null,
+    "address": "3601 Grand Avenue"
+  },
+  {
+    "name": "The Great Northern",
+    "city": "San Francisco",
+    "address": "119 Utah Street"
+  },
+  {
+    "name": "The Green Heron",
+    "city": null,
+    "address": "1601 Haight Street"
+  },
+  {
+    "name": "The Halfway Club",
+    "city": null,
+    "address": "1166 Geneva Avenue"
+  },
+  {
+    "name": "The Hatch",
+    "city": null,
+    "address": "402 15th Street"
+  },
+  {
+    "name": "The Hearth",
+    "city": null,
+    "address": "4701 Geary Boulevard"
+  },
+  {
+    "name": "The Hill Bar & Grill",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "The Hop Grenade",
+    "city": "Concord",
+    "address": "2151 Salvio Street"
+  },
+  {
+    "name": "The Horseshoe",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "The Hub",
+    "city": null,
+    "address": "2650 Broadway"
+  },
+  {
+    "name": "The Hyde Out",
+    "city": "San Francisco",
+    "address": "1068 Hyde Street"
+  },
+  {
+    "name": "The Interval",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "The Junction Beer Garden",
+    "city": "Mill Valley",
+    "address": "226 Shoreline Highway"
+  },
+  {
+    "name": "The Kezar Pub",
+    "city": "San Francisco",
+    "address": "770 Stanyan Street"
+  },
+  {
+    "name": "The Knockout",
+    "city": "San Francisco",
+    "address": "3223 Mission Street"
+  },
+  {
+    "name": "The Lark Bar",
+    "city": "San Francisco",
+    "address": "685 Market Street"
+  },
+  {
+    "name": "The Laughing Monk",
+    "city": null,
+    "address": "1785 Fulton Street"
+  },
+  {
+    "name": "The Legionnaire Saloon",
+    "city": null,
+    "address": "2272 Telegraph Avenue"
+  },
+  {
+    "name": "The Liberties",
+    "city": "San Francisco",
+    "address": "998 Guerrero Street"
+  },
+  {
+    "name": "The Library",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "The Little Shamrock",
+    "city": "San Francisco",
+    "address": "807 Lincoln Way"
+  },
+  {
+    "name": "The Lodge",
+    "city": null,
+    "address": "3760 Piedmont Avenue"
+  },
+  {
+    "name": "The Loft Wine Bar",
+    "city": "Benicia",
+    "address": "280 1st Street"
+  },
+  {
+    "name": "The Mad Dog in the Fog",
+    "city": null,
+    "address": "1568 Haight Street"
+  },
+  {
+    "name": "The Maple Bar Cafe",
+    "city": "Suisun City",
+    "address": "314 Main Street"
+  },
+  {
+    "name": "The Mayflower",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "The Mix",
+    "city": "San Francisco",
+    "address": "18th Street"
+  },
+  {
+    "name": "The Monk's Kettle",
+    "city": "San Rafael",
+    "address": "655 Del Ganado Road"
+  },
+  {
+    "name": "The Mortimer",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "The Nag's Head",
+    "city": "San Francisco",
+    "address": "5346 Geary Boulevard"
+  },
+  {
+    "name": "The Napper Tandy",
+    "city": "San Francisco",
+    "address": "3200 24th Street"
+  },
+  {
+    "name": "The Nite Cap",
+    "city": "San Francisco",
+    "address": "699 O'Farrell Street"
+  },
+  {
+    "name": "The Oasis",
+    "city": null,
+    "address": "952 East El Camino Real"
+  },
+  {
+    "name": "The Occidental Cigar Club",
+    "city": "San Francisco",
+    "address": "471 Pine Street"
+  },
+  {
+    "name": "The Old Wagon Saloon & Grill",
+    "city": "San Jose",
+    "address": "73 North San Pedro Street"
+  },
+  {
+    "name": "The Orbit Room",
+    "city": "San Francisco",
+    "address": "1900 Market Street"
+  },
+  {
+    "name": "The Outsider",
+    "city": "San Francisco",
+    "address": "894 Geary Street"
+  },
+  {
+    "name": "The Page",
+    "city": "San Francisco",
+    "address": "298 Divisadero Street"
+  },
+  {
+    "name": "The Patio",
+    "city": null,
+    "address": "948 East El Camino Real"
+  },
+  {
+    "name": "The Peaks",
+    "city": null,
+    "address": "1316 Castro Street"
+  },
+  {
+    "name": "The Phone Booth",
+    "city": "San Francisco",
+    "address": "1398 South Van Ness Avenue"
+  },
+  {
+    "name": "The Pig & Whistle",
+    "city": null,
+    "address": "2801 Geary Boulevard"
+  },
+  {
+    "name": "The Place",
+    "city": "San Jose",
+    "address": "1058 South 1st Street"
+  },
+  {
+    "name": "The Plough and the Stars",
+    "city": null,
+    "address": "116 Clement Street"
+  },
+  {
+    "name": "The Preacher's Daughter",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "The PUB@SFSU",
+    "city": "San Francisco",
+    "address": "1650 Holloway Avenue"
+  },
+  {
+    "name": "The Public Izakaya",
+    "city": "San Francisco",
+    "address": "700 Post Street"
+  },
+  {
+    "name": "The Punchdown",
+    "city": "Oakland",
+    "address": "1737 Broadway"
+  },
+  {
+    "name": "The Q Restaurant & Bar",
+    "city": "Napa",
+    "address": "1313 Main Street"
+  },
+  {
+    "name": "The Red Tail",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "The Refuge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "The Regency Ballroom",
+    "city": "San Francisco",
+    "address": "1300 Van Ness Avenue"
+  },
+  {
+    "name": "The Rellik Tavern",
+    "city": "Benicia",
+    "address": "726 1st Street"
+  },
+  {
+    "name": "The Riptide",
+    "city": "San Francisco",
+    "address": "3639 Taraval Street"
+  },
+  {
+    "name": "The Ritz",
+    "city": "San Jose",
+    "address": "400 South 1st Street"
+  },
+  {
+    "name": "The Rockridge Improvement Club",
+    "city": "Oakland",
+    "address": "5515 College Avenue"
+  },
+  {
+    "name": "The Royal Oak",
+    "city": "San Francisco",
+    "address": "Polk Street"
+  },
+  {
+    "name": "The Royale",
+    "city": "San Francisco",
+    "address": "800 Post Street"
+  },
+  {
+    "name": "The Rumpus Room",
+    "city": "San Francisco",
+    "address": "10 6th Street"
+  },
+  {
+    "name": "The Sage & Drifter",
+    "city": "San Francisco",
+    "address": "1368 Irving Street"
+  },
+  {
+    "name": "The Saloon",
+    "city": null,
+    "address": "1232 Grant Avenue"
+  },
+  {
+    "name": "The Sea Star",
+    "city": null,
+    "address": "2289 3rd Street"
+  },
+  {
+    "name": "The Sherwood Cocktails and Lounge",
+    "city": "San Francisco",
+    "address": "179 West Portal Avenue"
+  },
+  {
+    "name": "The Silver Peso",
+    "city": "Larkspur",
+    "address": "450 Magnolia Avenue"
+  },
+  {
+    "name": "The Skewer Bar",
+    "city": "San Jose",
+    "address": "3082 Landess Avenue"
+  },
+  {
+    "name": "The Social Study",
+    "city": "San Francisco",
+    "address": "1795 Geary Boulevard"
+  },
+  {
+    "name": "The Socialite",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "The Standby Club",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "The Starry Plough",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "The Stud",
+    "city": null,
+    "address": "1123 Folsom Street"
+  },
+  {
+    "name": "The Summer Place",
+    "city": "San Francisco",
+    "address": "801 Bush Street"
+  },
+  {
+    "name": "The Sycamore",
+    "city": "San Francisco",
+    "address": "2140 Mission Street"
+  },
+  {
+    "name": "The Syndicate",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "The Telegraph",
+    "city": "Oakland",
+    "address": "2318 Telegraph Avenue"
+  },
+  {
+    "name": "The Temple",
+    "city": null,
+    "address": "52 South 1st Street"
+  },
+  {
+    "name": "The Temple Bar",
+    "city": "San Francisco",
+    "address": "834 Irving Street"
+  },
+  {
+    "name": "The Town Square",
+    "city": "Sonoma",
+    "address": "482 1st Street East"
+  },
+  {
+    "name": "The Treasury",
+    "city": "San Francisco",
+    "address": "200 Bush Street"
+  },
+  {
+    "name": "The Valencia Room",
+    "city": "San Francisco",
+    "address": "647 Valencia Street"
+  },
+  {
+    "name": "The Valley Tavern",
+    "city": "San Francisco",
+    "address": "4054 24th Street"
+  },
+  {
+    "name": "The Vault Garden",
+    "city": "San Francisco",
+    "address": "555 California Street"
+  },
+  {
+    "name": "The Vesper",
+    "city": null,
+    "address": "394 East Campbell Avenue"
+  },
+  {
+    "name": "The View Lounge",
+    "city": "San Francisco",
+    "address": "55 4th Street"
+  },
+  {
+    "name": "The Village Pub",
+    "city": null,
+    "address": "2967 Woodside Road"
+  },
+  {
+    "name": "The Vineyard Table and Tasting Lounge",
+    "city": "Livermore",
+    "address": "5050 Arroyo Road"
+  },
+  {
+    "name": "The Warehouse Cafe",
+    "city": "Port Costa",
+    "address": "5 Canyon Lake Drive"
+  },
+  {
+    "name": "The Wine Room",
+    "city": null,
+    "address": "520 Ramona Street"
+  },
+  {
+    "name": "The Wood Tavern",
+    "city": "Oakland",
+    "address": "6317 College Avenue"
+  },
+  {
+    "name": "The X-Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "The Yakitori Bar",
+    "city": "Fremont",
+    "address": "46260 Warm Springs Blvd"
+  },
+  {
+    "name": "Thee Stork Club",
+    "city": null,
+    "address": "2330 Telegraph Avenue"
+  },
+  {
+    "name": "Theory",
+    "city": null,
+    "address": "1644 Telegraph Avenue"
+  },
+  {
+    "name": "There/There",
+    "city": "Oakland",
+    "address": "468 25th Street"
+  },
+  {
+    "name": "Third Rail",
+    "city": "San Francisco",
+    "address": "628 20th Street"
+  },
+  {
+    "name": "Thoa Café",
+    "city": "San Jose",
+    "address": "999 Story Road"
+  },
+  {
+    "name": "Thompson's Corner Saloon",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Three Sheets Craft Beer Bar",
+    "city": null,
+    "address": "7046 Village Parkway"
+  },
+  {
+    "name": "Three Sisters",
+    "city": "San Jose",
+    "address": "170 West Saint John Street"
+  },
+  {
+    "name": "Thriller Social Club",
+    "city": "San Francisco",
+    "address": "508 4th Street"
+  },
+  {
+    "name": "Tiburon Tavern",
+    "city": "Tiburon",
+    "address": "1651 Tiburon Boulevard"
+  },
+  {
+    "name": "Tikal Bar",
+    "city": null,
+    "address": "3441 Mission Street"
+  },
+  {
+    "name": "Tiki Haven",
+    "city": "San Francisco",
+    "address": "1334 Noriega Street"
+  },
+  {
+    "name": "Tiki Tom",
+    "city": "Walnut Creek",
+    "address": "1535 Olympic Boulevard"
+  },
+  {
+    "name": "TimeOut Tavern",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Tip Top",
+    "city": null,
+    "address": "3776 Mission Street"
+  },
+  {
+    "name": "Tip-Sea",
+    "city": "Berkeley",
+    "address": "2327 Shattuck Avenue"
+  },
+  {
+    "name": "Tipsy Yeti Restaurant & Bar",
+    "city": "Berkeley",
+    "address": "2512 San Pablo Avenue"
+  },
+  {
+    "name": "Toad Hall",
+    "city": null,
+    "address": "4146 18th Street"
+  },
+  {
+    "name": "Todos Cantina + Cocina",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Together Lounge",
+    "city": null,
+    "address": "2490 3rd Street"
+  },
+  {
+    "name": "Tonga Room & Hurricane Bar",
+    "city": "San Francisco",
+    "address": "950 Mason Street"
+  },
+  {
+    "name": "Tonic",
+    "city": "San Francisco",
+    "address": "2360 Polk Street"
+  },
+  {
+    "name": "Tonight Soju Bar",
+    "city": "San Francisco",
+    "address": "733 Taraval Street"
+  },
+  {
+    "name": "Tony Nik's Cafe",
+    "city": "San Francisco",
+    "address": "1534 Stockton Street"
+  },
+  {
+    "name": "Tony P's Park Avenue Bar & Grill",
+    "city": "San Jose",
+    "address": "956 Park Avenue"
+  },
+  {
+    "name": "Tony’s Pool Hall",
+    "city": "San Jose",
+    "address": "583 East Taylor Street"
+  },
+  {
+    "name": "Toot's Tavern",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Top Hatters Kitchen & Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Top of the Mark",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Tope",
+    "city": null,
+    "address": "1326 Grant Avenue"
+  },
+  {
+    "name": "Topper",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Torch Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Toro Sushi & Stone Grill & Bar",
+    "city": "Fremont",
+    "address": "43785 Boscell Road"
+  },
+  {
+    "name": "Toronado",
+    "city": null,
+    "address": "547 Haight Street"
+  },
+  {
+    "name": "Toss Noodle Bar",
+    "city": "Berkeley",
+    "address": "2272 Shattuck Avenue"
+  },
+  {
+    "name": "Totto Ramen & Sushi Bar",
+    "city": "Fairfield",
+    "address": "3334 North Texas Street"
+  },
+  {
+    "name": "Tourist Club",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Tourist Club Oakland",
+    "city": "Oakland",
+    "address": "3115 Butters Drive"
+  },
+  {
+    "name": "Town Bar and Lounge",
+    "city": "Oakland",
+    "address": "2001 Broadway"
+  },
+  {
+    "name": "Town Tavern",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Townhouse Bar & Grill",
+    "city": "Emeryville",
+    "address": "5862 Doyle Street"
+  },
+  {
+    "name": "Trad'r Sam",
+    "city": "San Francisco",
+    "address": "6150 Geary Boulevard"
+  },
+  {
+    "name": "Trailblazer Tavern",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Trials Pub",
+    "city": "San Jose",
+    "address": "265 North 1st Street"
+  },
+  {
+    "name": "Trick Dog",
+    "city": "San Francisco",
+    "address": "3010 20th Street"
+  },
+  {
+    "name": "Triple Rock Brewery",
+    "city": "Berkeley",
+    "address": "1920 Shattuck Avenue"
+  },
+  {
+    "name": "True Brew",
+    "city": "San Jose",
+    "address": "787 The Alameda"
+  },
+  {
+    "name": "True Laurel",
+    "city": null,
+    "address": "753 Alabama Street"
+  },
+  {
+    "name": "Tunnel Top",
+    "city": null,
+    "address": "601 Bush Street"
+  },
+  {
+    "name": "Tupper & Reed",
+    "city": "Berkeley",
+    "address": "2271 Shattuck Avenue"
+  },
+  {
+    "name": "Turf Club",
+    "city": "Hayward",
+    "address": "22519 Main Street"
+  },
+  {
+    "name": "TuTu Lounge",
+    "city": "San Rafael",
+    "address": "1335 Fourth Street"
+  },
+  {
+    "name": "Twelve Bar Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Twenty Five Lusk",
+    "city": null,
+    "address": "25 Lusk Street"
+  },
+  {
+    "name": "Twin Peaks Tavern",
+    "city": "San Francisco",
+    "address": "401 Castro Street"
+  },
+  {
+    "name": "Two Pitchers Brewing Company",
+    "city": "Oakland",
+    "address": "2344 Webster Street"
+  },
+  {
+    "name": "Two Pitchers Brewing Company",
+    "city": "San Francisco",
+    "address": "3821 Noriega Street"
+  },
+  {
+    "name": "U Bar",
+    "city": "San Jose",
+    "address": "39 Post Street"
+  },
+  {
+    "name": "uccello Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Umami Mart",
+    "city": null,
+    "address": "4027 Broadway"
+  },
+  {
+    "name": "Underdogs Cantina",
+    "city": "San Francisco",
+    "address": "128 King Street"
+  },
+  {
+    "name": "Underground SF",
+    "city": null,
+    "address": "424 Haight Street"
+  },
+  {
+    "name": "Union Square Sports Bar",
+    "city": null,
+    "address": "115 Mason Street"
+  },
+  {
+    "name": "United Club",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "United Polaris Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Unwine'd",
+    "city": null,
+    "address": "9 West Portal Avenue"
+  },
+  {
+    "name": "Up & Under 2nd Pitch",
+    "city": "El Sobrante",
+    "address": "5216 Sobrante Avenue"
+  },
+  {
+    "name": "Up and Under",
+    "city": "Point Richmond",
+    "address": "2 West Richmond Avenue"
+  },
+  {
+    "name": "upcider",
+    "city": "San Francisco",
+    "address": "1160 Polk Street"
+  },
+  {
+    "name": "Uproar Brewing Company",
+    "city": "San Jose",
+    "address": "439 South 1st Street"
+  },
+  {
+    "name": "Urban Grill Indian Cuisine and Bar",
+    "city": "Sunnyvale",
+    "address": "1214 Apollo Way"
+  },
+  {
+    "name": "Urban Legend Winery Tasting Room",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Urban Tavern",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Uzumakiya Udon Izakaya",
+    "city": "Cupertino",
+    "address": "10789 South Blaney Avenue"
+  },
+  {
+    "name": "Va de Vi Bistro & Wine Bar",
+    "city": "Walnut Creek",
+    "address": "1511 Mount Diablo Boulevard"
+  },
+  {
+    "name": "Val's Restaurant & Lounge",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Vallartas Taco Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Variety Club Preview Room",
+    "city": "San Francisco",
+    "address": "582 Market Street"
+  },
+  {
+    "name": "Ve Club",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Velvet 48",
+    "city": "Burlingame",
+    "address": "310 Lorton Avenue"
+  },
+  {
+    "name": "Verdi Club",
+    "city": null,
+    "address": "2424 Mariposa Street"
+  },
+  {
+    "name": "Vesuvio",
+    "city": null,
+    "address": "255 Columbus Avenue"
+  },
+  {
+    "name": "Victor's",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Victorian Pub",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Victory Hall & Parlor",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Vida Cantina",
+    "city": "San Francisco",
+    "address": "56 Belden Place"
+  },
+  {
+    "name": "Vieni Vieni",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Villa Del Monte Winery",
+    "city": "Los Gatos",
+    "address": "23076 Summit Road"
+  },
+  {
+    "name": "Villa Roma Cocktail Lounge",
+    "city": "Redwood City",
+    "address": "593 Woodside Road"
+  },
+  {
+    "name": "Vinnie's Bar & Grill",
+    "city": null,
+    "address": "2045 Mount Diablo Street"
+  },
+  {
+    "name": "Vino Volo",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Vinorosso Enoteca",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Vintage Wine Bar",
+    "city": "San Jose",
+    "address": "368 Santana Row"
+  },
+  {
+    "name": "Vinyl Wine Bar & Shop",
+    "city": "Alameda",
+    "address": "2350 Saratoga Street"
+  },
+  {
+    "name": "Viridian",
+    "city": "Oakland",
+    "address": "2216 Broadway"
+  },
+  {
+    "name": "Voyage",
+    "city": "San Anselmo",
+    "address": "500 San Anselmo Avenue"
+  },
+  {
+    "name": "Wally's Corner",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Wargin Wines",
+    "city": null,
+    "address": "18, Suite C Hangar Way"
+  },
+  {
+    "name": "Washington Square Bar & Grill",
+    "city": null,
+    "address": "1707 Powell Street"
+  },
+  {
+    "name": "Waterfront Cafe & Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Watsonville Public House",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Wayfare Tavern",
+    "city": null,
+    "address": "201 Pine Street"
+  },
+  {
+    "name": "Whale City Cafe, Bakery, Bar & Grill",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Whiskey Lane",
+    "city": "Martinez",
+    "address": "629 Ferry Street"
+  },
+  {
+    "name": "White Cap",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "White Horse Inn",
+    "city": null,
+    "address": "6547 Telegraph Avenue"
+  },
+  {
+    "name": "Whitechapel",
+    "city": "San Francisco",
+    "address": "600 Polk Street"
+  },
+  {
+    "name": "Wild Side West",
+    "city": null,
+    "address": "424 Cortland Avenue"
+  },
+  {
+    "name": "Wildhawk",
+    "city": null,
+    "address": "3464 19th Street"
+  },
+  {
+    "name": "Wilfred's Lounge",
+    "city": "Napa",
+    "address": "967 1st Street"
+  },
+  {
+    "name": "Windjammer",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Wine Affairs",
+    "city": "San Jose",
+    "address": "1435 The Alameda"
+  },
+  {
+    "name": "Wine Down",
+    "city": null,
+    "address": "685 Folsom Street"
+  },
+  {
+    "name": "Winery Collective",
+    "city": "San Francisco",
+    "address": "485 Jefferson Street"
+  },
+  {
+    "name": "Winters Tavern",
+    "city": "Pacifica",
+    "address": "1522 Francisco Boulevard"
+  },
+  {
+    "name": "Wipeout bar & grill",
+    "city": null,
+    "address": "Pier 39"
+  },
+  {
+    "name": "Wolfhound Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Wondrous Brewing Company",
+    "city": null,
+    "address": "1306 65th Street"
+  },
+  {
+    "name": "Woodbury",
+    "city": "San Francisco",
+    "address": "685 3rd Street"
+  },
+  {
+    "name": "Wooden Nickle Bar & Grill",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Woodhams Sports Lounge",
+    "city": "Santa Clara",
+    "address": "4475 Stevens Creek Boulevard"
+  },
+  {
+    "name": "Woods Island Club",
+    "city": "San Francisco",
+    "address": "1 Avenue of the Palms"
+  },
+  {
+    "name": "Woods Lowside",
+    "city": "San Francisco",
+    "address": "530 Haight Street"
+  },
+  {
+    "name": "Woods Outbound",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Woods Outbound",
+    "city": "San Francisco",
+    "address": "4045 Judah Street"
+  },
+  {
+    "name": "Woods Polk Station",
+    "city": "San Francisco",
+    "address": "2255 Polk Street"
+  },
+  {
+    "name": "Would You Believe? Cocktails",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Wreck Room",
+    "city": null,
+    "address": "1390 California Street"
+  },
+  {
+    "name": "Wright & Brown Distilling Co. Bar",
+    "city": "Oakland",
+    "address": "2715 Magnolia Street"
+  },
+  {
+    "name": "Y'all Come Back Saloon",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Yan's China Bistro & Bar",
+    "city": null,
+    "address": "2929 North Main Street"
+  },
+  {
+    "name": "Yancy's Saloon",
+    "city": "San Francisco",
+    "address": "734 Irving Street"
+  },
+  {
+    "name": "Ye Olde Watering Hole",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Yerba Buena Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Yeti Sports Bar and Restaurant",
+    "city": "Berkeley",
+    "address": "3290 Adeline Street"
+  },
+  {
+    "name": "Yoshi's Oakland",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Yossie's Cantina",
+    "city": null,
+    "address": "393 7th Street"
+  },
+  {
+    "name": "Young's Kung Fu Action Theatre & Laundry",
+    "city": "San Francisco",
+    "address": "841 Larkin Street"
+  },
+  {
+    "name": "Yuppie Bar",
+    "city": "San Mateo",
+    "address": "709 South B Street"
+  },
+  {
+    "name": "Z Cafe & Bar",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "Zanzi",
+    "city": "Oakland",
+    "address": "19 Grand Avenue"
+  },
+  {
+    "name": "Zeitgeist",
+    "city": "San Francisco",
+    "address": "199 Valencia Street"
+  },
+  {
+    "name": "Zeki's Bar",
+    "city": "San Francisco",
+    "address": "1319 California Street"
+  },
+  {
+    "name": "Zelda's",
+    "city": null,
+    "address": "Esplanade"
+  },
+  {
+    "name": "Zentarou Sushi & Sake Bar",
+    "city": "San Francisco",
+    "address": "1378 9th Avenue"
+  },
+  {
+    "name": "Zephyr Bar and Grill",
+    "city": null,
+    "address": null
+  },
+  {
+    "name": "ZHUZH",
+    "city": null,
+    "address": "1548 California Street"
+  },
+  {
+    "name": "Zinz Wine Bar",
+    "city": "Corte Madera",
+    "address": "207 Corte Madera Avenue"
+  },
+  {
+    "name": "Zombie Village",
+    "city": "San Francisco",
+    "address": "441 Jones Street"
+  }
+]

@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { BlocksController } from './blocks.controller';
+import { BarsController } from './bars/bars.controller';
 import { DbModule } from './db';
 import { DrinksController } from './drinks.controller';
 import { EntriesController } from './entries.controller';
@@ -28,6 +29,7 @@ import { StorageService } from './storage.service';
     FriendshipsController,
     NightOutsController,
     DrinksController,
+    BarsController,
     ReactionsController,
     BlocksController,
     LeaderboardController,
