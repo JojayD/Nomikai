@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { api, json } from "@/lib/api";
 import { createClient } from "@/lib/supabase/client";
-import { compressPhoto, photoForm } from "@/lib/photo";
+import { compressPhoto, photoForm, photoProblem } from "@/lib/photo";
 
 // ApiError carries the SQLSTATE; Supabase auth errors don't.
 function message(e: unknown) {
@@ -28,6 +28,7 @@ export default function AccountPanel(props: {
   const [timezone, setTimezone] = useState(props.timezone);
   const [optIn, setOptIn] = useState(props.leaderboardOptIn);
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [photoError, setPhotoError] = useState<string | null>(null);
   const timezones = useMemo<string[]>(
     () =>
       typeof Intl.supportedValuesOf === "function"
@@ -94,11 +95,13 @@ export default function AccountPanel(props: {
   const busy = save.isPending || deleteAccount.isPending;
   const failure =
     save.error ?? signOut.error ?? deleteAccount.error ?? uploadAvatar.error;
-  const status = failure
-    ? message(failure)
-    : save.isSuccess || uploadAvatar.isSuccess
-      ? "Saved."
-      : null;
+  const status =
+    photoError ??
+    (failure
+      ? message(failure)
+      : save.isSuccess || uploadAvatar.isSuccess
+        ? "Saved."
+        : null);
 
   return (
     <div className="mt-auto px-4 pb-8">
@@ -108,6 +111,7 @@ export default function AccountPanel(props: {
       <form
         onSubmit={(e) => {
           e.preventDefault();
+          setPhotoError(null); // a stale picker message must not mask this save's result
           save.mutate();
         }}
       >
@@ -167,7 +171,14 @@ export default function AccountPanel(props: {
           disabled={uploadAvatar.isPending}
           onChange={(e) => {
             const f = e.target.files?.[0];
-            if (f) uploadAvatar.mutate(f);
+            if (!f) return;
+            const problem = photoProblem(f);
+            setPhotoError(problem);
+            if (problem) {
+              e.target.value = ""; // let the same file be re-picked after a fix
+              return;
+            }
+            uploadAvatar.mutate(f);
           }}
         />
       </div>

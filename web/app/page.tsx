@@ -4,6 +4,7 @@ import { apiServer } from "@/lib/api-server";
 import { createClient } from "@/lib/supabase/server";
 import Header from "./header";
 import Feed from "./feed";
+import Avatar from "./avatar";
 
 export default async function Home(props: PageProps<"/">) {
   // Email-link redirects can land on "/" when the redirect allow-list falls
@@ -17,7 +18,10 @@ export default async function Home(props: PageProps<"/">) {
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const profile = await apiServer<{ username: string } | null>("/me");
+  const profile = await apiServer<{
+    username: string;
+    avatar_src: string | null;
+  } | null>("/me");
   if (!profile) redirect("/onboarding");
 
   return (
@@ -36,8 +40,9 @@ export default async function Home(props: PageProps<"/">) {
             </Link>
             <Link
               href={`/u/${profile.username}`}
-              className="!text-[inherit] no-underline"
+              className="flex items-center gap-1.5 !text-[inherit] no-underline"
             >
+              <Avatar src={profile.avatar_src} username={profile.username} size={5} />
               @{profile.username}
             </Link>
           </nav>

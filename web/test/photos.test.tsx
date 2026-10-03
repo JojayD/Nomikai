@@ -26,7 +26,8 @@ vi.mock("@/lib/api", async (importOriginal) => ({
   ...(await importOriginal<typeof import("@/lib/api")>()),
   api: vi.fn(),
 }));
-vi.mock("@/lib/photo", () => ({
+vi.mock("@/lib/photo", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@/lib/photo")>()),
   compressPhoto: async () => new Blob(["jpeg"]),
   photoForm: () => new FormData(),
 }));
@@ -228,7 +229,7 @@ test("retry after a photo failure persists changes to the drink fields", async (
   fireEvent.click(screen.getByText("Log “Beer” as written"));
   fireEvent.click(screen.getByText(/Add details/));
   fireEvent.change(screen.getByLabelText(/Photo · optional/), {
-    target: { files: [new File(["jpeg"], "drink.jpg")] },
+    target: { files: [new File(["jpeg"], "drink.jpg", { type: "image/jpeg" })] },
   });
   await waitFor(() =>
     expect((screen.getByText("Log it") as HTMLButtonElement).disabled).toBe(
@@ -259,11 +260,26 @@ test("a chosen photo shows as an image, not just its name", async () => {
   fireEvent.click(screen.getByText("Log “Beer” as written"));
   fireEvent.click(screen.getByText(/Add details/));
   fireEvent.change(screen.getByLabelText(/Photo · optional/), {
-    target: { files: [new File(["jpeg"], "drink.jpg")] },
+    target: { files: [new File(["jpeg"], "drink.jpg", { type: "image/jpeg" })] },
   });
   expect(
     (screen.getByAltText("Selected photo") as HTMLImageElement).src,
   ).toBe("blob:preview");
+});
+
+test("a non-image file is refused before it reaches the form", async () => {
+  navigation.edit = "";
+  mount(<LogPage />);
+  fireEvent.change(screen.getByPlaceholderText("Start typing…"), {
+    target: { value: "Beer" },
+  });
+  fireEvent.click(screen.getByText("Log “Beer” as written"));
+  fireEvent.click(screen.getByText(/Add details/));
+  fireEvent.change(screen.getByLabelText(/Photo · optional/), {
+    target: { files: [new File(["x"], "notes.txt", { type: "text/plain" })] },
+  });
+  expect(screen.getByText("Choose an image file.")).toBeDefined();
+  expect(screen.queryByAltText("Selected photo")).toBeNull();
 });
 
 const row = {

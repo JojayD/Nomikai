@@ -5,14 +5,15 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import { api, json } from "@/lib/api";
 import Header from "../header";
+import Avatar from "../avatar";
 
 type FriendshipRow = {
   id: string;
   requester_id: string;
   addressee_id: string;
   status: "pending" | "accepted";
-  requester: { username: string };
-  addressee: { username: string };
+  requester: { username: string; avatar_src: string | null };
+  addressee: { username: string; avatar_src: string | null };
 };
 
 function message(e: unknown) {
@@ -137,6 +138,7 @@ export default function FriendsPage() {
             <div className="kicker mt-6 mb-2">Requests for you</div>
             {incoming.map((r) => (
               <div key={r.id} className="flex items-center gap-2 py-1.5">
+                <Avatar src={r.requester.avatar_src} username={r.requester.username} size={7} />
                 <Link
                   href={`/u/${r.requester.username}`}
                   className="mr-auto font-extrabold !text-[inherit] no-underline"
@@ -167,6 +169,7 @@ export default function FriendsPage() {
             <div className="kicker mt-6 mb-2">Sent</div>
             {outgoing.map((r) => (
               <div key={r.id} className="flex items-center gap-2 py-1.5">
+                <Avatar src={r.addressee.avatar_src} username={r.addressee.username} size={7} />
                 <Link
                   href={`/u/${r.addressee.username}`}
                   className="mr-auto font-extrabold !text-[inherit] no-underline"
@@ -194,6 +197,7 @@ export default function FriendsPage() {
         )}
         {friends.map((r) => (
           <div key={r.id} className="flex items-center gap-2 py-1.5">
+            <Avatar src={other(r).avatar_src} username={other(r).username} size={7} />
             <Link
               href={`/u/${other(r).username}`}
               className="mr-auto font-extrabold !text-[inherit] no-underline"

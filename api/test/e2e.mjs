@@ -342,8 +342,13 @@ try {
   r = await api(a, 'GET', `/entries?user_id=${a.id}`);
   check('cleared photo drops the signed url', r.body?.[0]?.photo_url === null, r.body?.[0]);
 
+  const fakeAvatar = new FormData();
+  fakeAvatar.append('file', new Blob([Buffer.from('avatar-bytes')], { type: 'image/jpeg' }), 'a.jpg');
+  r = await api(a, 'POST', '/me/avatar', fakeAvatar);
+  check('POST /me/avatar rejects non-JPEG bytes → 400', r.status === 400, r);
+
   const avatarForm = new FormData();
-  avatarForm.append('file', new Blob([Buffer.from('avatar-bytes')], { type: 'image/jpeg' }), 'a.jpg');
+  avatarForm.append('file', new Blob([readFileSync(new URL('./fixtures/photo.jpg', import.meta.url))], { type: 'image/jpeg' }), 'a.jpg');
   r = await api(a, 'POST', '/me/avatar', avatarForm);
   check('POST /me/avatar stores under the owner folder', r.body?.avatar_url === `${a.id}/avatar.jpg`, r);
 
@@ -377,6 +382,11 @@ try {
   check('re-friending after unfriend works', r.status === 201 && !!refriendId, r);
   r = await api(b, 'PATCH', `/friendships/${refriendId}`);
   check('B accepts again', r.status === 200, r);
+
+  r = await api(b, 'GET', '/friendships');
+  const refriend = r.body?.find((x) => x.id === refriendId);
+  check('GET /friendships signs the requester avatar', typeof refriend?.requester?.avatar_src === 'string' && refriend.requester.avatar_src.includes('token='), refriend);
+  check('GET /friendships leaves avatar_src null for a user without one', refriend?.addressee?.avatar_src === null, refriend);
 
   r = await api(a, 'POST', '/blocks', { blocked_id: b.id });
   check('POST /blocks', r.status === 201 && r.body.blocked === true, r);

@@ -3,13 +3,11 @@ import {
   Controller,
   Delete,
   ForbiddenException,
-  FileTypeValidator,
   Get,
   Inject,
   Logger,
   NotFoundException,
   Param,
-  ParseFilePipe,
   Patch,
   Post,
   Query,
@@ -18,13 +16,13 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { randomUUID } from 'node:crypto';
-import { FileInterceptor } from '@nestjs/platform-express';
 import { Throttle } from '@nestjs/throttler';
 import { and, desc, eq } from 'drizzle-orm';
 import { AuthGuard, UserId } from './auth.guard';
 import { DB, type Db } from './db';
 import { drinks, entries, nightOuts } from './db/schema';
 import { entryQuery, withSignedUrls } from './entry-rows';
+import { jpegFilePipe, photoFileInterceptor } from './photo-upload';
 import { StorageService } from './storage.service';
 import { assertCanSee } from './visibility';
 
@@ -177,18 +175,11 @@ export class EntriesController {
 
   @Post(':id/photo')
   @Throttle({ default: { limit: 20, ttl: 60_000 } })
-  @UseInterceptors(
-    FileInterceptor('file', { limits: { fileSize: 5 * 1024 * 1024 } }),
-  )
+  @UseInterceptors(photoFileInterceptor())
   async setPhoto(
     @UserId() userId: string,
     @Param('id') id: string,
-    @UploadedFile(
-      new ParseFilePipe({
-        validators: [new FileTypeValidator({ fileType: 'image/jpeg' })],
-      }),
-    )
-    file: Express.Multer.File,
+    @UploadedFile(jpegFilePipe()) file: Express.Multer.File,
   ) {
     await this.assertOwn(userId, id);
     // Never reuse an object name: a delayed deletion must not remove a newer photo.

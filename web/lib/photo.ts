@@ -22,3 +22,14 @@ export function photoForm(blob: Blob): FormData {
   form.append("file", blob, "photo.jpg");
   return form;
 }
+
+// Shared gate for the avatar picker and the log form. The API enforces JPEG
+// and 5 MiB after compression; this catches the obvious mistakes before any
+// decoding work and gives the user a reason instead of a decoder error.
+export const PHOTO_MAX_RAW_BYTES = 20 * 1024 * 1024;
+
+export function photoProblem(file: File): string | null {
+  if (!file.type.startsWith("image/")) return "Choose an image file.";
+  if (file.size > PHOTO_MAX_RAW_BYTES) return "That image is over 20 MB.";
+  return null;
+}

@@ -12,12 +12,12 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
 import { Throttle } from '@nestjs/throttler';
 import { eq, sql } from 'drizzle-orm';
 import { AuthGuard, UserEmail, UserId } from './auth.guard';
 import { DB, type Db } from './db';
 import { entries, profiles } from './db/schema';
+import { jpegFilePipe, photoFileInterceptor } from './photo-upload';
 import { StorageService } from './storage.service';
 import { assertCanSee } from './visibility';
 
@@ -104,10 +104,10 @@ export class ProfilesController {
 
   @Post('me/avatar')
   @Throttle({ default: { limit: 20, ttl: 60_000 } })
-  @UseInterceptors(FileInterceptor('file'))
+  @UseInterceptors(photoFileInterceptor())
   async avatar(
     @UserId() userId: string,
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFile(jpegFilePipe()) file: Express.Multer.File,
   ) {
     // Path is derived, never supplied: an upload can only land in own folder.
     const path = `${userId}/avatar.jpg`;

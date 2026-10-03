@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { api } from "@/lib/api";
+import Avatar from "../avatar";
 
 type BoardRow = {
   id: string;
@@ -67,14 +68,7 @@ export default function Board({ viewerId }: { viewerId: string }) {
               <span className="w-6 text-[17px] font-extrabold tabular-nums">
                 {i + 1}
               </span>
-              {r.avatar_src && (
-                // eslint-disable-next-line @next/next/no-img-element -- signed URL, remote patterns don't apply
-                <img
-                  src={r.avatar_src}
-                  alt=""
-                  className="h-7 w-7 object-cover"
-                />
-              )}
+              <Avatar src={r.avatar_src} username={r.username} size={7} />
               <Link
                 href={`/u/${r.username}`}
                 className="mr-auto text-sm font-extrabold !text-[inherit] no-underline"

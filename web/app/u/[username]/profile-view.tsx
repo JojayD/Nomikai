@@ -5,6 +5,7 @@ import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tansta
 import { api, json } from "@/lib/api";
 import EntryCard, { type EntryRowData } from "../../entry-card";
 import AccountPanel from "../../account-panel";
+import Avatar from "../../avatar";
 
 const PAGE_SIZE = 30;
 
@@ -120,10 +121,7 @@ export default function ProfileView({
     <>
       <div className="px-4 py-5">
         <div className="flex items-center gap-3">
-          {profile.avatar_src && (
-            // eslint-disable-next-line @next/next/no-img-element -- signed URL, remote patterns don't apply
-            <img src={profile.avatar_src} alt="" className="h-14 w-14 object-cover" />
-          )}
+          <Avatar src={profile.avatar_src} username={profile.username} size={14} />
           <div>
             <h2 className="text-[26px] tracking-[-0.03em]">
               @{profile.username}
