@@ -4,6 +4,7 @@
 //
 //   node test/e2e.mjs            # expects `npm run start:dev` on $API
 import 'dotenv/config';
+import { readFileSync } from 'node:fs';
 
 const API = process.env.API ?? 'http://localhost:3001';
 const { SUPABASE_URL, SUPABASE_SECRET_KEY } = process.env;
@@ -167,9 +168,10 @@ try {
   check('GET /entries/history returns own normalized names', r.body?.some((h) => h.normalized_drink_name === 'lager'), r);
 
   const form = new FormData();
-  form.append('file', new Blob([Buffer.from('not-a-real-jpeg')], { type: 'image/jpeg' }), 'p.jpg');
+  form.append('file', new Blob([readFileSync(new URL('./fixtures/photo.jpg', import.meta.url))], { type: 'image/jpeg' }), 'p.jpg');
   r = await api(a, 'POST', `/entries/${entryId}/photo`, form);
-  check('POST /entries/:id/photo stores under the owner folder', r.body?.photo_path === `${a.id}/${entryId}.jpg`, r);
+  const photoPath = r.body?.photo_path;
+  check('POST /entries/:id/photo stores a versioned path under the owner folder', r.status === 201 && photoPath?.startsWith(`${a.id}/${entryId}-`) && photoPath.endsWith('.jpg'), r);
 
   r = await api(a, 'GET', `/entries?user_id=${a.id}`);
   check('GET /entries returns own history', r.body?.length === 1 && r.body[0].id === entryId, r);
@@ -319,7 +321,7 @@ try {
 
   r = await api(a, 'GET', `/entries/${entryId}`);
   check('PATCH switched to a custom drink', r.body?.custom_drink_name === 'Homemade Punch' && r.body.drink_id === null, r);
-  check('PATCH kept the photo', r.body?.photo_path === `${a.id}/${entryId}.jpg`, r.body);
+  check('PATCH kept the photo', r.body?.photo_path === photoPath, r.body);
 
   r = await api(a, 'GET', '/entries/history');
   check('the normalized-name trigger reran on update',
