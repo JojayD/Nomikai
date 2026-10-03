@@ -181,11 +181,23 @@ function LogForm({
   // getUserMedia is still pending — a stream resolving after close/unmount
   // must be stopped, not set.
   const [camStream, setCamStream] = useState<MediaStream | null>(null);
+  const camDialogRef = useRef<HTMLDialogElement | null>(null);
   const camVideoRef = useRef<HTMLVideoElement | null>(null);
   const photoInputRef = useRef<HTMLInputElement | null>(null);
   const camClosed = useRef(false);
   useEffect(() => {
     return () => camStream?.getTracks().forEach((t) => t.stop());
+  }, [camStream]);
+  useEffect(() => {
+    const dialog = camDialogRef.current;
+    if (!camStream || !dialog) return;
+    dialog.showModal();
+    const overflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      dialog.close();
+      document.body.style.overflow = overflow;
+    };
   }, [camStream]);
   useEffect(() => {
     return () => {
@@ -215,6 +227,7 @@ function LogForm({
   function closeCamera() {
     camClosed.current = true;
     setCamStream(null);
+    setCamError(null);
   }
 
   function capturePhoto() {
@@ -670,45 +683,13 @@ function LogForm({
                   setRemovePhoto(false);
                 }}
               />
-              {camStream ? (
-                <>
-                  <video
-                    className="mt-2 w-full"
-                    ref={(el) => {
-                      camVideoRef.current = el;
-                      if (el && el.srcObject !== camStream)
-                        el.srcObject = camStream;
-                    }}
-                    autoPlay
-                    playsInline
-                    muted
-                  />
-                  <div className="flex gap-2">
-                    <button
-                      type="button"
-                      className="btn btn-primary !mt-2 flex-1 !min-h-[42px]"
-                      onClick={capturePhoto}
-                    >
-                      Capture
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn-secondary !mt-2 flex-1 !min-h-[42px]"
-                      onClick={closeCamera}
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </>
-              ) : (
-                <button
-                  type="button"
-                  className="btn btn-secondary !mt-2 btn-block !min-h-[42px]"
-                  onClick={openCamera}
-                >
-                  Take photo
-                </button>
-              )}
+              <button
+                type="button"
+                className="btn btn-secondary !mt-2 btn-block !min-h-[42px]"
+                onClick={openCamera}
+              >
+                Take photo
+              </button>
               {existingPhotoPath && !removePhoto && !photo && (
                 <button
                   type="button"
@@ -751,7 +732,7 @@ function LogForm({
             Delete entry
           </button>
         )}
-        {error && (
+        {error && !camStream && (
           <p
             className="mt-4 text-sm font-semibold"
             style={{ color: "var(--color-accent)" }}
@@ -760,6 +741,51 @@ function LogForm({
           </p>
         )}
       </form>
+      <dialog
+        ref={camDialogRef}
+        aria-labelledby="camera-title"
+        className="fixed inset-0 m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-[430px] overflow-y-auto border border-[var(--color-divider)] bg-[var(--color-bg)] p-4 text-[var(--color-text)] backdrop:bg-black/70"
+        onCancel={(e) => {
+          e.preventDefault();
+          closeCamera();
+        }}
+      >
+        <h2 id="camera-title" className="text-xl">Take photo</h2>
+        {camStream && (
+          <video
+            className="mt-3 max-h-[60dvh] w-full bg-black object-contain"
+            ref={(el) => {
+              camVideoRef.current = el;
+              if (el && el.srcObject !== camStream)
+                el.srcObject = camStream;
+            }}
+            autoPlay
+            playsInline
+            muted
+          />
+        )}
+        {camError && (
+          <p role="alert" className="mt-3 text-sm font-semibold text-[var(--color-accent)]">
+            {camError}
+          </p>
+        )}
+        <div className="mt-3 flex gap-2">
+          <button
+            type="button"
+            className="btn btn-primary flex-1"
+            onClick={capturePhoto}
+          >
+            Capture
+          </button>
+          <button
+            type="button"
+            className="btn btn-secondary flex-1"
+            onClick={closeCamera}
+          >
+            Cancel
+          </button>
+        </div>
+      </dialog>
     </main>
   );
 }
