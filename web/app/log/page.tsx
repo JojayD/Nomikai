@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ApiError, api, json } from "@/lib/api";
 import { normalizeDrinkName } from "@/lib/normalize";
-import { compressPhoto, photoForm } from "@/lib/photo";
+import { compressPhoto, photoForm, photoProblem } from "@/lib/photo";
 import Header from "../header";
 import BarPicker from "./bar-picker";
 import CameraDialog from "./camera-dialog";
@@ -152,6 +152,7 @@ function LogForm({
   const [note, setNote] = useState(entry?.note ?? "");
   const [rec, setRec] = useState<boolean | null>(entry?.recommended ?? null);
   const [photo, setPhoto] = useState<File | null>(null);
+  const [photoError, setPhotoError] = useState<string | null>(null);
   // Preview of the chosen/captured photo; the object URL is released when it changes.
   const photoPreview = useMemo(
     () => (photo ? URL.createObjectURL(photo) : null),
@@ -362,6 +363,7 @@ function LogForm({
     setNewNightLoc("");
     setPhoto(null);
     setCameraOpen(false);
+    setPhotoError(null);
     setSaved(null);
     entryId.current = crypto.randomUUID();
     nightId.current = crypto.randomUUID();
@@ -607,10 +609,26 @@ function LogForm({
                 type="file"
                 accept="image/*"
                 onChange={(e) => {
-                  setPhoto(e.target.files?.[0] ?? null);
+                  const f = e.target.files?.[0] ?? null;
+                  const problem = f ? photoProblem(f) : null;
+                  setPhotoError(problem);
+                  if (problem) {
+                    e.target.value = "";
+                    setPhoto(null);
+                    return;
+                  }
+                  setPhoto(f);
                   setRemovePhoto(false);
                 }}
               />
+              {photoError && (
+                <p
+                  className="mt-1 text-sm font-semibold"
+                  style={{ color: "var(--color-accent)" }}
+                >
+                  {photoError}
+                </p>
+              )}
               <button
                 type="button"
                 className="btn btn-secondary !mt-2 btn-block !min-h-[42px]"
@@ -690,6 +708,7 @@ function LogForm({
           onClose={() => setCameraOpen(false)}
           onPhoto={(file) => {
             setPhoto(file);
+            setPhotoError(null);
             setRemovePhoto(false);
             if (photoInputRef.current) photoInputRef.current.value = "";
           }}
