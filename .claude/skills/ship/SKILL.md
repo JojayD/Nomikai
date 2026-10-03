@@ -24,7 +24,7 @@ The rule this flow exists for: **`dev` is never merged into `main`.** `dev` is t
 
 4. **Codex check** of the branch against main:
    ```bash
-   node "$(ls -d ~/.claude/plugins/cache/openai-codex/codex/*/ | tail -1)scripts/codex-companion.mjs" review --wait --base origin/main
+   node ~/.claude/plugins/cache/openai-codex/codex/*/scripts/codex-companion.mjs review --wait --base origin/main
    ```
    Real finding → fix on the feature branch, push, repeat step 3 for the fix. Report what Codex said and what you did about it.
 
