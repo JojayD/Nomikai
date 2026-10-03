@@ -30,6 +30,7 @@ The rule this flow exists for: **`dev` is never merged into `main`.** `dev` is t
    ```bash
    node ~/.claude/plugins/cache/openai-codex/codex/*/scripts/codex-companion.mjs review --wait --base origin/main
    ```
+   The glob assumes one cached plugin version. If node reports an unknown command, delete the older `~/.claude/plugins/cache/openai-codex/codex/<version>` directory.
    Real finding → fix on the feature branch, push, repeat step 3 for the fix. Report what Codex said and what you did about it.
 
 5. **STOP for the user's browser test.** Tell them staging has the change and what to click through. Do not open the main PR until they say go. If nothing visible changed, say so and still ask for the go-ahead.
