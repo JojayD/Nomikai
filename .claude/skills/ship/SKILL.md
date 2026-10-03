@@ -1,43 +1,53 @@
 ---
 name: ship
-description: Ship the current change through Nomikai's flow — branch off main, PR into dev to test, then PR the same branch into main and merge once confident. Use only when the user types /ship.
-disable-model-invocation: true
+description: Use when the user asks for any code change in Nomikai, before creating a branch, committing, opening a PR, or merging — and whenever the user types /ship.
 ---
 
-# Ship a change: main → feature branch → dev (test) → main
+# Ship a change: main → feature branch → dev → Codex → user approval → main
 
 Ship: $ARGUMENTS (if empty, ship the uncommitted changes / current feature branch).
 
-The rule this flow exists for: **`dev` is never merged into `main`.** `dev` is a testing branch; the feature branch is what goes into `main`. `main` deploys to production on Render.
+The rule this flow exists for: **`dev` is never merged into `main`.** `dev` is the staging branch (Render redeploys it); the feature branch is what goes into `main`, which deploys production. The user personally approves every merge into `main`.
 
 ## Steps
 
-1. **Local checks** for whichever side changed (CI runs the same):
-   - `web/`: `npm run lint`, `npx tsc --noEmit`
+1. **Branch off main**, never off dev, before the first edit:
+   `git fetch origin && git checkout -b <fix|feat|chore>/<slug> origin/main --no-track`
+   If already on a feature branch cut from main, keep it.
+
+2. **Local checks** for whichever side changed (CI runs the same):
+   - `web/`: `npm run lint`, `npx tsc --noEmit`, `npm test`
    - `api/`: `npm run lint`, `npm run test`
-   - UI change: run the app and exercise the changed screen in Claude in Chrome (the user's preference). Ask before a step with side effects, e.g. submitting the login form sends a real email.
 
-2. **Branch off main**, never off dev:
-   `git fetch origin && git checkout -b <fix|feat>/<slug> origin/main --no-track`
-   (uncommitted changes carry over). Commit. If already on a feature branch that was cut from main, keep it.
+3. **PR into dev**: commit, push, `gh pr create --base dev` (not `--draft`; drafts can't be merged).
+   `gh pr checks <n> --watch --fail-fast`, then `gh pr merge <n> --merge`. Keep the branch.
 
-3. **PR into dev**: push, `gh pr create --base dev`. When CI (`web`, `api`) is green, `gh pr merge <n> --merge`. Do not delete the branch.
+4. **Codex check** of the branch against main:
+   ```bash
+   node ~/.claude/plugins/cache/openai-codex/codex/*/scripts/codex-companion.mjs review --wait --base origin/main
+   ```
+   Real finding → fix on the feature branch, push, repeat step 3 for the fix. Report what Codex said and what you did about it.
 
-4. **Test in dev**: `git fetch origin`. If `git diff origin/dev <branch>` is empty, the checks from step 1 already cover dev. Otherwise dev holds other work too — run the app from `origin/dev` and re-check the change there.
+5. **STOP for the user's browser test.** Tell them staging has the change and what to click through. Do not open the main PR until they say go. If nothing visible changed, say so and still ask for the go-ahead.
 
-5. **PR the same feature branch into main**: `gh pr create --base main`. When CI is green and step 4 passed, `gh pr merge <n> --merge`.
+6. **On approval, PR the same feature branch into main**: `gh pr create --base main`, CI green, `gh pr merge <n> --merge`.
 
-6. **Wrap up**: `git checkout main && git pull`. Report both PR URLs, what was tested, and anything that was not.
+7. **Wrap up**: report both PR URLs, what Codex found, what was tested, and anything that was not.
 
-## Stop and ask instead of merging into main when
+## Conflicts
 
-- A check or CI job fails and the fix is not obvious (otherwise fix on the feature branch and push — both PRs pick it up).
-- Something in the change could not be tested.
+The PR into dev conflicts when another branch merged into dev touched the same files.
+- Fix is already on `main`: `git merge origin/main` into the feature branch, resolve, push.
+- Fix is only on `dev` (its main PR not merged yet): merge *that feature branch* into yours, never `dev`.
+
+## Stop and ask instead of continuing when
+
+- A check or CI job fails and the fix is not obvious.
 - The change needs a manual step: a Supabase migration (`supabase db push`), a new Render env var, or a Supabase dashboard setting.
-- The PR into dev has merge conflicts. Do **not** merge `dev` into the feature branch to resolve them — that would carry `dev` into `main`. Say what conflicts and ask.
 
 ## Don'ts
 
 - No direct pushes to `dev` or `main`; everything goes through PRs.
-- No "promote dev" PR (`dev` → `main`).
+- No "promote dev" PR (`dev` → `main`), and never `git merge dev` into a feature branch.
 - No squash or rebase merges; the repo uses merge commits.
+- No main PR before the user's explicit approval.
