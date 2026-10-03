@@ -13,3 +13,7 @@ HTMLDialogElement.prototype.showModal = function () {
 HTMLDialogElement.prototype.close = function () {
   this.removeAttribute("open");
 };
+
+// jsdom has no object URLs; the log form previews a chosen photo through one.
+URL.createObjectURL = () => "blob:preview";
+URL.revokeObjectURL = () => {};
