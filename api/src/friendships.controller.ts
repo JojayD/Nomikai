@@ -17,6 +17,7 @@ import { AuthGuard, UserId } from './auth.guard';
 import { isBlockedPair } from './blocks.controller';
 import { DB, type Db } from './db';
 import { friendships, profiles } from './db/schema';
+import { StorageService } from './storage.service';
 
 const requester = aliasedTable(profiles, 'requester');
 const addressee = aliasedTable(profiles, 'addressee');
@@ -24,7 +25,10 @@ const addressee = aliasedTable(profiles, 'addressee');
 @Controller('friendships')
 @UseGuards(AuthGuard)
 export class FriendshipsController {
-  constructor(@Inject(DB) private readonly db: Db) {}
+  constructor(
+    @Inject(DB) private readonly db: Db,
+    private readonly storage: StorageService,
+  ) {}
 
   private participant(userId: string) {
     return or(
@@ -33,22 +37,45 @@ export class FriendshipsController {
     );
   }
 
+  /** Both sides carry a signed avatar so the friends page renders like every other user list. */
   @Get()
-  list(@UserId() userId: string) {
-    return this.db
+  async list(@UserId() userId: string) {
+    const rows = await this.db
       .select({
         id: friendships.id,
         requester_id: friendships.requesterId,
         addressee_id: friendships.addresseeId,
         status: friendships.status,
-        requester: { username: requester.username },
-        addressee: { username: addressee.username },
+        requester: {
+          username: requester.username,
+          avatar_url: requester.avatarUrl,
+        },
+        addressee: {
+          username: addressee.username,
+          avatar_url: addressee.avatarUrl,
+        },
       })
       .from(friendships)
       .innerJoin(requester, eq(requester.id, friendships.requesterId))
       .innerJoin(addressee, eq(addressee.id, friendships.addresseeId))
       .where(this.participant(userId))
       .orderBy(desc(friendships.createdAt));
+    const signed = await this.storage.sign(
+      rows.flatMap((r) => [r.requester.avatar_url, r.addressee.avatar_url]),
+    );
+    const src = (path: string | null) =>
+      path ? (signed.get(path) ?? null) : null;
+    return rows.map((r) => ({
+      ...r,
+      requester: {
+        username: r.requester.username,
+        avatar_src: src(r.requester.avatar_url),
+      },
+      addressee: {
+        username: r.addressee.username,
+        avatar_src: src(r.addressee.avatar_url),
+      },
+    }));
   }
 
   /** The one row for this pair, in either direction; null when there is none. */
