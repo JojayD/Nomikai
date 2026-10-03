@@ -12,9 +12,10 @@ export default function LoginPage() {
   const [mode, setMode] = useState<Mode>("email");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [code, setCode] = useState("");
 
   const goHome = () => {
-    router.push("/");
+    router.replace("/");
     router.refresh();
   };
 
@@ -24,12 +25,29 @@ export default function LoginPage() {
         email,
         options: {
           shouldCreateUser: true,
-          emailRedirectTo: `${location.origin}/auth/confirm`,
         },
       });
       if (error) throw error;
     },
-    onSuccess: () => setMode("sent"),
+    onSuccess: () => {
+      setCode("");
+      setMode("sent");
+    },
+  });
+
+  const verifyCode = useMutation({
+    mutationFn: async () => {
+      if (!/^[0-9]{6}$/.test(code)) {
+        throw new Error("Enter the 6-digit code from your email.");
+      }
+      const { error } = await createClient().auth.verifyOtp({
+        email,
+        token: code,
+        type: "email",
+      });
+      if (error) throw error;
+    },
+    onSuccess: goHome,
   });
 
   const signInWithPassword = useMutation({
@@ -48,7 +66,6 @@ export default function LoginPage() {
       const { data, error } = await createClient().auth.signUp({
         email,
         password,
-        options: { emailRedirectTo: `${location.origin}/auth/confirm` },
       });
       if (error) throw error;
       return data;
@@ -56,13 +73,14 @@ export default function LoginPage() {
     onSuccess: (data) => {
       // A session comes back immediately when email confirmation is off.
       if (data.session) return goHome();
+      setCode("");
       setMode("sent");
     },
   });
 
-  // One error line serves all three paths. Retrying clears that mutation's own
-  // error; switching paths has to clear the other two.
-  const all = [sendCode, signInWithPassword, createAccount];
+  // One error line serves all auth paths. Retrying clears that mutation's own
+  // error; switching paths has to clear the others.
+  const all = [sendCode, verifyCode, signInWithPassword, createAccount];
   const busy = all.some((m) => m.isPending);
   const error = all.find((m) => m.error)?.error;
   const resetErrors = () => all.forEach((m) => m.reset());
@@ -84,14 +102,59 @@ export default function LoginPage() {
         {mode === "sent" ? (
           <>
             <p className="text-sm opacity-80">
-              We emailed <strong>{email}</strong> a link. Click it to
-              continue.
+              Enter the 6-digit code we emailed to <strong>{email}</strong>.
+            </p>
+            <form
+              className="mt-4"
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (busy) return;
+                resetErrors();
+                verifyCode.mutate();
+              }}
+            >
+              <div className="field">
+                <label htmlFor="code">6-digit code</label>
+                <input
+                  id="code"
+                  className="input"
+                  type="text"
+                  inputMode="numeric"
+                  autoComplete="one-time-code"
+                  pattern="[0-9]{6}"
+                  maxLength={6}
+                  value={code}
+                  onChange={(e) => setCode(e.target.value.replace(/[^0-9]/g, "").slice(0, 6))}
+                  disabled={busy}
+                  autoFocus
+                  required
+                />
+              </div>
+              <button className="btn btn-primary btn-block" disabled={busy || code.length !== 6}>
+                {verifyCode.isPending ? "Verifying…" : "Verify code"}
+              </button>
+            </form>
+            <button
+              type="button"
+              className="btn btn-secondary btn-block"
+              disabled={busy}
+              onClick={() => {
+                resetErrors();
+                sendCode.mutate();
+              }}
+            >
+              {sendCode.isPending ? "Sending…" : "Resend code"}
+            </button>
+            <p className="mt-2 text-xs opacity-60">
+              You may need to wait a minute before requesting another code.
             </p>
             <button
               type="button"
               className="btn btn-ghost mt-3 text-sm"
+              disabled={busy}
               onClick={() => {
                 resetErrors();
+                setCode("");
                 setMode("email");
               }}
             >
@@ -102,6 +165,8 @@ export default function LoginPage() {
           <form
             onSubmit={(e) => {
               e.preventDefault();
+              if (busy) return;
+              resetErrors();
               if (mode === "email") sendCode.mutate();
               else signInWithPassword.mutate();
             }}
@@ -114,6 +179,7 @@ export default function LoginPage() {
                 type="email"
                 autoComplete="email"
                 value={email}
+                disabled={busy}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
@@ -128,6 +194,7 @@ export default function LoginPage() {
                   autoComplete="current-password"
                   minLength={8}
                   value={password}
+                  disabled={busy}
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
@@ -137,11 +204,12 @@ export default function LoginPage() {
             {mode === "email" ? (
               <>
                 <button className="btn btn-primary btn-block" disabled={busy}>
-                  Email me a link
+                  {sendCode.isPending ? "Sending…" : "Email me a code"}
                 </button>
                 <button
                   type="button"
                   className="btn btn-secondary btn-block"
+                  disabled={busy}
                   onClick={() => {
                     resetErrors();
                     setMode("password");
@@ -159,19 +227,23 @@ export default function LoginPage() {
                   type="button"
                   className="btn btn-secondary btn-block"
                   disabled={busy}
-                  onClick={() => createAccount.mutate()}
+                  onClick={() => {
+                    resetErrors();
+                    createAccount.mutate();
+                  }}
                 >
                   Create account with this password
                 </button>
                 <button
                   type="button"
                   className="btn btn-ghost mt-3 text-sm"
+                  disabled={busy}
                   onClick={() => {
                     resetErrors();
                     setMode("email");
                   }}
                 >
-                  Email me a link instead
+                  Email me a code instead
                 </button>
               </>
             )}
@@ -179,7 +251,7 @@ export default function LoginPage() {
         )}
 
         {error && (
-          <p className="mt-4 text-sm font-semibold" style={{ color: "var(--color-accent)" }}>
+          <p role="alert" className="mt-4 text-sm font-semibold" style={{ color: "var(--color-accent)" }}>
             {error.message}
           </p>
         )}

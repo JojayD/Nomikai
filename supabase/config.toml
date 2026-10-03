@@ -206,11 +206,11 @@ enable_signup = true
 # addresses. If disabled, only the new email is required to confirm.
 double_confirm_changes = true
 # If enabled, users need to confirm their email address before signing in.
-enable_confirmations = false
+enable_confirmations = true
 # If enabled, users will need to reauthenticate or have logged in recently to change their password.
 secure_password_change = false
 # Controls the minimum amount of time that must pass before sending another signup confirmation or password reset email.
-max_frequency = "1s"
+max_frequency = "60s"
 # Number of characters used in the email OTP.
 otp_length = 6
 # Number of seconds before the email OTP expires (defaults to 1 hour).
@@ -234,15 +234,15 @@ sender_name = "Nomikai"
 # content_path = "./supabase/templates/invite.html"
 
 # Code-based auth: both sign-in and signup emails carry the 6-digit OTP.
-# NOTE: hosted rejects custom templates unless custom SMTP is enabled —
-# re-enable these together with [auth.email.smtp] or config push fails.
-# [auth.email.template.magic_link]
-# subject = "Your Nomikai code"
-# content_path = "./supabase/templates/otp.html"
+# Hosted templates must also be updated in the dashboard (see README.md).
+# The hosted default email provider may require custom SMTP for these templates.
+[auth.email.template.magic_link]
+subject = "Your Nomikai code"
+content_path = "./supabase/templates/otp.html"
 
-# [auth.email.template.confirmation]
-# subject = "Confirm your Nomikai account"
-# content_path = "./supabase/templates/otp.html"
+[auth.email.template.confirmation]
+subject = "Your Nomikai code"
+content_path = "./supabase/templates/otp.html"
 
 # Uncomment to customize notification email template
 # [auth.email.notification.password_changed]
