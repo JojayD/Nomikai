@@ -8,6 +8,7 @@ import { ApiError, api, json } from "@/lib/api";
 import { normalizeDrinkName } from "@/lib/normalize";
 import { compressPhoto, photoForm } from "@/lib/photo";
 import Header from "../header";
+import BarPicker from "./bar-picker";
 
 type Drink = {
   id: number;
@@ -579,15 +580,7 @@ function LogForm({
                 required
               />
             </div>
-            <div className="field mt-3">
-              <label htmlFor="location">Where · optional</label>
-              <input
-                id="location"
-                className="input"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-              />
-            </div>
+            <BarPicker value={location} onChange={setLocation} />
             <div className="field mt-3">
               <label htmlFor="note">
                 Note · optional · {note.length}/140
