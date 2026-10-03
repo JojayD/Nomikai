@@ -9,6 +9,10 @@ Ship: $ARGUMENTS (if empty, ship the uncommitted changes / current feature branc
 
 The rule this flow exists for: **`dev` is never merged into `main`.** `dev` is the staging branch (Render redeploys it); the feature branch is what goes into `main`, which deploys production. The user personally approves every merge into `main`.
 
+## Adjusting the flow
+
+`$ARGUMENTS` and anything the user says mid-flow override the steps below: stop after dev, skip or add a check (`npm run test:e2e`, a Playwright click-through), skip Codex, ship only part of the working tree, reuse an existing PR. Do what they asked and name the steps that changed. Only the two rules above never change.
+
 ## Steps
 
 1. **Branch off main**, never off dev, before the first edit:
