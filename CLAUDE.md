@@ -21,6 +21,7 @@ Nomikai — a drink-counting app with leaderboards and different drinks to try. 
 
 ## Commands
 
+- Shipping: every code change goes through the `ship` skill (`.claude/skills/ship/SKILL.md`, also `/ship`). Read it before branching, committing, or opening a PR.
 - `web/`: `npm run dev` (Turbopack), `npm run build`, `npm run lint`
 - `api/`: `npm run start:dev`, `npm run build`, `npm run test`, `npm run test:e2e`
   (`test:e2e` drives every endpoint against the linked Supabase project with two throwaway users, and deletes them afterwards — it needs the API running)
