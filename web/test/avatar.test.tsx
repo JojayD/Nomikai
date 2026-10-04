@@ -6,11 +6,13 @@ import AccountPanel from "@/app/account-panel";
 import { api } from "@/lib/api";
 import { photoProblem } from "@/lib/photo";
 
+const signOut = vi.hoisted(() => vi.fn(async () => ({ error: null })));
+
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: vi.fn(), replace: vi.fn(), refresh: vi.fn() }),
 }));
 vi.mock("@/lib/supabase/client", () => ({
-  createClient: () => ({ auth: { signOut: async () => ({ error: null }) } }),
+  createClient: () => ({ auth: { signOut } }),
 }));
 vi.mock("@/lib/api", async (importOriginal) => ({
   ...(await importOriginal<typeof import("@/lib/api")>()),
@@ -23,6 +25,7 @@ vi.mock("@/lib/photo", async (importOriginal) => ({
 
 beforeEach(() => {
   vi.mocked(api).mockClear();
+  signOut.mockClear();
 });
 
 test("renders the signed image when there is one", () => {
@@ -63,6 +66,13 @@ function mountPanel() {
     </QueryClientProvider>,
   );
 }
+
+test("signing out limits the logout request to the current session", async () => {
+  mountPanel();
+  fireEvent.click(screen.getByRole("button", { name: "Sign out" }));
+
+  await waitFor(() => expect(signOut).toHaveBeenCalledWith({ scope: "local" }));
+});
 
 test("a non-image avatar is refused without a request and the input resets", () => {
   mountPanel();

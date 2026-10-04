@@ -65,7 +65,8 @@ export default function AccountPanel(props: {
 
   const signOut = useMutation({
     mutationFn: async () => {
-      const { error } = await createClient().auth.signOut();
+      // scope local: signing out here must leave other devices signed in.
+      const { error } = await createClient().auth.signOut({ scope: "local" });
       if (error) throw error;
     },
     onSuccess: () => {
