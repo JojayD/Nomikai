@@ -86,3 +86,40 @@ a { color: var(--color-accent); text-underline-offset: 3px; }
 .kicker {
   font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.55;
 }
+
+/* Only the home feed leaves the mobile shell in this first desktop pass. */
+@media (min-width: 1024px) {
+  .app-shell:has(.feed-home) { max-width: none; }
+  .feed-home { display: grid; grid-template-columns: 220px minmax(0, 1fr); }
+  .feed-mobile-header { display: none; }
+  .feed-nav {
+    display: flex; flex-direction: column; gap: 40px;
+    position: sticky; top: 0; height: 100dvh; overflow-y: auto;
+    padding: 36px 20px 24px; border-right: 1px solid var(--color-divider);
+  }
+  .feed-brand { color: inherit; font-size: 26px; font-weight: 800; letter-spacing: -0.04em; text-decoration: none; }
+  .feed-nav-link {
+    display: flex; align-items: center; gap: 14px; min-height: 52px;
+    padding: 10px 12px; color: inherit; text-decoration: none; border-radius: 8px;
+  }
+  .feed-nav-link:hover { background: var(--color-surface); }
+  .feed-nav-link[aria-current="page"] { background: var(--color-surface); font-weight: 800; }
+  .feed-nav-link svg { flex-shrink: 0; }
+  .feed-timeline { width: 100%; max-width: 584px; min-width: 0; margin-inline: auto; padding: 36px 32px; }
+  .feed-title { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
+  .feed-title .btn { min-height: 42px; font-size: 13px; flex-shrink: 0; }
+  .feed-timeline .entry-card { padding: 24px 0; overflow-wrap: anywhere; }
+  .feed-timeline .entry-author-row { align-items: center; margin-bottom: 12px; }
+  .feed-timeline .entry-author { gap: 10px; }
+  .feed-timeline .entry-author > :first-child { width: 32px; height: 32px; border-radius: 50%; }
+  .feed-timeline .entry-author-row .kicker { flex-shrink: 0; letter-spacing: 0; text-transform: none; font-size: 12px; }
+  .feed-timeline .entry-photo { margin-top: 16px; max-height: 620px; object-fit: contain; background: var(--color-surface); border: 1px solid var(--color-divider); }
+  .feed-timeline .entry-reaction { min-height: 44px; min-width: 44px; text-align: left; font-size: 22px; }
+}
+
+@media (min-width: 1280px) {
+  .feed-home { grid-template-columns: 240px minmax(0, 1fr) 300px; padding-right: max(24px, calc((100vw - 1440px) / 2)); }
+  .feed-nav { padding-inline: 24px; }
+  .feed-profile { display: block; position: sticky; top: 0; align-self: start; padding: 44px 24px 24px 0; overflow-wrap: anywhere; }
+  .feed-profile img, .feed-profile span[aria-hidden="true"], .feed-nav-link > img, .feed-nav-link > span[aria-hidden="true"] { border-radius: 50%; }
+}
