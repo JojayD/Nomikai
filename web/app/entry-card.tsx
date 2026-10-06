@@ -46,7 +46,7 @@ function ReactionButton({ row }: { row: EntryRowData }) {
   });
   return (
     <button
-      className="mt-1.5 cursor-pointer text-[13px] font-semibold tabular-nums"
+      className="entry-reaction mt-1.5 cursor-pointer text-[13px] font-semibold tabular-nums"
       style={state.reacted ? { color: "var(--color-accent)" } : undefined}
       aria-pressed={state.reacted}
       aria-label="React"
@@ -86,14 +86,14 @@ export default function EntryCard({
 }) {
   return (
     <div
-      className="border-b px-4 py-3"
+      className="entry-card border-b px-4 py-3"
       style={{ borderColor: "var(--color-divider)" }}
     >
-      <div className="flex items-baseline gap-2">
+      <div className="entry-author-row flex items-baseline gap-2">
         {showAuthor && (
           <Link
             href={`/u/${row.username}`}
-            className="flex items-center gap-1.5 text-sm font-extrabold !text-[inherit] no-underline"
+            className="entry-author flex min-w-0 items-center gap-1.5 text-sm font-extrabold !text-[inherit] no-underline"
           >
             <Avatar src={row.avatar_src} username={row.username} size={5} />
             @{row.username}
@@ -131,7 +131,7 @@ export default function EntryCard({
           key={`${row.photo_path}:${row.photo_url}`}
           src={row.photo_url}
           alt={`Photo of ${row.drink_name}`}
-          className="mt-2 max-h-80 w-full object-cover"
+          className="entry-photo mt-2 max-h-80 w-full object-cover"
         />
       )}
       {/* key: a refetched server value reseeds the optimistic state */}

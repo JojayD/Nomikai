@@ -19,7 +19,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en" className={`${archivo.variable} h-full antialiased`}>
       <body className="min-h-full">
         <Providers>
-          <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col">
+          <div className="app-shell mx-auto flex min-h-dvh w-full max-w-[430px] flex-col">
             {children}
           </div>
         </Providers>
