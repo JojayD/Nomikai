@@ -53,6 +53,11 @@ export default async function Home(props: PageProps<"/">) {
               icon: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M17 4a4 4 0 0 1 0 8M22 21v-2a4 4 0 0 0-3-4M13 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0",
             },
             {
+              href: "/collection",
+              label: "My collection",
+              icon: "M4 3h16v18H4ZM8 8h8M8 12h8M8 16h5",
+            },
+            {
               href: "/recap",
               label: "Weekly recap",
               icon: "M4 3h16v18H4ZM8 8h8M8 12h8M8 16h5",
@@ -119,6 +124,9 @@ export default async function Home(props: PageProps<"/">) {
         />
       </div>
       <section className="feed-timeline" aria-label="Drink logs">
+        <Link href="/collection" className="border-b border-[var(--color-divider)] px-4 py-3 text-sm font-bold">
+          My collection · Want to try &amp; Passport
+        </Link>
         <div className="feed-title hidden">
           <div>
             <h1 className="text-2xl">Drink logs</h1>

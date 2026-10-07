@@ -67,7 +67,9 @@ export default function LogPage() {
 // Edit mode needs the entry in hand before the form mounts: the inputs are
 // controlled, so their initial values are the seeding step.
 function LogLoader() {
-  const editId = useSearchParams().get("id");
+  const params = useSearchParams();
+  const editId = params.get("id");
+  const prefill = params.get("drink")?.trim() ?? "";
   const entry = useQuery({
     queryKey: ["entry", editId],
     queryFn: () => api<EntryRow>(`/entries/${editId}`),
@@ -96,15 +98,17 @@ function LogLoader() {
       </main>
     );
   }
-  return <LogForm editId={editId} entry={entry.data ?? null} />;
+  return <LogForm key={editId ?? prefill} editId={editId} entry={entry.data ?? null} prefill={prefill} />;
 }
 
 function LogForm({
   editId,
   entry,
+  prefill,
 }: {
   editId: string | null;
   entry: EntryRow | null;
+  prefill: string;
 }) {
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -141,7 +145,9 @@ function LogForm({
           drinkId: entry.drink_id,
           name: entry.drink_id ? entry.drink_name! : entry.custom_drink_name!,
         }
-      : null
+      : prefill && [...prefill].length <= 120
+        ? { drinkId: null, name: prefill }
+        : null
   );
   const [query, setQuery] = useState("");
   const [showDetails, setShowDetails] = useState(!!entry);
@@ -402,7 +408,7 @@ function LogForm({
         <Header kicker="Log a drink" />
         <div className="px-4 py-7">
           <div className="kicker mb-2" role="status">{pending ? "Saving…" : "Logged"}</div>
-          <h2 className="text-[32px] leading-[1.05] tracking-[-0.03em]">
+          <h2 className="break-words text-[32px] leading-[1.05] tracking-[-0.03em]">
             {saved.name}
           </h2>
           <button
@@ -447,13 +453,13 @@ function LogForm({
           submit();
         }}
       >
-        <fieldset disabled={busy || pending}>
+        <fieldset className="min-w-0" disabled={busy || pending}>
         {sel ? (
           <div
             className="flex items-baseline gap-3 border px-3.5 py-3"
             style={{ borderColor: "var(--color-divider)" }}
           >
-            <span className="mr-auto text-[20px] font-extrabold tracking-[-0.02em]">
+            <span className="mr-auto min-w-0 break-words text-[20px] font-extrabold tracking-[-0.02em]">
               {sel.name}
             </span>
             <button
