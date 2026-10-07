@@ -189,6 +189,7 @@ export const entries = pgTable(
     nightOutId: uuid('night_out_id'),
   },
   (t) => [
+    index('entries_user_drink_idx').on(t.userId, t.normalizedDrinkName),
     index('entries_user_logged_idx').using(
       'btree',
       t.userId.asc().nullsLast().op('timestamptz_ops'),
@@ -231,6 +232,33 @@ export const entries = pgTable(
       for: 'delete',
       using: sql`${uid} = user_id`,
     }),
+  ],
+).enableRLS();
+
+// Private collection, accessed only through the owner-scoped API.
+export const savedDrinks = pgTable(
+  'saved_drinks',
+  {
+    id: uuid().defaultRandom().primaryKey().notNull(),
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => profiles.id, { onDelete: 'cascade' }),
+    name: text().notNull(),
+    normalizedName: text('normalized_name')
+      .notNull()
+      .generatedAlwaysAs(
+        sql`lower(regexp_replace(btrim(name), '\\s+', ' ', 'g'))`,
+      ),
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'string' })
+      .defaultNow()
+      .notNull(),
+  },
+  (t) => [
+    unique('saved_drinks_user_name_key').on(t.userId, t.normalizedName),
+    check(
+      'saved_drinks_name_check',
+      sql`char_length(name) between 1 and 120 and char_length(normalized_name) > 0`,
+    ),
   ],
 ).enableRLS();
 

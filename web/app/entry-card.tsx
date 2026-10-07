@@ -6,6 +6,7 @@ import Link from "next/link";
 import { api } from "@/lib/api";
 import Photo from "./photo";
 import Avatar from "./avatar";
+import SaveDrink from "./save-drink";
 
 // Shape of one feed/profile row as the API returns it; photo_url and
 // avatar_src are signed URLs the API attaches to each row.
@@ -135,10 +136,13 @@ export default function EntryCard({
         />
       )}
       {/* key: a refetched server value reseeds the optimistic state */}
-      <ReactionButton
-        key={`${row.reaction_count}-${row.reacted_by_me}`}
-        row={row}
-      />
+      <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
+        <ReactionButton
+          key={`${row.reaction_count}-${row.reacted_by_me}`}
+          row={row}
+        />
+        <SaveDrink key={row.drink_name} name={row.drink_name} />
+      </div>
     </div>
   );
 }
