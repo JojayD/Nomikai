@@ -15,12 +15,13 @@ import { ApiError, api } from "@/lib/api";
 
 const navigation = vi.hoisted(() => ({
   edit: "entry",
+  drink: "",
   router: { push: vi.fn(), replace: vi.fn(), refresh: vi.fn() },
 }));
 vi.mock("next/navigation", () => ({
   useRouter: () => navigation.router,
   useSearchParams: () =>
-    new URLSearchParams(navigation.edit ? { id: navigation.edit } : {}),
+    new URLSearchParams({ ...(navigation.edit ? { id: navigation.edit } : {}), ...(navigation.drink ? { drink: navigation.drink } : {}) }),
 }));
 vi.mock("@/lib/api", async (importOriginal) => ({
   ...(await importOriginal<typeof import("@/lib/api")>()),
@@ -55,6 +56,7 @@ function deferred<T>() {
 }
 beforeEach(() => {
   navigation.edit = "entry";
+  navigation.drink = "";
   vi.mocked(api)
     .mockReset()
     .mockImplementation(async (path) => {
@@ -62,6 +64,25 @@ beforeEach(() => {
       if (path === "/entries/entry") return entry;
       return [];
     });
+});
+
+test("collection prefill waits for explicit submit and preserves the chosen name", async () => {
+  navigation.edit = "";
+  navigation.drink = "Tea & lime";
+  mount(<LogPage />);
+  expect(await screen.findByText("Tea & lime")).toBeDefined();
+  expect(vi.mocked(api).mock.calls.some(([, init]) => init?.method === "POST")).toBe(false);
+  const button = screen.getByRole("button", { name: "Log it" });
+  await waitFor(() => expect((button as HTMLButtonElement).disabled).toBe(false));
+  fireEvent.click(button);
+  await waitFor(() => expect(api).toHaveBeenCalledWith("/entries", expect.objectContaining({ method: "POST", body: expect.stringContaining('"custom_drink_name":"Tea & lime"') })));
+});
+
+test("edit data wins over collection prefill", async () => {
+  navigation.drink = "Tea & lime";
+  mount(<LogPage />);
+  expect(await screen.findByText("Beer")).toBeDefined();
+  expect(screen.queryByText("Tea & lime")).toBeNull();
 });
 
 test("cannot open the camera while an edit is saving", async () => {

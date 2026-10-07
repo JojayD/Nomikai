@@ -15,6 +15,13 @@
       "when": 1787779432836,
       "tag": "0001_bouncy_aaron_stack",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791412952872,
+      "tag": "0002_skinny_queen_noir",
+      "breakpoints": true
     }
   ]
 }

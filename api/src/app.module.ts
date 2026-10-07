@@ -14,6 +14,7 @@ import { ProfilesController } from './profiles.controller';
 import { ReactionsController } from './reactions.controller';
 import { RecapController } from './recap.controller';
 import { StorageService } from './storage.service';
+import { CollectionController } from './collection.controller';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { StorageService } from './storage.service';
     ThrottlerModule.forRoot({ throttlers: [{ ttl: 60_000, limit: 300 }] }),
   ],
   controllers: [
+    CollectionController,
     ProfilesController,
     EntriesController,
     FeedController,

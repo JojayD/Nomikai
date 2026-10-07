@@ -25,6 +25,7 @@ jobs:
 
   api:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     defaults:
       run:
         working-directory: api
@@ -39,3 +40,33 @@ jobs:
       - run: npm run lint:check
       - run: npm test
       - run: npm run build
+      - uses: supabase/setup-cli@v3
+        with:
+          version: 2.115.0
+      - name: Start disposable Supabase
+        working-directory: .
+        run: supabase start
+      - name: Test real API and collection persistence
+        run: |
+          supabase status --workdir .. -o env > /tmp/nomikai-supabase.env
+          set -a
+          source /tmp/nomikai-supabase.env
+          DATABASE_URL="$DB_URL"
+          SUPABASE_URL="$API_URL"
+          SUPABASE_SECRET_KEY="$SECRET_KEY"
+          API=http://localhost:3101
+          API_URL=http://localhost:3101
+          PORT=3101
+          set +a
+          node dist/main.js > /tmp/nomikai-api.log 2>&1 &
+          api_pid=$!
+          trap 'kill "$api_pid"' EXIT
+          for attempt in {1..30}; do
+            if [ "$(curl -s -o /dev/null -w '%{http_code}' "$API/me")" = 401 ]; then break; fi
+            sleep 1
+          done
+          node test/e2e.mjs
+          node test/collection.e2e.mjs
+      - name: API diagnostics
+        if: failure()
+        run: cat /tmp/nomikai-api.log 2>/dev/null || true
