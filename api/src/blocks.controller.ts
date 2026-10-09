@@ -42,6 +42,7 @@ export class BlocksController {
   @Post()
   async block(@UserId() userId: string, @Body() body: { blocked_id: string }) {
     await this.db.transaction(async (tx) => {
+      await lockProfilePair(tx, userId, body.blocked_id);
       await tx
         .insert(blocks)
         .values({ blockerId: userId, blockedId: body.blocked_id })
@@ -79,7 +80,11 @@ export class BlocksController {
 }
 
 /** True when either side has blocked the other. */
-export async function isBlockedPair(db: Db, a: string, b: string) {
+export async function isBlockedPair(
+  db: Pick<Db, 'select'>,
+  a: string,
+  b: string,
+) {
   const [row] = await db
     .select({ ok: sql<number>`1` })
     .from(blocks)
@@ -91,4 +96,18 @@ export async function isBlockedPair(db: Db, a: string, b: string) {
     )
     .limit(1);
   return !!row;
+}
+
+/** Serialize block and friend-request writes; stable ordering avoids deadlocks. */
+export async function lockProfilePair(
+  db: Pick<Db, 'select'>,
+  a: string,
+  b: string,
+) {
+  await db
+    .select({ id: profiles.id })
+    .from(profiles)
+    .where(or(eq(profiles.id, a), eq(profiles.id, b)))
+    .orderBy(profiles.id)
+    .for('update');
 }

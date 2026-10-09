@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -64,6 +65,7 @@ export class ProfilesController {
     @UserId() userId: string,
     @Body() body: { username?: string; timezone?: string },
   ) {
+    await this.validateTimezone(body.timezone);
     const [row] = await this.db
       .insert(profiles)
       .values({
@@ -87,6 +89,14 @@ export class ProfilesController {
       leaderboard_opt_in?: boolean;
     },
   ) {
+    if (body.timezone !== undefined) await this.validateTimezone(body.timezone);
+    if (
+      body.username === undefined &&
+      body.timezone === undefined &&
+      body.leaderboard_opt_in === undefined
+    ) {
+      throw new BadRequestException('No profile changes supplied.');
+    }
     const [row] = await this.db
       .update(profiles)
       .set({
@@ -100,6 +110,15 @@ export class ProfilesController {
       .returning(publicColumns);
     if (!row) throw new NotFoundException('No profile');
     return row;
+  }
+
+  private async validateTimezone(timezone: unknown) {
+    if (typeof timezone !== 'string')
+      throw new BadRequestException('Invalid timezone.');
+    const rows = await this.db.execute(
+      sql`select 1 from pg_timezone_names where name = ${timezone} limit 1`,
+    );
+    if (!rows.length) throw new BadRequestException('Invalid timezone.');
   }
 
   @Post('me/avatar')
@@ -161,7 +180,7 @@ export class ProfilesController {
     const [row] = await this.db
       .select({
         total_entries: sql<number>`count(*)::int`,
-        unique_drinks: sql<number>`count(distinct coalesce(${entries.drinkId}::text, ${entries.normalizedDrinkName}))::int`,
+        unique_drinks: sql<number>`count(distinct nullif(btrim(${entries.normalizedDrinkName}), ''))::int`,
         nights_out: sql<number>`count(distinct ((${entries.loggedAt} at time zone ${profiles.timezone} - interval '4 hours')::date))::int`,
       })
       .from(entries)
