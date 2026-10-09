@@ -141,8 +141,8 @@ test("cancel discards an in-flight capture and stops the camera", async () => {
     videoHeight: { value: 480 },
   });
   fireEvent.loadedData(video);
-  fireEvent.click(screen.getByText("Capture"));
-  fireEvent.click(screen.getByText("Cancel"));
+  fireEvent.click(screen.getByRole("button", { name: "Capture" }));
+  fireEvent.click(screen.getByRole("button", { name: "Cancel" }));
   // The old implementation tries to update the input after cancellation.
   vi.stubGlobal(
     "DataTransfer",
@@ -220,7 +220,7 @@ test("permission denial is visible and the camera can be cancelled", async () =>
   const close = vi.fn();
   mount(<CameraDialog onClose={close} onPhoto={() => {}} />);
   expect(await screen.findByRole("alert")).toBeDefined();
-  fireEvent.click(screen.getByText("Cancel"));
+  fireEvent.click(screen.getByRole("button", { name: "Cancel" }));
   expect(close).toHaveBeenCalled();
 });
 

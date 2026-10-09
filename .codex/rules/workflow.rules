@@ -1,0 +1,23 @@
+# Routine Nomikai GitHub workflow; PR merge is allowed in merge.rules.
+prefix_rule(
+    pattern = ["gh", "pr", ["create", "edit", "checks", "view", "list", "diff", "status", "ready"]],
+    decision = "allow",
+    match = ["gh pr create --base dev", "gh pr checks 54 --watch", "gh pr view 54"],
+    not_match = ["gh repo delete", "gh pr close 54"],
+)
+prefix_rule(pattern = ["gh", "run", ["list", "view", "watch"]], decision = "allow")
+prefix_rule(pattern = ["gh", "auth", "status"], decision = "allow")
+prefix_rule(pattern = ["gh", "repo", "view"], decision = "allow")
+
+# Tests and local app checks, from web/ or api/ or via npm --prefix.
+prefix_rule(pattern = ["npm", "test"], decision = "allow")
+prefix_rule(
+    pattern = ["npm", "run", ["test", "test:e2e", "test:watch", "lint", "lint:check", "build", "dev", "start:dev"]],
+    decision = "allow",
+    match = ["npm run build", "npm run test:e2e", "npm run lint --prefix web"],
+    not_match = ["npm publish", "npm install", "npm run deploy"],
+)
+prefix_rule(pattern = ["npm", "--prefix", ["web", "api"], "test"], decision = "allow")
+prefix_rule(pattern = ["npm", "--prefix", ["web", "api"], "run", ["test", "test:e2e", "test:watch", "lint", "lint:check", "build", "dev", "start:dev"]], decision = "allow")
+prefix_rule(pattern = ["npx", "tsc", "--noEmit"], decision = "allow")
+prefix_rule(pattern = ["npx", "--no-install", ["tsc", "vitest", "jest", "eslint"]], decision = "allow")
