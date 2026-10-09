@@ -35,3 +35,9 @@ Nomikai — a drink-counting app with leaderboards and different drinks to try. 
 - The direct connection host `db.zcnjovwozgsxowijebgw.supabase.co` is IPv6-only and unreachable from this network. Use the IPv4 session pooler instead: `aws-0-us-west-2.pooler.supabase.com:5432`, user `postgres.zcnjovwozgsxowijebgw`.
 - The Supabase CLI is logged in and linked to this project. Linked db commands still resolve the IPv6-only direct host, so prefer `--db-url` with the IPv4 pooler for db operations (e.g. `supabase db push --db-url "$SUPABASE_DB_URL"`).
 - npm note: `~/.npm` contains root-owned files, so plain `npm install` fails. Either fix once with `sudo chown -R 501:20 ~/.npm` or set `npm_config_cache` to a writable dir.
+
+## Browser testing
+
+When you use the Playwright MCP, delete everything it writes once you're done:
+the `.playwright-mcp/` folder (snapshots, console logs) and any screenshots or
+images you saved. Check that the files are untracked before deleting them.
