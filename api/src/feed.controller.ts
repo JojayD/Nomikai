@@ -4,6 +4,7 @@ import { AuthGuard, UserId } from './auth.guard';
 import { DB, type Db } from './db';
 import { type EntryRow, withSignedUrls } from './entry-rows';
 import { StorageService } from './storage.service';
+import { pageNumber } from './pagination';
 
 const MAX_ID = 'ffffffff-ffff-ffff-ffff-ffffffffffff';
 
@@ -31,7 +32,7 @@ export class FeedController {
     @Query('before_id') beforeId = MAX_ID,
     @Query('limit') limit = '30',
   ) {
-    const lim = Math.min(Number(limit) || 30, 100);
+    const lim = pageNumber(limit, 1, 100);
     const result = await this.db.execute(sql`
       with friends as (
         select case when f.requester_id = ${viewerId} then f.addressee_id

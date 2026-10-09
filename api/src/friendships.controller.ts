@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -14,7 +15,7 @@ import {
 import { Throttle } from '@nestjs/throttler';
 import { aliasedTable, and, desc, eq, or } from 'drizzle-orm';
 import { AuthGuard, UserId } from './auth.guard';
-import { isBlockedPair } from './blocks.controller';
+import { isBlockedPair, lockProfilePair } from './blocks.controller';
 import { DB, type Db } from './db';
 import { friendships, profiles } from './db/schema';
 import { StorageService } from './storage.service';
@@ -109,7 +110,9 @@ export class FriendshipsController {
   ) {
     let addresseeId = body.addressee_id;
     if (!addresseeId) {
-      const name = (body.username ?? '').trim().toLowerCase();
+      if (typeof body.username !== 'string')
+        throw new BadRequestException('Enter a username.');
+      const name = body.username.trim().toLowerCase();
       const [target] = await this.db
         .select({ id: profiles.id })
         .from(profiles)
@@ -117,15 +120,19 @@ export class FriendshipsController {
       if (!target) throw new NotFoundException(`No user named @${name}.`);
       addresseeId = target.id;
     }
-    // Same message either way round: don't reveal who blocked whom.
-    if (await isBlockedPair(this.db, userId, addresseeId)) {
-      throw new ForbiddenException('You cannot add this user.');
-    }
-    const [row] = await this.db
-      .insert(friendships)
-      .values({ requesterId: userId, addresseeId })
-      .returning({ id: friendships.id });
-    return row;
+    const targetId = addresseeId;
+    return this.db.transaction(async (tx) => {
+      await lockProfilePair(tx, userId, targetId);
+      // Same message either way round: don't reveal who blocked whom.
+      if (await isBlockedPair(tx, userId, targetId)) {
+        throw new ForbiddenException('You cannot add this user.');
+      }
+      const [row] = await tx
+        .insert(friendships)
+        .values({ requesterId: userId, addresseeId: targetId })
+        .returning({ id: friendships.id });
+      return row;
+    });
   }
 
   /**

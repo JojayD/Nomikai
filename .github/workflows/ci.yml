@@ -67,6 +67,7 @@ jobs:
           done
           node test/e2e.mjs
           node test/collection.e2e.mjs
+          node test/audit.e2e.mjs
       - name: API diagnostics
         if: failure()
         run: cat /tmp/nomikai-api.log 2>/dev/null || true

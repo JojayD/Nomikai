@@ -45,10 +45,21 @@ export class StorageService {
     if (error) throw error;
   }
 
-  /** Empties a user's photo folder. ponytail: list() caps at 100 objects; paginate if anyone logs more photos than that. */
+  /** Re-read the first page after deletion so removing rows cannot skip objects. */
   async removeFolder(userId: string) {
-    const { data } = await this.supabase.storage.from(BUCKET).list(userId);
-    await this.remove((data ?? []).map((f) => `${userId}/${f.name}`));
+    while (true) {
+      const { data, error } = await this.supabase.storage
+        .from(BUCKET)
+        .list(userId, { limit: 100 });
+      if (error) throw error;
+      if (!data?.length) return;
+      for (const folder of data.filter((f) => !f.id)) {
+        await this.removeFolder(`${userId}/${folder.name}`);
+      }
+      await this.remove(
+        data.filter((f) => f.id).map((f) => `${userId}/${f.name}`),
+      );
+    }
   }
 
   async deleteAuthUser(userId: string) {
