@@ -242,7 +242,7 @@ export default function Collection() {
                     Recommended by {drink.recommenders.join(", ")}
                   </p>
                   <div className="mt-3 flex flex-wrap gap-2">
-                    <SaveDrink name={drink.name} />
+                    <SaveDrink name={drink.name} onOpen={() => setView("saved")} />
                     <Link
                       className="btn btn-secondary text-sm"
                       aria-label={`Log ${drink.name}`}
