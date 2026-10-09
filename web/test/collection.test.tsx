@@ -159,3 +159,17 @@ test("collection load failure offers a retry instead of showing an empty collect
     await screen.findByText("Your next discovery starts here."),
   ).toBeDefined();
 });
+
+test("saving a friend pick links to the Want to try view", async () => {
+  vi.mocked(api).mockImplementation(async (path: string) =>
+    path === "/collection/picks"
+      ? [{ normalized_name: "yuzu", name: "Yuzu", recommenders: ["bo"], last_recommended_at: "2026-10-01T00:00:00Z" }]
+      : [],
+  );
+  mount(<Collection />);
+  fireEvent.click(screen.getByRole("button", { name: "From friends" }));
+  expect(await screen.findByText("Recommended by bo")).toBeTruthy();
+  fireEvent.click(screen.getByRole("button", { name: "Want to try Yuzu" }));
+  fireEvent.click(await screen.findByText("Saved to Want to try"));
+  expect(screen.getByRole("button", { name: "Want to try" }).getAttribute("aria-pressed")).toBe("true");
+});

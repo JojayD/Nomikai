@@ -6,8 +6,15 @@ import Link from "next/link";
 import { api, json } from "@/lib/api";
 import { normalizeDrinkName } from "@/lib/normalize";
 import Header from "../header";
+import SaveDrink from "../save-drink";
 
 type SavedDrink = { id: string; name: string; tried: boolean };
+type FriendPick = {
+  normalized_name: string;
+  name: string;
+  recommenders: string[];
+  last_recommended_at: string;
+};
 type Stamp = {
   normalized_name: string;
   name: string;
@@ -19,7 +26,7 @@ type Stamp = {
 
 export default function Collection() {
   const client = useQueryClient();
-  const [view, setView] = useState<"saved" | "passport">("saved");
+  const [view, setView] = useState<"saved" | "passport" | "picks">("saved");
   const [name, setName] = useState("");
   const [search, setSearch] = useState("");
   const [recommended, setRecommended] = useState(false);
@@ -32,6 +39,11 @@ export default function Collection() {
     queryKey: ["passport"],
     queryFn: () => api<Stamp[]>("/collection/passport"),
     enabled: view === "passport",
+  });
+  const picks = useQuery({
+    queryKey: ["friend-picks"],
+    queryFn: () => api<FriendPick[]>("/collection/picks"),
+    enabled: view === "picks",
   });
   const add = useMutation({
     mutationFn: (value: string) =>
@@ -46,7 +58,7 @@ export default function Collection() {
       api(`/collection/saved/${id}`, { method: "DELETE" }),
     onSuccess: () => client.invalidateQueries({ queryKey: ["saved-drinks"] }),
   });
-  const current = view === "saved" ? saved : passport;
+  const current = view === "saved" ? saved : view === "passport" ? passport : picks;
   const matches = (passport.data ?? []).filter(
     (drink) =>
       (!recommended || drink.recommended === true) &&
@@ -59,9 +71,9 @@ export default function Collection() {
       <div className="p-4">
         <h2 className="text-3xl">A little taste of you.</h2>
         <p className="mt-2 text-sm opacity-70">
-          Drinks to discover. Favorites to remember. Only visible to you.
+          Drinks to discover. Favorites to remember. Your saved drinks and passport stay private.
         </p>
-        <div className="mt-5 flex gap-2" aria-label="Collection views">
+        <div className="mt-5 flex flex-wrap gap-2" aria-label="Collection views">
           <button
             className={`btn ${view === "saved" ? "btn-primary" : "btn-secondary"}`}
             aria-pressed={view === "saved"}
@@ -75,6 +87,13 @@ export default function Collection() {
             onClick={() => setView("passport")}
           >
             Passport
+          </button>
+          <button
+            className={`btn ${view === "picks" ? "btn-primary" : "btn-secondary"}`}
+            aria-pressed={view === "picks"}
+            onClick={() => setView("picks")}
+          >
+            From friends
           </button>
         </div>
         {view === "saved" ? (
@@ -111,7 +130,7 @@ export default function Collection() {
               </p>
             )}
           </form>
-        ) : (
+        ) : view === "passport" ? (
           <div className="mt-5">
             {passport.data && (
               <p className="kicker mb-3">
@@ -145,7 +164,7 @@ export default function Collection() {
               </button>
             </div>
           </div>
-        )}
+        ) : null}
         {current.isPending && (
           <p className="kicker py-7" role="status">
             Loading…
@@ -199,6 +218,38 @@ export default function Collection() {
                     >
                       Remove
                     </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </>
+        ) : view === "picks" ? (
+          <>
+            {picks.data?.length === 0 && (
+              <p className="py-7 text-sm">
+                No friend picks yet.{" "}
+                <Link href="/friends">Add friends</Link> to see what they recommend.
+              </p>
+            )}
+            <ul className="mt-4">
+              {picks.data?.map((drink) => (
+                <li
+                  key={drink.normalized_name}
+                  className="border-t border-[var(--color-divider)] py-4"
+                >
+                  <h3 className="break-words text-xl">{drink.name}</h3>
+                  <p className="kicker mt-1">
+                    Recommended by {drink.recommenders.join(", ")}
+                  </p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    <SaveDrink name={drink.name} onOpen={() => setView("saved")} />
+                    <Link
+                      className="btn btn-secondary text-sm"
+                      aria-label={`Log ${drink.name}`}
+                      href={`/log?drink=${encodeURIComponent(drink.name)}`}
+                    >
+                      Log this drink
+                    </Link>
                   </div>
                 </li>
               ))}
