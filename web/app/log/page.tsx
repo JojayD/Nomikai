@@ -611,7 +611,7 @@ function LogForm({
               <input
                 id="photo"
                 ref={photoInputRef}
-                className="input !py-2"
+                className="hidden"
                 type="file"
                 accept="image/*"
                 onChange={(e) => {
@@ -635,14 +635,25 @@ function LogForm({
                   {photoError}
                 </p>
               )}
-              <button
-                type="button"
-                className="btn btn-secondary !mt-2 btn-block !min-h-[42px]"
-                disabled={busy || pending}
+              <div className="mt-2 flex gap-2">
+                <button
+                  type="button"
+                  className="btn btn-secondary !mt-0 flex-1 gap-2"
+                  disabled={busy || pending}
                   onClick={() => setCameraOpen(true)}
-              >
-                Take photo
-              </button>
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><path d="M9 4 7 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2-3Z" /><circle cx="12" cy="13" r="4" /></svg>
+                  Take photo
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-secondary !mt-0 flex-1"
+                  disabled={busy || pending}
+                  onClick={() => photoInputRef.current?.click()}
+                >
+                  Photo library
+                </button>
+              </div>
               {photo && photoPreview && (
                 <div className="mt-2 text-sm">
                   {/* eslint-disable-next-line @next/next/no-img-element -- local object URL */}
