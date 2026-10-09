@@ -79,6 +79,37 @@ export class CollectionController {
     return { deleted: true };
   }
 
+  @Get('picks')
+  picks(@UserId() userId: string) {
+    return this.db.execute(sql`
+      with friends as (
+        select case when f.requester_id = ${userId} then f.addressee_id
+                    else f.requester_id end as friend_id
+        from friendships f
+        where f.status = 'accepted'
+          and ${userId} in (f.requester_id, f.addressee_id)
+      )
+      select btrim(e.normalized_drink_name) as normalized_name,
+        (array_agg(coalesce(d.name, e.custom_drink_name)
+          order by e.logged_at desc, e.created_at desc, e.id desc))[1] as name,
+        array_agg(distinct p.username order by p.username) as recommenders,
+        max(e.logged_at) as last_recommended_at
+      from friends f
+      join entries e on e.user_id = f.friend_id
+      join profiles p on p.id = e.user_id
+      left join drinks d on d.id = e.drink_id
+      where e.recommended = true
+        and btrim(e.normalized_drink_name) <> ''
+        and not exists (
+          select 1 from entries own where own.user_id = ${userId}
+            and btrim(own.normalized_drink_name) = btrim(e.normalized_drink_name)
+        )
+      group by btrim(e.normalized_drink_name)
+      order by count(distinct p.username) desc, last_recommended_at desc
+      limit 20
+    `);
+  }
+
   @Get('passport')
   passport(@UserId() userId: string) {
     // ponytail: aggregate on read for a personal history; paginate if it grows large.

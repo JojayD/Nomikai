@@ -48,7 +48,7 @@ const entryBody = (name, recommended = null, logged_at = '2026-10-01T12:00:00Z')
 
 try {
   const a = await makeUser(), b = await makeUser();
-  for (const path of ['/collection/saved', '/collection/passport']) {
+  for (const path of ['/collection/saved', '/collection/passport', '/collection/picks']) {
     check((await api(null, path)).status, 401, 'auth required');
     const r = await api(a, path);
     check(r.status, 200, 'collection route exists');
@@ -160,6 +160,34 @@ try {
       } catch (e) { check(e.code, '42501', `${role} has no ${operation} grant`); }
     }
   }
+  const picks = (user = a) => api(user, '/collection/picks').then(r => r.body);
+  check((await api(b, '/entries', 'POST', entryBody('  Citrus   fizz ', true))).status, 201, 'non-friend recommends');
+  check(await picks(), [], 'non-friend recommendations hidden');
+  const request = await api(a, '/friendships', 'POST', { addressee_id: b.id });
+  check(request.status, 201, 'friend request created');
+  check(await picks(), [], 'pending recommendations hidden');
+  check((await api(b, `/friendships/${request.body.id}`, 'PATCH')).status, 200, 'friend request accepted');
+  for (const [name, rating] of [['Skip pick', false], ['Neutral pick', null]]) {
+    check((await api(b, '/entries', 'POST', entryBody(name, rating))).status, 201, 'non-recommended log');
+  }
+  check((await api(b, '/entries', 'POST', entryBody('CITRUS FIZZ', true, '2026-10-02T12:00:00Z'))).status, 201, 'repeat recommendation');
+  check((await api(b, '/entries', 'POST', entryBody('citrus fizz', false, '2026-10-03T12:00:00Z'))).status, 201, 'later non-recommendation');
+  check((await api(b, '/entries', 'POST', { ...entryBody(null, true), drink_id: lager.id })).status, 201, 'curated recommendation');
+  const bUsername = (await db`select username from profiles where id = ${b.id}`)[0].username;
+  const friendPicks = await picks();
+  check(friendPicks.map(r => r.normalized_name), ['citrus fizz', 'lager'], 'only recommendations, normalized and newest first');
+  check(friendPicks[0].name, 'CITRUS FIZZ', 'latest recommended display name');
+  check(friendPicks[0].recommenders, [bUsername], 'distinct friend usernames');
+  check(new Date(friendPicks[0].last_recommended_at).toISOString(), '2026-10-02T12:00:00.000Z', 'latest recommended timestamp');
+  check(friendPicks[1].name, lager.name, 'curated display name');
+  check((await api(a, '/entries', 'POST', entryBody(' citrus FIZZ ', true))).status, 201, 'caller tries pick');
+  check((await picks()).map(r => r.normalized_name), ['lager'], 'tried drink disappears');
+  check((await picks(b)).map(r => r.normalized_name), ['tie drink'], 'own recommendations excluded');
+  check((await api(a, '/entries', 'POST', entryBody('Reverse pick', true, '2026-10-04T12:00:00Z'))).status, 201, 'requester recommends');
+  check((await picks(b)).map(r => r.normalized_name), ['reverse pick', 'tie drink'], 'addressee also sees friend picks');
+  check((await api(a, `/friendships/${request.body.id}`, 'DELETE')).status, 200, 'unfriend');
+  check(await picks(b), [], 'unfriended picks hidden');
+
   await api(a, '/collection/saved', 'PUT', { name: 'Tea' });
   await auth(`/admin/users/${a.id}`, null, 'DELETE');
   check((await db`select * from public.saved_drinks where user_id = ${a.id}`).length, 0, 'account cascade');
