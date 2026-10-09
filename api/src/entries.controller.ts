@@ -25,6 +25,7 @@ import { entryQuery, withSignedUrls } from './entry-rows';
 import { jpegFilePipe, photoFileInterceptor } from './photo-upload';
 import { StorageService } from './storage.service';
 import { assertCanSee } from './visibility';
+import { pageNumber } from './pagination';
 
 type EntryBody = {
   id?: string;
@@ -78,8 +79,8 @@ export class EntriesController {
         desc(entries.createdAt),
         desc(entries.id),
       )
-      .limit(Math.min(Number(limit) || 30, 100))
-      .offset(Number(offset) || 0);
+      .limit(pageNumber(limit, 1, 100))
+      .offset(pageNumber(offset, 0));
     return withSignedUrls(this.storage, rows);
   }
 

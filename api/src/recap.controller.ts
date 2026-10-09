@@ -28,7 +28,7 @@ export class RecapController {
              (select timezone from me) as timezone,
              (select start_at from w) as week_start,
              count(*)::int as total_entries,
-             count(distinct coalesce(e.drink_id::text, e.normalized_drink_name))::int as unique_drinks,
+             count(distinct nullif(btrim(e.normalized_drink_name), ''))::int as unique_drinks,
              count(distinct ((e.logged_at at time zone (select timezone from me) - interval '4 hours')::date))::int as nights_out
       from entries e
       where e.user_id = ${userId} and e.logged_at >= (select start_at from w)

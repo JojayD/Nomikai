@@ -57,7 +57,7 @@ export class LeaderboardController {
                      or (f.addressee_id = ${viewerId} and f.requester_id = p.id))))
       )
       select m.id, m.username, m.avatar_url,
-             count(distinct coalesce(e.drink_id::text, e.normalized_drink_name))::int as unique_drinks,
+             count(distinct nullif(btrim(e.normalized_drink_name), ''))::int as unique_drinks,
              count(distinct ((e.logged_at at time zone m.timezone - interval '4 hours')::date))::int as nights_out
       from members m
       left join entries e

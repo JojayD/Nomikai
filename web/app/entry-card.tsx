@@ -1,7 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
+import {
+  useIsMutating,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 import Link from "next/link";
 import { api } from "@/lib/api";
 import Photo from "./photo";
@@ -31,35 +35,52 @@ export type EntryRowData = {
 
 /**
  * F6: the toggle updates optimistically — local state flips first, the
- * request follows, and an error flips it back. No query invalidation: the
- * server lands on the same state, so the next refetch agrees.
+ * request follows, and an error flips it back. Serialize taps and refetch
+ * after settling so other views and ambiguous network failures reconcile.
  */
 function ReactionButton({ row }: { row: EntryRowData }) {
+  const client = useQueryClient();
+  const mutationKey = ["reaction", row.id];
+  const pending = useIsMutating({ mutationKey }) > 0;
   const [state, setState] = useState({
     count: row.reaction_count,
     reacted: row.reacted_by_me,
   });
   const toggle = useMutation({
+    mutationKey,
     mutationFn: (next: boolean) =>
       api(`/entries/${row.id}/reaction`, { method: next ? "PUT" : "DELETE" }),
     onError: (_e, next) =>
       setState((s) => ({ reacted: !next, count: s.count + (next ? -1 : 1) })),
+    onSettled: () => client.invalidateQueries(),
   });
   return (
-    <button
-      className="entry-reaction mt-1.5 cursor-pointer text-[13px] font-semibold tabular-nums"
-      style={state.reacted ? { color: "var(--color-accent)" } : undefined}
-      aria-pressed={state.reacted}
-      aria-label="React"
-      onClick={() => {
-        const next = !state.reacted;
-        setState((s) => ({ reacted: next, count: s.count + (next ? 1 : -1) }));
-        toggle.mutate(next);
-      }}
-    >
-      {state.reacted ? "♥" : "♡"}
-      {state.count > 0 && ` ${state.count}`}
-    </button>
+    <div>
+      <button
+        className="entry-reaction mt-1.5 cursor-pointer text-[13px] font-semibold tabular-nums"
+        style={state.reacted ? { color: "var(--color-accent)" } : undefined}
+        aria-pressed={state.reacted}
+        aria-label="React"
+        disabled={pending}
+        onClick={() => {
+          if (client.isMutating({ mutationKey })) return;
+          const next = !state.reacted;
+          setState((s) => ({
+            reacted: next,
+            count: s.count + (next ? 1 : -1),
+          }));
+          toggle.mutate(next);
+        }}
+      >
+        {state.reacted ? "♥" : "♡"}
+        {state.count > 0 && ` ${state.count}`}
+      </button>
+      {toggle.isError && (
+        <p role="alert" className="text-xs">
+          Could not save reaction. Try again.
+        </p>
+      )}
+    </div>
   );
 }
 
