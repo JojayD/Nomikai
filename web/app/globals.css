@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 /* Nomikai design system — ported from the "Modernist" Claude Design artifact.
-   Light theme by default, dark via prefers-color-scheme. Zero radius, 2px
-   dividers, Archivo everywhere. */
+   Light theme by default, dark via prefers-color-scheme. Rounded feed cards,
+   2px dividers, Archivo everywhere. */
 :root {
   --color-bg: #f3f2f2;
   --color-surface: #eae9e9;
@@ -87,6 +87,17 @@ a { color: var(--color-accent); text-underline-offset: 3px; }
   font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.55;
 }
 
+.feed-timeline { background: #e7e5e4; }
+.feed-timeline .entry-card {
+  margin: 14px 12px; padding: 16px;
+  border: 0; border-radius: 16px; background: #fff;
+  overflow-wrap: anywhere;
+}
+@media (prefers-color-scheme: dark) {
+  .feed-timeline { background: #141211; }
+  .feed-timeline .entry-card { background: #2b2725; }
+}
+
 /* Only the home feed leaves the mobile shell in this first desktop pass. */
 @media (min-width: 1024px) {
   .app-shell:has(.feed-home) { max-width: none; }
@@ -108,7 +119,7 @@ a { color: var(--color-accent); text-underline-offset: 3px; }
   .feed-timeline { width: 100%; max-width: 584px; min-width: 0; margin-inline: auto; padding: 36px 32px; }
   .feed-title { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
   .feed-title .btn { min-height: 42px; font-size: 13px; flex-shrink: 0; }
-  .feed-timeline .entry-card { padding: 24px 0; overflow-wrap: anywhere; }
+  .feed-timeline .entry-card { margin-inline: 0; padding: 24px; }
   .feed-timeline .entry-author-row { align-items: center; margin-bottom: 12px; }
   .feed-timeline .entry-author { gap: 10px; }
   .feed-timeline .entry-author > :first-child { width: 32px; height: 32px; border-radius: 50%; }
