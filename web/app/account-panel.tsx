@@ -105,7 +105,7 @@ export default function AccountPanel(props: {
         : null);
 
   return (
-    <div className="mt-auto px-4 pb-8">
+    <div className="account-panel mt-auto px-4 pb-8">
       <div className="hr mb-4" />
       <div className="kicker mb-3">Account</div>
 

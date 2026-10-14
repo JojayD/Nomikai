@@ -98,12 +98,15 @@ a { color: var(--color-accent); text-underline-offset: 3px; }
   .feed-timeline .entry-card { background: #2b2725; }
 }
 
-/* Only the home feed leaves the mobile shell in this first desktop pass. */
+/* Keep the compact mobile layout; share the desktop rail across app pages. */
 @media (min-width: 1024px) {
-  .app-shell:has(.feed-home) { max-width: none; }
-  .feed-home { display: grid; grid-template-columns: 220px minmax(0, 1fr); }
+  .app-shell:has(.desktop-nav) {
+    display: grid; grid-template-columns: 220px minmax(0, 1fr); max-width: 1600px;
+  }
+  .app-shell > main { min-width: 0; }
+  .feed-home { display: grid; grid-template-columns: minmax(0, 1fr); }
   .feed-mobile-header { display: none; }
-  .feed-nav {
+  .desktop-nav {
     display: flex; flex-direction: column; gap: 40px;
     position: sticky; top: 0; height: 100dvh; overflow-y: auto;
     padding: 36px 20px 24px; border-right: 1px solid var(--color-divider);
@@ -129,10 +132,39 @@ a { color: var(--color-accent); text-underline-offset: 3px; }
 }
 
 @media (min-width: 1280px) {
-  .feed-home { grid-template-columns: 240px minmax(0, 1fr) 300px; padding-right: max(24px, calc((100vw - 1440px) / 2)); }
-  .feed-nav { padding-inline: 24px; }
+  .app-shell:has(.desktop-nav) { grid-template-columns: 240px minmax(0, 1fr); }
+  .feed-home { grid-template-columns: minmax(0, 1fr) 280px; padding-right: 24px; }
+  .desktop-nav { padding-inline: 24px; }
   .feed-profile { display: block; position: sticky; top: 0; align-self: start; padding: 44px 24px 24px 0; overflow-wrap: anywhere; }
   .feed-profile img, .feed-profile span[aria-hidden="true"], .feed-nav-link > img, .feed-nav-link > span[aria-hidden="true"] { border-radius: 50%; }
+}
+
+/* Page widths follow the content: forms stay readable, collections use columns. */
+@media (min-width: 1024px) {
+  .desktop-page {
+    width: 100%; max-width: 960px; margin-inline: auto; padding: 28px 32px 48px;
+    overflow-wrap: anywhere;
+  }
+  .desktop-page .page-header { margin-bottom: 16px; padding-bottom: 20px; }
+  .desktop-page .page-header h1 { font-size: 24px; }
+  .board-page, .friends-page, .recap-page { max-width: 800px; }
+  .log-page, .night-page { max-width: 760px; }
+  .profile-page { max-width: 1120px; }
+  .collection-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; }
+  .collection-grid > li { min-width: 0; }
+  .log-details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 24px; }
+  .log-details > .field { min-width: 0; margin-top: 0; }
+  .desktop-page .entry-photo { object-fit: contain; background: var(--color-surface); max-height: 520px; }
+  .app-shell:has(.auth-page) { max-width: 520px; padding: 48px 0; }
+  .auth-page { border: 1px solid var(--color-divider); }
+  .auth-page > div, .auth-page > form { padding-inline: 32px; }
+}
+
+@media (min-width: 1280px) {
+  .profile-layout { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); align-items: start; column-gap: 24px; }
+  .profile-overview { grid-column: 1; grid-row: 1; }
+  .profile-history { grid-column: 2; grid-row: 1 / span 2; min-width: 0; }
+  .profile-layout .account-panel { grid-column: 1; grid-row: 2; margin-top: 0; }
 }
 
 /* Camera controls stay outside the image so framing matches the saved photo. */
