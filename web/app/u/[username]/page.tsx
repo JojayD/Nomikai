@@ -23,7 +23,7 @@ export default async function ProfilePage(props: PageProps<"/u/[username]">) {
     ? await apiServer<{ leaderboard_opt_in: boolean }>("/me")
     : null;
   return (
-    <main className="flex flex-1 flex-col">
+    <main className="desktop-page profile-page flex flex-1 flex-col">
       <Header kicker={own ? "Your profile" : "Profile"} />
       <ProfileView
         profile={profile}

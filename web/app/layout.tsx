@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Archivo } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
+import DesktopNav from "./desktop-nav";
 
 const archivo = Archivo({
   variable: "--font-archivo",
@@ -20,6 +21,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full">
         <Providers>
           <div className="app-shell mx-auto flex min-h-dvh w-full max-w-[430px] flex-col">
+            <DesktopNav />
             {children}
           </div>
         </Providers>

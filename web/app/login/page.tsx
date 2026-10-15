@@ -86,7 +86,7 @@ export default function LoginPage() {
   const resetErrors = () => all.forEach((m) => m.reset());
 
   return (
-    <main className="flex flex-1 flex-col">
+    <main className="auth-page flex flex-1 flex-col">
       <div className="border-b-2 px-5 pt-10 pb-6" style={{ borderColor: "var(--color-divider)" }}>
         <h1 className="text-[44px] leading-[0.95] tracking-[-0.045em]">NOMIKAI</h1>
         <div className="kicker mt-2 !text-[12px] !tracking-[0.2em]">

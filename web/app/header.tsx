@@ -9,7 +9,7 @@ export default function Header({
 }) {
   return (
     <div
-      className="flex items-baseline gap-2.5 border-b-2 px-4 pt-3.5 pb-3"
+      className="page-header flex flex-wrap items-baseline gap-2.5 border-b-2 px-4 pt-3.5 pb-3"
       style={{ borderColor: "var(--color-divider)" }}
     >
       <h1 className="mr-auto text-[20px] tracking-[-0.02em]">

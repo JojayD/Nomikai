@@ -118,8 +118,8 @@ export default function ProfileView({
   const busy = sendRequest.isPending || accept.isPending || withdraw.isPending;
 
   return (
-    <>
-      <div className="px-4 py-5">
+    <div className="profile-layout contents">
+      <div className="profile-overview px-4 py-5">
         <div className="flex items-center gap-3">
           <Avatar src={profile.avatar_src} username={profile.username} size={14} />
           <div>
@@ -228,7 +228,7 @@ export default function ProfileView({
       </div>
 
       {canSee && (
-        <div>
+        <div className="profile-history">
           {entries.isPending && <p role="status" className="px-4 py-7 text-sm">Loading drink history…</p>}
           {entries.isError && (
             <div role="alert" className="px-4 py-4 text-sm">
@@ -275,6 +275,6 @@ export default function ProfileView({
           leaderboardOptIn={leaderboardOptIn}
         />
       )}
-    </>
+    </div>
   );
 }

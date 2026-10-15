@@ -46,7 +46,7 @@ export default function NightOutPage({
   });
 
   return (
-    <main className="flex flex-1 flex-col">
+    <main className="desktop-page night-page flex flex-1 flex-col">
       <Header kicker="Night out" />
       {night.isPending ? (
         <div className="kicker px-4 py-7">Loading…</div>

@@ -23,7 +23,7 @@ export default async function RecapPage() {
   ] as const;
 
   return (
-    <main className="flex flex-1 flex-col">
+    <main className="desktop-page recap-page flex flex-1 flex-col">
       <Header kicker="Weekly recap" />
       <div className="px-4 py-5">
         <h2 className="text-[26px] tracking-[-0.03em]">
