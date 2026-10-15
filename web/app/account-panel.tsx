@@ -45,6 +45,7 @@ export default function AccountPanel(props: {
       }),
     // The profile is rendered by the server component above us.
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["me"] });
       queryClient.invalidateQueries({ queryKey: ["leaderboard"] });
       router.refresh();
     },
