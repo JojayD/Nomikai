@@ -80,7 +80,7 @@ export default function FriendsPage() {
   const failure = send.error ?? accept.error ?? remove.error;
 
   return (
-    <main className="flex flex-1 flex-col">
+    <main className="desktop-page friends-page flex flex-1 flex-col">
       <Header kicker="Friends" />
       <div className="px-4 py-5">
         <form

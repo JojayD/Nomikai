@@ -45,6 +45,7 @@ export default function AccountPanel(props: {
       }),
     // The profile is rendered by the server component above us.
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["me"] });
       queryClient.invalidateQueries({ queryKey: ["leaderboard"] });
       router.refresh();
     },
@@ -105,7 +106,7 @@ export default function AccountPanel(props: {
         : null);
 
   return (
-    <div className="mt-auto px-4 pb-8">
+    <div className="account-panel mt-auto px-4 pb-8">
       <div className="hr mb-4" />
       <div className="kicker mb-3">Account</div>
 

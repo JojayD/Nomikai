@@ -11,7 +11,7 @@ export default async function BoardPage() {
   if (!user) redirect("/login");
 
   return (
-    <main className="flex flex-1 flex-col">
+    <main className="desktop-page board-page flex flex-1 flex-col">
       <Header kicker="Leaderboard" />
       <Board viewerId={user.id} />
     </main>

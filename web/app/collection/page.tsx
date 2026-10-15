@@ -66,7 +66,7 @@ export default function Collection() {
   );
 
   return (
-    <main className="flex flex-1 flex-col">
+    <main className="desktop-page collection-page flex flex-1 flex-col">
       <Header kicker="Your collection" />
       <div className="p-4">
         <h2 className="text-3xl">A little taste of you.</h2>
@@ -190,7 +190,7 @@ export default function Collection() {
                 {remove.error.message} Try removing it again.
               </p>
             )}
-            <ul className="mt-4">
+            <ul className="collection-grid mt-4">
               {saved.data?.map((drink) => (
                 <li
                   key={drink.id}
@@ -231,7 +231,7 @@ export default function Collection() {
                 <Link href="/friends">Add friends</Link> to see what they recommend.
               </p>
             )}
-            <ul className="mt-4">
+            <ul className="collection-grid mt-4">
               {picks.data?.map((drink) => (
                 <li
                   key={drink.normalized_name}
@@ -268,7 +268,7 @@ export default function Collection() {
                 <p className="py-7 text-sm">No drinks match these filters.</p>
               )
             )}
-            <ul className="mt-4">
+            <ul className="collection-grid mt-4">
               {matches.map((drink) => (
                 <li
                   key={drink.normalized_name}

@@ -52,7 +52,7 @@ export default function OnboardingPage() {
     : null;
 
   return (
-    <main className="flex flex-1 flex-col">
+    <main className="auth-page flex flex-1 flex-col">
       <div className="border-b-2 px-5 pt-10 pb-6" style={{ borderColor: "var(--color-divider)" }}>
         <h1 className="text-[32px] tracking-[-0.03em]">Almost in.</h1>
         <p className="mt-3 text-[14.5px] opacity-80">

@@ -79,7 +79,7 @@ function LogLoader() {
 
   if (editId && entry.isPending) {
     return (
-      <main className="flex flex-1 flex-col">
+      <main className="desktop-page log-page flex flex-1 flex-col">
         <Header kicker="Log a drink" />
         <div className="kicker px-4 py-7">Loading…</div>
       </main>
@@ -87,7 +87,7 @@ function LogLoader() {
   }
   if (editId && entry.isError) {
     return (
-      <main className="flex flex-1 flex-col">
+      <main className="desktop-page log-page flex flex-1 flex-col">
         <Header kicker="Log a drink" />
         <p
           className="px-4 py-7 text-sm font-semibold"
@@ -404,7 +404,7 @@ function LogForm({
 
   if (saved) {
     return (
-      <main className="flex flex-1 flex-col">
+      <main className="desktop-page log-page flex flex-1 flex-col">
         <Header kicker="Log a drink" />
         <div className="px-4 py-7">
           <div className="kicker mb-2" role="status">{pending ? "Saving…" : "Logged"}</div>
@@ -444,7 +444,7 @@ function LogForm({
   }
 
   return (
-    <main className="flex flex-1 flex-col">
+    <main className="desktop-page log-page flex flex-1 flex-col">
       <Header kicker="Log a drink" />
       <form
         className="p-4"
@@ -524,7 +524,7 @@ function LogForm({
         )}
 
         {showDetails ? (
-          <>
+          <div className="log-details">
             <div className="field mt-4">
               <label htmlFor="loggedAt">When</label>
               <input
@@ -678,7 +678,7 @@ function LogForm({
                 </button>
               )}
             </div>
-          </>
+          </div>
         ) : (
           <button
             type="button"
