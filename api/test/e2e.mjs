@@ -177,10 +177,16 @@ try {
   check('GET /entries returns own history', r.body?.length === 1 && r.body[0].id === entryId, r);
   check('GET /entries signs the photo', typeof r.body[0].photo_url === 'string' && r.body[0].photo_url.includes('token='), r.body?.[0]?.photo_url);
   check('GET /entries carries the night out label', r.body[0].night_out_name === 'E2E Night', r.body?.[0]);
+  r = await api(a, 'GET', `/entries?user_id=${a.id}&q=lager`);
+  check('search matches curated drink name', r.status === 200 && r.body?.length === 1 && r.body[0].id === entryId, r);
 
   console.log('\n— visibility before friendship —');
+  r = await api(null, 'GET', `/entries?user_id=${a.id}&q=Lager`);
+  check('filtered history requires a token → 401', r.status === 401, r);
   r = await api(b, 'GET', `/entries?user_id=${a.id}`);
   check("GET /entries for a stranger → 403", r.status === 403, r);
+  r = await api(b, 'GET', `/entries?user_id=${a.id}&q=Lager&recommended=true`);
+  check('filtered history is also friend-gated → 403', r.status === 403, r);
   r = await api(b, 'GET', `/profiles/${a.id}/stats`);
   check('GET /profiles/:id/stats for a stranger → 403', r.status === 403, r);
   r = await api(b, 'GET', `/night-outs/${nightId}`);
@@ -367,11 +373,75 @@ try {
   r = await api(a, 'GET', `/entries/${entryId}`);
   check('deleted entry is gone → 404', r.status === 404, r);
 
+  console.log('\n— searchable history —');
+  const searchEntry = async (fields) => {
+    const { minutesAgo, ...entryFields } = fields;
+    const created = await api(a, 'POST', '/entries', {
+      drink_id: null,
+      custom_drink_name: 'Soda',
+      night_out_id: null,
+      logged_at: new Date(Date.now() - minutesAgo * 60_000).toISOString(),
+      location: null,
+      note: null,
+      recommended: null,
+      ...entryFields,
+    });
+    check(`create search fixture ${fields.custom_drink_name}`, created.status === 201 && !!created.body?.id, created);
+    return created.body?.id;
+  };
+  const cafeId = await searchEntry({ custom_drink_name: 'Café 100%_', recommended: true, minutesAgo: 4 });
+  const moonId = await searchEntry({ custom_drink_name: 'Ginger Ale', location: 'Moon%_ Bar', note: "A comet passed by O'Brien\\Lounge", recommended: false, minutesAgo: 3 });
+  const firstNightId = await searchEntry({ custom_drink_name: 'Soda', note: 'Quiet café corner', new_night_out: { name: 'Golden Hour', location: null }, minutesAgo: 2 });
+  r = await api(a, 'GET', `/entries/${firstNightId}`);
+  const searchNightId = r.body?.night_out_id;
+  check('search fixture has a night out', !!searchNightId, r);
+  const lastNightId = await searchEntry({ custom_drink_name: 'Tonic', night_out_id: searchNightId, recommended: true, minutesAgo: 1 });
+
+  const history = (user, params) => api(user, 'GET', `/entries?${new URLSearchParams({ user_id: a.id, ...params })}`);
+  r = await history(a, {});
+  const unfilteredIds = r.body?.map((e) => e.id);
+  const whitespace = await history(a, { q: '  ' });
+  check('whitespace-only search equals unfiltered history', r.status === 200 && whitespace.status === 200 && JSON.stringify(whitespace.body?.map((e) => e.id)) === JSON.stringify(unfilteredIds), whitespace);
+  r = await history(a, { q: 'CAFÉ' });
+  check('case-insensitive Unicode search matches drink and note', r.status === 200 && r.body?.length === 2 && r.body.some((e) => e.id === cafeId) && r.body.some((e) => e.id === firstNightId), r);
+  r = await history(a, { q: 'Moon' });
+  check('search matches location', r.status === 200 && r.body?.length === 1 && r.body[0].id === moonId, r);
+  r = await history(a, { q: 'comet' });
+  check('search matches note', r.status === 200 && r.body?.length === 1 && r.body[0].id === moonId, r);
+  r = await history(a, { q: "O'Brien\\Lounge" });
+  check('apostrophe and backslash are literal search text', r.status === 200 && r.body?.length === 1 && r.body[0].id === moonId, r);
+  r = await history(a, { q: 'Golden Hour' });
+  check('search matches night label', r.status === 200 && r.body?.length === 2 && r.body[0].id === lastNightId && r.body[1].id === firstNightId, r);
+  r = await history(a, { q: '%_', limit: '1', offset: '0' });
+  check('literal wildcard search filters before first page', r.status === 200 && r.body?.length === 1 && r.body[0].id === moonId, r);
+  r = await history(a, { q: '%_', limit: '1', offset: '1' });
+  check('literal wildcard search filters before second page', r.status === 200 && r.body?.length === 1 && r.body[0].id === cafeId, r);
+  r = await history(a, { q: '  %_  ', recommended: 'true' });
+  check('trimmed search and recommended-only match true rows', r.status === 200 && r.body?.length === 1 && r.body[0].id === cafeId, r);
+  r = await history(a, { recommended: 'true' });
+  check('recommended-only excludes false and null', r.status === 200 && r.body?.length === 2 && r.body[0].id === lastNightId && r.body[1].id === cafeId, r);
+  r = await history(a, { q: "' OR 1=1 --" });
+  check('search text cannot change the SQL predicate', r.status === 200 && r.body?.length === 0, r);
+  r = await history(a, { q: '🫧'.repeat(120) });
+  check('search accepts exactly 120 Unicode characters', r.status === 200 && r.body?.length === 0, r);
+  r = await history(a, { q: '🫧'.repeat(121) });
+  check('search over 120 Unicode characters → 400', r.status === 400, r);
+  r = await api(a, 'GET', `/entries?user_id=${a.id}&q=x&q=y`);
+  check('repeated q values → 400', r.status === 400, r);
+  r = await history(a, { recommended: 'false' });
+  check('unsupported recommended value → 400', r.status === 400, r);
+  r = await api(a, 'GET', `/entries?user_id=${a.id}&recommended=true&recommended=true`);
+  check('repeated recommended values → 400', r.status === 400, r);
+  r = await history(b, { q: '%_', recommended: 'true' });
+  check('friend can search recommended history', r.status === 200 && r.body?.length === 1 && r.body[0].id === cafeId, r);
+
   r = await api(b, 'DELETE', `/friendships/${friendshipId}`);
   check('DELETE /friendships/:id (unfriend)', r.body?.deleted === true, r);
 
   r = await api(b, 'GET', `/entries?user_id=${a.id}`);
   check('unfriending revokes visibility immediately → 403', r.status === 403, r);
+  r = await history(b, { q: 'Golden Hour' });
+  check('unfriending revokes filtered history → 403', r.status === 403, r);
 
   r = await api(b, 'DELETE', `/friendships/${friendshipId}`);
   check('DELETE /friendships/:id twice → 404', r.status === 404, r);
@@ -396,6 +466,8 @@ try {
 
   r = await api(b, 'GET', `/entries?user_id=${a.id}`);
   check("blocked B cannot see A's entries → 403", r.status === 403, r);
+  r = await history(b, { q: 'Golden Hour' });
+  check('blocked B cannot search A’s history → 403', r.status === 403, r);
 
   r = await api(b, 'POST', '/friendships', { username: nameA });
   check('blocked B cannot re-friend → 403', r.status === 403, r);

@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -17,7 +18,7 @@ import {
 } from '@nestjs/common';
 import { randomUUID } from 'node:crypto';
 import { Throttle } from '@nestjs/throttler';
-import { and, desc, eq } from 'drizzle-orm';
+import { and, desc, eq, or, sql } from 'drizzle-orm';
 import { AuthGuard, UserId } from './auth.guard';
 import { DB, type Db } from './db';
 import { drinks, entries, nightOuts } from './db/schema';
@@ -68,10 +69,36 @@ export class EntriesController {
     @Query('user_id') targetId: string,
     @Query('limit') limit = '30',
     @Query('offset') offset = '0',
+    @Query('q') q?: unknown,
+    @Query('recommended') recommended?: unknown,
   ) {
+    if (q !== undefined && typeof q !== 'string') {
+      throw new BadRequestException('Search must be text.');
+    }
+    const search = typeof q === 'string' ? q.trim() : '';
+    if ([...search].length > 120) {
+      throw new BadRequestException('Search must be 120 characters or fewer.');
+    }
+    if (recommended !== undefined && recommended !== 'true') {
+      throw new BadRequestException('Recommended must be true.');
+    }
     await assertCanSee(this.db, viewerId, targetId);
+    const matches = search
+      ? or(
+          sql`strpos(lower(coalesce(${drinks.name}, ${entries.customDrinkName}, '')), lower(${search})) > 0`,
+          sql`strpos(lower(coalesce(${entries.location}, '')), lower(${search})) > 0`,
+          sql`strpos(lower(coalesce(${entries.note}, '')), lower(${search})) > 0`,
+          sql`strpos(lower(coalesce(${nightOuts.name}, '')), lower(${search})) > 0`,
+        )
+      : undefined;
     const rows = await entryQuery(this.db, viewerId)
-      .where(eq(entries.userId, targetId))
+      .where(
+        and(
+          eq(entries.userId, targetId),
+          recommended === 'true' ? eq(entries.recommended, true) : undefined,
+          matches,
+        ),
+      )
       // logged_at ties at minute precision; created_at then id make the
       // order (and offset pagination) deterministic
       .orderBy(
