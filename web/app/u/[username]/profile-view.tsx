@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { api, json } from "@/lib/api";
+import Link from "next/link";
+import { ApiError, api, json } from "@/lib/api";
 import EntryCard, { type EntryRowData } from "../../entry-card";
 import AccountPanel from "../../account-panel";
 import Avatar from "../../avatar";
@@ -31,6 +32,15 @@ export default function ProfileView({
 }) {
   const own = profile.id === viewerId;
   const queryClient = useQueryClient();
+  const [search, setSearch] = useState("");
+  const [searchError, setSearchError] = useState(false);
+  const [submittedQ, setSubmittedQ] = useState("");
+  const [recommendedOnly, setRecommendedOnly] = useState(false);
+  const [accessDenial, setAccessDenial] = useState<{
+    viewerId: string;
+    profileId: string;
+    status: number;
+  } | null>(null);
 
   const friendship = useQuery({
     queryKey: ["friendship", profile.id],
@@ -82,14 +92,31 @@ export default function ProfileView({
   });
 
   const entries = useInfiniteQuery({
-    queryKey: ["entries", profile.id],
+    queryKey: ["entries", viewerId, profile.id, submittedQ, recommendedOnly],
     enabled: canSee,
+    retry: false,
     initialPageParam: 0,
     // The API orders, gates on friendship, and signs the photo URLs.
-    queryFn: ({ pageParam }) =>
-      api<EntryRowData[]>(
-        `/entries?user_id=${profile.id}&limit=${PAGE_SIZE}&offset=${pageParam}`
-      ),
+    queryFn: ({ pageParam, signal }) => {
+      const params = new URLSearchParams({
+        user_id: profile.id,
+        limit: String(PAGE_SIZE),
+        offset: String(pageParam),
+      });
+      if (submittedQ) params.set("q", submittedQ);
+      if (recommendedOnly) params.set("recommended", "true");
+      return api<EntryRowData[]>(`/entries?${params}`, { signal }).catch((error) => {
+        if (error instanceof ApiError && (error.status === 401 || error.status === 403)) {
+          // Other filter results must not reappear after this view remounts.
+          queryClient.removeQueries({
+            queryKey: ["entries", viewerId, profile.id],
+            type: "inactive",
+          });
+          setAccessDenial({ viewerId, profileId: profile.id, status: error.status });
+        }
+        throw error;
+      });
+    },
     getNextPageParam: (last, _all, lastOffset) =>
       last.length < PAGE_SIZE ? null : lastOffset + PAGE_SIZE,
   });
@@ -116,6 +143,16 @@ export default function ProfileView({
   });
 
   const busy = sendRequest.isPending || accept.isPending || withdraw.isPending;
+  const deniedStatus = entries.error instanceof ApiError &&
+    (entries.error.status === 401 || entries.error.status === 403)
+    ? entries.error.status
+    : null;
+  const accessStatus = deniedStatus ??
+    (accessDenial?.viewerId === viewerId && accessDenial.profileId === profile.id
+      ? accessDenial.status
+      : null);
+  const accessDenied = accessStatus !== null;
+  const filtered = !!submittedQ || recommendedOnly;
 
   return (
     <div className="profile-layout contents">
@@ -228,20 +265,117 @@ export default function ProfileView({
       </div>
 
       {canSee && (
-        <div className="profile-history">
-          {entries.isPending && <p role="status" className="px-4 py-7 text-sm">Loading drink history…</p>}
-          {entries.isError && (
+        <div className="profile-history" aria-busy={entries.isFetching}>
+          <form
+            className="border-b border-[var(--color-divider)] px-4 py-4"
+            onSubmit={(event) => {
+              event.preventDefault();
+              const q = search.trim();
+              if ([...q].length > 120) {
+                setSearchError(true);
+                return;
+              }
+              setSearchError(false);
+              setSubmittedQ(q);
+            }}
+          >
+            <label className="kicker" htmlFor="profile-history-search">Search drink history</label>
+            <div className="mt-2 flex gap-2">
+              <input
+                id="profile-history-search"
+                className="input min-w-0 flex-1"
+                type="search"
+                value={search}
+                aria-invalid={searchError}
+                aria-describedby={searchError ? "profile-history-search-error" : undefined}
+                onChange={(event) => {
+                  setSearch(event.target.value);
+                  setSearchError(false);
+                }}
+                placeholder="Drink, place, note, or night"
+              />
+              <button type="submit" className="btn btn-secondary !mt-0">Search</button>
+            </div>
+            {searchError && <p id="profile-history-search-error" role="alert" className="mt-2 text-sm">Search must be 120 characters or fewer.</p>}
+            <div className="mt-3 flex items-center justify-between gap-3 text-sm">
+              <label className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={recommendedOnly}
+                  onChange={(event) => setRecommendedOnly(event.target.checked)}
+                />
+                Recommended only
+              </label>
+              {(filtered || search) && (
+                <button
+                  type="button"
+                  className="btn btn-ghost !mt-0 text-sm"
+                  onClick={() => {
+                    setSearch("");
+                    setSearchError(false);
+                    setSubmittedQ("");
+                    setRecommendedOnly(false);
+                  }}
+                >
+                  Clear filters
+                </button>
+              )}
+            </div>
+          </form>
+          {entries.isPending && !accessDenied && <p role="status" className="px-4 py-7 text-sm">Loading drink history…</p>}
+          {((entries.isError && !entries.data) || accessDenied) && (
             <div role="alert" className="px-4 py-4 text-sm">
-              <p>Could not load drink history.</p>
-              <button type="button" className="btn btn-secondary" disabled={entries.isFetching} onClick={() => entries.refetch()}>
+              {accessDenied ? (
+                <>
+                  <p>{accessStatus === 401
+                    ? "Your session expired. Sign in to view drink history."
+                    : "You no longer have access to this drink history."}</p>
+                  {accessStatus === 403 && <button
+                    type="button"
+                    className="btn btn-secondary"
+                    disabled={entries.isFetching}
+                    onClick={async () => {
+                      const result = await entries.refetch();
+                      if (result.isSuccess) setAccessDenial(null);
+                    }}
+                  >
+                    Retry access
+                  </button>}
+                  <Link className="btn btn-secondary" href={accessStatus === 401 ? "/login" : "/friends"}>
+                    {accessStatus === 401 ? "Sign in" : "View friends"}
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <p>Could not load drink history.</p>
+                  <button type="button" className="btn btn-secondary" disabled={entries.isFetching} onClick={() => entries.refetch()}>
+                    {entries.isFetching ? "Retrying…" : "Retry"}
+                  </button>
+                </>
+              )}
+            </div>
+          )}
+          {entries.isError && entries.data && !accessDenied && (
+            <div role="alert" className="px-4 py-4 text-sm">
+              <p>{entries.isFetchNextPageError
+                ? "Could not load more drinks. Your earlier results are still here."
+                : "Could not refresh drink history. Showing saved results."}</p>
+              <button
+                type="button"
+                className="btn btn-secondary"
+                disabled={entries.isFetching}
+                onClick={() => entries.isFetchNextPageError
+                  ? entries.fetchNextPage()
+                  : entries.refetch()}
+              >
                 {entries.isFetching ? "Retrying…" : "Retry"}
               </button>
             </div>
           )}
-          {entries.isSuccess && !entries.data.pages.some(page => page.length > 0) && (
-            <p className="px-4 py-7 text-sm">No drinks logged yet.</p>
+          {entries.isSuccess && !accessDenied && !entries.data.pages.some(page => page.length > 0) && (
+            <p className="px-4 py-7 text-sm">{filtered ? "No drinks match these filters." : "No drinks logged yet."}</p>
           )}
-          {entries.data?.pages.flat().map((r) => (
+          {!accessDenied && entries.data?.pages.flat().map((r) => (
             <EntryCard
               key={r.id}
               row={r}
@@ -251,7 +385,7 @@ export default function ProfileView({
               }
             />
           ))}
-          {entries.hasNextPage && (
+          {!accessDenied && entries.hasNextPage && !entries.isFetchNextPageError && (
             <div className="px-4 py-3">
               <button
                 className="btn btn-secondary btn-block !mt-0"
