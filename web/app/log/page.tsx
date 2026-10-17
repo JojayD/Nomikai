@@ -312,7 +312,7 @@ function LogForm({
       : null);
 
   const normalizedQuery = normalizeDrinkName(query);
-  // F4 ranking: own repeats (by times logged) above the curated list.
+  // Exact matches first, then own repeats (by times logged), then the catalog.
   let matches: Option[] = [];
   if (normalizedQuery) {
     const byId = new Map((drinks.data ?? []).map((d) => [d.id, d]));
@@ -352,7 +352,11 @@ function LogForm({
           timesLogged: 0,
         })
       );
-    matches = [...histMatches, ...curatedMatches].slice(0, 8);
+    matches = [...histMatches, ...curatedMatches]
+      .sort((a, b) =>
+        Number(b.normalized === normalizedQuery) - Number(a.normalized === normalizedQuery)
+      )
+      .slice(0, 8);
   }
   const exactMatch = matches.some((m) => m.normalized === normalizedQuery);
 
