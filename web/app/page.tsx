@@ -55,7 +55,7 @@ export default async function Home(props: PageProps<"/">) {
         />
       </div>
       <section className="feed-timeline" aria-label="Drink logs">
-        <Link href="/collection" className="border-b border-[var(--color-divider)] px-4 py-3 text-sm font-bold">
+        <Link href="/collection" className="block border-b border-[var(--color-divider)] px-4 py-3 text-sm font-bold lg:mb-6 lg:px-0">
           My collection · Want to try &amp; Passport
         </Link>
         <div className="feed-title hidden">

@@ -46,12 +46,11 @@ export default function Feed({ viewerId }: { viewerId: string }) {
 
   if (!rows.length)
     return (
-      <div className="px-4 py-7">
-        <div className="hr" />
-        <h2 className="my-4 text-[32px] leading-[1.05] tracking-[-0.03em]">
+      <div className="px-4 py-7 lg:px-0">
+        <h2 className="text-[32px] leading-[1.05] tracking-[-0.03em]">
           Nothing here yet.
         </h2>
-        <p className="mb-4 text-[13.5px] opacity-70">
+        <p className="mt-3 mb-4 text-[13.5px] opacity-70">
           Log your first drink, then invite friends to see each other&apos;s
           nights here.
         </p>
