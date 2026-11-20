@@ -1,17 +1,27 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { api } from "@/lib/api";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { api, json } from "@/lib/api";
 
-type Bar = { name: string; city: string | null; address: string | null };
+type Bar = {
+  id: string;
+  name: string;
+  city: string | null;
+  address: string | null;
+};
+type Menu =
+  | { status: "pending" | "none" }
+  | { status: "ready"; items: { name: string }[]; sourceUrls: string[] };
 
 export default function BarPicker({
   value,
   onChange,
+  onPickDrink,
 }: {
   value: string;
   onChange: (value: string) => void;
+  onPickDrink: (name: string) => void;
 }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -30,14 +40,53 @@ export default function BarPicker({
   });
   const showResults = open && !!query && query === search;
 
+  // The position is sent for this one lookup and never stored.
+  const nearby = useMutation({
+    mutationFn: async () => {
+      const { coords } = await new Promise<GeolocationPosition>(
+        (resolve, reject) =>
+          navigator.geolocation.getCurrentPosition(resolve, reject, {
+            timeout: 10_000,
+          }),
+      );
+      return api<Bar[]>("/bars/nearby", {
+        method: "POST",
+        ...json({ lat: coords.latitude, lng: coords.longitude }),
+      });
+    },
+  });
+  const results = nearby.data ?? (showResults ? bars.data : undefined);
+
+  // Drinks found on the picked bar's own menu. The first read starts a web
+  // lookup, so poll while it runs and give up after about a minute.
+  const [picked, setPicked] = useState<Bar | null>(null);
+  const menu = useQuery({
+    queryKey: ["bar-menu", picked?.id],
+    queryFn: async ({ signal }) => {
+      for (let tries = 0; ; tries++) {
+        const found = await api<Menu>(`/bars/${picked!.id}/menu`, { signal });
+        if (found.status !== "pending" || tries >= 20) return found;
+        await new Promise((resolve) => setTimeout(resolve, 3000));
+      }
+    },
+    enabled: !!picked,
+    staleTime: 5 * 60_000,
+  });
+
   return (
     <div
       className="field mt-3"
       onBlur={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
+        if (!event.currentTarget.contains(event.relatedTarget)) {
+          setOpen(false);
+          nearby.reset();
+        }
       }}
       onKeyDown={(event) => {
-        if (event.key === "Escape") setOpen(false);
+        if (event.key === "Escape") {
+          setOpen(false);
+          nearby.reset();
+        }
       }}
     >
       <label htmlFor="location">Where · optional</label>
@@ -51,22 +100,38 @@ export default function BarPicker({
         onFocus={() => setOpen(true)}
         onChange={(event) => {
           onChange(event.target.value);
+          setPicked(null);
           setOpen(true);
+          nearby.reset();
         }}
       />
-      {showResults && !!bars.data?.length && (
+      <button
+        type="button"
+        className="btn btn-ghost self-start text-sm"
+        // not `disabled`: a focused button that disables itself blurs, which
+        // closes the picker and drops the lookup
+        aria-disabled={nearby.isPending}
+        onClick={() => {
+          if (!nearby.isPending) nearby.mutate();
+        }}
+      >
+        Use my location
+      </button>
+      {!!results?.length && (
         <ul aria-label="Bar suggestions" className="border border-current/20">
-          {bars.data.map((bar) => {
+          {results.map((bar) => {
             const label = bar.city ? `${bar.name} — ${bar.city}` : bar.name;
             return (
-              <li key={JSON.stringify([bar.name, bar.city, bar.address])}>
+              <li key={bar.id}>
                 <button
                   type="button"
                   className="w-full px-3 py-2 text-left text-sm hover:bg-black/5 focus-visible:bg-black/5"
                   onMouseDown={(event) => event.preventDefault()}
                   onClick={() => {
                     onChange(label);
+                    setPicked(bar);
                     setOpen(false);
+                    nearby.reset();
                   }}
                 >
                   <span className="block font-semibold">{label}</span>
@@ -80,8 +145,16 @@ export default function BarPicker({
         </ul>
       )}
       <p role="status" className="text-xs opacity-60">
-        {showResults &&
-          (bars.isError
+        {nearby.isPending
+          ? "Finding bars near you…"
+          : nearby.isError
+            ? "Couldn't get your location. You can still search or type a place."
+            : nearby.data
+              ? nearby.data.length
+                ? null
+                : "No bars within 500 m. You can still search or type a place."
+              : showResults &&
+                (bars.isError
             ? "Bar search is unavailable. You can still type any place."
             : bars.isFetching
               ? "Searching bars…"
@@ -89,6 +162,42 @@ export default function BarPicker({
                 ? "No matching bars. You can still use what you typed."
                 : null)}
       </p>
+      {picked && menu.data?.status === "ready" && (
+        <div>
+          <p className="text-xs opacity-60">
+            On the menu at {picked.name} ·{" "}
+            <a
+              href={menu.data.sourceUrls[0]}
+              target="_blank"
+              rel="noreferrer"
+              className="underline"
+            >
+              from the web
+            </a>
+          </p>
+          <ul
+            aria-label={`Drinks at ${picked.name}`}
+            className="mt-1 flex max-h-40 flex-wrap gap-1.5 overflow-y-auto"
+          >
+            {menu.data.items.map((item) => (
+              <li key={item.name}>
+                <button
+                  type="button"
+                  className="border border-current/20 px-2.5 py-1 text-sm hover:bg-black/5 focus-visible:bg-black/5"
+                  onClick={() => onPickDrink(item.name)}
+                >
+                  {item.name}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {picked && menu.isFetching && (
+        <p role="status" className="text-xs opacity-60">
+          Looking up the menu at {picked.name}…
+        </p>
+      )}
       <p id="location-help" className="text-xs opacity-60">
         Bay Area bars, or any place you type.{" "}
         <a

@@ -123,12 +123,14 @@ function LogForm({
     if (me.isSuccess && !me.data) router.push("/login");
   }, [me.isSuccess, me.data, router]);
 
+  const [showDetails, setShowDetails] = useState(!!entry);
   // Curated list: fetched on first focus, then reused for the session.
   const [drinksWanted, setDrinksWanted] = useState(false);
   const drinks = useQuery({
     queryKey: ["drinks"],
     queryFn: () => api<Drink[]>("/drinks"),
-    enabled: drinksWanted,
+    // also needed once details are open, to match a tapped bar-menu drink
+    enabled: drinksWanted || showDetails,
     staleTime: Infinity,
   });
 
@@ -150,7 +152,6 @@ function LogForm({
         : null
   );
   const [query, setQuery] = useState("");
-  const [showDetails, setShowDetails] = useState(!!entry);
   const [loggedAt, setLoggedAt] = useState(() =>
     toLocalInput(entry ? new Date(entry.logged_at) : new Date())
   );
@@ -540,7 +541,17 @@ function LogForm({
                 required
               />
             </div>
-            <BarPicker value={location} onChange={setLocation} />
+            <BarPicker
+              value={location}
+              onChange={setLocation}
+              onPickDrink={(name) => {
+                // same as typing it: the curated drink when the name matches
+                const curated = drinks.data?.find(
+                  (d) => d.name.toLowerCase() === name.toLowerCase()
+                );
+                setSel({ drinkId: curated?.id ?? null, name: curated?.name ?? name });
+              }}
+            />
             <div className="field mt-3">
               <label htmlFor="note">
                 Note · optional · {note.length}/140
