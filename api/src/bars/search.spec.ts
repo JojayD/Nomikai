@@ -4,7 +4,10 @@ import { cleanMenu } from './menu-agent';
 import { nearbyBars, searchBars } from './search';
 
 // the real guard imports jose, which is ESM-only and jest cannot parse it
-jest.mock('../auth.guard', () => ({ AuthGuard: class {} }));
+jest.mock('../auth.guard', () => ({
+  AuthGuard: class {},
+  UserId: () => () => {},
+}));
 
 describe('searchBars', () => {
   it.each([
@@ -56,7 +59,7 @@ describe('POST /bars/nearby', () => {
 describe('GET /bars/:type/:id/menu', () => {
   it('404s a bar that is not in the snapshot', async () => {
     await expect(
-      new BarsController(null as never).menu('node', '1'),
+      new BarsController(null as never).menu('me', 'node', '1'),
     ).rejects.toThrow(NotFoundException);
   });
 });

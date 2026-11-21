@@ -277,6 +277,10 @@ export const barMenus = pgTable(
       .defaultNow()
       .notNull(),
     fetchedAt: timestamp('fetched_at', { withTimezone: true, mode: 'string' }),
+    // who started the lookup, for the per-member daily cap
+    requestedBy: uuid('requested_by').references(() => profiles.id, {
+      onDelete: 'set null',
+    }),
   },
   () => [
     check(

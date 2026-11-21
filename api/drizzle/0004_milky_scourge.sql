@@ -1,0 +1,2 @@
+ALTER TABLE "bar_menus" ADD COLUMN "requested_by" uuid;--> statement-breakpoint
+ALTER TABLE "bar_menus" ADD CONSTRAINT "bar_menus_requested_by_profiles_id_fk" FOREIGN KEY ("requested_by") REFERENCES "public"."profiles"("id") ON DELETE set null ON UPDATE no action;

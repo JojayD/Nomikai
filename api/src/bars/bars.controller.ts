@@ -14,15 +14,17 @@ import {
 } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
 import { and, eq, sql } from 'drizzle-orm';
-import { AuthGuard } from '../auth.guard';
+import { AuthGuard, UserId } from '../auth.guard';
 import { DB, type Db } from '../db';
 import { barMenuItems, barMenus } from '../db/schema';
 import { lookupMenu } from './menu-agent';
 import { type Bar, barById, nearbyBars, searchBars } from './search';
 
-// New web lookups per rolling day, across all members. Over it, bars we have
-// not seen answer "none" without calling the model.
-const DAILY_LOOKUPS = 50;
+// New web lookups per rolling day: across all members, and started by one
+// member (a night out is a handful of bars, and most are already cached).
+// Over either, bars we have not seen answer "none" without calling the model.
+const DAILY_LOOKUPS = 20;
+const DAILY_LOOKUPS_EACH = 5;
 
 @Controller('bars')
 @UseGuards(AuthGuard)
@@ -38,6 +40,7 @@ export class BarsController {
 
   // POST so the coordinates stay out of URLs and access logs. Nothing is stored.
   @Post('nearby')
+  @Throttle({ default: { limit: 30, ttl: 60_000 } })
   @HttpCode(200)
   nearby(@Body() body: { lat?: unknown; lng?: unknown } | undefined) {
     const { lat, lng } = body ?? {};
@@ -55,7 +58,11 @@ export class BarsController {
   // The web app polls this while a lookup runs.
   @Get(':type/:id/menu')
   @Throttle({ default: { ttl: 60_000, limit: 60 } })
-  async menu(@Param('type') type: string, @Param('id') id: string) {
+  async menu(
+    @UserId() userId: string,
+    @Param('type') type: string,
+    @Param('id') id: string,
+  ) {
     const bar = barById(`${type}/${id}`);
     if (!bar) throw new NotFoundException('Unknown bar.');
 
@@ -89,17 +96,22 @@ export class BarsController {
     if (menu) return { status: menu.status };
 
     if (!process.env.ANTHROPIC_API_KEY) return { status: 'none' };
-    const [{ today }] = await this.db
-      .select({ today: sql<number>`count(*)::int` })
+    const [{ today, mine }] = await this.db
+      .select({
+        today: sql<number>`count(*)::int`,
+        mine: sql<number>`(count(*) filter (where ${barMenus.requestedBy} = ${userId}))::int`,
+      })
       .from(barMenus)
       .where(sql`${barMenus.createdAt} > now() - interval '1 day'`);
-    if (today >= DAILY_LOOKUPS) return { status: 'none' };
+    if (today >= DAILY_LOOKUPS || mine >= DAILY_LOOKUPS_EACH) {
+      return { status: 'none' };
+    }
 
     // The primary key makes this the lock: of two members picking the same
     // bar at once, only the one whose insert lands starts a lookup.
     const started = await this.db
       .insert(barMenus)
-      .values({ barId: bar.id })
+      .values({ barId: bar.id, requestedBy: userId })
       .onConflictDoNothing()
       .returning({ barId: barMenus.barId });
     // ponytail: runs in this process, unawaited. A restart drops it and the

@@ -14,6 +14,19 @@ type Menu =
   | { status: "pending" | "none" }
   | { status: "ready"; items: { name: string }[]; sourceUrls: string[] };
 
+// Menus this device has already loaded, reused for a day without a request.
+// ponytail: one localStorage key per bar, never pruned; add cleanup if a
+// device ever collects enough bars to matter.
+const DAY = 24 * 60 * 60_000;
+function savedMenu(barId: string): { at: number; menu: Menu } | null {
+  try {
+    const saved = JSON.parse(localStorage.getItem(`bar-menu:${barId}`) ?? "null");
+    return saved && Date.now() - saved.at < DAY ? saved : null;
+  } catch {
+    return null;
+  }
+}
+
 export default function BarPicker({
   value,
   onChange,
@@ -65,12 +78,26 @@ export default function BarPicker({
     queryFn: async ({ signal }) => {
       for (let tries = 0; ; tries++) {
         const found = await api<Menu>(`/bars/${picked!.id}/menu`, { signal });
+        if (found.status === "ready") {
+          try {
+            localStorage.setItem(
+              `bar-menu:${picked!.id}`,
+              JSON.stringify({ at: Date.now(), menu: found }),
+            );
+          } catch {
+            // storage full or blocked: the menu still shows, just not saved
+          }
+        }
         if (found.status !== "pending" || tries >= 20) return found;
         await new Promise((resolve) => setTimeout(resolve, 3000));
       }
     },
     enabled: !!picked,
-    staleTime: 5 * 60_000,
+    initialData: () => (picked ? savedMenu(picked.id)?.menu : undefined),
+    initialDataUpdatedAt: () => (picked ? savedMenu(picked.id)?.at : undefined),
+    // "none" may just mean the daily cap, so only a found menu is kept long
+    staleTime: (query) =>
+      query.state.data?.status === "ready" ? DAY : 5 * 60_000,
   });
 
   return (

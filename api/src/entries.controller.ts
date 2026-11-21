@@ -141,6 +141,7 @@ export class EntriesController {
    * insert cannot leave an orphan session behind.
    */
   @Post()
+  @Throttle({ default: { limit: 30, ttl: 60_000 } })
   create(@UserId() userId: string, @Body() body: EntryBody) {
     return this.db.transaction(async (tx) => {
       const nightOutId = await resolveNightOut(tx, userId, body);
@@ -165,6 +166,7 @@ export class EntriesController {
   }
 
   @Patch(':id')
+  @Throttle({ default: { limit: 30, ttl: 60_000 } })
   update(
     @UserId() userId: string,
     @Param('id') id: string,
@@ -191,6 +193,7 @@ export class EntriesController {
   }
 
   @Delete(':id')
+  @Throttle({ default: { limit: 30, ttl: 60_000 } })
   async destroy(@UserId() userId: string, @Param('id') id: string) {
     const [row] = await this.db
       .delete(entries)
@@ -225,6 +228,7 @@ export class EntriesController {
   }
 
   @Delete(':id/photo')
+  @Throttle({ default: { limit: 30, ttl: 60_000 } })
   async clearPhoto(@UserId() userId: string, @Param('id') id: string) {
     const previous = await this.replacePhoto(userId, id, null);
     await this.removeUnusedPhoto(previous);

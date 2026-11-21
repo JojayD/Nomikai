@@ -207,5 +207,6 @@ feature and is tracked there.
 2. **No human review.** Menus go live as soon as they are found, labelled with
    their source. The alternative is a review step, which would make the feature
    useless at the moment someone is standing in the bar.
-3. **Daily cap.** How many new bar lookups per day to allow. Built as 50
-   (`DAILY_LOOKUPS` in `bars.controller.ts`).
+3. **Daily cap.** How many new bar lookups per day to allow. Built as 20 in
+   total and 5 started by one member (`DAILY_LOOKUPS` and `DAILY_LOOKUPS_EACH`
+   in `bars.controller.ts`; `bar_menus.requested_by` records who started one).
