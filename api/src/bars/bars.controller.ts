@@ -95,7 +95,14 @@ export class BarsController {
     }
     if (menu) return { status: menu.status };
 
-    if (!process.env.ANTHROPIC_API_KEY) return { status: 'none' };
+    // Either an API key, or the OIDC token file Render writes for the
+    // federation rule (the SDK reads both on its own).
+    if (
+      !process.env.ANTHROPIC_API_KEY &&
+      !process.env.ANTHROPIC_IDENTITY_TOKEN_FILE
+    ) {
+      return { status: 'none' };
+    }
     const [{ today, mine }] = await this.db
       .select({
         today: sql<number>`count(*)::int`,
