@@ -38,7 +38,7 @@ for (const source of sources) {
   if (source.remark || !Array.isArray(source.elements)) {
     throw new Error(source.remark || 'Invalid Overpass response');
   }
-  for (const { tags = {} } of source.elements) {
+  for (const { type, id, lat, lon, center, tags = {} } of source.elements) {
     const name = tags.name?.trim();
     if (!name) continue;
     if (
@@ -53,7 +53,17 @@ for (const source of sources) {
         .join(' ') || null;
     const aliases =
       name.toLowerCase() === 'san jose bar and grill' ? ['SJBG'] : [];
-    const bar = { name, city, address, ...(aliases.length ? { aliases } : {}) };
+    // nodes carry lat/lon; ways and relations get a centre from `out center`
+    const bar = {
+      id: `${type}/${id}`,
+      name,
+      city,
+      address,
+      lat: lat ?? center?.lat,
+      lon: lon ?? center?.lon,
+      ...(aliases.length ? { aliases } : {}),
+    };
+    if (bar.lat == null || bar.lon == null) continue;
     const key = JSON.stringify([name, city, address]).toLowerCase();
     bars.set(key, bar);
   }
