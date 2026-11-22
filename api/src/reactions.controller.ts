@@ -7,6 +7,7 @@ import {
   Put,
   UseGuards,
 } from '@nestjs/common';
+import { Throttle } from '@nestjs/throttler';
 import { and, eq } from 'drizzle-orm';
 import { AuthGuard, UserId } from './auth.guard';
 import { DB, type Db } from './db';
@@ -20,6 +21,7 @@ export class ReactionsController {
   constructor(@Inject(DB) private readonly db: Db) {}
 
   @Put()
+  @Throttle({ default: { limit: 60, ttl: 60_000 } })
   async react(@UserId() userId: string, @Param('id') entryId: string) {
     const [entry] = await this.db
       .select({ userId: entries.userId })
@@ -35,6 +37,7 @@ export class ReactionsController {
   }
 
   @Delete()
+  @Throttle({ default: { limit: 60, ttl: 60_000 } })
   async unreact(@UserId() userId: string, @Param('id') entryId: string) {
     await this.db
       .delete(reactions)

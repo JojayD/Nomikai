@@ -9,6 +9,7 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
+import { Throttle } from '@nestjs/throttler';
 import { and, desc, eq, or, sql } from 'drizzle-orm';
 import { AuthGuard, UserId } from './auth.guard';
 import { DB, type Db } from './db';
@@ -40,6 +41,7 @@ export class BlocksController {
   }
 
   @Post()
+  @Throttle({ default: { limit: 30, ttl: 60_000 } })
   async block(@UserId() userId: string, @Body() body: { blocked_id: string }) {
     await this.db.transaction(async (tx) => {
       await lockProfilePair(tx, userId, body.blocked_id);
@@ -66,6 +68,7 @@ export class BlocksController {
   }
 
   @Delete(':blockedId')
+  @Throttle({ default: { limit: 30, ttl: 60_000 } })
   async unblock(
     @UserId() userId: string,
     @Param('blockedId') blockedId: string,
