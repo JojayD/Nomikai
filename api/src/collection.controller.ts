@@ -10,6 +10,7 @@ import {
   Put,
   UseGuards,
 } from '@nestjs/common';
+import { Throttle } from '@nestjs/throttler';
 import { and, desc, eq, sql } from 'drizzle-orm';
 import { AuthGuard, UserId } from './auth.guard';
 import { DB, type Db } from './db';
@@ -42,6 +43,7 @@ export class CollectionController {
   }
 
   @Put('saved')
+  @Throttle({ default: { limit: 30, ttl: 60_000 } })
   async save(
     @UserId() userId: string,
     @Body() body: { name?: unknown } | null,
@@ -69,6 +71,7 @@ export class CollectionController {
   }
 
   @Delete('saved/:id')
+  @Throttle({ default: { limit: 30, ttl: 60_000 } })
   async remove(
     @UserId() userId: string,
     @Param('id', ParseUUIDPipe) id: string,

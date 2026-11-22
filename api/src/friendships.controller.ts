@@ -140,6 +140,7 @@ export class FriendshipsController {
    * where clause makes sure the friendships_accept trigger never sees another.
    */
   @Patch(':id')
+  @Throttle({ default: { limit: 30, ttl: 60_000 } })
   async accept(@UserId() userId: string, @Param('id') id: string) {
     const [row] = await this.db
       .update(friendships)
@@ -161,6 +162,7 @@ export class FriendshipsController {
    * this delete. It revokes visibility immediately and deletes no data.
    */
   @Delete(':id')
+  @Throttle({ default: { limit: 30, ttl: 60_000 } })
   async remove(@UserId() userId: string, @Param('id') id: string) {
     const [row] = await this.db
       .delete(friendships)

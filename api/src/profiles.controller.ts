@@ -61,6 +61,7 @@ export class ProfilesController {
   }
 
   @Post('me')
+  @Throttle({ default: { limit: 10, ttl: 60_000 } })
   async create(
     @UserId() userId: string,
     @Body() body: { username?: string; timezone?: string },
@@ -80,6 +81,7 @@ export class ProfilesController {
 
   // user_code and age_attested_at stay immutable, as the column grants enforced.
   @Patch('me')
+  @Throttle({ default: { limit: 10, ttl: 60_000 } })
   async update(
     @UserId() userId: string,
     @Body()
@@ -144,6 +146,7 @@ export class ProfilesController {
    * objects are not covered by the cascade, so the folder is emptied first.
    */
   @Delete('me')
+  @Throttle({ default: { limit: 10, ttl: 60_000 } })
   async destroy(@UserId() userId: string) {
     await this.storage.removeFolder(userId);
     await this.storage.deleteAuthUser(userId);

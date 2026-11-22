@@ -262,6 +262,69 @@ export const savedDrinks = pgTable(
   ],
 ).enableRLS();
 
+// Bar menus found on the web by the menu agent (src/bars/menu-agent.ts).
+// bar_id is the OSM id from bars.json. API-only: RLS on, no policies.
+export const barMenus = pgTable(
+  'bar_menus',
+  {
+    barId: text('bar_id').primaryKey().notNull(),
+    status: text().default('pending').notNull(),
+    sourceUrls: text('source_urls')
+      .array()
+      .default(sql`'{}'`)
+      .notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'string' })
+      .defaultNow()
+      .notNull(),
+    fetchedAt: timestamp('fetched_at', { withTimezone: true, mode: 'string' }),
+    // who started the lookup, for the per-member daily cap
+    requestedBy: uuid('requested_by').references(() => profiles.id, {
+      onDelete: 'set null',
+    }),
+  },
+  () => [
+    check(
+      'bar_menus_status_check',
+      sql`status in ('pending', 'ready', 'none')`,
+    ),
+    // a ready menu must be cited
+    check(
+      'bar_menus_cited_check',
+      sql`status <> 'ready' or cardinality(source_urls) >= 1`,
+    ),
+  ],
+).enableRLS();
+
+// Each bar owns its drinks; the same drink at two bars is two rows.
+export const barMenuItems = pgTable(
+  'bar_menu_items',
+  {
+    id: bigint({ mode: 'number' }).primaryKey().generatedAlwaysAsIdentity(),
+    barId: text('bar_id')
+      .notNull()
+      .references(() => barMenus.barId, { onDelete: 'cascade' }),
+    name: text().notNull(),
+    normalizedName: text('normalized_name')
+      .notNull()
+      .generatedAlwaysAs(
+        sql`lower(regexp_replace(btrim(name), '\\s+', ' ', 'g'))`,
+      ),
+    isAlcoholic: boolean('is_alcoholic').notNull(),
+    category: text().notNull(),
+  },
+  (t) => [
+    unique('bar_menu_items_bar_name_key').on(t.barId, t.normalizedName),
+    check(
+      'bar_menu_items_name_check',
+      sql`char_length(name) between 1 and 120 and char_length(normalized_name) > 0`,
+    ),
+    check(
+      'bar_menu_items_category_check',
+      sql`category in ('beer', 'wine', 'spirit', 'cocktail', 'shot', 'non_alcoholic', 'other')`,
+    ),
+  ],
+).enableRLS();
+
 // F6: one reaction type, one row per (entry, user); the PK is the toggle.
 export const reactions = pgTable(
   'reactions',

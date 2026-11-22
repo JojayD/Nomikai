@@ -22,6 +22,20 @@
       "when": 1791412952872,
       "tag": "0002_skinny_queen_noir",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1795152378923,
+      "tag": "0003_gifted_ikaris",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1795239468811,
+      "tag": "0004_milky_scourge",
+      "breakpoints": true
     }
   ]
 }
