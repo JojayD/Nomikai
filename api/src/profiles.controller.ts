@@ -10,12 +10,11 @@ import {
   Patch,
   Post,
   UploadedFile,
-  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
 import { eq, sql } from 'drizzle-orm';
-import { AuthGuard, UserEmail, UserId } from './auth.guard';
+import { UserEmail, UserId } from './auth.guard';
 import { DB, type Db } from './db';
 import { entries, profiles } from './db/schema';
 import { jpegFilePipe, photoFileInterceptor } from './photo-upload';
@@ -31,7 +30,6 @@ const publicColumns = {
 };
 
 @Controller()
-@UseGuards(AuthGuard)
 export class ProfilesController {
   constructor(
     @Inject(DB) private readonly db: Db,

@@ -10,11 +10,10 @@ import {
   Param,
   Post,
   Query,
-  UseGuards,
 } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
 import { and, eq, sql } from 'drizzle-orm';
-import { AuthGuard, UserId } from '../auth.guard';
+import { UserId } from '../auth.guard';
 import { DB, type Db } from '../db';
 import { barMenuItems, barMenus } from '../db/schema';
 import { lookupMenu } from './menu-agent';
@@ -27,7 +26,6 @@ const DAILY_LOOKUPS = 20;
 const DAILY_LOOKUPS_EACH = 5;
 
 @Controller('bars')
-@UseGuards(AuthGuard)
 export class BarsController {
   private readonly logger = new Logger(BarsController.name);
 

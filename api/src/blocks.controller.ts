@@ -7,11 +7,10 @@ import {
   NotFoundException,
   Param,
   Post,
-  UseGuards,
 } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
 import { and, desc, eq, or, sql } from 'drizzle-orm';
-import { AuthGuard, UserId } from './auth.guard';
+import { UserId } from './auth.guard';
 import { DB, type Db } from './db';
 import { blocks, friendships, profiles } from './db/schema';
 
@@ -22,7 +21,6 @@ import { blocks, friendships, profiles } from './db/schema';
  * all friendship-gated. The block row's job is to stop re-friending.
  */
 @Controller('blocks')
-@UseGuards(AuthGuard)
 export class BlocksController {
   constructor(@Inject(DB) private readonly db: Db) {}
 
