@@ -226,7 +226,7 @@ export default function BarPicker({
         </p>
       )}
       <p id="location-help" className="text-xs opacity-60">
-        Bay Area bars, or any place you type.{" "}
+        Bay Area and Long Beach bars, or any place you type.{" "}
         <a
           href="https://www.openstreetmap.org/copyright"
           target="_blank"

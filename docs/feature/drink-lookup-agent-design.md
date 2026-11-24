@@ -1,8 +1,9 @@
 # Bar menu agent: design
 
 Status: built (all four build steps). Hosted needs the `bar_menus` migration and
-`ANTHROPIC_API_KEY` on the Render API service; without the key every bar answers
-`none` and no model call is made.
+either `ANTHROPIC_API_KEY` or OIDC federation (`ANTHROPIC_IDENTITY_TOKEN_FILE`)
+on the Render API service; without both every bar answers `none` and no model
+call is made.
 
 ## Objective
 
@@ -71,8 +72,9 @@ What exists today:
    the section is hidden and the form works as it does today.
 
 6. **Refresh.** A menu older than 30 days is deleted on the next read and looked
-   up again. A `pending` row older than 2 minutes is treated as failed and
-   retried, which covers an API restart or a failed model call mid-lookup.
+   up again. A `pending` row older than 2 minutes answers `none`. If the lookup
+   failed (API restart, model or search error, cut-off answer) the row stays for
+   a day and is then retried, so the daily caps count every model call.
 
 ## Data model
 
@@ -117,7 +119,11 @@ Menu drinks are scoped to their bar and never enter `drinks`. The curated list
 keeps its rule of changing only through migrations.
 
 Following the project rule, Postgres constraints are the validation layer: a
-malformed answer fails the insert and the menu is stored as `none`.
+malformed answer fails the insert and counts as a failed lookup.
+
+A failed search or an unusable answer is sent back to the model once, within the
+same lookup, before it counts as failed. Overload, rate-limit and connection
+errors are retried by the SDK (4 times).
 
 ## Duplicates
 
