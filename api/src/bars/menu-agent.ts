@@ -93,20 +93,29 @@ export function cleanMenu(answer: unknown): Menu | null {
   return items.length && sourceUrls.length ? { items, sourceUrls } : null;
 }
 
-/** Searches the web for the bar's menu. Throws when the model call fails. */
+/**
+ * Searches the web for the bar's menu. Null means there is none (kept for 30
+ * days); anything that only went wrong throws, so it is retried after a day.
+ */
 export async function lookupMenu(bar: Bar): Promise<Menu | null> {
-  const client = new Anthropic();
-  // Only the bar's public name, city and address leave the API.
+  // Runs in the background, so wait out an overloaded API. Lookups take about
+  // 30 seconds; a request silent for 2 minutes is dead.
+  const client = new Anthropic({ maxRetries: 4, timeout: 120_000 });
+  // Only the bar's public OSM name, city, address and position leave the API.
+  // Many bars have no city tag, so the coordinates say where it is.
   const messages: Anthropic.MessageParam[] = [
     {
       role: 'user',
-      content: `Bar: ${bar.name}\nCity: ${bar.city ?? 'unknown (San Francisco Bay Area)'}\nAddress: ${bar.address ?? 'unknown'}`,
+      content: `Bar: ${bar.name}\nCity: ${bar.city ?? 'unknown'}\nAddress: ${bar.address ?? 'unknown'}\nCoordinates: ${bar.lat}, ${bar.lon}`,
     },
   ];
+  let searchFailed = false;
+  let corrected = false;
+  let stopReason: string | null = null;
   for (let turn = 0; turn < 4; turn++) {
     const response = await client.messages.create({
       model: MODEL,
-      max_tokens: 8000,
+      max_tokens: 16000, // thinking counts toward this too
       system: SYSTEM,
       tools: [
         { type: 'web_search_20250305', name: 'web_search', max_uses: 5 },
@@ -114,15 +123,50 @@ export async function lookupMenu(bar: Bar): Promise<Menu | null> {
       ],
       messages,
     });
-    const submitted = response.content.find(
-      (block) => block.type === 'tool_use' && block.name === 'submit_menu',
+    stopReason = response.stop_reason;
+    // A failed search is a normal 200 with an error block, and the model then
+    // tends to answer "no menu". Only a later search that works clears it.
+    // Running out of searches is not a failure.
+    for (const block of response.content) {
+      if (block.type !== 'web_search_tool_result') continue;
+      if (Array.isArray(block.content)) searchFailed = false;
+      else if (block.content.error_code !== 'max_uses_exceeded')
+        searchFailed = true;
+    }
+    const submitted = response.content.filter(
+      (block) => block.type === 'tool_use',
     );
-    if (submitted?.type === 'tool_use') return cleanMenu(submitted.input);
+    // Any other stop reason can leave a cut-off submit_menu behind.
+    if (submitted.length && stopReason === 'tool_use') {
+      const menu = cleanMenu(submitted[0].input);
+      const { has_menu } = submitted[0].input as { has_menu?: unknown };
+      if (menu || (has_menu === false && !searchFailed)) return menu;
+      const problem = searchFailed
+        ? 'Web search failed'
+        : 'Unusable submit_menu answer';
+      if (corrected) throw new Error(problem);
+      corrected = true;
+      messages.push(
+        { role: 'assistant', content: response.content },
+        {
+          role: 'user',
+          content: submitted.map(({ id }) => ({
+            type: 'tool_result' as const,
+            tool_use_id: id,
+            is_error: true,
+            content: searchFailed
+              ? 'Web search failed. Search again, then call submit_menu.'
+              : 'A menu needs at least one valid drink and the http(s) URL of the page it came from. Fix it and call submit_menu again, with has_menu false if there is no such page.',
+          })),
+        },
+      );
+      continue;
+    }
     messages.push({ role: 'assistant', content: response.content });
     // pause_turn: the server-side search loop wants to continue as-is
-    if (response.stop_reason === 'pause_turn') continue;
-    if (response.stop_reason !== 'end_turn') break; // refusal, max_tokens
+    if (stopReason === 'pause_turn') continue;
+    if (stopReason !== 'end_turn') break; // refusal, max_tokens
     messages.push({ role: 'user', content: 'Call submit_menu now.' });
   }
-  throw new Error('Menu lookup ended without submit_menu');
+  throw new Error(`Menu lookup ended without submit_menu (${stopReason})`);
 }

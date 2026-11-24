@@ -64,19 +64,25 @@ export class BarsController {
     const bar = barById(`${type}/${id}`);
     if (!bar) throw new NotFoundException('Unknown bar.');
 
-    // Refresh: menus expire after 30 days. A lookup still pending after
-    // 2 minutes died (API restart, model error) and is retried.
+    // Refresh: menus expire after 30 days. A lookup that failed (API restart,
+    // model error) keeps its pending row for a day before it is retried, so
+    // every model call is still there for the daily caps to count.
     await this.db.delete(barMenus).where(
       and(
         eq(barMenus.barId, bar.id),
         sql`case when ${barMenus.status} = 'pending'
-          then ${barMenus.createdAt} < now() - interval '2 minutes'
+          then ${barMenus.createdAt} < now() - interval '1 day'
           else ${barMenus.fetchedAt} < now() - interval '30 days' end`,
       ),
     );
 
     const [menu] = await this.db
-      .select()
+      .select({
+        status: barMenus.status,
+        sourceUrls: barMenus.sourceUrls,
+        // nobody is still waiting on it; it may yet finish and turn ready
+        overdue: sql<boolean>`${barMenus.createdAt} < now() - interval '2 minutes'`,
+      })
       .from(barMenus)
       .where(eq(barMenus.barId, bar.id));
     if (menu?.status === 'ready') {
@@ -91,7 +97,10 @@ export class BarsController {
         .orderBy(barMenuItems.id);
       return { status: 'ready', items, sourceUrls: menu.sourceUrls };
     }
-    if (menu) return { status: menu.status };
+    if (menu) {
+      const gaveUp = menu.status === 'pending' && menu.overdue;
+      return { status: gaveUp ? 'none' : menu.status };
+    }
 
     // Either an API key, or the OIDC token file Render writes for the
     // federation rule (the SDK reads both on its own).
@@ -101,26 +110,31 @@ export class BarsController {
     ) {
       return { status: 'none' };
     }
-    const [{ today, mine }] = await this.db
-      .select({
-        today: sql<number>`count(*)::int`,
-        mine: sql<number>`(count(*) filter (where ${barMenus.requestedBy} = ${userId}))::int`,
-      })
-      .from(barMenus)
-      .where(sql`${barMenus.createdAt} > now() - interval '1 day'`);
-    if (today >= DAILY_LOOKUPS || mine >= DAILY_LOOKUPS_EACH) {
-      return { status: 'none' };
-    }
-
-    // The primary key makes this the lock: of two members picking the same
-    // bar at once, only the one whose insert lands starts a lookup.
-    const started = await this.db
-      .insert(barMenus)
-      .values({ barId: bar.id, requestedBy: userId })
-      .onConflictDoNothing()
-      .returning({ barId: barMenus.barId });
+    const started = await this.db.transaction(async (tx) => {
+      // One at a time, or parallel requests all count before any inserts and
+      // slip past the caps together.
+      await tx.execute(
+        sql`select pg_advisory_xact_lock(hashtext('bar_menu_lookups'))`,
+      );
+      const [{ today, mine }] = await tx
+        .select({
+          today: sql<number>`count(*)::int`,
+          mine: sql<number>`(count(*) filter (where ${barMenus.requestedBy} = ${userId}))::int`,
+        })
+        .from(barMenus)
+        .where(sql`${barMenus.createdAt} > now() - interval '1 day'`);
+      if (today >= DAILY_LOOKUPS || mine >= DAILY_LOOKUPS_EACH) return null;
+      // Of two members picking the same bar at once, only the one whose
+      // insert lands starts a lookup.
+      return tx
+        .insert(barMenus)
+        .values({ barId: bar.id, requestedBy: userId })
+        .onConflictDoNothing()
+        .returning({ barId: barMenus.barId });
+    });
+    if (!started) return { status: 'none' };
     // ponytail: runs in this process, unawaited. A restart drops it and the
-    // 2-minute rule above retries; move to a queue if lookups need to survive.
+    // 1-day rule above retries; move to a queue if lookups need to survive.
     if (started.length) void this.lookup(bar);
     return { status: 'pending' };
   }
@@ -146,7 +160,7 @@ export class BarsController {
           .where(eq(barMenus.barId, bar.id));
       });
     } catch (error) {
-      // The row stays pending, so the next read after 2 minutes retries.
+      // The row stays pending, so a read after a day retries.
       this.logger.error(`Menu lookup failed for ${bar.id}`, error);
     }
   }

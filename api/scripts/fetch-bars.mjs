@@ -6,13 +6,18 @@
 // tagged as restaurants in OSM). Missing city/address tags stay null.
 import { readFile, writeFile } from 'node:fs/promises';
 
-const bbox = '36.9,-122.65,38.35,-121.55';
+// San Francisco Bay Area, then Long Beach
+const bboxes = ['36.9,-122.65,38.35,-121.55', '33.74,-118.21,33.79,-118.11'];
 const words =
   'bar|pub|tavern|saloon|lounge|taproom|brewery|brewing|beer garden|cantina|izakaya';
 const barName = new RegExp(`\\b(${words})\\b`, 'i');
-const query = `[out:json][timeout:90];(
+const query = `[out:json][timeout:90];(${bboxes
+  .map(
+    (bbox) => `
   nwr["amenity"~"^(bar|pub|nightclub|biergarten)$"](${bbox});
-  nwr["amenity"="restaurant"]["name"~"${words}",i](${bbox});
+  nwr["amenity"="restaurant"]["name"~"${words}",i](${bbox});`,
+  )
+  .join('')}
 );out center tags;`;
 
 const files = process.argv.slice(2);
@@ -78,7 +83,8 @@ const snapshot = [...bars.values()].sort(
 if (!snapshot.length) throw new Error('Refusing to write an empty snapshot');
 await writeFile(
   new URL('../src/bars/bars.json', import.meta.url),
-  JSON.stringify(snapshot, null, 2) + '\n',
+  // one bar per line: short file, readable diffs
+  `[\n${snapshot.map((bar) => JSON.stringify(bar)).join(',\n')}\n]\n`,
 );
 console.log(
   `Wrote ${snapshot.length} bars (OSM: ${sources.map((s) => s.osm3s?.timestamp_osm_base).join(', ')})`,
