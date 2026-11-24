@@ -8,11 +8,10 @@ import {
   Param,
   ParseUUIDPipe,
   Put,
-  UseGuards,
 } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
 import { and, desc, eq, sql } from 'drizzle-orm';
-import { AuthGuard, UserId } from './auth.guard';
+import { UserId } from './auth.guard';
 import { DB, type Db } from './db';
 import { savedDrinks } from './db/schema';
 
@@ -24,7 +23,6 @@ const savedColumns = {
 };
 
 @Controller('collection')
-@UseGuards(AuthGuard)
 export class CollectionController {
   constructor(@Inject(DB) private readonly db: Db) {}
 

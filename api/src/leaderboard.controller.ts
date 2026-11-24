@@ -1,6 +1,6 @@
-import { Controller, Get, Inject, Query, UseGuards } from '@nestjs/common';
+import { Controller, Get, Inject, Query } from '@nestjs/common';
 import { sql } from 'drizzle-orm';
-import { AuthGuard, UserId } from './auth.guard';
+import { UserId } from './auth.guard';
 import { DB, type Db } from './db';
 import { StorageService } from './storage.service';
 
@@ -24,7 +24,6 @@ type BoardRow = {
  * deletes the friendship, so blocked users drop out with no extra filter.
  */
 @Controller('leaderboard')
-@UseGuards(AuthGuard)
 export class LeaderboardController {
   constructor(
     @Inject(DB) private readonly db: Db,

@@ -10,11 +10,10 @@ import {
   Param,
   Patch,
   Post,
-  UseGuards,
 } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
 import { aliasedTable, and, desc, eq, or } from 'drizzle-orm';
-import { AuthGuard, UserId } from './auth.guard';
+import { UserId } from './auth.guard';
 import { isBlockedPair, lockProfilePair } from './blocks.controller';
 import { DB, type Db } from './db';
 import { friendships, profiles } from './db/schema';
@@ -24,7 +23,6 @@ const requester = aliasedTable(profiles, 'requester');
 const addressee = aliasedTable(profiles, 'addressee');
 
 @Controller('friendships')
-@UseGuards(AuthGuard)
 export class FriendshipsController {
   constructor(
     @Inject(DB) private readonly db: Db,

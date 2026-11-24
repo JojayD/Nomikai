@@ -13,13 +13,12 @@ import {
   Post,
   Query,
   UploadedFile,
-  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { randomUUID } from 'node:crypto';
 import { Throttle } from '@nestjs/throttler';
 import { and, desc, eq, or, sql } from 'drizzle-orm';
-import { AuthGuard, UserId } from './auth.guard';
+import { UserId } from './auth.guard';
 import { DB, type Db } from './db';
 import { drinks, entries, nightOuts } from './db/schema';
 import { entryQuery, withSignedUrls } from './entry-rows';
@@ -41,7 +40,6 @@ type EntryBody = {
 };
 
 @Controller('entries')
-@UseGuards(AuthGuard)
 export class EntriesController {
   private readonly logger = new Logger(EntriesController.name);
   constructor(

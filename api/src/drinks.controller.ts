@@ -1,11 +1,9 @@
-import { Controller, Get, Inject, UseGuards } from '@nestjs/common';
+import { Controller, Get, Inject } from '@nestjs/common';
 import { asc } from 'drizzle-orm';
-import { AuthGuard } from './auth.guard';
 import { DB, type Db } from './db';
 import { drinks } from './db/schema';
 
 @Controller('drinks')
-@UseGuards(AuthGuard)
 export class DrinksController {
   constructor(@Inject(DB) private readonly db: Db) {}
 
