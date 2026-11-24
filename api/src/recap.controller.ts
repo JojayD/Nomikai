@@ -1,6 +1,6 @@
-import { Controller, Get, Inject, UseGuards } from '@nestjs/common';
+import { Controller, Get, Inject } from '@nestjs/common';
 import { sql } from 'drizzle-orm';
-import { AuthGuard, UserId } from './auth.guard';
+import { UserId } from './auth.guard';
 import { DB, type Db } from './db';
 
 /**
@@ -11,7 +11,6 @@ import { DB, type Db } from './db';
  * ponytail: no weekly cron; add one only if a push notification ever needs it.
  */
 @Controller('recap')
-@UseGuards(AuthGuard)
 export class RecapController {
   constructor(@Inject(DB) private readonly db: Db) {}
 

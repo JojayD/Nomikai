@@ -5,18 +5,16 @@ import {
   NotFoundException,
   Param,
   Put,
-  UseGuards,
 } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
 import { and, eq } from 'drizzle-orm';
-import { AuthGuard, UserId } from './auth.guard';
+import { UserId } from './auth.guard';
 import { DB, type Db } from './db';
 import { entries, reactions } from './db/schema';
 import { assertCanSee } from './visibility';
 
 /** F6: one reaction type, toggled with PUT/DELETE. Both are idempotent. */
 @Controller('entries/:id/reaction')
-@UseGuards(AuthGuard)
 export class ReactionsController {
   constructor(@Inject(DB) private readonly db: Db) {}
 

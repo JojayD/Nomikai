@@ -1,6 +1,6 @@
-import { Controller, Get, Inject, Query, UseGuards } from '@nestjs/common';
+import { Controller, Get, Inject, Query } from '@nestjs/common';
 import { sql } from 'drizzle-orm';
-import { AuthGuard, UserId } from './auth.guard';
+import { UserId } from './auth.guard';
 import { DB, type Db } from './db';
 import { type EntryRow, withSignedUrls } from './entry-rows';
 import { StorageService } from './storage.service';
@@ -9,7 +9,6 @@ import { pageNumber } from './pagination';
 const MAX_ID = 'ffffffff-ffff-ffff-ffff-ffffffffffff';
 
 @Controller('feed')
-@UseGuards(AuthGuard)
 export class FeedController {
   constructor(
     @Inject(DB) private readonly db: Db,

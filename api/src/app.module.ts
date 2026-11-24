@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { AuthGuard } from './auth.guard';
 import { BlocksController } from './blocks.controller';
 import { BarsController } from './bars/bars.controller';
 import { DbModule } from './db';
@@ -37,6 +38,10 @@ import { CollectionController } from './collection.controller';
     LeaderboardController,
     RecapController,
   ],
-  providers: [StorageService, { provide: APP_GUARD, useClass: ThrottlerGuard }],
+  providers: [
+    StorageService,
+    { provide: APP_GUARD, useClass: ThrottlerGuard },
+    { provide: APP_GUARD, useClass: AuthGuard },
+  ],
 })
 export class AppModule {}

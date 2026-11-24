@@ -5,10 +5,9 @@ import {
   NotFoundException,
   Param,
   Query,
-  UseGuards,
 } from '@nestjs/common';
 import { and, asc, desc, eq, gte } from 'drizzle-orm';
-import { AuthGuard, UserId } from './auth.guard';
+import { UserId } from './auth.guard';
 import { DB, type Db } from './db';
 import { entries, nightOuts } from './db/schema';
 import { entryQuery, withSignedUrls } from './entry-rows';
@@ -16,7 +15,6 @@ import { StorageService } from './storage.service';
 import { assertCanSee } from './visibility';
 
 @Controller('night-outs')
-@UseGuards(AuthGuard)
 export class NightOutsController {
   constructor(
     @Inject(DB) private readonly db: Db,
