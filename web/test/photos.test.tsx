@@ -314,7 +314,7 @@ const row = {
   location: null,
   photo_path: "owner/photo.jpg",
   note: null,
-  recommended: null,
+  rating: null,
   logged_at: "2026-10-03T03:00:00Z",
   reaction_count: 0,
   reacted_by_me: false,

@@ -35,7 +35,7 @@ type EntryBody = {
   logged_at: string;
   location: string | null;
   note: string | null;
-  recommended: boolean | null;
+  rating: number | null;
   new_night_out?: { id?: string; name: string; location: string | null } | null;
 };
 
@@ -93,7 +93,7 @@ export class EntriesController {
       .where(
         and(
           eq(entries.userId, targetId),
-          recommended === 'true' ? eq(entries.recommended, true) : undefined,
+          recommended === 'true' ? eq(entries.rating, 3) : undefined,
           matches,
         ),
       )
@@ -123,7 +123,7 @@ export class EntriesController {
         logged_at: entries.loggedAt,
         location: entries.location,
         note: entries.note,
-        recommended: entries.recommended,
+        rating: entries.rating,
         photo_path: entries.photoPath,
       })
       .from(entries)
@@ -154,7 +154,7 @@ export class EntriesController {
           loggedAt: body.logged_at,
           location: body.location,
           note: body.note,
-          recommended: body.recommended,
+          rating: body.rating,
           // overwritten by the entries_normalized_drink_name trigger
           normalizedDrinkName: '',
         })
@@ -181,7 +181,7 @@ export class EntriesController {
           loggedAt: body.logged_at,
           location: body.location,
           note: body.note,
-          recommended: body.recommended,
+          rating: body.rating,
         })
         .where(and(eq(entries.id, id), eq(entries.userId, userId)))
         .returning({ id: entries.id });

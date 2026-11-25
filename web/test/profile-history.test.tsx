@@ -28,7 +28,7 @@ const row = {
   location: "Bar One",
   photo_path: null,
   note: null,
-  recommended: true,
+  rating: 3,
   logged_at: "2026-10-01T00:00:00Z",
   reaction_count: 0,
   reacted_by_me: false,

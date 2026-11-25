@@ -21,7 +21,7 @@ type Stamp = {
   first_logged_at: string;
   last_logged_at: string;
   times_logged: number;
-  recommended: boolean | null;
+  rating: number | null;
 };
 
 export default function Collection() {
@@ -61,7 +61,7 @@ export default function Collection() {
   const current = view === "saved" ? saved : view === "passport" ? passport : picks;
   const matches = (passport.data ?? []).filter(
     (drink) =>
-      (!recommended || drink.recommended === true) &&
+      (!recommended || drink.rating === 3) &&
       normalizeDrinkName(drink.name).includes(normalizeDrinkName(search)),
   );
 
@@ -278,11 +278,13 @@ export default function Collection() {
                   <p className="kicker mt-1">
                     {drink.times_logged}{" "}
                     {drink.times_logged === 1 ? "log" : "logs"}
-                    {drink.recommended === true
+                    {drink.rating === 3
                       ? " · Recommended"
-                      : drink.recommended === false
-                        ? " · Skip it"
-                        : ""}
+                      : drink.rating === 2
+                        ? " · Meh"
+                        : drink.rating === 1
+                          ? " · Skip it"
+                          : ""}
                   </p>
                   <p className="mt-2 text-sm opacity-70">
                     First {new Date(drink.first_logged_at).toLocaleDateString()}{" "}

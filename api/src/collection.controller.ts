@@ -99,7 +99,7 @@ export class CollectionController {
       join entries e on e.user_id = f.friend_id
       join profiles p on p.id = e.user_id
       left join drinks d on d.id = e.drink_id
-      where e.recommended = true
+      where e.rating = 3
         and btrim(e.normalized_drink_name) <> ''
         and not exists (
           select 1 from entries own where own.user_id = ${userId}
@@ -115,14 +115,14 @@ export class CollectionController {
   passport(@UserId() userId: string) {
     // ponytail: aggregate on read for a personal history; paginate if it grows large.
     return this.db.execute(sql`
-      select normalized_name, name, first_logged_at, last_logged_at, times_logged, recommended
+      select normalized_name, name, first_logged_at, last_logged_at, times_logged, rating
       from (
         select btrim(e.normalized_drink_name) as normalized_name,
           coalesce(d.name, e.custom_drink_name) as name,
           min(e.logged_at) over w as first_logged_at,
           e.logged_at as last_logged_at,
           (count(*) over w)::int as times_logged,
-          e.recommended,
+          e.rating,
           row_number() over (partition by btrim(e.normalized_drink_name)
             order by e.logged_at desc, e.created_at desc, e.id desc) as rank
         from entries e left join drinks d on d.id = e.drink_id

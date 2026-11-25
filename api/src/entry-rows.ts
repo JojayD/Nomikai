@@ -18,7 +18,7 @@ export const entryColumns = {
   location: entries.location,
   photo_path: entries.photoPath,
   note: entries.note,
-  recommended: entries.recommended,
+  rating: entries.rating,
   logged_at: entries.loggedAt,
 };
 
@@ -26,8 +26,8 @@ export type EntryRow = {
   [K in keyof typeof entryColumns]: K extends
     'id' | 'user_id' | 'username' | 'drink_name' | 'logged_at'
     ? string
-    : K extends 'recommended'
-      ? boolean | null
+    : K extends 'rating'
+      ? number | null
       : string | null;
 } & { reaction_count: number; reacted_by_me: boolean };
 
