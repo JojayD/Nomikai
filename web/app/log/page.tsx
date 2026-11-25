@@ -461,13 +461,13 @@ function LogForm({
     <main className="desktop-page log-page flex flex-1 flex-col">
       <Header kicker="Log a drink" />
       <form
-        className="p-4"
+        className="flex flex-1 flex-col p-4"
         onSubmit={(e) => {
           e.preventDefault();
           submit();
         }}
       >
-        <fieldset className="min-w-0" disabled={busy || pending}>
+        <fieldset className="contents" disabled={busy || pending}>
         {sel ? (
           <div
             className="flex items-baseline gap-3 border px-3.5 py-3"
@@ -717,13 +717,15 @@ function LogForm({
         ) : (
           <button
             type="button"
-            className="btn btn-ghost mt-4 text-sm max-lg:!hidden"
+            className="btn btn-ghost mt-4 self-start text-sm max-lg:!hidden"
             onClick={() => setShowDetails(true)}
           >
             + Add details — time, place, note, photo
           </button>
         )}
 
+        {/* pinned to the bottom of the screen on phones */}
+        <div className="max-lg:sticky max-lg:bottom-0 max-lg:mt-auto max-lg:bg-[var(--color-bg)] max-lg:pb-4">
         {!editId && (
           <div className="mt-4 flex items-center justify-between lg:hidden">
             <button
@@ -750,11 +752,12 @@ function LogForm({
           </div>
         )}
         <button
-          className="btn btn-primary btn-block mt-6"
+          className="btn btn-primary btn-block mt-6 max-lg:!mt-3"
           disabled={!sel || busy || !userId}
         >
           {editId ? "Save changes" : "Log it"}
         </button>
+        </div>
         {editId && (
           <button
             type="button"
