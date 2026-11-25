@@ -51,10 +51,10 @@ function metersBetween(lat1: number, lon1: number, lat2: number, lon2: number) {
 
 // ponytail: scans the whole snapshot per call; fine at ~1.6k bars, needs a
 // spatial index if the snapshot grows past one metro area.
-export function nearbyBars(lat: number, lng: number): Bar[] {
+export function nearbyBars(lat: number, lng: number, radius = 500): Bar[] {
   return bars
     .map((bar) => ({ bar, meters: metersBetween(lat, lng, bar.lat, bar.lon) }))
-    .filter(({ meters }) => meters <= 500)
+    .filter(({ meters }) => meters <= radius)
     .sort((a, b) => a.meters - b.meters)
     .slice(0, 10)
     .map(({ bar }) => bar);

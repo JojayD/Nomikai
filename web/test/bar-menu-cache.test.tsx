@@ -47,3 +47,24 @@ test("a saved menu older than a day is fetched again", async () => {
   await pickBar();
   expect(api).toHaveBeenCalledTimes(2);
 });
+
+test("using my location starts the menu lookup for the closest bars only", async () => {
+  vi.stubGlobal("navigator", {
+    geolocation: {
+      getCurrentPosition: (ok: (p: unknown) => void) => ok({ coords: { latitude: 1, longitude: 2 } }),
+    },
+  });
+  const far = { ...bar, id: "node/2", name: "Far Bar" };
+  api.mockImplementation(async (path: string) =>
+    path === "/bars/nearby" ? [{ ...bar, prefetch: true }, far] : menu);
+  render(
+    <QueryClientProvider client={new QueryClient()}>
+      <BarPicker value="" onChange={() => {}} onPickDrink={() => {}} />
+    </QueryClientProvider>,
+  );
+  fireEvent.click(screen.getByRole("button", { name: "Use my location" }));
+  await screen.findByRole("button", { name: /Far Bar/ });
+  await vi.waitFor(() => expect(api).toHaveBeenCalledWith("/bars/node/1/menu", expect.anything()));
+  expect(api).not.toHaveBeenCalledWith("/bars/node/2/menu", expect.anything());
+  cleanup();
+});

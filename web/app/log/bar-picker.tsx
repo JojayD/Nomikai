@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { api, json } from "@/lib/api";
 
 type Bar = {
@@ -9,6 +9,7 @@ type Bar = {
   name: string;
   city: string | null;
   address: string | null;
+  prefetch?: boolean;
 };
 type Menu =
   | { status: "pending" | "none" }
@@ -26,6 +27,29 @@ function savedMenu(barId: string): { at: number; menu: Menu } | null {
     return null;
   }
 }
+
+// The first read starts a web lookup, so poll while it runs and give up
+// after about a minute.
+async function fetchMenu(barId: string, signal: AbortSignal): Promise<Menu> {
+  for (let tries = 0; ; tries++) {
+    const found = await api<Menu>(`/bars/${barId}/menu`, { signal });
+    if (found.status === "ready") {
+      try {
+        localStorage.setItem(
+          `bar-menu:${barId}`,
+          JSON.stringify({ at: Date.now(), menu: found }),
+        );
+      } catch {
+        // storage full or blocked: the menu still shows, just not saved
+      }
+    }
+    if (found.status !== "pending" || tries >= 20) return found;
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+  }
+}
+// "none" may just mean the daily cap, so only a found menu is kept long
+const menuStaleTime = (query: { state: { data?: Menu } }) =>
+  query.state.data?.status === "ready" ? DAY : 5 * 60_000;
 
 export default function BarPicker({
   value,
@@ -53,6 +77,7 @@ export default function BarPicker({
   });
   const showResults = open && !!query && query === search;
 
+  const queryClient = useQueryClient();
   // The position is sent for this one lookup and never stored.
   const nearby = useMutation({
     mutationFn: async () => {
@@ -67,37 +92,30 @@ export default function BarPicker({
         ...json({ lat: coords.latitude, lng: coords.longitude }),
       });
     },
+    // Start the closest bars' menu lookups now, so the menu is usually ready
+    // by the time one of them is picked.
+    onSuccess: (found) => {
+      for (const bar of found) {
+        if (!bar.prefetch || savedMenu(bar.id)) continue;
+        void queryClient.prefetchQuery({
+          queryKey: ["bar-menu", bar.id],
+          queryFn: ({ signal }) => fetchMenu(bar.id, signal),
+          staleTime: menuStaleTime,
+        });
+      }
+    },
   });
   const results = nearby.data ?? (showResults ? bars.data : undefined);
 
-  // Drinks found on the picked bar's own menu. The first read starts a web
-  // lookup, so poll while it runs and give up after about a minute.
+  // Drinks found on the picked bar's own menu.
   const [picked, setPicked] = useState<Bar | null>(null);
   const menu = useQuery({
     queryKey: ["bar-menu", picked?.id],
-    queryFn: async ({ signal }) => {
-      for (let tries = 0; ; tries++) {
-        const found = await api<Menu>(`/bars/${picked!.id}/menu`, { signal });
-        if (found.status === "ready") {
-          try {
-            localStorage.setItem(
-              `bar-menu:${picked!.id}`,
-              JSON.stringify({ at: Date.now(), menu: found }),
-            );
-          } catch {
-            // storage full or blocked: the menu still shows, just not saved
-          }
-        }
-        if (found.status !== "pending" || tries >= 20) return found;
-        await new Promise((resolve) => setTimeout(resolve, 3000));
-      }
-    },
+    queryFn: ({ signal }) => fetchMenu(picked!.id, signal),
     enabled: !!picked,
     initialData: () => (picked ? savedMenu(picked.id)?.menu : undefined),
     initialDataUpdatedAt: () => (picked ? savedMenu(picked.id)?.at : undefined),
-    // "none" may just mean the daily cap, so only a found menu is kept long
-    staleTime: (query) =>
-      query.state.data?.status === "ready" ? DAY : 5 * 60_000,
+    staleTime: menuStaleTime,
   });
 
   return (
