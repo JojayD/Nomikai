@@ -49,7 +49,7 @@ async function makeUser() {
   return u;
 }
 const entry = (name) => ({ drink_id: null, custom_drink_name: name, night_out_id: null,
-  logged_at: new Date().toISOString(), location: null, note: null, recommended: null });
+  logged_at: new Date().toISOString(), location: null, note: null, rating: null });
 
 try {
   const a = await makeUser(), b = await makeUser();

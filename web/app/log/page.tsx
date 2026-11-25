@@ -30,7 +30,7 @@ type EntryRow = {
   logged_at: string;
   location: string | null;
   note: string | null;
-  recommended: boolean | null;
+  rating: number | null;
   photo_path: string | null;
 };
 
@@ -157,7 +157,7 @@ function LogForm({
   );
   const [location, setLocation] = useState(entry?.location ?? "");
   const [note, setNote] = useState(entry?.note ?? "");
-  const [rec, setRec] = useState<boolean | null>(entry?.recommended ?? null);
+  const [rating, setRating] = useState<number | null>(entry?.rating ?? null);
   const [photo, setPhoto] = useState<File | null>(null);
   const [photoError, setPhotoError] = useState<string | null>(null);
   // Preview of the chosen/captured photo; the object URL is released when it changes.
@@ -216,7 +216,7 @@ function LogForm({
       logged_at: new Date(loggedAt).toISOString(),
       location: location.trim() || null,
       note: note.trim() || null,
-      recommended: rec,
+      rating,
     };
   }
 
@@ -368,7 +368,7 @@ function LogForm({
     setLoggedAt(toLocalInput(new Date()));
     setLocation("");
     setNote("");
-    setRec(null);
+    setRating(null);
     setNightSel("");
     setNewNightName("");
     setNewNightLoc("");
@@ -569,15 +569,25 @@ function LogForm({
               <div className="flex gap-2">
                 <button
                   type="button"
-                  className={`btn !mt-0 flex-1 !min-h-[42px] ${rec === true ? "btn-primary" : "btn-secondary"}`}
-                  onClick={() => setRec(rec === true ? null : true)}
+                  className={`btn !mt-0 flex-1 !min-h-[42px] ${rating === 3 ? "btn-primary" : "btn-secondary"}`}
+                  aria-pressed={rating === 3}
+                  onClick={() => setRating(rating === 3 ? null : 3)}
                 >
                   Yes
                 </button>
                 <button
                   type="button"
-                  className={`btn !mt-0 flex-1 !min-h-[42px] ${rec === false ? "btn-primary" : "btn-secondary"}`}
-                  onClick={() => setRec(rec === false ? null : false)}
+                  className={`btn !mt-0 flex-1 !min-h-[42px] ${rating === 2 ? "btn-primary" : "btn-secondary"}`}
+                  aria-pressed={rating === 2}
+                  onClick={() => setRating(rating === 2 ? null : 2)}
+                >
+                  Meh
+                </button>
+                <button
+                  type="button"
+                  className={`btn !mt-0 flex-1 !min-h-[42px] ${rating === 1 ? "btn-primary" : "btn-secondary"}`}
+                  aria-pressed={rating === 1}
+                  onClick={() => setRating(rating === 1 ? null : 1)}
                 >
                   No
                 </button>

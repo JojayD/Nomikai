@@ -139,7 +139,7 @@ try {
     logged_at: new Date().toISOString(),
     location: 'Test Bar',
     note: 'e2e',
-    recommended: true,
+    rating: 3,
     new_night_out: { name: 'E2E Night', location: 'Testville' },
   });
   check('POST /entries with a new night out', r.status === 201 && !!r.body.id, r);
@@ -152,9 +152,17 @@ try {
     logged_at: new Date().toISOString(),
     location: null,
     note: null,
-    recommended: null,
+    rating: null,
   });
   check('POST /entries with both drink sources → 400 / 23514', r.status === 400 && r.body.code === '23514', r);
+
+  for (const bad of [0, 4, 2.5, 99999]) {
+    r = await api(a, 'POST', '/entries', {
+      drink_id: null, custom_drink_name: 'Bad rating', night_out_id: null,
+      logged_at: new Date().toISOString(), location: null, note: null, rating: bad,
+    });
+    check(`rating ${bad} → 400`, r.status === 400, r);
+  }
 
   r = await api(a, 'GET', `/entries/${entryId}`);
   check('GET /entries/:id seeds the edit form', r.body?.drink_name === 'Lager' && r.body.night_out_name === 'E2E Night', r);
@@ -321,7 +329,7 @@ try {
     logged_at: new Date().toISOString(),
     location: 'Kitchen',
     note: 'edited',
-    recommended: false,
+    rating: 1,
   });
   check('PATCH /entries/:id', r.status === 200, r);
 
@@ -335,7 +343,7 @@ try {
 
   r = await api(b, 'PATCH', `/entries/${entryId}`, {
     drink_id: null, custom_drink_name: 'Hijacked', night_out_id: null,
-    logged_at: new Date().toISOString(), location: null, note: null, recommended: null,
+    logged_at: new Date().toISOString(), location: null, note: null, rating: null,
   });
   check("friend cannot edit A's entry → 404", r.status === 404, r);
 
@@ -383,19 +391,19 @@ try {
       logged_at: new Date(Date.now() - minutesAgo * 60_000).toISOString(),
       location: null,
       note: null,
-      recommended: null,
+      rating: null,
       ...entryFields,
     });
     check(`create search fixture ${fields.custom_drink_name}`, created.status === 201 && !!created.body?.id, created);
     return created.body?.id;
   };
-  const cafeId = await searchEntry({ custom_drink_name: 'Café 100%_', recommended: true, minutesAgo: 4 });
-  const moonId = await searchEntry({ custom_drink_name: 'Ginger Ale', location: 'Moon%_ Bar', note: "A comet passed by O'Brien\\Lounge", recommended: false, minutesAgo: 3 });
+  const cafeId = await searchEntry({ custom_drink_name: 'Café 100%_', rating: 3, minutesAgo: 4 });
+  const moonId = await searchEntry({ custom_drink_name: 'Ginger Ale', location: 'Moon%_ Bar', note: "A comet passed by O'Brien\\Lounge", rating: 1, minutesAgo: 3 });
   const firstNightId = await searchEntry({ custom_drink_name: 'Soda', note: 'Quiet café corner', new_night_out: { name: 'Golden Hour', location: null }, minutesAgo: 2 });
   r = await api(a, 'GET', `/entries/${firstNightId}`);
   const searchNightId = r.body?.night_out_id;
   check('search fixture has a night out', !!searchNightId, r);
-  const lastNightId = await searchEntry({ custom_drink_name: 'Tonic', night_out_id: searchNightId, recommended: true, minutesAgo: 1 });
+  const lastNightId = await searchEntry({ custom_drink_name: 'Tonic', night_out_id: searchNightId, rating: 3, minutesAgo: 1 });
 
   const history = (user, params) => api(user, 'GET', `/entries?${new URLSearchParams({ user_id: a.id, ...params })}`);
   r = await history(a, {});

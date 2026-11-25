@@ -22,7 +22,7 @@ const row: EntryRowData = {
   location: null,
   photo_path: null,
   note: null,
-  recommended: null,
+  rating: null,
   logged_at: new Date().toISOString(),
   reaction_count: 0,
   reacted_by_me: false,
