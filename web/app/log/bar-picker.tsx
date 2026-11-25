@@ -28,10 +28,12 @@ function savedMenu(barId: string): { at: number; menu: Menu } | null {
 }
 
 export default function BarPicker({
+  className = "",
   value,
   onChange,
   onPickDrink,
 }: {
+  className?: string;
   value: string;
   onChange: (value: string) => void;
   onPickDrink: (name: string) => void;
@@ -102,7 +104,7 @@ export default function BarPicker({
 
   return (
     <div
-      className="field mt-3"
+      className={`field mt-3${className}`}
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) {
           setOpen(false);

@@ -33,3 +33,31 @@ test.each(["Vodka", "Vodka Shot"])("prioritizes exact %s over brand and history 
   expect(screen.getByRole("button", { name: "Change" })).toBeDefined();
   expect(screen.getByText(name)).toBeDefined();
 });
+
+test("steps forward and back without losing what was entered", () => {
+  const client = new QueryClient({ defaultOptions: { queries: { staleTime: Infinity, retry: false } } });
+  client.setQueryData(["me"], { id: "owner" });
+  client.setQueryData(["drinks"], []);
+  client.setQueryData(["night-outs"], []);
+  render(<QueryClientProvider client={client}><LogPage /></QueryClientProvider>);
+  const hidden = (label: RegExp) =>
+    screen.getByLabelText(label).closest(".field")!.className.includes("max-lg:!hidden");
+
+  expect(screen.getByRole("button", { name: "Back" })).toHaveProperty("disabled", true);
+  fireEvent.click(screen.getByRole("button", { name: "Next" }));
+  expect(screen.getByText(/2 \/ 4/)).toBeDefined();
+  expect(hidden(/Where/)).toBe(false);
+  expect(hidden(/Note/)).toBe(true);
+  fireEvent.change(screen.getByLabelText(/Where/), { target: { value: "Some bar" } });
+
+  fireEvent.click(screen.getByRole("button", { name: "Next" }));
+  fireEvent.click(screen.getByRole("button", { name: "Meh" }));
+  fireEvent.click(screen.getByRole("button", { name: "Next" }));
+  expect(screen.getByRole("button", { name: "Next" })).toHaveProperty("disabled", true);
+  expect(hidden(/Note/)).toBe(false);
+
+  fireEvent.click(screen.getByRole("button", { name: "Back" }));
+  expect(screen.getByRole("button", { name: "Meh" }).getAttribute("aria-pressed")).toBe("true");
+  fireEvent.click(screen.getByRole("button", { name: "Back" }));
+  expect(screen.getByLabelText<HTMLInputElement>(/Where/).value).toBe("Some bar");
+});

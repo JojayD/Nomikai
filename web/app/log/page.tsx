@@ -124,6 +124,14 @@ function LogForm({
   }, [me.isSuccess, me.data, router]);
 
   const [showDetails, setShowDetails] = useState(!!entry);
+  // Phones show one step at a time: 0 drink, 1 where, 2 rating, 3 extras.
+  // Desktop and edit mode show the whole form.
+  const [step, setStep] = useState(0);
+  const shown = (n: number) => (editId || step === n ? "" : " max-lg:!hidden");
+  const goTo = (n: number) => {
+    setShowDetails(true);
+    setStep(n);
+  };
   // Curated list: fetched on first focus, then reused for the session.
   const [drinksWanted, setDrinksWanted] = useState(false);
   const drinks = useQuery({
@@ -365,6 +373,7 @@ function LogForm({
     setSel(null);
     setQuery("");
     setShowDetails(false);
+    setStep(0);
     setLoggedAt(toLocalInput(new Date()));
     setLocation("");
     setNote("");
@@ -530,7 +539,7 @@ function LogForm({
 
         {showDetails ? (
           <div className="log-details">
-            <div className="field mt-4">
+            <div className={`field mt-4${shown(3)}`}>
               <label htmlFor="loggedAt">When</label>
               <input
                 id="loggedAt"
@@ -542,6 +551,7 @@ function LogForm({
               />
             </div>
             <BarPicker
+              className={shown(1)}
               value={location}
               onChange={setLocation}
               onPickDrink={(name) => {
@@ -552,7 +562,7 @@ function LogForm({
                 setSel({ drinkId: curated?.id ?? null, name: curated?.name ?? name });
               }}
             />
-            <div className="field mt-3">
+            <div className={`field mt-3${shown(3)}`}>
               <label htmlFor="note">
                 Note · optional · {note.length}/140
               </label>
@@ -564,7 +574,7 @@ function LogForm({
                 onChange={(e) => setNote(e.target.value)}
               />
             </div>
-            <div className="field mt-3">
+            <div className={`field mt-3${shown(2)}`}>
               <label>Recommend it?</label>
               <div className="flex gap-2">
                 <button
@@ -593,7 +603,7 @@ function LogForm({
                 </button>
               </div>
             </div>
-            <div className="field mt-3">
+            <div className={`field mt-3${shown(3)}`}>
               <label htmlFor="nightOut">Night out · optional</label>
               <select
                 id="nightOut"
@@ -628,7 +638,7 @@ function LogForm({
                 </div>
               )}
             </div>
-            <div className="field mt-3">
+            <div className={`field mt-3${shown(3)}`}>
               <label htmlFor="photo">
                 Photo · optional
                 {existingPhotoPath && !removePhoto && !photo && " · attached"}
@@ -707,13 +717,38 @@ function LogForm({
         ) : (
           <button
             type="button"
-            className="btn btn-ghost mt-4 text-sm"
+            className="btn btn-ghost mt-4 text-sm max-lg:!hidden"
             onClick={() => setShowDetails(true)}
           >
             + Add details — time, place, note, photo
           </button>
         )}
 
+        {!editId && (
+          <div className="mt-4 flex items-center justify-between lg:hidden">
+            <button
+              type="button"
+              className="btn btn-secondary"
+              aria-label="Back"
+              disabled={step === 0}
+              onClick={() => goTo(step - 1)}
+            >
+              {"<"}
+            </button>
+            <span className="kicker">
+              {step + 1} / 4 · {["Drink", "Where", "Rating", "Extras"][step]}
+            </span>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              aria-label="Next"
+              disabled={step === 3}
+              onClick={() => goTo(step + 1)}
+            >
+              {">"}
+            </button>
+          </div>
+        )}
         <button
           className="btn btn-primary btn-block mt-6"
           disabled={!sel || busy || !userId}
