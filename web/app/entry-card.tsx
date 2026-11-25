@@ -10,6 +10,7 @@ import Link from "next/link";
 import { api } from "@/lib/api";
 import Photo from "./photo";
 import Avatar from "./avatar";
+import Comments from "./comments";
 import SaveDrink from "./save-drink";
 
 // Shape of one feed/profile row as the API returns it; photo_url and
@@ -29,6 +30,7 @@ export type EntryRowData = {
   logged_at: string;
   reaction_count: number;
   reacted_by_me: boolean;
+  comment_count?: number;
   photo_url?: string | null;
   avatar_src?: string | null;
 };
@@ -164,6 +166,7 @@ export default function EntryCard({
           row={row}
         />
         <SaveDrink key={row.drink_name} name={row.drink_name} />
+        <Comments entryId={row.id} ownerId={row.user_id} count={row.comment_count ?? 0} />
       </div>
     </div>
   );

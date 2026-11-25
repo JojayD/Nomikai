@@ -16,7 +16,7 @@ only when a few lines can't do it.
 | Bars | OSM bar search, nearby bars by location, menu chips from the menu agent | `api/src/bars`, `bar_menus` |
 | Night outs | Group a night's drinks under a named night | `web/app/nights/[id]`, `night_outs` |
 | Friends | Invite links, requests, unfriend, block | `web/app/friends`, `web/app/add/[code]` |
-| Feed | Friends' drinks with reactions | `web/app/feed.tsx`, `GET /feed` |
+| Feed | Friends' drinks with reactions and comments | `web/app/feed.tsx`, `GET /feed` |
 | Profile | Stats, history search, avatar | `web/app/u/[username]` |
 | Collection | Want to try, drink passport, friend picks | `web/app/collection` |
 | Leaderboard | Weekly board for friends, with opt-out | `web/app/board` |
@@ -65,9 +65,11 @@ Friends join one night: combined tally, everyone's drinks in one timeline.
 Needs a `night_out_members` table and a visibility check in `visibility.ts`
 (members see each other's entries for that night even if they aren't friends).
 
-**8. Comments on entries (M)**
-Short comments under feed posts. New `comments` table; visibility follows the
-entry, blocks hide both ways. Rate-limit like friend requests.
+**8. Comments on entries (M): built**
+Comments under every entry card (`web/app/comments.tsx`,
+`/entries/:id/comments`). Visibility follows the entry, a blocked pair don't
+see each other's comments, and the author or the entry's owner can delete.
+Not built: notifications, editing, paging past 200 comments.
 
 **9. Head-to-head (M)**
 Pick a friend and compare: total drinks, new drinks, bars, overlap in drinks

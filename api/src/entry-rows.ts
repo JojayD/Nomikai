@@ -29,13 +29,15 @@ export type EntryRow = {
     : K extends 'rating'
       ? number | null
       : string | null;
-} & { reaction_count: number; reacted_by_me: boolean };
+} & { reaction_count: number; reacted_by_me: boolean; comment_count: number };
 
 /** F6: the toggle count and the viewer's own state ride on every entry row. */
 export function reactionColumns(viewerId: string) {
   return {
     reaction_count: sql<number>`(select count(*)::int from reactions r where r.entry_id = ${entries.id})`,
     reacted_by_me: sql<boolean>`exists (select 1 from reactions r where r.entry_id = ${entries.id} and r.user_id = ${viewerId})`,
+    // ponytail: counts comments a block hides from this viewer; filter here if it ever confuses anyone
+    comment_count: sql<number>`(select count(*)::int from comments c where c.entry_id = ${entries.id})`,
   };
 }
 
