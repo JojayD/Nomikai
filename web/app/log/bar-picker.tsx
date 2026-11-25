@@ -52,10 +52,12 @@ const menuStaleTime = (query: { state: { data?: Menu } }) =>
   query.state.data?.status === "ready" ? DAY : 5 * 60_000;
 
 export default function BarPicker({
+  className = "",
   value,
   onChange,
   onPickDrink,
 }: {
+  className?: string;
   value: string;
   onChange: (value: string) => void;
   onPickDrink: (name: string) => void;
@@ -120,7 +122,7 @@ export default function BarPicker({
 
   return (
     <div
-      className="field mt-3"
+      className={`field mt-3${className}`}
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) {
           setOpen(false);
