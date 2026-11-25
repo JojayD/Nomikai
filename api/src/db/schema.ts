@@ -9,6 +9,7 @@ import {
   pgPolicy,
   pgTable,
   primaryKey,
+  smallint,
   text,
   timestamp,
   unique,
@@ -176,7 +177,9 @@ export const entries = pgTable(
     location: text(),
     photoPath: text('photo_path'),
     note: text(),
-    recommended: boolean(),
+    recommended: boolean(), // legacy: replaced by rating, dropped in a follow-up
+    // 1 = not recommended, 2 = meh, 3 = recommended; null = unrated
+    rating: smallint(),
     loggedAt: timestamp('logged_at', { withTimezone: true, mode: 'string' })
       .defaultNow()
       .notNull(),
@@ -216,6 +219,7 @@ export const entries = pgTable(
       sql`(drink_id IS NULL) <> (custom_drink_name IS NULL)`,
     ),
     check('entries_note_check', sql`char_length(note) <= 140`),
+    check('entries_rating_check', sql`rating between 1 and 3`),
     pgPolicy('own or friends entries select', {
       for: 'select',
       using: sql`${uid} = user_id OR public.is_friends_with(user_id)`,

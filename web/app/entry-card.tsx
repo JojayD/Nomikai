@@ -25,7 +25,7 @@ export type EntryRowData = {
   location: string | null;
   photo_path: string | null;
   note: string | null;
-  recommended: boolean | null;
+  rating: number | null;
   logged_at: string;
   reaction_count: number;
   reacted_by_me: boolean;
@@ -127,8 +127,9 @@ export default function EntryCard({
         <span className="text-[19px] font-extrabold tracking-[-0.02em]">
           {row.drink_name}
         </span>
-        {row.recommended === true && <span className="kicker">rec’d</span>}
-        {row.recommended === false && <span className="kicker">skip it</span>}
+        {row.rating === 3 && <span className="kicker">rec’d</span>}
+        {row.rating === 2 && <span className="kicker">meh</span>}
+        {row.rating === 1 && <span className="kicker">skip it</span>}
         {editHref && (
           <Link href={editHref} className="btn btn-ghost ml-auto text-sm">
             Edit

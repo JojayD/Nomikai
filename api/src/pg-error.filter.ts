@@ -16,6 +16,7 @@ const STATUS: Record<string, number> = {
   '23514': 400, // check_violation
   '23503': 400, // foreign_key_violation
   '23502': 400, // not_null_violation
+  '22003': 400, // numeric_value_out_of_range
   '22P02': 400, // invalid_text_representation (bad uuid)
   '22007': 400, // invalid_datetime_format
   '22008': 400, // datetime_field_overflow

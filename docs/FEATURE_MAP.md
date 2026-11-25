@@ -1,6 +1,6 @@
 # Nomikai feature map
 
-Last updated 2026-11-22. What exists, and what to build next.
+Last updated 2026-11-23. What exists, and what to build next.
 
 Rules for anything new: keep it a fun side project. Compute on read before
 adding a cron, reuse an existing table before adding one, and add a dependency
@@ -11,7 +11,7 @@ only when a few lines can't do it.
 | Area | What it does | Where |
 | --- | --- | --- |
 | Auth | Email OTP and password sign-in, onboarding with age check | `web/app/login`, `web/app/onboarding` |
-| Log a drink | Catalog search, custom names, photo (camera or file), note, "recommend" | `web/app/log`, `POST /entries` |
+| Log a drink | Catalog search, custom names, photo (camera or file), note, three-state rating | `web/app/log`, `POST /entries` |
 | Drink catalog | Curated drinks, spirits and branded shots | `drinks` table, migrations |
 | Bars | OSM bar search, nearby bars by location, menu chips from the menu agent | `api/src/bars`, `bar_menus` |
 | Night outs | Group a night's drinks under a named night | `web/app/nights/[id]`, `night_outs` |
@@ -28,10 +28,11 @@ Size: **S** is an evening, **M** is a weekend, **L** needs a plan doc first.
 
 ### Quick wins
 
-**1. Drink ratings (S)**
-Swap or extend the `recommended` boolean with a 1–5 rating on `entries`.
-Show the average on drink pages and "top rated by friends" in the collection.
-Touches: one migration, the log form, `entry-rows.ts`.
+**1. Drink ratings (S): shipped as a three-state rating**
+`entries.rating` (1 not recommended, 2 meh, 3 recommended) replaces the
+`recommended` boolean. Friend picks and the "Recommended" filters use 3. The
+old column is dropped in a follow-up once production runs the new code.
+Not built: prefilling the last rating when a known drink is picked.
 
 **2. Achievements (S)**
 Badges computed on read from `entries`: first drink, 10 new drinks, 5 bars,
@@ -93,6 +94,14 @@ leaderboard and recap would move from compute-on-read to a cron.
 **13. Happy hours from the menu agent (L)**
 Extend the bar menu agent to pull happy hour times and prices. Costs model
 calls per bar and goes stale, so it needs a refresh policy before it's built.
+
+**14. "What should I order here?" (L)**
+After picking a bar, an agent suggests three drinks with a one-line reason
+each. It reads the bar's menu (`bar_menus`), the member's history, their want
+to try list and friend picks. Tools are read-only and bound to the verified
+user id, so the model can't read anyone else's entries. Reuses the menu
+agent's rules: daily cap per member, fixed-shape answer filtered before it's
+shown, "none" when no key is configured. Only works for bars with a menu.
 
 ## Not doing
 

@@ -41,9 +41,9 @@ async function makeUser() {
   check((await api(u, '/me', 'POST', { username: `c_${u.id.replaceAll('-', '').slice(0, 15)}`, timezone: 'UTC' })).status, 201, 'onboard');
   return u;
 }
-const entryBody = (name, recommended = null, logged_at = '2026-10-01T12:00:00Z') => ({
+const entryBody = (name, rating = null, logged_at = '2026-10-01T12:00:00Z') => ({
   drink_id: null, custom_drink_name: name, night_out_id: null, location: null,
-  note: null, recommended, logged_at,
+  note: null, rating, logged_at,
 });
 
 try {
@@ -78,18 +78,18 @@ try {
   const drinks = (await api(a, '/drinks')).body;
   const lager = drinks.find(d => d.normalized_name === 'lager');
   assert.ok(lager);
-  const first = await api(a, '/entries', 'POST', { ...entryBody(null, true), drink_id: lager.id });
+  const first = await api(a, '/entries', 'POST', { ...entryBody(null, 3), drink_id: lager.id });
   check(first.status, 201, 'curated log');
-  const second = await api(a, '/entries', 'POST', entryBody('  LAGER ', false, '2026-10-02T12:00:00Z'));
+  const second = await api(a, '/entries', 'POST', entryBody('  LAGER ', 1, '2026-10-02T12:00:00Z'));
   check(second.status, 201, 'custom equivalent log');
-  const virgin = await api(a, '/entries', 'POST', entryBody('Virgin Mojito', true));
+  const virgin = await api(a, '/entries', 'POST', entryBody('Virgin Mojito', 3));
   check(virgin.status, 201, 'nonalcoholic log');
   const passport = () => api(a, '/collection/passport').then(r => r.body);
   let rows = await passport();
   check(rows.length, 2, 'unique normalized drinks');
   check(rows[0].normalized_name, 'lager', 'newest drink first');
   check(rows[0].times_logged, 2, 'curated/custom grouped');
-  check(rows[0].recommended, false, 'latest recommendation wins');
+  check(rows[0].rating, 1, 'latest recommendation wins');
   check(new Date(rows[0].first_logged_at).toISOString(), '2026-10-01T12:00:00.000Z', 'first date');
   check(new Date(rows[0].last_logged_at).toISOString(), '2026-10-02T12:00:00.000Z', 'last date');
   check((await api(b, `/collection/passport?user_id=${a.id}`)).body, [], 'passport private');
@@ -100,10 +100,10 @@ try {
   await api(a, `/entries/${second.body.id}`, 'DELETE');
   rows = await passport();
   check(rows.find(r => r.normalized_name === 'lager').times_logged, 1, 'delete recomputes count');
-  check(rows.find(r => r.normalized_name === 'lager').recommended, true, 'delete restores surviving recommendation');
+  check(rows.find(r => r.normalized_name === 'lager').rating, 3, 'delete restores surviving recommendation');
   // Equal timestamps must still select the newest created log deterministically.
   const tie = await api(a, '/entries', 'POST', entryBody('lager', null));
-  check((await passport()).find(r => r.normalized_name === 'lager').recommended, null, 'latest neutral rating stays neutral');
+  check((await passport()).find(r => r.normalized_name === 'lager').rating, null, 'latest neutral rating stays neutral');
   await api(a, `/entries/${tie.body.id}`, 'DELETE');
   await api(a, `/entries/${first.body.id}`, 'DELETE');
   check((await passport()).some(r => r.normalized_name === 'lager'), false, 'last deletion removes stamp');
@@ -125,10 +125,10 @@ try {
   }
   await api(b, '/collection/saved', 'PUT', { name: 'Private B drink' });
   check((await db`select count(*)::int as n from saved_drinks`).at(0).n >= 4, true, 'real rows exist for access-denial checks');
-  await db`insert into entries (id, user_id, custom_drink_name, normalized_drink_name, logged_at, created_at, recommended)
-    values ('00000000-0000-4000-8000-000000000001', ${a.id}, 'Tie drink', '', '2026-10-01', '2026-10-01', false),
-           ('00000000-0000-4000-8000-000000000002', ${a.id}, 'Tie drink', '', '2026-10-01', '2026-10-01', true)`;
-  check((await passport()).find(r => r.normalized_name === 'tie drink').recommended, true, 'UUID breaks exact timestamp ties');
+  await db`insert into entries (id, user_id, custom_drink_name, normalized_drink_name, logged_at, created_at, rating)
+    values ('00000000-0000-4000-8000-000000000001', ${a.id}, 'Tie drink', '', '2026-10-01', '2026-10-01', 1),
+           ('00000000-0000-4000-8000-000000000002', ${a.id}, 'Tie drink', '', '2026-10-01', '2026-10-01', 3)`;
+  check((await passport()).find(r => r.normalized_name === 'tie drink').rating, 3, 'UUID breaks exact timestamp ties');
   await api(a, '/entries', 'POST', entryBody('   '));
   check((await passport()).some(r => !r.normalized_name.trim()), false, 'historical blank names omitted');
 
@@ -161,18 +161,18 @@ try {
     }
   }
   const picks = (user = a) => api(user, '/collection/picks').then(r => r.body);
-  check((await api(b, '/entries', 'POST', entryBody('  Citrus   fizz ', true))).status, 201, 'non-friend recommends');
+  check((await api(b, '/entries', 'POST', entryBody('  Citrus   fizz ', 3))).status, 201, 'non-friend recommends');
   check(await picks(), [], 'non-friend recommendations hidden');
   const request = await api(a, '/friendships', 'POST', { addressee_id: b.id });
   check(request.status, 201, 'friend request created');
   check(await picks(), [], 'pending recommendations hidden');
   check((await api(b, `/friendships/${request.body.id}`, 'PATCH')).status, 200, 'friend request accepted');
-  for (const [name, rating] of [['Skip pick', false], ['Neutral pick', null]]) {
+  for (const [name, rating] of [['Skip pick', 1], ['Meh pick', 2], ['Neutral pick', null]]) {
     check((await api(b, '/entries', 'POST', entryBody(name, rating))).status, 201, 'non-recommended log');
   }
-  check((await api(b, '/entries', 'POST', entryBody('CITRUS FIZZ', true, '2026-10-02T12:00:00Z'))).status, 201, 'repeat recommendation');
-  check((await api(b, '/entries', 'POST', entryBody('citrus fizz', false, '2026-10-03T12:00:00Z'))).status, 201, 'later non-recommendation');
-  check((await api(b, '/entries', 'POST', { ...entryBody(null, true), drink_id: lager.id })).status, 201, 'curated recommendation');
+  check((await api(b, '/entries', 'POST', entryBody('CITRUS FIZZ', 3, '2026-10-02T12:00:00Z'))).status, 201, 'repeat recommendation');
+  check((await api(b, '/entries', 'POST', entryBody('citrus fizz', 1, '2026-10-03T12:00:00Z'))).status, 201, 'later non-recommendation');
+  check((await api(b, '/entries', 'POST', { ...entryBody(null, 3), drink_id: lager.id })).status, 201, 'curated recommendation');
   const bUsername = (await db`select username from profiles where id = ${b.id}`)[0].username;
   const friendPicks = await picks();
   check(friendPicks.map(r => r.normalized_name), ['citrus fizz', 'lager'], 'only recommendations, normalized and newest first');
@@ -180,10 +180,10 @@ try {
   check(friendPicks[0].recommenders, [bUsername], 'distinct friend usernames');
   check(new Date(friendPicks[0].last_recommended_at).toISOString(), '2026-10-02T12:00:00.000Z', 'latest recommended timestamp');
   check(friendPicks[1].name, lager.name, 'curated display name');
-  check((await api(a, '/entries', 'POST', entryBody(' citrus FIZZ ', true))).status, 201, 'caller tries pick');
+  check((await api(a, '/entries', 'POST', entryBody(' citrus FIZZ ', 3))).status, 201, 'caller tries pick');
   check((await picks()).map(r => r.normalized_name), ['lager'], 'tried drink disappears');
   check((await picks(b)).map(r => r.normalized_name), ['tie drink'], 'own recommendations excluded');
-  check((await api(a, '/entries', 'POST', entryBody('Reverse pick', true, '2026-10-04T12:00:00Z'))).status, 201, 'requester recommends');
+  check((await api(a, '/entries', 'POST', entryBody('Reverse pick', 3, '2026-10-04T12:00:00Z'))).status, 201, 'requester recommends');
   check((await picks(b)).map(r => r.normalized_name), ['reverse pick', 'tie drink'], 'addressee also sees friend picks');
   check((await api(a, `/friendships/${request.body.id}`, 'DELETE')).status, 200, 'unfriend');
   check(await picks(b), [], 'unfriended picks hidden');
