@@ -370,6 +370,38 @@ export const reactions = pgTable(
   ],
 ).enableRLS();
 
+// Comments on entries, visible wherever the entry is. RLS is on with no
+// policies or grants: only the API (which bypasses RLS) reads or writes them.
+export const comments = pgTable(
+  'comments',
+  {
+    id: uuid().defaultRandom().primaryKey().notNull(),
+    entryId: uuid('entry_id').notNull(),
+    userId: uuid('user_id').notNull(),
+    body: text().notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'string' })
+      .defaultNow()
+      .notNull(),
+  },
+  (t) => [
+    index('comments_entry_id_created_at_idx').on(t.entryId, t.createdAt),
+    foreignKey({
+      columns: [t.entryId],
+      foreignColumns: [entries.id],
+      name: 'comments_entry_id_fkey',
+    }).onDelete('cascade'),
+    foreignKey({
+      columns: [t.userId],
+      foreignColumns: [profiles.id],
+      name: 'comments_user_id_fkey',
+    }).onDelete('cascade'),
+    check(
+      'comments_body_check',
+      sql`char_length(btrim(body)) between 1 and 280`,
+    ),
+  ],
+).enableRLS();
+
 // F10: blocking hides content both ways. The API deletes the friendship row in
 // the same transaction, so feed/leaderboard/profile visibility (all friendship
 // -gated) drops out without extra filters; this table's job is to stop the

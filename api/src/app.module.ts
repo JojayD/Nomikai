@@ -16,6 +16,7 @@ import { ReactionsController } from './reactions.controller';
 import { RecapController } from './recap.controller';
 import { StorageService } from './storage.service';
 import { CollectionController } from './collection.controller';
+import { CommentsController } from './comments.controller';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { CollectionController } from './collection.controller';
     BlocksController,
     LeaderboardController,
     RecapController,
+    CommentsController,
   ],
   providers: [
     StorageService,

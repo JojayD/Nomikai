@@ -63,6 +63,7 @@ export class FeedController {
              v.night_out_id, n.name as night_out_name,
              v.location, v.photo_path, v.note, v.rating, v.logged_at,
              (select count(*)::int from reactions r where r.entry_id = v.id) as reaction_count,
+             (select count(*)::int from comments c where c.entry_id = v.id) as comment_count,
              exists (select 1 from reactions r where r.entry_id = v.id and r.user_id = ${viewerId}) as reacted_by_me
       from visible v
       join profiles p on p.id = v.user_id

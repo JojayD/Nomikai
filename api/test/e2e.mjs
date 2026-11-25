@@ -285,6 +285,31 @@ try {
   check("owner sees the count but not b's state",
     r.body?.[0]?.reaction_count === 1 && r.body[0].reacted_by_me === false, r.body?.[0]);
 
+  console.log('\n— comments —');
+  r = await api(b, 'POST', `/entries/${entryId}/comments`, { body: '  nice one  ' });
+  check('POST /entries/:id/comments', r.status === 201 && !!r.body?.id, r);
+  const commentId = r.body?.id;
+
+  for (const bad of ['   ', 'x'.repeat(281), 5, undefined]) {
+    r = await api(b, 'POST', `/entries/${entryId}/comments`, { body: bad });
+    check(`comment ${JSON.stringify(bad)?.slice(0, 12)} → 400`, r.status === 400, r);
+  }
+
+  r = await api(a, 'GET', `/entries/${entryId}/comments`);
+  check('GET comments, trimmed, with the author',
+    r.body?.length === 1 && r.body[0].body === 'nice one' && r.body[0].username === nameB, r.body);
+
+  r = await api(a, 'GET', '/feed');
+  check('feed carries comment_count',
+    r.body?.find((e) => e.id === entryId)?.comment_count === 1, r.body);
+
+  r = await api(a, 'POST', `/entries/${entryId}/comments`, { body: 'mine' });
+  r = await api(b, 'DELETE', `/entries/${entryId}/comments/${r.body?.id}`);
+  check("b cannot delete a's comment on a's entry", r.status === 404, r);
+
+  r = await api(a, 'DELETE', `/entries/${entryId}/comments/${commentId}`);
+  check("entry owner deletes b's comment", r.status === 200, r);
+
   console.log('\n— leaderboard —');
   r = await api(a, 'GET', '/leaderboard');
   check('GET /leaderboard has both members, A first',
