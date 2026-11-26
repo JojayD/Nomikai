@@ -50,7 +50,14 @@ export class BarsController {
     ) {
       throw new BadRequestException('Send lat and lng as numbers.');
     }
-    return nearbyBars(lat, lng);
+    // The member is probably standing in one of the closest bars, so the web
+    // app starts those menu lookups while the list is still being read. Phone
+    // positions are off by tens of metres indoors, hence 75 m and not less.
+    const close = nearbyBars(lat, lng, 75).slice(0, 2);
+    return nearbyBars(lat, lng).map((bar) => ({
+      ...bar,
+      prefetch: close.includes(bar),
+    }));
   }
 
   // The web app polls this while a lookup runs.

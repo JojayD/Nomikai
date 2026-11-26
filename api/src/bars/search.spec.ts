@@ -66,6 +66,13 @@ describe('POST /bars/nearby', () => {
       'Nomikai',
     );
   });
+
+  it('marks at most the two closest bars within 75 m for prefetch', () => {
+    const found = controller.nearby({ lat: 37.3353, lng: -121.8898 });
+    expect(found[0].prefetch).toBe(true);
+    expect(found.filter((bar) => bar.prefetch).length).toBeLessThanOrEqual(2);
+    expect(found.slice(2).some((bar) => bar.prefetch)).toBe(false);
+  });
 });
 
 describe('GET /bars/:type/:id/menu', () => {
