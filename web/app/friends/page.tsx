@@ -101,7 +101,7 @@ export default function FriendsPage() {
                 autoComplete="off"
               />
               <button
-                className="btn btn-primary !min-h-[42px]"
+                className="btn btn-md btn-primary"
                 disabled={send.isPending || !addName.trim()}
               >
                 Send
@@ -112,7 +112,7 @@ export default function FriendsPage() {
         {me.data && (
           <button
             type="button"
-            className="btn btn-secondary btn-block !min-h-[42px]"
+            className="btn btn-md btn-secondary btn-block"
             onClick={async () => {
               await navigator.clipboard.writeText(
                 `${window.location.origin}/add/${me.data.user_code}`
@@ -126,8 +126,7 @@ export default function FriendsPage() {
         )}
         {failure && (
           <p
-            className="mt-3 text-sm font-semibold"
-            style={{ color: "var(--color-accent)" }}
+            className="mt-3 text-13 font-semibold text-accent"
           >
             {message(failure)}
           </p>
@@ -146,14 +145,14 @@ export default function FriendsPage() {
                   @{r.requester.username}
                 </Link>
                 <button
-                  className="btn btn-primary !mt-0 !min-h-[36px] text-sm"
+                  className="btn btn-sm btn-primary !mt-0"
                   disabled={accept.isPending}
                   onClick={() => accept.mutate(r.id)}
                 >
                   Accept
                 </button>
                 <button
-                  className="btn btn-secondary !mt-0 !min-h-[36px] text-sm"
+                  className="btn btn-sm btn-secondary !mt-0"
                   disabled={remove.isPending}
                   onClick={() => remove.mutate(r.id)}
                 >
@@ -177,7 +176,7 @@ export default function FriendsPage() {
                   @{r.addressee.username}
                 </Link>
                 <button
-                  className="btn btn-secondary !mt-0 !min-h-[36px] text-sm"
+                  className="btn btn-sm btn-secondary !mt-0"
                   disabled={remove.isPending}
                   onClick={() => remove.mutate(r.id)}
                 >
@@ -191,7 +190,7 @@ export default function FriendsPage() {
         <div className="kicker mt-6 mb-2">Friends</div>
         {friendships.isPending && <div className="kicker">Loading…</div>}
         {friendships.isSuccess && friends.length === 0 && (
-          <p className="text-[13.5px] opacity-70">
+          <p className="text-13 opacity-70">
             No friends yet. Send a request or share your invite link.
           </p>
         )}
@@ -205,7 +204,7 @@ export default function FriendsPage() {
               @{other(r).username}
             </Link>
             <button
-              className="btn btn-secondary !mt-0 !min-h-[36px] text-sm"
+              className="btn btn-sm btn-secondary !mt-0"
               disabled={remove.isPending}
               onClick={() =>
                 confirmRemove === r.id

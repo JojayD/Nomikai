@@ -87,12 +87,12 @@ export default function LoginPage() {
 
   return (
     <main className="auth-page flex flex-1 flex-col">
-      <div className="border-b-2 px-5 pt-10 pb-6" style={{ borderColor: "var(--color-divider)" }}>
-        <h1 className="text-[44px] leading-[0.95] tracking-[-0.045em]">NOMIKAI</h1>
-        <div className="kicker mt-2 !text-[12px] !tracking-[0.2em]">
+      <div className="border-b-2 border-divider px-5 pt-10 pb-6">
+        <h1 className="text-44 leading-[0.95] tracking-[-0.045em]">NOMIKAI</h1>
+        <div className="kicker mt-2 !text-12 !tracking-[0.2em]">
           飲み会 · a drinking party
         </div>
-        <p className="mt-4 text-[14.5px] opacity-80">
+        <p className="mt-4 text-15 opacity-80">
           Log what you drank, where, and when. See what your friends are
           trying. No install — it&apos;s a link.
         </p>
@@ -101,7 +101,7 @@ export default function LoginPage() {
       <div className="p-5">
         {mode === "sent" ? (
           <>
-            <p className="text-sm opacity-80">
+            <p className="text-13 opacity-80">
               Enter the 6-digit code we emailed to <strong>{email}</strong>.
             </p>
             <form
@@ -150,7 +150,7 @@ export default function LoginPage() {
             </p>
             <button
               type="button"
-              className="btn btn-ghost mt-3 text-sm"
+              className="btn btn-ghost mt-3 text-13"
               disabled={busy}
               onClick={() => {
                 resetErrors();
@@ -236,7 +236,7 @@ export default function LoginPage() {
                 </button>
                 <button
                   type="button"
-                  className="btn btn-ghost mt-3 text-sm"
+                  className="btn btn-ghost mt-3 text-13"
                   disabled={busy}
                   onClick={() => {
                     resetErrors();
@@ -251,7 +251,7 @@ export default function LoginPage() {
         )}
 
         {error && (
-          <p role="alert" className="mt-4 text-sm font-semibold" style={{ color: "var(--color-accent)" }}>
+          <p role="alert" className="mt-4 text-13 font-semibold text-accent">
             {error.message}
           </p>
         )}
@@ -259,7 +259,7 @@ export default function LoginPage() {
 
       <div className="mt-auto px-5 pb-6">
         <div className="hr mb-4" />
-        <p className="text-[11.5px] opacity-50">
+        <p className="text-12 opacity-50">
           Nomikai ranks variety, not volume. Nothing here rewards drinking
           more. Non-alcoholic drinks count the same.
         </p>

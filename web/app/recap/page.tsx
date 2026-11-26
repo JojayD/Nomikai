@@ -26,32 +26,30 @@ export default async function RecapPage() {
     <main className="desktop-page recap-page flex flex-1 flex-col">
       <Header kicker="Weekly recap" />
       <div className="px-4 py-5">
-        <h2 className="text-[26px] tracking-[-0.03em]">
+        <h2 className="text-26 tracking-[-0.03em]">
           Week of {weekLabel(recap)}
         </h2>
         <div
-          className="mt-4 grid grid-cols-3 border"
-          style={{ borderColor: "var(--color-divider)" }}
+          className="mt-4 grid grid-cols-3 border border-divider"
         >
           {stats.map(([n, label], i) => (
             <div
               key={label}
-              className={`px-3.5 py-3 ${i < 2 ? "border-r" : ""}`}
-              style={{ borderColor: "var(--color-divider)" }}
+              className={`border-divider px-3.5 py-3 ${i < 2 ? "border-r" : ""}`}
             >
-              <div className="text-[26px] font-extrabold tabular-nums">{n}</div>
+              <div className="text-26 font-extrabold tabular-nums">{n}</div>
               <div className="kicker">{label}</div>
             </div>
           ))}
         </div>
         {recap.most_reacted && (
-          <p className="mt-3 text-[13.5px]">
+          <p className="mt-3 text-13">
             Most loved: <b>{recap.most_reacted.drink_name}</b> ·{" "}
             {recap.most_reacted.reactions} ♥
           </p>
         )}
         {recap.total_entries === 0 ? (
-          <p className="mt-4 text-[13.5px] opacity-70">
+          <p className="mt-4 text-13 opacity-70">
             Nothing logged yet this week — the card fills in as you log.
           </p>
         ) : (

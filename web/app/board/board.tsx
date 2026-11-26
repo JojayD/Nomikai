@@ -32,7 +32,7 @@ export default function Board({ viewerId }: { viewerId: string }) {
         {(["week", "month"] as const).map((w) => (
           <button
             key={w}
-            className={`btn !mt-0 text-sm ${window === w ? "btn-primary" : "btn-secondary"}`}
+            className={`btn !mt-0 text-13 ${window === w ? "btn-primary" : "btn-secondary"}`}
             onClick={() => setWindow(w)}
           >
             {w === "week" ? "This week" : "This month"}
@@ -47,8 +47,7 @@ export default function Board({ viewerId }: { viewerId: string }) {
         <div className="kicker px-4 py-7">Loading…</div>
       ) : board.isError ? (
         <p
-          className="px-4 py-7 text-sm font-semibold"
-          style={{ color: "var(--color-accent)" }}
+          className="px-4 py-7 text-13 font-semibold text-accent"
         >
           Could not load the leaderboard.
         </p>
@@ -57,34 +56,28 @@ export default function Board({ viewerId }: { viewerId: string }) {
           {board.data.map((r, i) => (
             <div
               key={r.id}
-              className="flex items-center gap-3 border-b px-4 py-3"
-              style={{
-                borderColor: "var(--color-divider)",
-                ...(r.id === viewerId && {
-                  background: "var(--color-divider)",
-                }),
-              }}
+              className={`flex items-center gap-3 border-b border-divider px-4 py-3${r.id === viewerId ? " bg-divider" : ""}`}
             >
-              <span className="w-6 text-[17px] font-extrabold tabular-nums">
+              <span className="w-6 text-15 font-extrabold tabular-nums">
                 {i + 1}
               </span>
               <Avatar src={r.avatar_src} username={r.username} size={7} />
               <Link
                 href={`/u/${r.username}`}
-                className="mr-auto text-sm font-extrabold !text-[inherit] no-underline"
+                className="mr-auto text-13 font-extrabold !text-[inherit] no-underline"
               >
                 @{r.username}
               </Link>
-              <span className="text-sm tabular-nums">
+              <span className="text-13 tabular-nums">
                 <b>{r.unique_drinks}</b> drinks
               </span>
-              <span className="text-sm tabular-nums opacity-70">
+              <span className="text-13 tabular-nums opacity-70">
                 {r.nights_out} nights
               </span>
             </div>
           ))}
           {board.data.length === 1 && (
-            <p className="px-4 py-4 text-[13.5px] opacity-70">
+            <p className="px-4 py-4 text-13 opacity-70">
               Just you so far — add friends to have someone to beat, or check
               your leaderboard setting on your profile.
             </p>
