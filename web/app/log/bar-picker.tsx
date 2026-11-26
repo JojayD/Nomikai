@@ -147,7 +147,7 @@ export default function BarPicker({
         Use my location
       </button>
       {!!results?.length && (
-        <ul aria-label="Bar suggestions" className="border border-current/20">
+        <ul aria-label="Bar suggestions" className="rounded-sm border border-current/20">
           {results.map((bar) => {
             const label = bar.city ? `${bar.name} — ${bar.city}` : bar.name;
             return (
@@ -212,7 +212,7 @@ export default function BarPicker({
               <li key={item.name}>
                 <button
                   type="button"
-                  className="border border-current/20 px-2.5 py-1 text-13 hover:bg-text/5 focus-visible:bg-text/5"
+                  className="rounded-sm border border-current/20 px-2.5 py-1 text-13 hover:bg-text/5 focus-visible:bg-text/5"
                   onClick={() => onPickDrink(item.name)}
                 >
                   {item.name}

@@ -469,7 +469,7 @@ function LogForm({
         <fieldset className="contents" disabled={busy || pending}>
         {sel ? (
           <div
-            className="flex items-baseline gap-3 border border-divider px-3.5 py-3"
+            className="flex items-baseline gap-3 rounded-sm border border-divider px-3.5 py-3"
           >
             <span className="mr-auto min-w-0 break-words text-20 font-extrabold tracking-[-0.02em]">
               {sel.name}
@@ -500,7 +500,7 @@ function LogForm({
             />
             {normalizedQuery && (
               <div
-                className="border border-t-0 border-divider"
+                className="rounded-b-sm border border-t-0 border-divider"
               >
                 {matches.map((m) => (
                   <button
@@ -691,7 +691,7 @@ function LogForm({
                   <img
                     src={photoPreview}
                     alt="Selected photo"
-                    className="max-h-80 w-full object-cover"
+                    className="max-h-80 w-full rounded-sm object-cover"
                   />
                   <button type="button" className="btn btn-ghost mt-1 text-13" onClick={() => {
                     setPhoto(null);

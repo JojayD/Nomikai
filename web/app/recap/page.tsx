@@ -30,7 +30,7 @@ export default async function RecapPage() {
           Week of {weekLabel(recap)}
         </h2>
         <div
-          className="mt-4 grid grid-cols-3 border border-divider"
+          className="mt-4 grid grid-cols-3 rounded-sm border border-divider"
         >
           {stats.map(([n, label], i) => (
             <div
