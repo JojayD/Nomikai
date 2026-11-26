@@ -24,7 +24,8 @@
   --text-32: 32px;
   --text-44: 44px;
 
-  /* Buttons and inputs are square (0). */
+  /* sm: buttons, inputs, photos, avatars, boxes. md: nav links, hover tints. lg: cards. */
+  --radius-sm: 6px;
   --radius-md: 8px;
   --radius-lg: 16px;
   --radius-full: 50%;
@@ -79,7 +80,7 @@ a { color: var(--color-accent); text-underline-offset: 3px; }
   font-family: var(--font-heading); font-weight: 800;
   font-size: var(--text-15); line-height: 1.2; color: var(--color-text);
   background: transparent; border: 1px solid transparent;
-  padding: 8px 14px; border-radius: 0; min-height: 50px;
+  padding: 8px 14px; border-radius: var(--radius-sm); min-height: 50px;
 }
 /* Sizes: plain .btn is lg. md and sm keep a 44px tap target on phones via ::after
    (inset is measured from inside the 1px border). */
@@ -109,7 +110,7 @@ a { color: var(--color-accent); text-underline-offset: 3px; }
   width: 100%; min-height: 42px; padding: 6px 10px; font: inherit;
   font-size: var(--text-15); color: var(--color-text); caret-color: var(--color-accent);
   background: var(--color-surface);
-  border: 1px solid var(--color-divider); border-radius: 0;
+  border: 1px solid var(--color-divider); border-radius: var(--radius-sm);
 }
 .input:hover { border-color: color-mix(in srgb, var(--color-text) 45%, transparent); }
 .input:focus-visible { border-color: var(--color-accent); outline-offset: 0; }
@@ -119,7 +120,7 @@ a { color: var(--color-accent); text-underline-offset: 3px; }
 }
 
 /* Posts: photo in a 4:5 frame; note clamped to 3 lines until its button is expanded. */
-.entry-card .entry-photo { width: 100%; max-width: 472px; margin-inline: auto; aspect-ratio: 4 / 5; object-fit: cover; }
+.entry-card .entry-photo { width: 100%; max-width: 472px; margin-inline: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius-sm); }
 .entry-card .entry-note { display: block; width: 100%; margin-top: 4px; font-size: var(--text-15); text-align: left; }
 .entry-card button.entry-note { cursor: pointer; }
 .entry-card .entry-note:not([aria-expanded="true"]) > span {
@@ -190,7 +191,7 @@ a { color: var(--color-accent); text-underline-offset: 3px; }
   .log-details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 24px; }
   .log-details > .field { min-width: 0; margin-top: 0; }
   .app-shell:has(.auth-page) { max-width: 520px; padding: 48px 0; }
-  .auth-page { border: 1px solid var(--color-divider); }
+  .auth-page { border: 1px solid var(--color-divider); border-radius: var(--radius-lg); }
   .auth-page > div, .auth-page > form { padding-inline: 32px; }
 }
 

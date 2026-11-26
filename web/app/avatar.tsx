@@ -1,4 +1,4 @@
-// Square avatar at a fixed Tailwind size; a user without one gets their
+// Rounded-square avatar at a fixed Tailwind size; a user without one gets their
 // initial in the same box so lists stay aligned. Classes are listed in full
 // because Tailwind only emits literal class names.
 const SIZES = {
@@ -16,7 +16,7 @@ export default function Avatar({
   username: string;
   size: keyof typeof SIZES;
 }) {
-  const box = `${SIZES[size]} shrink-0 object-cover`;
+  const box = `${SIZES[size]} shrink-0 rounded-sm object-cover`;
   if (src) {
     // eslint-disable-next-line @next/next/no-img-element -- signed URL, remote patterns don't apply
     return <img src={src} alt="" className={box} />;

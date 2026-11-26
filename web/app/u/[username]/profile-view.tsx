@@ -238,7 +238,7 @@ export default function ProfileView({
 
         {canSee && stats.data && (
           <div
-            className="mt-4 grid grid-cols-3 border border-divider"
+            className="mt-4 grid grid-cols-3 rounded-sm border border-divider"
           >
             {(
               [

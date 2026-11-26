@@ -31,7 +31,7 @@ export default function Photo({
   if (!src || failed)
     return (
       <div
-        className="mt-2 border border-divider p-3 text-13"
+        className="mt-2 rounded-sm border border-divider p-3 text-13"
         role="status"
       >
         <p>Photo unavailable</p>

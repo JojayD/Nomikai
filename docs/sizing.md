@@ -6,7 +6,7 @@ Desktop layout (rail, page widths, columns) is in [sizing-desktop.md](sizing-des
 
 ## Buttons
 
-Square (radius 0). Plain `.btn` is `btn-lg`.
+Slightly rounded (6px). Plain `.btn` is `btn-lg`.
 
 | Class | Min height | Padding | Font | Mobile | Desktop |
 | --- | --- | --- | --- | --- | --- |
@@ -39,7 +39,7 @@ Not on the scale: the camera screen. Tailwind's `text-xs` is still used in place
 
 | Token | Value | Used for |
 | --- | --- | --- |
-| none | 0 | buttons, inputs |
+| `--radius-sm` | 6px | buttons, inputs, photos, avatars, bordered boxes |
 | `--radius-md` | 8px | desktop nav links, hover tints (`btn-ghost`, dropdown rows) |
 | `--radius-lg` | 16px | feed cards |
 | `--radius-full` | 50% | avatars (desktop feed and rail) |
