@@ -160,7 +160,7 @@ export default function ProfileView({
         <div className="flex items-center gap-3">
           <Avatar src={profile.avatar_src} username={profile.username} size={14} />
           <div>
-            <h2 className="text-[26px] tracking-[-0.03em]">
+            <h2 className="text-26 tracking-[-0.03em]">
               @{profile.username}
             </h2>
             {state === "friends" && <span className="kicker">Friends</span>}
@@ -205,7 +205,7 @@ export default function ProfileView({
                 </button>
               </>
             )}
-            <p className="mt-3 text-[13.5px] opacity-70">
+            <p className="mt-3 text-13 opacity-70">
               Drinks and stats are visible to friends only.
             </p>
           </div>
@@ -214,14 +214,13 @@ export default function ProfileView({
         {!own && !blocks.isPending && (
           <div className="mt-4">
             {blocked && (
-              <p className="mb-2 text-[13.5px] opacity-70">
+              <p className="mb-2 text-13 opacity-70">
                 Blocked — you can&apos;t see each other&apos;s drinks, and
                 neither of you can send a friend request.
               </p>
             )}
             <button
-              className="btn btn-ghost !mt-0 text-sm"
-              style={{ color: "var(--color-accent)" }}
+              className="btn btn-ghost !mt-0 text-13"
               disabled={toggleBlock.isPending}
               onClick={() => {
                 if (blocked || confirmBlock) return toggleBlock.mutate();
@@ -239,8 +238,7 @@ export default function ProfileView({
 
         {canSee && stats.data && (
           <div
-            className="mt-4 grid grid-cols-3 border"
-            style={{ borderColor: "var(--color-divider)" }}
+            className="mt-4 grid grid-cols-3 border border-divider"
           >
             {(
               [
@@ -251,10 +249,9 @@ export default function ProfileView({
             ).map(([n, label], i) => (
               <div
                 key={label}
-                className={`px-3.5 py-3 ${i < 2 ? "border-r" : ""}`}
-                style={{ borderColor: "var(--color-divider)" }}
+                className={`border-divider px-3.5 py-3 ${i < 2 ? "border-r" : ""}`}
               >
-                <div className="font-extrabold text-[26px] tabular-nums">
+                <div className="font-extrabold text-26 tabular-nums">
                   {n}
                 </div>
                 <div className="kicker">{label}</div>
@@ -267,7 +264,7 @@ export default function ProfileView({
       {canSee && (
         <div className="profile-history" aria-busy={entries.isFetching}>
           <form
-            className="border-b border-[var(--color-divider)] px-4 py-4"
+            className="border-b border-divider px-4 py-4"
             onSubmit={(event) => {
               event.preventDefault();
               const q = search.trim();
@@ -296,8 +293,8 @@ export default function ProfileView({
               />
               <button type="submit" className="btn btn-secondary !mt-0">Search</button>
             </div>
-            {searchError && <p id="profile-history-search-error" role="alert" className="mt-2 text-sm">Search must be 120 characters or fewer.</p>}
-            <div className="mt-3 flex items-center justify-between gap-3 text-sm">
+            {searchError && <p id="profile-history-search-error" role="alert" className="mt-2 text-13">Search must be 120 characters or fewer.</p>}
+            <div className="mt-3 flex items-center justify-between gap-3 text-13">
               <label className="flex items-center gap-2">
                 <input
                   type="checkbox"
@@ -309,7 +306,7 @@ export default function ProfileView({
               {(filtered || search) && (
                 <button
                   type="button"
-                  className="btn btn-ghost !mt-0 text-sm"
+                  className="btn btn-ghost !mt-0 text-13"
                   onClick={() => {
                     setSearch("");
                     setSearchError(false);
@@ -322,9 +319,9 @@ export default function ProfileView({
               )}
             </div>
           </form>
-          {entries.isPending && !accessDenied && <p role="status" className="px-4 py-7 text-sm">Loading drink history…</p>}
+          {entries.isPending && !accessDenied && <p role="status" className="px-4 py-7 text-13">Loading drink history…</p>}
           {((entries.isError && !entries.data) || accessDenied) && (
-            <div role="alert" className="px-4 py-4 text-sm">
+            <div role="alert" className="px-4 py-4 text-13">
               {accessDenied ? (
                 <>
                   <p>{accessStatus === 401
@@ -356,7 +353,7 @@ export default function ProfileView({
             </div>
           )}
           {entries.isError && entries.data && !accessDenied && (
-            <div role="alert" className="px-4 py-4 text-sm">
+            <div role="alert" className="px-4 py-4 text-13">
               <p>{entries.isFetchNextPageError
                 ? "Could not load more drinks. Your earlier results are still here."
                 : "Could not refresh drink history. Showing saved results."}</p>
@@ -373,7 +370,7 @@ export default function ProfileView({
             </div>
           )}
           {entries.isSuccess && !accessDenied && !entries.data.pages.some(page => page.length > 0) && (
-            <p className="px-4 py-7 text-sm">{filtered ? "No drinks match these filters." : "No drinks logged yet."}</p>
+            <p className="px-4 py-7 text-13">{filtered ? "No drinks match these filters." : "No drinks logged yet."}</p>
           )}
           {!accessDenied && entries.data?.pages.flat().map((r) => (
             <EntryCard

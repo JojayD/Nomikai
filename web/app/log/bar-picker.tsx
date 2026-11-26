@@ -136,7 +136,7 @@ export default function BarPicker({
       />
       <button
         type="button"
-        className="btn btn-ghost self-start text-sm"
+        className="btn btn-ghost self-start text-13"
         // not `disabled`: a focused button that disables itself blurs, which
         // closes the picker and drops the lookup
         aria-disabled={nearby.isPending}
@@ -154,7 +154,7 @@ export default function BarPicker({
               <li key={bar.id}>
                 <button
                   type="button"
-                  className="w-full px-3 py-2 text-left text-sm hover:bg-black/5 focus-visible:bg-black/5"
+                  className="w-full rounded-md px-3 py-2 text-left text-13 hover:bg-text/5 focus-visible:bg-text/5"
                   onMouseDown={(event) => event.preventDefault()}
                   onClick={() => {
                     onChange(label);
@@ -212,7 +212,7 @@ export default function BarPicker({
               <li key={item.name}>
                 <button
                   type="button"
-                  className="border border-current/20 px-2.5 py-1 text-sm hover:bg-black/5 focus-visible:bg-black/5"
+                  className="border border-current/20 px-2.5 py-1 text-13 hover:bg-text/5 focus-visible:bg-text/5"
                   onClick={() => onPickDrink(item.name)}
                 >
                   {item.name}

@@ -53,9 +53,9 @@ export default function OnboardingPage() {
 
   return (
     <main className="auth-page flex flex-1 flex-col">
-      <div className="border-b-2 px-5 pt-10 pb-6" style={{ borderColor: "var(--color-divider)" }}>
-        <h1 className="text-[32px] tracking-[-0.03em]">Almost in.</h1>
-        <p className="mt-3 text-[14.5px] opacity-80">
+      <div className="border-b-2 border-divider px-5 pt-10 pb-6">
+        <h1 className="text-32 tracking-[-0.03em]">Almost in.</h1>
+        <p className="mt-3 text-15 opacity-80">
           A username, your timezone, and one confirmation.
         </p>
       </div>
@@ -104,14 +104,14 @@ export default function OnboardingPage() {
             type="checkbox"
             checked={attested}
             onChange={(e) => setAttested(e.target.checked)}
-            className="mt-0.5 size-5 accent-[var(--color-accent)]"
+            className="mt-0.5 size-5 accent-accent"
             required
           />
-          <span className="text-[13px] leading-[1.45]">
+          <span className="text-13 leading-[1.45]">
             I am 21 or older. Recorded with a timestamp.
           </span>
         </label>
-        <p className="mt-3 text-[11.5px] opacity-50">
+        <p className="mt-3 text-12 opacity-50">
           Drink responsibly. Nomikai ranks variety, not volume — nothing here
           rewards drinking more.
         </p>
@@ -123,7 +123,7 @@ export default function OnboardingPage() {
           Start logging
         </button>
         {error && (
-          <p className="mt-4 text-sm font-semibold" style={{ color: "var(--color-accent)" }}>
+          <p className="mt-4 text-13 font-semibold text-accent">
             {error}
           </p>
         )}

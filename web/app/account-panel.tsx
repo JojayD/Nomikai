@@ -149,14 +149,14 @@ export default function AccountPanel(props: {
             type="checkbox"
             checked={optIn}
             onChange={(e) => setOptIn(e.target.checked)}
-            className="mt-0.5 size-5 accent-[var(--color-accent)]"
+            className="mt-0.5 size-5 accent-accent"
           />
-          <span className="text-[13px] leading-[1.45]">
+          <span className="text-13 leading-[1.45]">
             Appear on leaderboards. Off removes you from every friend&apos;s
             board — yours shows only you.
           </span>
         </label>
-        <button className="btn btn-secondary btn-block !min-h-[42px]" disabled={busy}>
+        <button className="btn btn-md btn-secondary btn-block" disabled={busy}>
           Save changes
         </button>
       </form>
@@ -185,25 +185,20 @@ export default function AccountPanel(props: {
         />
       </div>
 
-      <p className="mt-4 text-[11.5px] opacity-50">
+      <p className="mt-4 text-12 opacity-50">
         Signed in as {props.email} · permanent code {props.userCode}
       </p>
-      {status && <p className="mt-2 text-sm font-semibold">{status}</p>}
+      {status && <p className="mt-2 text-13 font-semibold">{status}</p>}
 
       <div className="hr my-4" />
       <button
-        className="btn btn-secondary btn-block !min-h-[42px]"
+        className="btn btn-md btn-secondary btn-block"
         onClick={() => signOut.mutate()}
       >
         Sign out
       </button>
       <button
-        className="btn btn-block !min-h-[42px]"
-        style={{
-          borderColor: "var(--color-accent)",
-          color: "var(--color-accent)",
-          borderWidth: 1,
-        }}
+        className="btn btn-md btn-block !border-accent !text-accent"
         disabled={busy}
         onClick={() => {
           if (!confirmDelete) return setConfirmDelete(true);

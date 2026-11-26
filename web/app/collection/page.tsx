@@ -69,8 +69,8 @@ export default function Collection() {
     <main className="desktop-page collection-page flex flex-1 flex-col">
       <Header kicker="Your collection" />
       <div className="p-4">
-        <h2 className="text-3xl">A little taste of you.</h2>
-        <p className="mt-2 text-sm opacity-70">
+        <h2 className="text-32">A little taste of you.</h2>
+        <p className="mt-2 text-13 opacity-70">
           Drinks to discover. Favorites to remember. Your saved drinks and passport stay private.
         </p>
         <div className="mt-5 flex flex-wrap gap-2" aria-label="Collection views">
@@ -125,7 +125,7 @@ export default function Collection() {
               </button>
             </div>
             {add.error && (
-              <p className="mt-2 text-sm" role="alert">
+              <p className="mt-2 text-13" role="alert">
                 {add.error.message}
               </p>
             )}
@@ -183,10 +183,10 @@ export default function Collection() {
         ) : view === "saved" ? (
           <>
             {saved.data?.length === 0 && (
-              <p className="py-7 text-sm">Your next discovery starts here.</p>
+              <p className="py-7 text-13">Your next discovery starts here.</p>
             )}
             {remove.error && (
-              <p role="alert" className="mt-3 text-sm">
+              <p role="alert" className="mt-3 text-13">
                 {remove.error.message} Try removing it again.
               </p>
             )}
@@ -194,9 +194,9 @@ export default function Collection() {
               {saved.data?.map((drink) => (
                 <li
                   key={drink.id}
-                  className="border-t border-[var(--color-divider)] py-4"
+                  className="border-t border-divider py-4"
                 >
-                  <h3 className="break-words text-xl">{drink.name}</h3>
+                  <h3 className="break-words text-20">{drink.name}</h3>
                   <p className="kicker mt-1">
                     {drink.tried
                       ? "Tried · in your passport"
@@ -204,14 +204,14 @@ export default function Collection() {
                   </p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     <Link
-                      className="btn btn-secondary text-sm"
+                      className="btn btn-secondary text-13"
                       aria-label={`Log ${drink.name}`}
                       href={`/log?drink=${encodeURIComponent(drink.name)}`}
                     >
                       {drink.tried ? "Log again" : "Log this drink"}
                     </Link>
                     <button
-                      className="btn btn-ghost text-sm"
+                      className="btn btn-ghost text-13"
                       aria-label={`Remove ${drink.name}`}
                       disabled={remove.isPending}
                       onClick={() => remove.mutate(drink.id)}
@@ -226,7 +226,7 @@ export default function Collection() {
         ) : view === "picks" ? (
           <>
             {picks.data?.length === 0 && (
-              <p className="py-7 text-sm">
+              <p className="py-7 text-13">
                 No friend picks yet.{" "}
                 <Link href="/friends">Add friends</Link> to see what they recommend.
               </p>
@@ -235,16 +235,16 @@ export default function Collection() {
               {picks.data?.map((drink) => (
                 <li
                   key={drink.normalized_name}
-                  className="border-t border-[var(--color-divider)] py-4"
+                  className="border-t border-divider py-4"
                 >
-                  <h3 className="break-words text-xl">{drink.name}</h3>
+                  <h3 className="break-words text-20">{drink.name}</h3>
                   <p className="kicker mt-1">
                     Recommended by {drink.recommenders.join(", ")}
                   </p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     <SaveDrink name={drink.name} onOpen={() => setView("saved")} />
                     <Link
-                      className="btn btn-secondary text-sm"
+                      className="btn btn-secondary text-13"
                       aria-label={`Log ${drink.name}`}
                       href={`/log?drink=${encodeURIComponent(drink.name)}`}
                     >
@@ -258,23 +258,23 @@ export default function Collection() {
         ) : (
           <>
             {passport.data?.length === 0 ? (
-              <p className="py-7 text-sm">
+              <p className="py-7 text-13">
                 Your passport starts with your first drink.{" "}
                 <Link href="/log">Log a drink</Link>
               </p>
             ) : (
               passport.data &&
               matches.length === 0 && (
-                <p className="py-7 text-sm">No drinks match these filters.</p>
+                <p className="py-7 text-13">No drinks match these filters.</p>
               )
             )}
             <ul className="collection-grid mt-4">
               {matches.map((drink) => (
                 <li
                   key={drink.normalized_name}
-                  className="border-t border-[var(--color-divider)] py-4"
+                  className="border-t border-divider py-4"
                 >
-                  <h3 className="break-words text-xl">{drink.name}</h3>
+                  <h3 className="break-words text-20">{drink.name}</h3>
                   <p className="kicker mt-1">
                     {drink.times_logged}{" "}
                     {drink.times_logged === 1 ? "log" : "logs"}
@@ -286,12 +286,12 @@ export default function Collection() {
                           ? " · Skip it"
                           : ""}
                   </p>
-                  <p className="mt-2 text-sm opacity-70">
+                  <p className="mt-2 text-13 opacity-70">
                     First {new Date(drink.first_logged_at).toLocaleDateString()}{" "}
                     · Last {new Date(drink.last_logged_at).toLocaleDateString()}
                   </p>
                   <Link
-                    className="btn btn-secondary mt-3 text-sm"
+                    className="btn btn-secondary mt-3 text-13"
                     aria-label={`Log ${drink.name} again`}
                     href={`/log?drink=${encodeURIComponent(drink.name)}`}
                   >
