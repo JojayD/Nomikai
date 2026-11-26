@@ -31,13 +31,13 @@ export default function Photo({
   if (!src || failed)
     return (
       <div
-        className="mt-2 border border-[var(--color-divider)] p-3 text-sm"
+        className="mt-2 border border-divider p-3 text-13"
         role="status"
       >
         <p>Photo unavailable</p>
         <button
           type="button"
-          className="btn btn-ghost text-sm"
+          className="btn btn-ghost text-13"
           disabled={retry.isPending}
           onClick={() => retry.mutate()}
         >
@@ -52,7 +52,7 @@ export default function Photo({
   return (
     <>
       {!loaded && (
-        <p role="status" className="mt-2 text-sm opacity-70">
+        <p role="status" className="mt-2 text-13 opacity-70">
           Loading photo…
         </p>
       )}

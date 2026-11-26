@@ -90,8 +90,7 @@ function LogLoader() {
       <main className="desktop-page log-page flex flex-1 flex-col">
         <Header kicker="Log a drink" />
         <p
-          className="px-4 py-7 text-sm font-semibold"
-          style={{ color: "var(--color-accent)" }}
+          className="px-4 py-7 text-13 font-semibold text-accent"
         >
           Could not load that entry.
         </p>
@@ -422,7 +421,7 @@ function LogForm({
         <Header kicker="Log a drink" />
         <div className="px-4 py-7">
           <div className="kicker mb-2" role="status">{pending ? "Saving…" : "Logged"}</div>
-          <h2 className="break-words text-[32px] leading-[1.05] tracking-[-0.03em]">
+          <h2 className="break-words text-32 leading-[1.05] tracking-[-0.03em]">
             {saved.name}
           </h2>
           <button
@@ -470,15 +469,14 @@ function LogForm({
         <fieldset className="contents" disabled={busy || pending}>
         {sel ? (
           <div
-            className="flex items-baseline gap-3 border px-3.5 py-3"
-            style={{ borderColor: "var(--color-divider)" }}
+            className="flex items-baseline gap-3 border border-divider px-3.5 py-3"
           >
-            <span className="mr-auto min-w-0 break-words text-[20px] font-extrabold tracking-[-0.02em]">
+            <span className="mr-auto min-w-0 break-words text-20 font-extrabold tracking-[-0.02em]">
               {sel.name}
             </span>
             <button
               type="button"
-              className="btn btn-ghost text-sm"
+              className="btn btn-ghost text-13"
               onClick={() => {
                 setSel(null);
                 setQuery("");
@@ -502,14 +500,13 @@ function LogForm({
             />
             {normalizedQuery && (
               <div
-                className="border border-t-0"
-                style={{ borderColor: "var(--color-divider)" }}
+                className="border border-t-0 border-divider"
               >
                 {matches.map((m) => (
                   <button
                     key={m.normalized}
                     type="button"
-                    className="block w-full cursor-pointer px-3.5 py-2.5 text-left text-[15px] hover:bg-[var(--color-surface)]"
+                    className="block w-full cursor-pointer px-3.5 py-2.5 text-left text-15 rounded-md hover:bg-surface"
                     onClick={() => setSel({ drinkId: m.drinkId, name: m.name })}
                   >
                     {m.name}
@@ -526,7 +523,7 @@ function LogForm({
                 {!exactMatch && (
                   <button
                     type="button"
-                    className="block w-full cursor-pointer px-3.5 py-2.5 text-left text-[15px] hover:bg-[var(--color-surface)]"
+                    className="block w-full cursor-pointer px-3.5 py-2.5 text-left text-15 rounded-md hover:bg-surface"
                     onClick={() => setSel({ drinkId: null, name: query.trim() })}
                   >
                     Log “{query.trim()}” as written
@@ -579,7 +576,7 @@ function LogForm({
               <div className="flex gap-2">
                 <button
                   type="button"
-                  className={`btn !mt-0 flex-1 !min-h-[42px] ${rating === 3 ? "btn-primary" : "btn-secondary"}`}
+                  className={`btn btn-md !mt-0 flex-1 ${rating === 3 ? "btn-primary" : "btn-secondary"}`}
                   aria-pressed={rating === 3}
                   onClick={() => setRating(rating === 3 ? null : 3)}
                 >
@@ -587,7 +584,7 @@ function LogForm({
                 </button>
                 <button
                   type="button"
-                  className={`btn !mt-0 flex-1 !min-h-[42px] ${rating === 2 ? "btn-primary" : "btn-secondary"}`}
+                  className={`btn btn-md !mt-0 flex-1 ${rating === 2 ? "btn-primary" : "btn-secondary"}`}
                   aria-pressed={rating === 2}
                   onClick={() => setRating(rating === 2 ? null : 2)}
                 >
@@ -595,7 +592,7 @@ function LogForm({
                 </button>
                 <button
                   type="button"
-                  className={`btn !mt-0 flex-1 !min-h-[42px] ${rating === 1 ? "btn-primary" : "btn-secondary"}`}
+                  className={`btn btn-md !mt-0 flex-1 ${rating === 1 ? "btn-primary" : "btn-secondary"}`}
                   aria-pressed={rating === 1}
                   onClick={() => setRating(rating === 1 ? null : 1)}
                 >
@@ -664,8 +661,7 @@ function LogForm({
               />
               {photoError && (
                 <p
-                  className="mt-1 text-sm font-semibold"
-                  style={{ color: "var(--color-accent)" }}
+                  className="mt-1 text-13 font-semibold text-accent"
                 >
                   {photoError}
                 </p>
@@ -690,14 +686,14 @@ function LogForm({
                 </button>
               </div>
               {photo && photoPreview && (
-                <div className="mt-2 text-sm">
+                <div className="mt-2 text-13">
                   {/* eslint-disable-next-line @next/next/no-img-element -- local object URL */}
                   <img
                     src={photoPreview}
                     alt="Selected photo"
                     className="max-h-80 w-full object-cover"
                   />
-                  <button type="button" className="btn btn-ghost mt-1 text-sm" onClick={() => {
+                  <button type="button" className="btn btn-ghost mt-1 text-13" onClick={() => {
                     setPhoto(null);
                     if (photoInputRef.current) photoInputRef.current.value = "";
                   }}>Remove selected photo</button>
@@ -706,7 +702,7 @@ function LogForm({
               {existingPhotoPath && !removePhoto && !photo && (
                 <button
                   type="button"
-                  className="btn btn-ghost mt-1 text-sm"
+                  className="btn btn-ghost mt-1 text-13"
                   onClick={() => setRemovePhoto(true)}
                 >
                   Remove current photo
@@ -717,7 +713,7 @@ function LogForm({
         ) : (
           <button
             type="button"
-            className="btn btn-ghost mt-4 self-start text-sm max-lg:!hidden"
+            className="btn btn-ghost mt-4 self-start text-13 max-lg:!hidden"
             onClick={() => setShowDetails(true)}
           >
             + Add details — time, place, note, photo
@@ -725,7 +721,7 @@ function LogForm({
         )}
 
         {/* pinned to the bottom of the screen on phones */}
-        <div className="max-lg:sticky max-lg:bottom-0 max-lg:mt-auto max-lg:bg-[var(--color-bg)] max-lg:pb-4">
+        <div className="max-lg:sticky max-lg:bottom-0 max-lg:mt-auto max-lg:bg-bg max-lg:pb-4">
         {!editId && (
           <div className="mt-4 flex items-center justify-between lg:hidden">
             <button
@@ -761,12 +757,7 @@ function LogForm({
         {editId && (
           <button
             type="button"
-            className="btn btn-block !min-h-[42px]"
-            style={{
-              borderColor: "var(--color-accent)",
-              color: "var(--color-accent)",
-              borderWidth: 1,
-            }}
+            className="btn btn-md btn-block !border-accent !text-accent"
             disabled={busy}
             onClick={() => removeEntry.mutate()}
           >
@@ -775,8 +766,7 @@ function LogForm({
         )}
         {error && (
           <p
-            className="mt-4 text-sm font-semibold"
-            style={{ color: "var(--color-accent)" }}
+            className="mt-4 text-13 font-semibold text-accent"
           >
             {error}
           </p>

@@ -59,8 +59,7 @@ function ReactionButton({ row }: { row: EntryRowData }) {
   return (
     <div>
       <button
-        className="entry-reaction mt-1.5 cursor-pointer text-[13px] font-semibold tabular-nums"
-        style={state.reacted ? { color: "var(--color-accent)" } : undefined}
+        className={`entry-reaction mt-1.5 cursor-pointer text-13 font-semibold tabular-nums${state.reacted ? " text-accent" : ""}`}
         aria-pressed={state.reacted}
         aria-label="React"
         disabled={pending}
@@ -97,6 +96,40 @@ export function relativeTime(iso: string) {
   return new Date(iso).toLocaleDateString();
 }
 
+// Clamped to 3 lines by .entry-note in globals.css. Only a note that
+// overflows becomes a button; tapping it expands the note in place.
+function Note({ text }: { text: string }) {
+  const [open, setOpen] = useState(false);
+  const [overflows, setOverflows] = useState(false);
+  const body = (
+    <span
+      ref={(el) => {
+        if (!el || open) return;
+        // Fires on observe and again whenever the column width changes.
+        const ro = new ResizeObserver(() =>
+          // +1: fractional line heights can report a 1px phantom overflow
+          setOverflows(el.scrollHeight > el.clientHeight + 1),
+        );
+        ro.observe(el);
+        return () => ro.disconnect();
+      }}
+    >
+      {text}
+    </span>
+  );
+  if (!overflows) return <p className="entry-note">{body}</p>;
+  return (
+    <button
+      type="button"
+      className="entry-note"
+      aria-expanded={open}
+      onClick={() => setOpen(!open)}
+    >
+      {body}
+    </button>
+  );
+}
+
 export default function EntryCard({
   row,
   showAuthor = false,
@@ -110,14 +143,13 @@ export default function EntryCard({
 }) {
   return (
     <div
-      className="entry-card border-b px-4 py-3"
-      style={{ borderColor: "var(--color-divider)" }}
+      className="entry-card border-b border-divider px-4 py-3"
     >
       <div className="entry-author-row flex items-baseline gap-2">
         {showAuthor && (
           <Link
             href={`/u/${row.username}`}
-            className="entry-author flex min-w-0 items-center gap-1.5 text-sm font-extrabold !text-[inherit] no-underline"
+            className="entry-author flex min-w-0 items-center gap-1.5 text-13 font-extrabold !text-[inherit] no-underline"
           >
             <Avatar src={row.avatar_src} username={row.username} size={5} />
             @{row.username}
@@ -126,20 +158,20 @@ export default function EntryCard({
         <span className="kicker ml-auto">{relativeTime(row.logged_at)}</span>
       </div>
       <div className="mt-0.5 flex items-baseline gap-2">
-        <span className="text-[19px] font-extrabold tracking-[-0.02em]">
+        <span className="text-20 font-extrabold tracking-[-0.02em]">
           {row.drink_name}
         </span>
         {row.rating === 3 && <span className="kicker">rec’d</span>}
         {row.rating === 2 && <span className="kicker">meh</span>}
         {row.rating === 1 && <span className="kicker">skip it</span>}
         {editHref && (
-          <Link href={editHref} className="btn btn-ghost ml-auto text-sm">
+          <Link href={editHref} className="btn btn-ghost ml-auto text-13">
             Edit
           </Link>
         )}
       </div>
       {(row.night_out_name || row.location) && (
-        <div className="mt-0.5 text-[13px] opacity-70">
+        <div className="mt-0.5 text-13 opacity-70">
           {row.night_out_name &&
             (nightHref ? (
               <Link href={nightHref}>{row.night_out_name}</Link>
@@ -150,13 +182,13 @@ export default function EntryCard({
           {row.location}
         </div>
       )}
-      {row.note && <p className="mt-1 text-[14px]">{row.note}</p>}
+      {row.note && <Note text={row.note} />}
       {row.photo_path && (
         <Photo
           key={`${row.photo_path}:${row.photo_url}`}
           src={row.photo_url}
           alt={`Photo of ${row.drink_name}`}
-          className="entry-photo mt-2 max-h-80 w-full object-cover"
+          className="entry-photo mt-2"
         />
       )}
       {/* key: a refetched server value reseeds the optimistic state */}

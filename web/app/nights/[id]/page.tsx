@@ -52,18 +52,17 @@ export default function NightOutPage({
         <div className="kicker px-4 py-7">Loading…</div>
       ) : night.isError ? (
         <p
-          className="px-4 py-7 text-sm font-semibold"
-          style={{ color: "var(--color-accent)" }}
+          className="px-4 py-7 text-13 font-semibold text-accent"
         >
           Could not load that night out.
         </p>
       ) : (
         <>
           <div className="px-4 py-5">
-            <h2 className="text-[26px] tracking-[-0.03em]">
+            <h2 className="text-26 tracking-[-0.03em]">
               {night.data.name}
             </h2>
-            <div className="mt-1 text-[13px] opacity-70">
+            <div className="mt-1 text-13 opacity-70">
               {new Date(night.data.started_at).toLocaleDateString()}
               {night.data.location && ` · ${night.data.location}`}
             </div>
@@ -78,7 +77,7 @@ export default function NightOutPage({
             />
           ))}
           {entries.isSuccess && !entries.data.length && (
-            <p className="px-4 text-[13.5px] opacity-70">
+            <p className="px-4 text-13 opacity-70">
               No entries in this night out.
             </p>
           )}

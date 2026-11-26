@@ -2,9 +2,9 @@
 // initial in the same box so lists stay aligned. Classes are listed in full
 // because Tailwind only emits literal class names.
 const SIZES = {
-  5: "h-5 w-5 text-[10px]",
+  5: "h-5 w-5 text-10",
   7: "h-7 w-7 text-xs",
-  14: "h-14 w-14 text-2xl",
+  14: "h-14 w-14 text-26",
 } as const;
 
 export default function Avatar({
@@ -24,7 +24,7 @@ export default function Avatar({
   return (
     <span
       aria-hidden="true"
-      className={`${box} inline-flex items-center justify-center bg-[var(--color-divider)] font-extrabold uppercase`}
+      className={`${box} inline-flex items-center justify-center bg-divider font-extrabold uppercase`}
     >
       {username[0]}
     </span>
